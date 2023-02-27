@@ -1,0 +1,2 @@
+class Desc < ApplicationRecord
+end
