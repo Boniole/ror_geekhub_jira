@@ -84,3 +84,40 @@
  DEBUG [1771d799] 	
  DEBUG [1771d799] 	fatal: Authentication failed for 'https://github.com/Boniole/ror_geekhub_jira.git/'
  DEBUG [1771d799] 	
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-02-27 22:20:13 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [68156b7d] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [68156b7d] Command: [ -d ~/.rvm ]
+ DEBUG [68156b7d] Finished in 0.948 seconds with exit status 0 (successful).
+ DEBUG [d8a4c4ed] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [d8a4c4ed] Command: ~/.rvm/bin/rvm version
+ DEBUG [d8a4c4ed] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [d8a4c4ed] 	
+ DEBUG [d8a4c4ed] Finished in 0.350 seconds with exit status 0 (successful).
+ DEBUG [7d22e3b3] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [7d22e3b3] Command: ~/.rvm/bin/rvm current
+ DEBUG [7d22e3b3] 	ruby-3.1.2
+ DEBUG [7d22e3b3] 	
+ DEBUG [7d22e3b3] Finished in 0.351 seconds with exit status 0 (successful).
+ DEBUG [4ffd25c7] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [4ffd25c7] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [4ffd25c7] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [4ffd25c7] 	
+ DEBUG [4ffd25c7] Finished in 0.479 seconds with exit status 0 (successful).
+  INFO [4ccbee15] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [4ccbee15] Command: /usr/bin/env mkdir -p /tmp
+  INFO [4ccbee15] Finished in 0.159 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-7817838d38d45090db81.sh 0.0%
+  INFO Uploading /tmp/git-ssh-7817838d38d45090db81.sh 100.0%
+  INFO [554eca65] Running /usr/bin/env chmod 700 /tmp/git-ssh-7817838d38d45090db81.sh as deployer@164.90.165.89
+ DEBUG [554eca65] Command: /usr/bin/env chmod 700 /tmp/git-ssh-7817838d38d45090db81.sh
+  INFO [554eca65] Finished in 0.159 seconds with exit status 0 (successful).
+  INFO [8407a83a] Running /usr/bin/env git ls-remote https://github.com/Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [8407a83a] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-7817838d38d45090db81.sh" ; /usr/bin/env git ls-remote https://github.com/Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [8407a83a] 	remote: Support for password authentication was removed on August 13, 2021.
+ DEBUG [8407a83a] 	
+ DEBUG [8407a83a] 	remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+ DEBUG [8407a83a] 	
+ DEBUG [8407a83a] 	fatal: Authentication failed for 'https://github.com/Boniole/ror_geekhub_jira.git/'
+ DEBUG [8407a83a] 	

@@ -1,6 +1,6 @@
 lock "~> 3.17.1" # there should be your version, don`t change this!!!
 
-set :repo_url, 'https://github.com/Boniole/ror_geekhub_jira.git'
+set :repo_url, 'git@github.com:Boniole/ror_geekhub_jira.git'
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp # if you want to chose branch before each deploy
 
 set :user, 'deployer'
