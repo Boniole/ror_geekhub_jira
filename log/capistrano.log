@@ -1,0 +1,86 @@
+# Logfile created on 2023-02-27 22:06:25 +0200 by logger.rb/v1.5.0
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-02-27 22:06:25 +0200 cap production config:init
+  INFO ---------------------------------------------------------------------------
+  INFO Copied: config/database.yml.example to ./config/database.production.yml
+  INFO Created: ./config/application.production.yml as empty file
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-02-27 22:18:12 +0200 cap production puma:nginx_config
+  INFO ---------------------------------------------------------------------------
+ DEBUG [deff5074] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [deff5074] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-02-27 22:18:42 +0200 cap production puma:nginx_config
+  INFO ---------------------------------------------------------------------------
+ DEBUG [6d96e6e1] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [6d96e6e1] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-02-27 22:18:57 +0200 cap production puma:nginx_config
+  INFO ---------------------------------------------------------------------------
+ DEBUG [44465e8b] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [44465e8b] Command: [ -d ~/.rvm ]
+ DEBUG [44465e8b] Finished in 0.939 seconds with exit status 0 (successful).
+ DEBUG [69220fdc] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [69220fdc] Command: ~/.rvm/bin/rvm version
+ DEBUG [69220fdc] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [69220fdc] 	
+ DEBUG [69220fdc] Finished in 0.346 seconds with exit status 0 (successful).
+ DEBUG [502c72c9] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [502c72c9] Command: ~/.rvm/bin/rvm current
+ DEBUG [502c72c9] 	ruby-3.1.2
+ DEBUG [502c72c9] 	
+ DEBUG [502c72c9] Finished in 0.341 seconds with exit status 0 (successful).
+ DEBUG [d0297d7d] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [d0297d7d] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [d0297d7d] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [d0297d7d] 	
+ DEBUG [d0297d7d] Finished in 0.477 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/nginx_mini_jira_production 0.0%
+  INFO Uploading /tmp/nginx_mini_jira_production 100.0%
+  INFO [6349aa19] Running /usr/bin/env sudo mv /tmp/nginx_mini_jira_production /etc/nginx/sites-available/mini_jira_production as deployer@164.90.165.89
+ DEBUG [6349aa19] Command: /usr/bin/env sudo mv /tmp/nginx_mini_jira_production /etc/nginx/sites-available/mini_jira_production
+ DEBUG [6349aa19] 	[sudo] password for deployer: 
+ DEBUG [6349aa19] 	
+  INFO [6349aa19] Finished in 3.774 seconds with exit status 0 (successful).
+  INFO [2ff06bbf] Running /usr/bin/env sudo ln -fs /etc/nginx/sites-available/mini_jira_production /etc/nginx/sites-enabled/mini_jira_production as deployer@164.90.165.89
+ DEBUG [2ff06bbf] Command: /usr/bin/env sudo ln -fs /etc/nginx/sites-available/mini_jira_production /etc/nginx/sites-enabled/mini_jira_production
+ DEBUG [2ff06bbf] 	[sudo] password for deployer: 
+ DEBUG [2ff06bbf] 	
+  INFO [2ff06bbf] Finished in 0.260 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-02-27 22:19:34 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [f437cd40] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [f437cd40] Command: [ -d ~/.rvm ]
+ DEBUG [f437cd40] Finished in 0.576 seconds with exit status 0 (successful).
+ DEBUG [191eb1fa] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [191eb1fa] Command: ~/.rvm/bin/rvm version
+ DEBUG [191eb1fa] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [191eb1fa] 	
+ DEBUG [191eb1fa] Finished in 0.340 seconds with exit status 0 (successful).
+ DEBUG [29c6d838] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [29c6d838] Command: ~/.rvm/bin/rvm current
+ DEBUG [29c6d838] 	ruby-3.1.2
+ DEBUG [29c6d838] 	
+ DEBUG [29c6d838] Finished in 0.343 seconds with exit status 0 (successful).
+ DEBUG [b68dadc0] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [b68dadc0] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [b68dadc0] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [b68dadc0] 	
+ DEBUG [b68dadc0] Finished in 0.484 seconds with exit status 0 (successful).
+  INFO [a56e3051] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [a56e3051] Command: /usr/bin/env mkdir -p /tmp
+  INFO [a56e3051] Finished in 0.165 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-787cd96fa70de71eea12.sh 0.0%
+  INFO Uploading /tmp/git-ssh-787cd96fa70de71eea12.sh 100.0%
+  INFO [64881838] Running /usr/bin/env chmod 700 /tmp/git-ssh-787cd96fa70de71eea12.sh as deployer@164.90.165.89
+ DEBUG [64881838] Command: /usr/bin/env chmod 700 /tmp/git-ssh-787cd96fa70de71eea12.sh
+  INFO [64881838] Finished in 0.155 seconds with exit status 0 (successful).
+  INFO [1771d799] Running /usr/bin/env git ls-remote https://github.com/Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [1771d799] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-787cd96fa70de71eea12.sh" ; /usr/bin/env git ls-remote https://github.com/Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [1771d799] 	remote: Support for password authentication was removed on August 13, 2021.
+ DEBUG [1771d799] 	
+ DEBUG [1771d799] 	remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+ DEBUG [1771d799] 	
+ DEBUG [1771d799] 	fatal: Authentication failed for 'https://github.com/Boniole/ror_geekhub_jira.git/'
+ DEBUG [1771d799] 	
