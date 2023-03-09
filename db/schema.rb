@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_185456) do
     t.text "title"
     t.string "description"
     t.integer "priority"
+    t.integer "status"
     t.text "label"
     t.datetime "estimate"
     t.date "start"
