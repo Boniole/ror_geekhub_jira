@@ -65,3 +65,9 @@ yarn-error.log*
 # byebug 
 
 .byebug_history
+
+# ignore IDe config
+.idea
+
+# ignore tmp/cache
+tmp/cache
