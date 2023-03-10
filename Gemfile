@@ -65,4 +65,6 @@ group :development do
   gem 'capistrano-nginx'
   gem 'capistrano-upload-config'
   gem 'sshkit-sudo'
+
+  gem 'annotate'
 end
