@@ -14,12 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_122551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "descs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password_digest"
@@ -27,4 +21,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_122551) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "body"
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_comments_on_task_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "title"
+    t.string "description"
+    t.integer "priority"
+    t.integer "status"
+    t.text "label"
+    t.datetime "estimate"
+    t.date "start"
+    t.date "end"
+    t.integer "assignee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "comments", "tasks"
 end

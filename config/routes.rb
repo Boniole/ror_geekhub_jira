@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
-  root 'desc#index'
   namespace :api do
     namespace :v1 do
       resources :users, only: [:create]
       post '/login', to: 'users#login'
+      resources :tasks do 
+        member do
+          get :comments
+        end
+      end
     end
   end
 end
