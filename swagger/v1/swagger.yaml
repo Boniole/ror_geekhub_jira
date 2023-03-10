@@ -1,0 +1,103 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/users":
+    post:
+      summary: create user
+      tags:
+      - Users
+      description: Create a new user
+      parameters: []
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              examples:
+                create_new_user:
+                  value:
+                    user:
+                      name: Jovani Giorgio
+                      password: password2023
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                create_new_user_without_name:
+                  value:
+                    user:
+                      password: password2023
+                create_new_user_without_password:
+                  value:
+                    user:
+                      name: Jola
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    password:
+                      type: string
+              required:
+              - user
+  "/api/v1/login":
+    post:
+      summary: login user
+      tags:
+      - Users
+      description: Login as user
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              examples:
+                create_new_user:
+                  value:
+                    user:
+                      name: Jovani Giorgio
+                      password: password2023
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              examples:
+                create_new_user_without_name:
+                  value:
+                    user:
+                      password: password2023
+                create_new_user_without_password:
+                  value:
+                    user:
+                      name: Jola
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    password:
+                      type: string
+              required:
+              - user
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000

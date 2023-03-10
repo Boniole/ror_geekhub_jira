@@ -174,3 +174,359 @@ Processing by Api::V1::UsersController#login as */*
 Completed 200 OK in 539ms (Views: 0.8ms | ActiveRecord: 28.2ms | Allocations: 3452)
 
 
+  [1m[35m (129.9ms)[0m  [1m[35mCREATE DATABASE "mini_jira_development" ENCODING = 'unicode'[0m
+  [1m[35m (36.7ms)[0m  [1m[35mCREATE DATABASE "mini_jira_test" ENCODING = 'unicode'[0m
+  [1m[35m (14.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230309122551)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (6.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309122551"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTasks (20230309184537)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" text, "description" character varying, "priority" integer, "status" integer, "label" text, "estimate" timestamp(6), "start" date, "end" date, "assignee_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309184537"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20230309185456)
+  [1m[36mTRANSACTION (17.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (63.5ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "body" character varying, "task_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_6bd05453df"
+FOREIGN KEY ("task_id")
+  REFERENCES "tasks" ("id")
+)[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE INDEX "index_comments_on_task_id" ON "comments" ("task_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309185456"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-10 18:35:48.660739"], ["updated_at", "2023-03-10 18:35:48.660739"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2023-03-10 20:35:53 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.1ms | Allocations: 586)
+Completed 200 OK in 10ms (Views: 4.2ms | ActiveRecord: 0.0ms | Allocations: 4511)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2023-03-10 20:35:53 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for 127.0.0.1 at 2023-03-10 20:35:55 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 281)
+Completed 200 OK in 5ms (Views: 3.6ms | ActiveRecord: 0.0ms | Allocations: 934)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-10 20:35:56 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.0ms | Allocations: 16)
+Completed 200 OK in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 234)
+
+
+Started GET "/root_path" for 127.0.0.1 at 2023-03-10 20:36:00 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/root_path"):
+  
+Started GET "/routes" for 127.0.0.1 at 2023-03-10 20:36:01 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/routes"):
+  
+Started GET "/" for 127.0.0.1 at 2023-03-10 20:49:02 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.8ms | Allocations: 478)
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 3169)
+
+
+Started GET "/users" for 127.0.0.1 at 2023-03-10 20:49:15 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/v1/users" for 127.0.0.1 at 2023-03-10 20:50:20 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/v1/users"):
+  
+Started POST "/v1/users" for 127.0.0.1 at 2023-03-10 20:50:34 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/v1/users"):
+  
+Started POST "/v1/users" for 127.0.0.1 at 2023-03-10 20:50:35 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/v1/users"):
+  
+Started POST "/v1/users" for 127.0.0.1 at 2023-03-10 20:53:02 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/v1/users"):
+  
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-10 20:53:25 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"Sergio", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio"}}
+Completed 422 Unprocessable Entity in 11ms (Views: 0.2ms | ActiveRecord: 5.0ms | Allocations: 6087)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-10 20:54:15 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"Sergio", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mUser Create (4.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Sergio"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-10 18:54:15.581494"], ["updated_at", "2023-03-10 18:54:15.581494"]]
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+Completed 201 Created in 280ms (Views: 0.3ms | ActiveRecord: 5.9ms | Allocations: 2881)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-10 21:09:50 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.8ms | Allocations: 478)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 3169)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-10 21:09:54 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | Allocations: 281)
+Completed 200 OK in 4ms (Views: 2.5ms | ActiveRecord: 0.0ms | Allocations: 936)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-10 21:09:55 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 16)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 234)
+
+
+Started GET "/admin/products" for 127.0.0.1 at 2023-03-10 21:09:56 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/admin/products"):
+  
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:09:56 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:09:56 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:09:56 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:09:56 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:09:57 +0200
+Started GET "/api-docs/favicon-32x32.png" for 127.0.0.1 at 2023-03-10 21:09:57 +0200
+Started GET "/api-docs/favicon-16x16.png" for 127.0.0.1 at 2023-03-10 21:09:57 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:14:46 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (29.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:14:47 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:14:47 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:14:47 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:14:47 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:15:17 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:15:18 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:15:18 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:15:18 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:15:18 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:15:27 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:15:27 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:15:27 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:15:27 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:15:27 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:16:58 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:16:58 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:16:58 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:16:58 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:16:58 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:17:42 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:17:42 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:17:42 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:17:42 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:17:42 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:22:57 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:22:57 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:22:57 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:22:57 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:22:57 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:24:17 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:24:17 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:24:17 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:24:17 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:24:17 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:24:52 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:24:52 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:24:52 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:24:52 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:24:52 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:25:59 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:25:59 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:25:59 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:25:59 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:25:59 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:27:13 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:27:13 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:27:13 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:27:13 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:27:13 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:27:30 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:27:30 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:27:30 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:27:30 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:27:30 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:27:35 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:27:35 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:27:35 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:27:35 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:27:35 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:28:16 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:28:16 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:28:16 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:28:16 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:28:16 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:34:04 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:34:04 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:34:04 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:34:04 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:34:04 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:34:26 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:34:26 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:34:26 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:34:26 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:34:26 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:34:28 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:34:28 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:34:28 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:34:28 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:34:28 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:35:36 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:35:36 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:35:36 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:35:36 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:35:36 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:36:35 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:36:35 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:36:35 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:36:35 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:36:35 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:41:33 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:41:33 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:41:33 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:41:33 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:41:33 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:41:44 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:41:44 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:41:44 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:41:44 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:41:44 +0200
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-10 21:41:49 +0200
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"string", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "string"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-10 19:41:49.516992"], ["updated_at", "2023-03-10 19:41:49.516992"]]
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+Completed 201 Created in 298ms (Views: 0.5ms | ActiveRecord: 32.0ms | Allocations: 12575)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-10 21:45:06 +0200
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 268ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 439)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:46:04 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:46:04 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:46:04 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:46:04 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:46:04 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:46:59 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:46:59 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:46:59 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:46:59 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:47:00 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 21:49:23 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 21:49:23 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 21:49:23 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 21:49:23 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 21:49:23 +0200
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-10 21:49:39 +0200
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Jovani Giorgio", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jovani Giorgio"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-10 19:49:39.601855"], ["updated_at", "2023-03-10 19:49:39.601855"]]
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+Completed 201 Created in 276ms (Views: 0.2ms | ActiveRecord: 3.2ms | Allocations: 2056)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2023-03-10 21:49:48 +0200
+Processing by Api::V1::UsersController#login as JSON
+  Parameters: {"user"=>{"name"=>"Jovani Giorgio", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "Jovani Giorgio"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:14:in `login'
+Completed 200 OK in 282ms (Views: 0.3ms | ActiveRecord: 1.7ms | Allocations: 2912)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-10 21:49:57 +0200
+Processing by Api::V1::UsersController#create as JSON
+  Parameters: {"user"=>{"name"=>"Jovani Giorgio", "password"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Jovani Giorgio"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-10 19:49:57.719092"], ["updated_at", "2023-03-10 19:49:57.719092"]]
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:3:in `create'
+Completed 201 Created in 272ms (Views: 0.4ms | ActiveRecord: 3.1ms | Allocations: 2158)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2023-03-10 21:51:34 +0200
+Processing by Api::V1::UsersController#login as JSON
+  Parameters: {"user"=>{"name"=>"Jovani Giorgio", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" = $1 LIMIT $2[0m  [["name", "Jovani Giorgio"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:14:in `login'
+Completed 200 OK in 267ms (Views: 1.1ms | ActiveRecord: 0.5ms | Allocations: 796)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2023-03-10 21:51:58 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{
+  "user": {
+    "name": "Jovani Giorgio",
+    "password": "passwword2023"
+  }
+}'
+Processing by Api::V1::UsersController#login as JSON
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 146)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+app/controllers/api/v1/users_controller.rb:27:in `user_params'
+app/controllers/api/v1/users_controller.rb:14:in `login'
+Started POST "/api/v1/login" for 127.0.0.1 at 2023-03-10 21:53:35 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{
+  "user": {
+    "password": "passwword2023"
+  }
+}'
+Processing by Api::V1::UsersController#login as JSON
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 113)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+app/controllers/api/v1/users_controller.rb:27:in `user_params'
+app/controllers/api/v1/users_controller.rb:14:in `login'
