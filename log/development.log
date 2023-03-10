@@ -206,3 +206,264 @@ FOREIGN KEY ("task_id")
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProjects (20230310144341)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.1ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "type" integer DEFAULT 0, "user_id" bigint NOT NULL, "desc_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_1f678e1d36"
+FOREIGN KEY ("desc_id")
+  REFERENCES "descs" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProjects (20230310144341)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "type" integer DEFAULT 0, "user_id" bigint NOT NULL, "desk_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_816a0f83cb"
+FOREIGN KEY ("desk_id")
+  REFERENCES "desks" ("id")
+)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProjects (20230310144341)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "type" integer DEFAULT 0, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE INDEX "index_projects_on_user_id" ON "projects" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310144341"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDesks (20230310150440)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE "desks" ("id" bigserial primary key, "name" character varying, "project_id" bigint NOT NULL, "users_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d692808753"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+, CONSTRAINT "fk_rails_a24bb0599e"
+FOREIGN KEY ("users_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_desks_on_project_id" ON "desks" ("project_id")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_desks_on_users_id" ON "desks" ("users_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310150440"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddReferencesDeskToProject (20230310151132)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.4ms)[0m  [1m[35mALTER TABLE "desks" ADD "project_id" bigint[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddReferencesDeskToProject (20230310151132)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "desks" ADD "project_id_id" bigint[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE INDEX "index_desks_on_project_id_id" ON "desks" ("project_id_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "desks" ADD CONSTRAINT "fk_rails_3837f9d5fa"
+FOREIGN KEY ("project_id_id")
+  REFERENCES "project_ids" ("id")
+[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddReferencesDeskToProject (20230310151132)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "projects" ADD "desk_id_id" bigint[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE INDEX "index_projects_on_desk_id_id" ON "projects" ("desk_id_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "projects" ADD CONSTRAINT "fk_rails_c05a28b941"
+FOREIGN KEY ("desk_id_id")
+  REFERENCES "desk_ids" ("id")
+[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (35.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mini_jira_development"[0m
+  [1m[35m (33.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mini_jira_test"[0m
+  [1m[35m (428.8ms)[0m  [1m[35mCREATE DATABASE "mini_jira_development" ENCODING = 'unicode'[0m
+  [1m[35m (447.5ms)[0m  [1m[35mCREATE DATABASE "mini_jira_test" ENCODING = 'unicode'[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (7.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230309122551)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309122551"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTasks (20230309184537)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" text, "description" character varying, "priority" integer, "status" integer, "label" text, "estimate" timestamp(6), "start" date, "end" date, "assignee_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309184537"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20230309185456)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "body" character varying, "task_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_6bd05453df"
+FOREIGN KEY ("task_id")
+  REFERENCES "tasks" ("id")
+)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_task_id" ON "comments" ("task_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309185456"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProjects (20230310144341)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "type" integer DEFAULT 0, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE INDEX "index_projects_on_user_id" ON "projects" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310144341"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDesks (20230310150440)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "desks" ("id" bigserial primary key, "name" character varying, "project_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d692808753"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE INDEX "index_desks_on_project_id" ON "desks" ("project_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310150440"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-10 15:22:03.964349"], ["updated_at", "2023-03-10 15:22:03.964349"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "xxxx"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-10 15:31:15.082946"], ["updated_at", "2023-03-10 15:31:15.082946"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (24.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mini_jira_development"[0m
+  [1m[35m (32.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mini_jira_test"[0m
+  [1m[35m (447.2ms)[0m  [1m[35mCREATE DATABASE "mini_jira_development" ENCODING = 'unicode'[0m
+  [1m[35m (434.1ms)[0m  [1m[35mCREATE DATABASE "mini_jira_test" ENCODING = 'unicode'[0m
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230309122551)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309122551"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTasks (20230309184537)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" text, "description" character varying, "priority" integer, "status" integer, "label" text, "estimate" timestamp(6), "start" date, "end" date, "assignee_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309184537"]]
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20230309185456)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.2ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "body" character varying, "task_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_6bd05453df"
+FOREIGN KEY ("task_id")
+  REFERENCES "tasks" ("id")
+)[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE INDEX "index_comments_on_task_id" ON "comments" ("task_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309185456"]]
+  [1m[36mTRANSACTION (2.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProjects (20230310144341)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "status" integer DEFAULT 0, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE INDEX "index_projects_on_user_id" ON "projects" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310144341"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDesks (20230310150440)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "desks" ("id" bigserial primary key, "name" character varying, "project_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d692808753"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE INDEX "index_desks_on_project_id" ON "desks" ("project_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310150440"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-10 15:37:21.924714"], ["updated_at", "2023-03-10 15:37:21.924714"]]
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "xxxx"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-10 15:42:21.546585"], ["updated_at", "2023-03-10 15:42:21.546585"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProject Create (0.5ms)[0m  [1m[32mINSERT INTO "projects" ("name", "status", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "xxxx"], ["status", 0], ["user_id", 1], ["created_at", "2023-03-10 15:42:25.734012"], ["updated_at", "2023-03-10 15:42:25.734012"]]
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddRefDesksToProject (20230310154859)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "projects" ADD "desc_id_id" bigint NOT NULL[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddRefDesksToProject (20230310154859)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "projects" ADD "desc_id" bigint NOT NULL[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddRefDesksToProject (20230310154859)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "desks" ADD "project_id" bigint NOT NULL[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = $1[0m  [["user_id", 1]]
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT "projects".* FROM "projects" ORDER BY "projects"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mDesk Load (0.8ms)[0m  [1m[34mSELECT "desks".* FROM "desks" WHERE "desks"."project_id" = $1[0m  [["project_id", 1]]
