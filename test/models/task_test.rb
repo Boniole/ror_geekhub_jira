@@ -11,6 +11,7 @@
 #  start       :date
 #  status      :integer          default("todo")
 #  title       :text
+#  type        :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer

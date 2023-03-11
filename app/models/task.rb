@@ -11,6 +11,7 @@
 #  start       :date
 #  status      :integer          default("todo")
 #  title       :text
+#  type        :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
@@ -37,15 +38,16 @@ class Task < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, dependent: :destroy
 
-  enum :priority, [ :lowest, :low, :high, :highest ], default: :lowest
-  enum :status, [ :todo, :in_progress, :code_review, :test, :response_client, :done ], default: :todo
+  enum :priority, %i[lowest low high highest], default: :lowest
+  enum :type, %i[task bug epic], default: :task
+  enum :status, %i[todo in_progress code_review test response_client done], default: :todo
 
   validates :user_id, numericality: { only_integer: true }
   validates :project_id, numericality: { only_integer: true }
   validates :desk_id, numericality: { only_integer: true }
+
   validates :title, presence: true, length: { in: 3..30 }
   validates :description, presence: true, length: { in: 3..2500 }
-
   validates :label, presence: true, optional: true
   validates :start, presence: true, date: true, optional: true
   validates :end, presence: true, date: true, optional: true
