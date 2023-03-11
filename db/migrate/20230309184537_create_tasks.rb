@@ -10,9 +10,6 @@ class CreateTasks < ActiveRecord::Migration[7.0]
       t.date :start
       t.date :end
       t.integer :assignee_id
-      # t.references :project, null: false, foreign_key: true
-      # t.references :desk, null: false, foreign_key: true
-      # t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
