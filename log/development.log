@@ -890,3 +890,41 @@ Processing by Rails::WelcomeController#index as HTML
 Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 3169)
 
 
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 22:27:01 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 22:27:01 +0200
+Started GET "/api-docs/favicon-16x16.png" for 127.0.0.1 at 2023-03-10 22:27:01 +0200
+Started GET "/api-docs/favicon-32x32.png" for 127.0.0.1 at 2023-03-10 22:27:01 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 22:27:01 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 22:27:01 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 22:27:02 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 22:29:24 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 22:29:24 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 22:29:24 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 22:29:24 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 22:29:24 +0200
+Started GET "/api/v1/desks" for 127.0.0.1 at 2023-03-10 22:29:28 +0200
+Processing by Api::V1::DesksController#index as */*
+Completed 400 Bad Request in 1ms (ActiveRecord: 0.0ms | Allocations: 288)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: desk):
+  
+app/controllers/api/v1/desks_controller.rb:45:in `desk_params'
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 22:35:31 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 22:35:31 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 22:35:31 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 22:35:31 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 22:35:31 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-10 22:38:45 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-10 22:38:45 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-10 22:38:45 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-10 22:38:45 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-10 22:38:45 +0200
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-11 09:57:52 +0200

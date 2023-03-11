@@ -4,6 +4,250 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/comments":
+    get:
+      summary: list comments
+      tags:
+      - Comments
+      description: Get comments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      description: Create comment
+      responses:
+        '200':
+          description: successful
+  "/api/v1/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show comment
+      tags:
+      - Comments
+      description: Get comment
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update comment
+      tags:
+      - Comments
+      description: Update comment
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update comment
+      tags:
+      - Comments
+      description: Put comment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      description: Delete comment
+      responses:
+        '200':
+          description: successful
+  "/api/v1/desks":
+    get:
+      summary: list desks
+      tags:
+      - Desks
+      description: Get desks
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create desk
+      tags:
+      - Desks
+      description: Create desk
+      responses:
+        '200':
+          description: successful
+  "/api/v1/desks/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show desk
+      tags:
+      - Desks
+      description: Get desk by id
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update desk
+      tags:
+      - Desks
+      description: Update desk
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update desk
+      tags:
+      - Desks
+      description: Update desk
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete desk
+      tags:
+      - Desks
+      description: Delete desk
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects":
+    get:
+      summary: list projects
+      tags:
+      - Projects
+      description: Get projects
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create project
+      tags:
+      - Projects
+      description: Create projects
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show project
+      tags:
+      - Projects
+      description: Get project
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update project
+      tags:
+      - Projects
+      description: Update project
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update project
+      tags:
+      - Projects
+      description: Update project
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete project
+      tags:
+      - Projects
+      description: Delete project
+      responses:
+        '200':
+          description: successful
+  "/api/v1/tasks/{id}/comments":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: comments task
+      tags:
+      - Tasks
+      description: Get comments by task id
+      responses:
+        '200':
+          description: successful
+  "/api/v1/tasks":
+    get:
+      summary: list tasks
+      tags:
+      - Tasks
+      description: Get tasks list
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create task
+      tags:
+      - Tasks
+      description: Create task
+      responses:
+        '200':
+          description: successful
+  "/api/v1/tasks/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show task
+      tags:
+      - Tasks
+      description: Get task by id
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update task
+      tags:
+      - Tasks
+      description: Update task
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update task
+      tags:
+      - Tasks
+      description: Put task
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete task
+      tags:
+      - Tasks
+      description: Delete task
+      responses:
+        '200':
+          description: successful
   "/api/v1/users":
     post:
       summary: create user
@@ -68,8 +312,8 @@ paths:
                     user:
                       name: Jovani Giorgio
                       password: password2023
-        '422':
-          description: Unprocessable Entity
+        '400':
+          description: Bad request
           content:
             application/json:
               examples:
@@ -100,4 +344,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000
+      default: 164.90.165.89
