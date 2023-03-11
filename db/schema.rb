@@ -50,7 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_11_074920) do
   create_table "tasks", force: :cascade do |t|
     t.text "title"
     t.string "description"
-    t.integer "priority"
+    t.integer "priority", default: 0
+    t.integer "status", default: 0
     t.text "label"
     t.datetime "estimate"
     t.date "start"

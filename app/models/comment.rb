@@ -23,5 +23,6 @@ class Comment < ApplicationRecord
   belongs_to :task
   belongs_to :user
 
-  validates :body, presence: true, length: { minimum: 3 }
+  validates :user_id, numericality: { only_integer: true }
+  validates :body, presence: true, length: { in: 3..2500 }
 end
