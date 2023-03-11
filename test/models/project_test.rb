@@ -1,27 +1,25 @@
 # == Schema Information
 #
-# Table name: comments
+# Table name: projects
 #
 #  id         :bigint           not null, primary key
-#  body       :string
+#  name       :string
+#  status     :integer          default("closed")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  task_id    :bigint           not null
 #  user_id    :bigint           not null
 #
 # Indexes
 #
-#  index_comments_on_task_id  (task_id)
-#  index_comments_on_user_id  (user_id)
+#  index_projects_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (task_id => tasks.id)
 #  fk_rails_...  (user_id => users.id)
 #
 require "test_helper"
 
-class CommentTest < ActiveSupport::TestCase
+class ProjectTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
