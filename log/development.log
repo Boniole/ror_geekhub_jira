@@ -280,3 +280,660 @@ Migrating to AddDetailsToUser (20230311153803)
   [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
   [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:19:27 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    "user": {
+        "name": "dsfdsds",
+        "last_name": "sdvdf"
+        "password": "goodtryasshole"
+    }
+}
+Processing by Api::V1::UsersController#create as */*
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 241)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:21:19 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 111)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:21:21 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 90)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:21:28 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 90)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:21:51 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 90)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:21:54 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 89)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:21:58 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 89)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:22:38 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 169)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:22:42 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 89)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:13:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:30:42 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 162)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:34:20 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:34:22 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 162)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:11:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:36:48 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 162)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:37:06 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 1ms (Allocations: 162)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:42:10 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password_digest"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 1ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:42:13 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds", "password_digest"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 2ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:42:55 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:42:57 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:45:45 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+Completed 500 Internal Server Error in 1ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:45:47 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+Completed 500 Internal Server Error in 2ms (Allocations: 162)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:45:52 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+Completed 500 Internal Server Error in 0ms (Allocations: 88)
+
+
+  
+JWT::DecodeError (Nil JSON web token):
+  
+app/controllers/concerns/json_web_token.rb:12:in `jwt_decode'
+app/controllers/application_controller.rb:11:in `authenticate_request'
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:54:49 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x0000000110358188>, params: {"user"=>{"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds"}, "controller"=>"api/v1/users", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (33.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (11.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 289ms (Views: 0.7ms | ActiveRecord: 131.5ms | Allocations: 17885)
+
+
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:55:19 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds", "user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds"}}
+[31mUnpermitted parameters: :last_name, :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x0000000110872bc8>, params: {"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdf", "email"=>"swdvds", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdf", "email"=>"swdvds"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 327ms (Views: 0.9ms | ActiveRecord: 5.9ms | Allocations: 4945)
+
+
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:55:33 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdljonklf", "email"=>"swdvds", "user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdljonklf", "email"=>"swdvds"}}
+[31mUnpermitted parameters: :last_name, :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x0000000110a40f40>, params: {"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdljonklf", "email"=>"swdvds", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdljonklf", "email"=>"swdvds"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 392ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 2673)
+
+
+Started POST "/api/v1/users" for ::1 at 2023-03-11 18:56:26 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdljonklf", "email"=>"swdvds", "user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdljonklf", "email"=>"swdvds"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x000000010ff858f8>, params: {"name"=>"dsfdsds", "password"=>"[FILTERED]", "last_name"=>"sdvdljonklf", "email"=>"swdvds", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"dsfdsds", "last_name"=>"sdvdljonklf", "email"=>"swdvds"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Create (7.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at", "last_name", "email") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "dsfdsds"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-11 16:56:26.864595"], ["updated_at", "2023-03-11 16:56:26.864595"], ["last_name", "sdvdljonklf"], ["email", "swdvds"]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 201 Created in 463ms (Views: 0.6ms | ActiveRecord: 50.4ms | Allocations: 5501)
+
+
+Started POST "/api/v1/login" for ::1 at 2023-03-11 18:57:52 +0200
+Processing by Api::V1::AuthenticationController#login as */*
+  Parameters: {"password"=>"[FILTERED]", "email"=>"swdvds", "authentication"=>{"password"=>"[FILTERED]", "email"=>"swdvds"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:6:in `login'
+Completed 500 Internal Server Error in 318ms (ActiveRecord: 0.4ms | Allocations: 2479)
+
+
+  
+NoMethodError (undefined method `encode' for JsonWebToken:Module
+
+      token = JsonWebToken.encode(user_id: @user.id)
+                          ^^^^^^^):
+  
+app/controllers/api/v1/authentication_controller.rb:8:in `login'
+Started POST "/api/v1/login" for ::1 at 2023-03-11 19:10:53 +0200
+Processing by Api::V1::AuthenticationController#login as */*
+  Parameters: {"email"=>"swdvds", "password"=>"[FILTERED]", "authentication"=>{"email"=>"swdvds", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:6:in `login'
+Completed 500 Internal Server Error in 440ms (ActiveRecord: 43.4ms | Allocations: 4711)
+
+
+  
+NoMethodError (undefined method `encode' for JsonWebToken:Module
+
+      token = JsonWebToken.encode(user_id: @user.id)
+                          ^^^^^^^):
+  
+app/controllers/api/v1/authentication_controller.rb:8:in `login'
+Started POST "/api/v1/login" for ::1 at 2023-03-11 19:12:35 +0200
+Processing by Api::V1::AuthenticationController#login as */*
+  Parameters: {"email"=>"swdvds", "password"=>"[FILTERED]", "authentication"=>{"email"=>"swdvds", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:6:in `login'
+Completed 500 Internal Server Error in 395ms (ActiveRecord: 27.8ms | Allocations: 9023)
+
+
+  
+NoMethodError (undefined method `username' for #<User id: 3, name: "dsfdsds", password_digest: [FILTERED], created_at: "2023-03-11 16:56:26.864595000 +0000", updated_at: "2023-03-11 16:56:26.864595000 +0000", last_name: "sdvdljonklf", email: "swdvds">):
+  
+app/controllers/api/v1/authentication_controller.rb:11:in `login'
+Started POST "/api/v1/login" for ::1 at 2023-03-11 19:13:15 +0200
+Processing by Api::V1::AuthenticationController#login as */*
+  Parameters: {"email"=>"swdvds", "password"=>"[FILTERED]", "authentication"=>{"email"=>"swdvds", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (4.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:6:in `login'
+Completed 500 Internal Server Error in 448ms (ActiveRecord: 4.3ms | Allocations: 5064)
+
+
+  
+NoMethodError (undefined method `username' for #<User id: 3, name: "dsfdsds", password_digest: [FILTERED], created_at: "2023-03-11 16:56:26.864595000 +0000", updated_at: "2023-03-11 16:56:26.864595000 +0000", last_name: "sdvdljonklf", email: "swdvds">):
+  
+app/controllers/api/v1/authentication_controller.rb:11:in `login'
+Started POST "/api/v1/login" for ::1 at 2023-03-11 19:13:20 +0200
+Processing by Api::V1::AuthenticationController#login as */*
+  Parameters: {"email"=>"swdvds", "password"=>"[FILTERED]", "authentication"=>{"email"=>"swdvds", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:6:in `login'
+Completed 200 OK in 315ms (Views: 0.8ms | ActiveRecord: 6.6ms | Allocations: 4461)
+
+
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:15:08 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 267)
+
+
+Started GET "/api/v1//users/%7Bdsfdsds%7D" for ::1 at 2023-03-11 19:25:01 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"{dsfdsds}"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | Allocations: 380)
+
+
+Started GET "/api/v1//users/%7Bdsfdsds%7D" for ::1 at 2023-03-11 19:25:05 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"{dsfdsds}"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.1ms | Allocations: 110)
+
+
+Started POST "/api/v1/login" for ::1 at 2023-03-11 19:25:17 +0200
+Processing by Api::V1::AuthenticationController#login as */*
+  Parameters: {"email"=>"swdvds", "password"=>"[FILTERED]", "authentication"=>{"email"=>"swdvds", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "swdvds"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/authentication_controller.rb:6:in `login'
+Completed 200 OK in 289ms (Views: 0.2ms | ActiveRecord: 11.9ms | Allocations: 6974)
+
+
+Started GET "/api/v1//users" for ::1 at 2023-03-11 19:25:51 +0200
+Processing by Api::V1::UsersController#index as */*
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 124)
+
+
+Started GET "/api/v1//users/%7Bdsfdsds%7D" for ::1 at 2023-03-11 19:28:46 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"{dsfdsds}"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 113)
+
+
+Started GET "/api/v1//users/%7Bdsfdsds%7D" for ::1 at 2023-03-11 19:28:55 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"{dsfdsds}"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 113)
+
+
+Started GET "/api/v1//users" for ::1 at 2023-03-11 19:29:04 +0200
+Processing by Api::V1::UsersController#index as */*
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 113)
+
+
+Started GET "/api/v1//users" for ::1 at 2023-03-11 19:31:36 +0200
+Processing by Api::V1::UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `index'
+Completed 200 OK in 42ms (Views: 4.6ms | ActiveRecord: 13.3ms | Allocations: 4696)
+
+
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:32:21 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 3.7ms | Allocations: 4457)
+
+
+  
+NoMethodError (undefined method `find_by_username!' for User:Class
+Did you mean?  find_by_email):
+  
+app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:32:50 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+Completed 500 Internal Server Error in 30ms (ActiveRecord: 0.3ms | Allocations: 4399)
+
+
+  
+NoMethodError (undefined method `find_by_username!' for User:Class
+Did you mean?  find_by_email):
+  
+app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:32:52 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 36ms (Views: 0.2ms | ActiveRecord: 15.4ms | Allocations: 5188)
+
+
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:33:00 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 10ms (Views: 0.9ms | ActiveRecord: 2.5ms | Allocations: 1399)
+
+
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:33:14 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 12ms (Views: 0.3ms | ActiveRecord: 1.8ms | Allocations: 1369)
+
+
+Started GET "/api/v1//users/%7Bdsfdsds%7D" for ::1 at 2023-03-11 19:33:42 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"{dsfdsds}"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (3.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 29ms (Views: 0.3ms | ActiveRecord: 8.9ms | Allocations: 5012)
+
+
+Started GET "/api/v1//users/%7Bdsfdsds%7D" for ::1 at 2023-03-11 19:33:43 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"{dsfdsds}"}
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 12ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 1399)
+
+
+Started GET "/api/v1//users/'dsfdsds'" for ::1 at 2023-03-11 19:34:01 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"'dsfdsds'"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 9ms (Views: 1.0ms | ActiveRecord: 1.4ms | Allocations: 1369)
+
+
+Started GET "/api/v1//users/'dsfdsds'" for ::1 at 2023-03-11 19:34:02 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"'dsfdsds'"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 21ms (Views: 0.3ms | ActiveRecord: 3.1ms | Allocations: 1369)
+
+
+Started GET "/api/v1//users/dsfdsds" for ::1 at 2023-03-11 19:34:07 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfdsds"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 13ms (Views: 0.2ms | ActiveRecord: 2.1ms | Allocations: 1369)
+
+
+Started GET "/api/v1//users/" for ::1 at 2023-03-11 19:34:38 +0200
+Processing by Api::V1::UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `index'
+Completed 200 OK in 12ms (Views: 5.9ms | ActiveRecord: 3.0ms | Allocations: 1670)
+
+
+Started GET "/api/v1//users/dsfds" for ::1 at 2023-03-11 19:34:46 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfds"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 7ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 1369)
+
+
+Started GET "/api/v1//users/dsfds" for ::1 at 2023-03-11 19:35:45 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfds"}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (7.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 18ms (Views: 0.4ms | ActiveRecord: 8.7ms | Allocations: 1369)
+
+
+Started GET "/api/v1//users/dsfds" for ::1 at 2023-03-11 19:35:47 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfds"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (5.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Completed 200 OK in 57ms (Views: 0.3ms | ActiveRecord: 33.9ms | Allocations: 4937)
+
+
+Started GET "/api/v1//users/dsfds" for ::1 at 2023-03-11 19:36:04 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfds"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 2.7ms | Allocations: 1296)
+
+
+Started GET "/api/v1//users/dsfds" for ::1 at 2023-03-11 19:36:06 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfds"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (15.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 15.8ms | Allocations: 1266)
+
+
+Started GET "/api/v1//users/dsfds" for ::1 at 2023-03-11 19:36:08 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"dsfds"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (9.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."name" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 49ms (Views: 0.5ms | ActiveRecord: 13.3ms | Allocations: 5032)
+
+
+Started GET "/api/v1//users/1" for ::1 at 2023-03-11 19:37:25 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Completed 200 OK in 20ms (Views: 1.3ms | ActiveRecord: 4.5ms | Allocations: 4864)
+
+
+Started GET "/api/v1//users/2" for ::1 at 2023-03-11 19:37:30 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Completed 200 OK in 8ms (Views: 0.5ms | ActiveRecord: 0.8ms | Allocations: 1247)
+
+
+Started GET "/api/v1//users/3" for ::1 at 2023-03-11 19:37:34 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 3.4ms | Allocations: 1229)
+
+
+Started GET "/api/v1//users/4" for ::1 at 2023-03-11 19:37:38 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:43:in `set_user'
+Filter chain halted as :set_user rendered or redirected
+Completed 404 Not Found in 17ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 1150)
+
+
+Started GET "/api/v1//users/" for ::1 at 2023-03-11 19:37:46 +0200
+Processing by Api::V1::UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `index'
+Completed 200 OK in 9ms (Views: 3.2ms | ActiveRecord: 1.1ms | Allocations: 1599)
+
+
