@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post '/login', to: 'authentication#login'
       resources :projects
       resources :desks
+      resources :columns
       resources :tasks do
         member do
           get :comments
