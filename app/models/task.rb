@@ -41,7 +41,7 @@ class Task < ApplicationRecord
 
   enum :priority, %i[lowest low high highest], default: :lowest
   enum :type, %i[task bug epic], default: :task
-  enum :status, %i[todo in_progress code_review test response_client done], default: :todo
+  enum :status, %i[open close], default: :open
 
   validates :user_id, numericality: { only_integer: true }
   validates :project_id, numericality: { only_integer: true }
