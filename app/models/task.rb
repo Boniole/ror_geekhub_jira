@@ -9,7 +9,7 @@
 #  label       :text
 #  priority    :integer          default("lowest")
 #  start       :date
-#  status      :integer          default("todo")
+#  status      :integer          default("open")
 #  title       :text
 #  type        :integer          default("task")
 #  created_at  :datetime         not null
