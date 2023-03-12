@@ -36,7 +36,7 @@ class Task < ApplicationRecord
   belongs_to :desk
   belongs_to :user
   belongs_to :assignee, class_name: 'User', optional: true
-  has_many :comments, dependent: :destroy
+  has_many :comments, as: :polymorphic, dependent: :destroy
 
   enum :priority, %i[lowest low high highest], default: :lowest
   enum :type, %i[task bug epic], default: :task
