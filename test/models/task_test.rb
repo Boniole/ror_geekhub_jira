@@ -7,11 +7,11 @@
 #  end         :date
 #  estimate    :datetime
 #  label       :text
-#  priority    :integer          default("lowest")
+#  priority    :integer          default(0)
 #  start       :date
-#  status      :integer          default("open")
+#  status      :integer          default(0)
 #  title       :text
-#  type        :integer          default("task")
+#  type        :integer          default(0)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
