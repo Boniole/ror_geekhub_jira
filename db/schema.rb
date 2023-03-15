@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_12_105215) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "columns", force: :cascade do |t|
+    t.text "name"
+    t.string "columnntable_type", null: false
+    t.bigint "columnntable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["columnntable_type", "columnntable_id"], name: "index_columns_on_columnntable"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
@@ -25,12 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_105215) do
     t.index ["commetable_type", "commetable_id"], name: "index_comments_on_commetable"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "descs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "desks", force: :cascade do |t|
@@ -78,6 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_105215) do
     t.datetime "updated_at", null: false
     t.string "last_name"
     t.string "email"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
   end
 
   add_foreign_key "comments", "tasks"
