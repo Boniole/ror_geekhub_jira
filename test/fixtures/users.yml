@@ -2,11 +2,15 @@
 #
 # Table name: users
 #
-#  id              :bigint           not null, primary key
-#  name            :string
-#  password_digest :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                     :bigint           not null, primary key
+#  email                  :string
+#  last_name              :string
+#  name                   :string
+#  password_digest        :string
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #
 
 one:

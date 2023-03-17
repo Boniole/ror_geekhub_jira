@@ -3,11 +3,14 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:create]
-      post '/login', to: 'users#login'
+      resources :users
+      post '/login', to: 'authentication#login'
+      post '/forgot', to: 'passwords#forgot'
+      post '/reset', to: 'passwords#reset'
       resources :projects
       resources :desks
-      resources :tasks do 
+      resources :columns
+      resources :tasks do
         member do
           get :comments
         end
