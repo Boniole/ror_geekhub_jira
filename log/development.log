@@ -928,3 +928,56 @@ Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-11 09:57:52 +020
 Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
 Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
 Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-11 09:57:52 +0200
+Started GET "/" for 127.0.0.1 at 2023-03-11 13:29:08 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.8ms | Allocations: 478)
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.0ms | Allocations: 3169)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-11 13:29:13 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-11 13:29:13 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-11 13:29:13 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-11 13:29:13 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-11 13:29:14 +0200
+Started GET "/" for 127.0.0.1 at 2023-03-13 11:09:39 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.7ms | Allocations: 285)
+Completed 200 OK in 22ms (Views: 16.1ms | Allocations: 922)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-13 11:09:40 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 16)
+Completed 200 OK in 1ms (Views: 0.5ms | Allocations: 231)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-17 21:49:05 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (12.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.9ms | Allocations: 478)
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 3169)
+
+
+Started GET "/favicon.ico" for 127.0.0.1 at 2023-03-17 21:49:05 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/" for 127.0.0.1 at 2023-03-17 21:49:07 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | Allocations: 281)
+Completed 200 OK in 4ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 934)
+
+
+Started GET "/api-docs/index.html" for 127.0.0.1 at 2023-03-17 21:49:11 +0200
+Started GET "/api-docs/swagger-ui.css" for 127.0.0.1 at 2023-03-17 21:49:11 +0200
+Started GET "/api-docs/swagger-ui-bundle.js" for 127.0.0.1 at 2023-03-17 21:49:11 +0200
+Started GET "/api-docs/swagger-ui-standalone-preset.js" for 127.0.0.1 at 2023-03-17 21:49:11 +0200
+Started GET "/api-docs/v1/swagger.yaml" for 127.0.0.1 at 2023-03-17 21:49:11 +0200
+Started GET "/api-docs/favicon-32x32.png" for 127.0.0.1 at 2023-03-17 21:49:11 +0200
+Started GET "/api-docs/favicon-16x16.png" for 127.0.0.1 at 2023-03-17 21:49:11 +0200

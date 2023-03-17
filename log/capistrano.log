@@ -3163,3 +3163,1300 @@ sudo stderr: Nothing written
  DEBUG [db4307e5] 	[sudo] password for deployer: 
  DEBUG [db4307e5] 	
   INFO [db4307e5] Finished in 0.301 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-11 10:04:19 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [767f0a50] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [767f0a50] Command: [ -d ~/.rvm ]
+ DEBUG [767f0a50] Finished in 4.882 seconds with exit status 0 (successful).
+ DEBUG [78bf99cb] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [78bf99cb] Command: ~/.rvm/bin/rvm version
+ DEBUG [78bf99cb] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [78bf99cb] 	
+ DEBUG [78bf99cb] Finished in 0.606 seconds with exit status 0 (successful).
+ DEBUG [6e1f34cb] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [6e1f34cb] Command: ~/.rvm/bin/rvm current
+ DEBUG [6e1f34cb] 	ruby-3.1.2
+ DEBUG [6e1f34cb] 	
+ DEBUG [6e1f34cb] Finished in 0.346 seconds with exit status 0 (successful).
+ DEBUG [16869092] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [16869092] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [16869092] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [16869092] 	
+ DEBUG [16869092] Finished in 0.513 seconds with exit status 0 (successful).
+  INFO [a0323eb5] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [a0323eb5] Command: /usr/bin/env mkdir -p /tmp
+  INFO [a0323eb5] Finished in 0.160 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-1418b132b437f631513b.sh 0.0%
+  INFO Uploading /tmp/git-ssh-1418b132b437f631513b.sh 100.0%
+  INFO [ea0b7975] Running /usr/bin/env chmod 700 /tmp/git-ssh-1418b132b437f631513b.sh as deployer@164.90.165.89
+ DEBUG [ea0b7975] Command: /usr/bin/env chmod 700 /tmp/git-ssh-1418b132b437f631513b.sh
+  INFO [ea0b7975] Finished in 0.158 seconds with exit status 0 (successful).
+  INFO [95dbcbba] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [95dbcbba] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1418b132b437f631513b.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [95dbcbba] 	git@github.com: Permission denied (publickey).
+ DEBUG [95dbcbba] 	
+ DEBUG [95dbcbba] 	fatal: Could not read from remote repository.
+ DEBUG [95dbcbba] 	
+ DEBUG [95dbcbba] 	
+ DEBUG [95dbcbba] 	Please make sure you have the correct access rights
+ DEBUG [95dbcbba] 	
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-11 10:09:26 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [0a19346d] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [0a19346d] Command: [ -d ~/.rvm ]
+ DEBUG [0a19346d] Finished in 7.094 seconds with exit status 0 (successful).
+ DEBUG [0041a95c] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [0041a95c] Command: ~/.rvm/bin/rvm version
+ DEBUG [0041a95c] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [0041a95c] 	
+ DEBUG [0041a95c] Finished in 0.340 seconds with exit status 0 (successful).
+ DEBUG [29add92a] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [29add92a] Command: ~/.rvm/bin/rvm current
+ DEBUG [29add92a] 	ruby-3.1.2
+ DEBUG [29add92a] 	
+ DEBUG [29add92a] Finished in 0.335 seconds with exit status 0 (successful).
+ DEBUG [7902cc5e] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [7902cc5e] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [7902cc5e] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [7902cc5e] 	
+ DEBUG [7902cc5e] Finished in 0.573 seconds with exit status 0 (successful).
+  INFO [fb0685a2] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [fb0685a2] Command: /usr/bin/env mkdir -p /tmp
+  INFO [fb0685a2] Finished in 0.171 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-62b01cb418125e488d43.sh 0.0%
+  INFO Uploading /tmp/git-ssh-62b01cb418125e488d43.sh 100.0%
+  INFO [b6f8ca02] Running /usr/bin/env chmod 700 /tmp/git-ssh-62b01cb418125e488d43.sh as deployer@164.90.165.89
+ DEBUG [b6f8ca02] Command: /usr/bin/env chmod 700 /tmp/git-ssh-62b01cb418125e488d43.sh
+  INFO [b6f8ca02] Finished in 0.158 seconds with exit status 0 (successful).
+  INFO [946462a3] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [946462a3] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-62b01cb418125e488d43.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [946462a3] 	git@github.com: Permission denied (publickey).
+ DEBUG [946462a3] 	
+ DEBUG [946462a3] 	fatal: Could not read from remote repository.
+ DEBUG [946462a3] 	
+ DEBUG [946462a3] 	
+ DEBUG [946462a3] 	Please make sure you have the correct access rights
+ DEBUG [946462a3] 	
+ DEBUG [946462a3] 	and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-11 10:14:26 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [3796bb34] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [3796bb34] Command: [ -d ~/.rvm ]
+ DEBUG [3796bb34] Finished in 4.925 seconds with exit status 0 (successful).
+ DEBUG [e8c2652b] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [e8c2652b] Command: ~/.rvm/bin/rvm version
+ DEBUG [e8c2652b] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [e8c2652b] 	
+ DEBUG [e8c2652b] Finished in 0.401 seconds with exit status 0 (successful).
+ DEBUG [d3c377fd] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [d3c377fd] Command: ~/.rvm/bin/rvm current
+ DEBUG [d3c377fd] 	ruby-3.1.2
+ DEBUG [d3c377fd] 	
+ DEBUG [d3c377fd] Finished in 0.376 seconds with exit status 0 (successful).
+ DEBUG [8d4bebf9] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [8d4bebf9] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [8d4bebf9] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [8d4bebf9] 	
+ DEBUG [8d4bebf9] Finished in 0.545 seconds with exit status 0 (successful).
+  INFO [ac436ed0] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [ac436ed0] Command: /usr/bin/env mkdir -p /tmp
+  INFO [ac436ed0] Finished in 0.172 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-865fe6978649c1a0c985.sh 0.0%
+  INFO Uploading /tmp/git-ssh-865fe6978649c1a0c985.sh 100.0%
+  INFO [c075f321] Running /usr/bin/env chmod 700 /tmp/git-ssh-865fe6978649c1a0c985.sh as deployer@164.90.165.89
+ DEBUG [c075f321] Command: /usr/bin/env chmod 700 /tmp/git-ssh-865fe6978649c1a0c985.sh
+  INFO [c075f321] Finished in 0.168 seconds with exit status 0 (successful).
+  INFO [7fd9d877] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [7fd9d877] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-865fe6978649c1a0c985.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [7fd9d877] 	git@github.com: Permission denied (publickey).
+ DEBUG [7fd9d877] 	
+ DEBUG [7fd9d877] 	fatal: Could not read from remote repository.
+ DEBUG [7fd9d877] 	
+ DEBUG [7fd9d877] 	
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-11 10:16:43 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [bbd2067d] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [bbd2067d] Command: [ -d ~/.rvm ]
+ DEBUG [bbd2067d] Finished in 4.404 seconds with exit status 0 (successful).
+ DEBUG [eae1cd0e] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [eae1cd0e] Command: ~/.rvm/bin/rvm version
+ DEBUG [eae1cd0e] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [eae1cd0e] 	
+ DEBUG [eae1cd0e] Finished in 0.350 seconds with exit status 0 (successful).
+ DEBUG [76e4334b] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [76e4334b] Command: ~/.rvm/bin/rvm current
+ DEBUG [76e4334b] 	ruby-3.1.2
+ DEBUG [76e4334b] 	
+ DEBUG [76e4334b] Finished in 0.355 seconds with exit status 0 (successful).
+ DEBUG [c3992c75] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [c3992c75] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [c3992c75] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [c3992c75] 	
+ DEBUG [c3992c75] Finished in 0.607 seconds with exit status 0 (successful).
+  INFO [c3fcf8ac] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [c3fcf8ac] Command: /usr/bin/env mkdir -p /tmp
+  INFO [c3fcf8ac] Finished in 0.090 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-99a2133adcee394f5904.sh 0.0%
+  INFO Uploading /tmp/git-ssh-99a2133adcee394f5904.sh 100.0%
+  INFO [d9d3f8c0] Running /usr/bin/env chmod 700 /tmp/git-ssh-99a2133adcee394f5904.sh as deployer@164.90.165.89
+ DEBUG [d9d3f8c0] Command: /usr/bin/env chmod 700 /tmp/git-ssh-99a2133adcee394f5904.sh
+  INFO [d9d3f8c0] Finished in 0.159 seconds with exit status 0 (successful).
+  INFO [bc41019c] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [bc41019c] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-99a2133adcee394f5904.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [bc41019c] 	git@github.com: Permission denied (publickey).
+ DEBUG [bc41019c] 	
+ DEBUG [bc41019c] 	fatal: Could not read from remote repository.
+ DEBUG [bc41019c] 	
+ DEBUG [bc41019c] 	
+ DEBUG [bc41019c] 	Please make sure you have the correct access rights
+ DEBUG [bc41019c] 	
+ DEBUG [bc41019c] 	and the repository exists.
+ DEBUG [bc41019c] 	
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-11 10:18:10 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [f6d06063] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [f6d06063] Command: [ -d ~/.rvm ]
+ DEBUG [f6d06063] Finished in 4.844 seconds with exit status 0 (successful).
+ DEBUG [a686a6eb] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [a686a6eb] Command: ~/.rvm/bin/rvm version
+ DEBUG [a686a6eb] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [a686a6eb] 	
+ DEBUG [a686a6eb] Finished in 0.376 seconds with exit status 0 (successful).
+ DEBUG [4fd90356] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [4fd90356] Command: ~/.rvm/bin/rvm current
+ DEBUG [4fd90356] 	ruby-3.1.2
+ DEBUG [4fd90356] 	
+ DEBUG [4fd90356] Finished in 0.341 seconds with exit status 0 (successful).
+ DEBUG [3ce8d406] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [3ce8d406] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [3ce8d406] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [3ce8d406] 	
+ DEBUG [3ce8d406] Finished in 0.523 seconds with exit status 0 (successful).
+  INFO [d325001c] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [d325001c] Command: /usr/bin/env mkdir -p /tmp
+  INFO [d325001c] Finished in 0.156 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-611f1292a37eabc9f88d.sh 0.0%
+  INFO Uploading /tmp/git-ssh-611f1292a37eabc9f88d.sh 100.0%
+  INFO [55619cb1] Running /usr/bin/env chmod 700 /tmp/git-ssh-611f1292a37eabc9f88d.sh as deployer@164.90.165.89
+ DEBUG [55619cb1] Command: /usr/bin/env chmod 700 /tmp/git-ssh-611f1292a37eabc9f88d.sh
+  INFO [55619cb1] Finished in 0.158 seconds with exit status 0 (successful).
+  INFO [e9cf8bad] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [e9cf8bad] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-611f1292a37eabc9f88d.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [e9cf8bad] 	git@github.com: Permission denied (publickey).
+ DEBUG [e9cf8bad] 	
+ DEBUG [e9cf8bad] 	fatal: Could not read from remote repository.
+ DEBUG [e9cf8bad] 	
+ DEBUG [e9cf8bad] 	
+ DEBUG [e9cf8bad] 	Please make sure you have the correct access rights
+ DEBUG [e9cf8bad] 	
+ DEBUG [e9cf8bad] 	and the repository exists.
+ DEBUG [e9cf8bad] 	
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-17 21:18:18 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [24ef9f14] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [24ef9f14] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-17 21:20:31 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [fc558664] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [fc558664] Command: [ -d ~/.rvm ]
+ DEBUG [fc558664] Finished in 5.832 seconds with exit status 0 (successful).
+ DEBUG [dc7dddc4] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [dc7dddc4] Command: ~/.rvm/bin/rvm version
+ DEBUG [dc7dddc4] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [dc7dddc4] 	
+ DEBUG [dc7dddc4] Finished in 0.428 seconds with exit status 0 (successful).
+ DEBUG [55cc38c9] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [55cc38c9] Command: ~/.rvm/bin/rvm current
+ DEBUG [55cc38c9] 	ruby-3.1.2
+ DEBUG [55cc38c9] 	
+ DEBUG [55cc38c9] Finished in 0.392 seconds with exit status 0 (successful).
+ DEBUG [0ce780b3] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [0ce780b3] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [0ce780b3] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [0ce780b3] 	
+ DEBUG [0ce780b3] Finished in 0.486 seconds with exit status 0 (successful).
+  INFO [03c1acb8] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [03c1acb8] Command: /usr/bin/env mkdir -p /tmp
+  INFO [03c1acb8] Finished in 0.253 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-e0f824d1c38d84b50802.sh 0.0%
+  INFO Uploading /tmp/git-ssh-e0f824d1c38d84b50802.sh 100.0%
+  INFO [e48ec934] Running /usr/bin/env chmod 700 /tmp/git-ssh-e0f824d1c38d84b50802.sh as deployer@164.90.165.89
+ DEBUG [e48ec934] Command: /usr/bin/env chmod 700 /tmp/git-ssh-e0f824d1c38d84b50802.sh
+  INFO [e48ec934] Finished in 0.491 seconds with exit status 0 (successful).
+  INFO [91cf3b15] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [91cf3b15] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-e0f824d1c38d84b50802.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [91cf3b15] 	git@github.com: Permission denied (publickey).
+ DEBUG [91cf3b15] 	
+ DEBUG [91cf3b15] 	fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-17 21:21:49 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [11cc249e] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [11cc249e] Command: [ -d ~/.rvm ]
+ DEBUG [11cc249e] Finished in 4.752 seconds with exit status 0 (successful).
+ DEBUG [80ef1b29] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [80ef1b29] Command: ~/.rvm/bin/rvm version
+ DEBUG [80ef1b29] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [80ef1b29] 	
+ DEBUG [80ef1b29] Finished in 0.437 seconds with exit status 0 (successful).
+ DEBUG [474e9b88] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [474e9b88] Command: ~/.rvm/bin/rvm current
+ DEBUG [474e9b88] 	ruby-3.1.2
+ DEBUG [474e9b88] 	
+ DEBUG [474e9b88] Finished in 0.399 seconds with exit status 0 (successful).
+ DEBUG [af5e854c] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [af5e854c] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [af5e854c] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [af5e854c] 	
+ DEBUG [af5e854c] Finished in 0.521 seconds with exit status 0 (successful).
+  INFO [1f5fa181] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [1f5fa181] Command: /usr/bin/env mkdir -p /tmp
+  INFO [1f5fa181] Finished in 0.123 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-bfc7279629cc2d7b4af1.sh 0.0%
+  INFO Uploading /tmp/git-ssh-bfc7279629cc2d7b4af1.sh 100.0%
+  INFO [bf3b94aa] Running /usr/bin/env chmod 700 /tmp/git-ssh-bfc7279629cc2d7b4af1.sh as deployer@164.90.165.89
+ DEBUG [bf3b94aa] Command: /usr/bin/env chmod 700 /tmp/git-ssh-bfc7279629cc2d7b4af1.sh
+  INFO [bf3b94aa] Finished in 0.224 seconds with exit status 0 (successful).
+  INFO [67d07885] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [67d07885] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bfc7279629cc2d7b4af1.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [67d07885] 	git@github.com: Permission denied (publickey).
+ DEBUG [67d07885] 	
+ DEBUG [67d07885] 	fatal: Could not read from remote repository.
+ DEBUG [67d07885] 	
+ DEBUG [67d07885] 	
+ DEBUG [67d07885] 	Please make sure you have the correct access rights
+ DEBUG [67d07885] 	
+and the repository exists.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-17 21:46:30 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [abeb1715] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [abeb1715] Command: [ -d ~/.rvm ]
+ DEBUG [abeb1715] Finished in 1.278 seconds with exit status 0 (successful).
+ DEBUG [c9b23207] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [c9b23207] Command: ~/.rvm/bin/rvm version
+ DEBUG [c9b23207] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [c9b23207] 	
+ DEBUG [c9b23207] Finished in 0.360 seconds with exit status 0 (successful).
+ DEBUG [64a4de78] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [64a4de78] Command: ~/.rvm/bin/rvm current
+ DEBUG [64a4de78] 	ruby-3.1.2
+ DEBUG [64a4de78] 	
+ DEBUG [64a4de78] Finished in 0.398 seconds with exit status 0 (successful).
+ DEBUG [fc53cc44] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [fc53cc44] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [fc53cc44] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [fc53cc44] 	
+ DEBUG [fc53cc44] Finished in 0.606 seconds with exit status 0 (successful).
+  INFO [116ce229] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [116ce229] Command: /usr/bin/env mkdir -p /tmp
+  INFO [116ce229] Finished in 0.278 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ccae7eff726e868f19f5.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ccae7eff726e868f19f5.sh 100.0%
+  INFO [6bcdf4f7] Running /usr/bin/env chmod 700 /tmp/git-ssh-ccae7eff726e868f19f5.sh as deployer@164.90.165.89
+ DEBUG [6bcdf4f7] Command: /usr/bin/env chmod 700 /tmp/git-ssh-ccae7eff726e868f19f5.sh
+  INFO [6bcdf4f7] Finished in 0.197 seconds with exit status 0 (successful).
+  INFO [34a6b869] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [34a6b869] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ccae7eff726e868f19f5.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [34a6b869] 	76aaf64338cf34586393c8226206eeeaf2b7af9f
+ DEBUG [34a6b869] 		
+ DEBUG [34a6b869] 	HEAD
+ DEBUG [34a6b869] 	
+  INFO [34a6b869] Finished in 1.731 seconds with exit status 0 (successful).
+  INFO [0dade530] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared /home/deployer/apps/mini_jira/releases as deployer@164.90.165.89
+ DEBUG [0dade530] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared /home/deployer/apps/mini_jira/releases
+  INFO [0dade530] Finished in 0.155 seconds with exit status 0 (successful).
+  INFO [0dc901c1] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/shared/storage as deployer@164.90.165.89
+ DEBUG [0dc901c1] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/shared/storage
+  INFO [0dc901c1] Finished in 0.157 seconds with exit status 0 (successful).
+  INFO [9314872b] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/config as deployer@164.90.165.89
+ DEBUG [9314872b] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/config
+  INFO [9314872b] Finished in 0.475 seconds with exit status 0 (successful).
+ DEBUG [0b808098] Running [ -f /home/deployer/apps/mini_jira/shared/config/master.key ] as deployer@164.90.165.89
+ DEBUG [0b808098] Command: [ -f /home/deployer/apps/mini_jira/shared/config/master.key ]
+ DEBUG [0b808098] Finished in 0.537 seconds with exit status 0 (successful).
+ DEBUG [ee1e81bf] Running if test ! -d /home/deployer/apps/mini_jira/shared; then echo "Directory does not exist '/home/deployer/apps/mini_jira/shared'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [ee1e81bf] Command: if test ! -d /home/deployer/apps/mini_jira/shared; then echo "Directory does not exist '/home/deployer/apps/mini_jira/shared'" 1>&2; false; fi
+ DEBUG [ee1e81bf] Finished in 0.336 seconds with exit status 0 (successful).
+  INFO Uploading config ./config/database.production.yml as config/database.yml
+ DEBUG Uploading /home/deployer/apps/mini_jira/shared/config/database.yml 0.0%
+  INFO Uploading /home/deployer/apps/mini_jira/shared/config/database.yml 100.0%
+  INFO Uploading config ./config/application.production.yml as config/application.yml
+  WARN Error calculating percentage 0/0, is /home/deployer/apps/mini_jira/shared/config/application.yml empty?
+ DEBUG Uploading /home/deployer/apps/mini_jira/shared/config/puma.rb 0.0%
+  INFO Uploading /home/deployer/apps/mini_jira/shared/config/puma.rb 100.0%
+ DEBUG Uploading /tmp/run-puma 0.0%
+  INFO Uploading /tmp/run-puma 100.0%
+  INFO [74bf37d9] Running chmod +x /tmp/run-puma as deployer@164.90.165.89
+ DEBUG [74bf37d9] Command: chmod +x /tmp/run-puma
+  INFO [74bf37d9] Finished in 0.198 seconds with exit status 0 (successful).
+  INFO [9e892f8d] Running /usr/bin/env sudo mv /tmp/run-puma /usr/local/bin/run-puma as deployer@164.90.165.89
+ DEBUG [9e892f8d] Command: /usr/bin/env sudo mv /tmp/run-puma /usr/local/bin/run-puma
+ DEBUG [9e892f8d] 	[sudo] password for deployer: 
+ DEBUG [9e892f8d] 	
+ DEBUG [9e892f8d] 	Sorry, try again.
+ DEBUG [9e892f8d] 	
+ DEBUG [9e892f8d] 	[sudo] password for deployer: 
+ DEBUG [9e892f8d] 	
+  INFO [9e892f8d] Finished in 11.689 seconds with exit status 0 (successful).
+ DEBUG [95473e1d] Running [ -f /etc/redhat-release ] as deployer@164.90.165.89
+ DEBUG [95473e1d] Command: [ -f /etc/redhat-release ]
+ DEBUG [95473e1d] Finished in 0.199 seconds with exit status 1 (failed).
+ DEBUG [ac52896d] Running [ -f /etc/lsb-release ] as deployer@164.90.165.89
+ DEBUG [ac52896d] Command: [ -f /etc/lsb-release ]
+ DEBUG [ac52896d] Finished in 0.185 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/puma 0.0%
+  INFO Uploading /tmp/puma 100.0%
+  INFO [230ba4a9] Running chmod +x /tmp/puma as deployer@164.90.165.89
+ DEBUG [230ba4a9] Command: chmod +x /tmp/puma
+  INFO [230ba4a9] Finished in 0.307 seconds with exit status 0 (successful).
+  INFO [592c5c1d] Running /usr/bin/env sudo mv /tmp/puma /etc/init.d/puma as deployer@164.90.165.89
+ DEBUG [592c5c1d] Command: /usr/bin/env sudo mv /tmp/puma /etc/init.d/puma
+ DEBUG [592c5c1d] 	[sudo] password for deployer: 
+ DEBUG [592c5c1d] 	
+  INFO [592c5c1d] Finished in 0.254 seconds with exit status 0 (successful).
+  INFO [3f053fd2] Running /usr/bin/env sudo update-rc.d -f puma defaults as deployer@164.90.165.89
+ DEBUG [3f053fd2] Command: /usr/bin/env sudo update-rc.d -f puma defaults
+ DEBUG [3f053fd2] 	[sudo] password for deployer: 
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 	perl: warning: Setting locale failed.
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 	perl: warning: Please check that your locale settings:
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 		
+ DEBUG [3f053fd2] 	LANGUAGE = (unset),
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 		
+ DEBUG [3f053fd2] 	LC_ALL = (unset),
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 		
+ DEBUG [3f053fd2] 	LC_CTYPE = "uk_UA.UTF-8",
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 		
+ DEBUG [3f053fd2] 	LANG = "C.UTF-8"
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 	    are supported and installed on your system.
+ DEBUG [3f053fd2] 	
+ DEBUG [3f053fd2] 	perl: warning: Falling back to a fallback locale ("C.UTF-8").
+ DEBUG [3f053fd2] 	
+  INFO [3f053fd2] Finished in 0.678 seconds with exit status 0 (successful).
+  INFO [0e41a101] Running /usr/bin/env sudo touch /etc/puma.conf as deployer@164.90.165.89
+ DEBUG [0e41a101] Command: /usr/bin/env sudo touch /etc/puma.conf
+ DEBUG [0e41a101] 	[sudo] password for deployer: 
+ DEBUG [0e41a101] 	
+  INFO [0e41a101] Finished in 0.275 seconds with exit status 0 (successful).
+  INFO [8da2f56b] Running /usr/bin/env sudo /etc/init.d/puma add '/home/deployer/apps/mini_jira/current' deployer '/home/deployer/apps/mini_jira/shared/config/puma.rb' as deployer@164.90.165.89
+ DEBUG [8da2f56b] Command: /usr/bin/env sudo /etc/init.d/puma add '/home/deployer/apps/mini_jira/current' deployer '/home/deployer/apps/mini_jira/shared/config/puma.rb'
+ DEBUG [8da2f56b] 	[sudo] password for deployer: 
+ DEBUG [8da2f56b] 	
+ DEBUG [8da2f56b] 	The app is already being managed. Remove it if you want to update its config.
+ DEBUG [8da2f56b] 	
+  WARN sudo exit status: 1
+sudo stdout: [sudo] password for deployer: 
+The app is already being managed. Remove it if you want to update its config.
+sudo stderr: Nothing written
+ DEBUG [2f0cb309] Running [ -f /home/deployer/apps/mini_jira/shared/config/database.yml ] as deployer@164.90.165.89
+ DEBUG [2f0cb309] Command: [ -f /home/deployer/apps/mini_jira/shared/config/database.yml ]
+ DEBUG [2f0cb309] Finished in 0.154 seconds with exit status 0 (successful).
+ DEBUG [d0faf8c6] Running [ -f /home/deployer/apps/mini_jira/shared/config/master.key ] as deployer@164.90.165.89
+ DEBUG [d0faf8c6] Command: [ -f /home/deployer/apps/mini_jira/shared/config/master.key ]
+ DEBUG [d0faf8c6] Finished in 0.599 seconds with exit status 0 (successful).
+ DEBUG [0e9526fb] Running [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [0e9526fb] Command: [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ]
+ DEBUG [0e9526fb] Finished in 0.374 seconds with exit status 0 (successful).
+ DEBUG [04d31ecd] Running [ -f /home/deployer/apps/mini_jira/shared/config/application.yml ] as deployer@164.90.165.89
+ DEBUG [04d31ecd] Command: [ -f /home/deployer/apps/mini_jira/shared/config/application.yml ]
+ DEBUG [04d31ecd] Finished in 0.180 seconds with exit status 0 (successful).
+ DEBUG [95710893] Running [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [95710893] Command: [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ]
+ DEBUG [95710893] Finished in 0.261 seconds with exit status 0 (successful).
+ DEBUG [462fd524] Running [ -f /home/deployer/apps/mini_jira/current/REVISION ] as deployer@164.90.165.89
+ DEBUG [462fd524] Command: [ -f /home/deployer/apps/mini_jira/current/REVISION ]
+ DEBUG [462fd524] Finished in 0.159 seconds with exit status 0 (successful).
+ DEBUG [c2cae1cf] Running /usr/bin/env cat /home/deployer/apps/mini_jira/current/REVISION 2>/dev/null as deployer@164.90.165.89
+ DEBUG [c2cae1cf] Command: /usr/bin/env cat /home/deployer/apps/mini_jira/current/REVISION 2>/dev/null
+ DEBUG [c2cae1cf] 	dfb1623f7b8c5af3c19f9cd72ea5b2125a5e44b1
+ DEBUG [c2cae1cf] 	
+ DEBUG [c2cae1cf] Finished in 0.206 seconds with exit status 0 (successful).
+ DEBUG [5454ae7c] Running [ -f /home/deployer/apps/mini_jira/repo/HEAD ] as deployer@164.90.165.89
+ DEBUG [5454ae7c] Command: [ -f /home/deployer/apps/mini_jira/repo/HEAD ]
+ DEBUG [5454ae7c] Finished in 0.232 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/deployer/apps/mini_jira/repo
+ DEBUG [c7506870] Running if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [c7506870] Command: if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi
+ DEBUG [c7506870] Finished in 0.210 seconds with exit status 0 (successful).
+  INFO [ddc85eae] Running /usr/bin/env git remote set-url origin git@github.com:Boniole/ror_geekhub_jira.git as deployer@164.90.165.89
+ DEBUG [ddc85eae] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ccae7eff726e868f19f5.sh" ; /usr/bin/env git remote set-url origin git@github.com:Boniole/ror_geekhub_jira.git )
+  INFO [ddc85eae] Finished in 0.279 seconds with exit status 0 (successful).
+  INFO [9770364a] Running /usr/bin/env git remote update --prune as deployer@164.90.165.89
+ DEBUG [9770364a] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ccae7eff726e868f19f5.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [9770364a] 	Fetching origin
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	remote: Enumerating objects: 542, done.[K
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	remote: Counting objects:   0% (1/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   1% (6/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   2% (11/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   3% (17/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   4% (22/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   5% (28/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   6% (33/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   7% (38/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   8% (44/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:   9% (49/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  10% (55/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  11% (60/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  12% (65/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  13% (71/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  14% (76/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  15% (82/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  16% (87/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  17% (92/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  18% (98/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  19% (103/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  20% (109/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  21% (114/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  22% (120/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  23% (125/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  24% (130/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  25% (136/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  26% (141/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  27% (147/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  28% (152/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  29% (157/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  30% (163/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  31% (168/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  32% (174/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  33% (179/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  34% (184/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  35% (190/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  36% (195/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  37% (201/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  38% (206/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  39% (211/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  40% (217/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  41% (222/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  42% (228/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  43% (233/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  44% (239/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  45% (244/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  46% (249/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  47% (255/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  48% (260/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  49% (266/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  50% (271/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  51% (276/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  52% (282/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  53% (287/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  54% (293/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  55% (298/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  56% (303/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  57% (309/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  58% (314/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  59% (320/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  60% (325/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  61% (331/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  62% (336/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  63% (341/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  64% (347/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  65% (352/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  66% (358/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  67% (363/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  68% (368/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  69% (374/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  70% (379/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  71% (385/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  72% (390/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  73% (395/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  74% (401/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  75% (406/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  76% (412/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  77% (417/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  78% (422/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  79% (428/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  80% (433/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  81% (439/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  82% (444/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  83% (450/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  84% (455/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  85% (460/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  86% (466/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  87% (471/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  88% (477/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  89% (482/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  90% (487/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  91% (493/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  92% (498/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  93% (504/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  94% (509/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  95% (514/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  96% (520/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  97% (525/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  98% (531/541)[K
+ DEBUG [9770364a] 	remote: Counting objects:  99% (536/541)[K
+ DEBUG [9770364a] 	remote: Counting objects: 100% (541/541)[K
+ DEBUG [9770364a] 	remote: Counting objects: 100% (541/541), done.[K
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	remote: Compressing objects:   0% (1/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   1% (3/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   2% (6/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   3% (8/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   4% (11/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   5% (14/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   6% (16/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   7% (19/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   8% (22/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:   9% (24/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  10% (27/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  11% (29/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  12% (32/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  13% (35/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  14% (37/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  15% (40/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  16% (43/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  17% (45/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  18% (48/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  19% (50/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  20% (53/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  21% (56/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  22% (58/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  23% (61/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  24% (64/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  25% (66/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  26% (69/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  27% (72/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  28% (74/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  29% (77/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  30% (79/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  31% (82/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  32% (85/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  33% (87/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  34% (90/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  35% (93/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  36% (95/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  37% (98/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  38% (100/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  39% (103/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  40% (106/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  41% (108/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  42% (111/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  43% (114/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  44% (116/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  45% (119/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  46% (121/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  47% (124/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  48% (127/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  49% (129/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  50% (132/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  51% (135/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  52% (137/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  53% (140/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  54% (143/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  55% (145/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  56% (148/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  57% (150/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  58% (153/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  59% (156/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  60% (158/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  61% (161/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  62% (164/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  63% (166/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  64% (169/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  65% (171/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  66% (174/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  67% (177/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  68% (179/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  69% (182/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  70% (185/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  71% (187/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  72% (190/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  73% (192/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  74% (195/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  75% (198/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  76% (200/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  77% (203/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  78% (206/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  79% (208/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  80% (211/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  81% (214/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  82% (216/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  83% (219/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  84% (221/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  85% (224/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  86% (227/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  87% (229/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  88% (232/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  89% (235/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  90% (237/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  91% (240/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  92% (242/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  93% (245/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  94% (248/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  95% (250/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  96% (253/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  97% (256/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  98% (258/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects:  99% (261/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects: 100% (263/263)[K
+ DEBUG [9770364a] 	remote: Compressing objects: 100% (263/263), done.[K
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	Receiving objects:   0% (1/510)
+ DEBUG [9770364a] 	Receiving objects:   1% (6/510)
+ DEBUG [9770364a] 	Receiving objects:   2% (11/510)
+ DEBUG [9770364a] 	Receiving objects:   3% (16/510)
+ DEBUG [9770364a] 	Receiving objects:   4% (21/510)
+ DEBUG [9770364a] 	Receiving objects:   5% (26/510)
+ DEBUG [9770364a] 	Receiving objects:   6% (31/510)
+ DEBUG [9770364a] 	Receiving objects:   7% (36/510)
+ DEBUG [9770364a] 	Receiving objects:   8% (41/510)
+ DEBUG [9770364a] 	Receiving objects:   9% (46/510)
+ DEBUG [9770364a] 	Receiving objects:  10% (51/510)
+ DEBUG [9770364a] 	Receiving objects:  11% (57/510)
+ DEBUG [9770364a] 	Receiving objects:  12% (62/510)
+ DEBUG [9770364a] 	Receiving objects:  13% (67/510)
+ DEBUG [9770364a] 	Receiving objects:  14% (72/510)
+ DEBUG [9770364a] 	Receiving objects:  15% (77/510)
+ DEBUG [9770364a] 	Receiving objects:  16% (82/510)
+ DEBUG [9770364a] 	Receiving objects:  17% (87/510)
+ DEBUG [9770364a] 	Receiving objects:  18% (92/510)
+ DEBUG [9770364a] 	Receiving objects:  19% (97/510)
+ DEBUG [9770364a] 	Receiving objects:  20% (102/510)
+ DEBUG [9770364a] 	Receiving objects:  21% (108/510)
+ DEBUG [9770364a] 	Receiving objects:  22% (113/510)
+ DEBUG [9770364a] 	Receiving objects:  23% (118/510)
+ DEBUG [9770364a] 	Receiving objects:  24% (123/510)
+ DEBUG [9770364a] 	Receiving objects:  25% (128/510)
+ DEBUG [9770364a] 	Receiving objects:  26% (133/510)
+ DEBUG [9770364a] 	Receiving objects:  27% (138/510)
+ DEBUG [9770364a] 	Receiving objects:  28% (143/510)
+ DEBUG [9770364a] 	Receiving objects:  29% (148/510)
+ DEBUG [9770364a] 	Receiving objects:  30% (153/510)
+ DEBUG [9770364a] 	Receiving objects:  31% (159/510)
+ DEBUG [9770364a] 	Receiving objects:  32% (164/510)
+ DEBUG [9770364a] 	Receiving objects:  33% (169/510)
+ DEBUG [9770364a] 	Receiving objects:  34% (174/510)
+ DEBUG [9770364a] 	Receiving objects:  35% (179/510)
+ DEBUG [9770364a] 	Receiving objects:  36% (184/510)
+ DEBUG [9770364a] 	Receiving objects:  37% (189/510)
+ DEBUG [9770364a] 	Receiving objects:  38% (194/510)
+ DEBUG [9770364a] 	Receiving objects:  39% (199/510)
+ DEBUG [9770364a] 	Receiving objects:  40% (204/510)
+ DEBUG [9770364a] 	Receiving objects:  41% (210/510)
+ DEBUG [9770364a] 	Receiving objects:  42% (215/510)
+ DEBUG [9770364a] 	Receiving objects:  43% (220/510)
+ DEBUG [9770364a] 	Receiving objects:  44% (225/510)
+ DEBUG [9770364a] 	Receiving objects:  45% (230/510)
+ DEBUG [9770364a] 	Receiving objects:  46% (235/510)
+ DEBUG [9770364a] 	Receiving objects:  47% (240/510)
+ DEBUG [9770364a] 	Receiving objects:  48% (245/510)
+ DEBUG [9770364a] 	Receiving objects:  49% (250/510)
+ DEBUG [9770364a] 	Receiving objects:  50% (255/510)
+ DEBUG [9770364a] 	Receiving objects:  51% (261/510)
+ DEBUG [9770364a] 	Receiving objects:  52% (266/510)
+ DEBUG [9770364a] 	Receiving objects:  53% (271/510)
+ DEBUG [9770364a] 	Receiving objects:  54% (276/510)
+ DEBUG [9770364a] 	Receiving objects:  55% (281/510)
+ DEBUG [9770364a] 	Receiving objects:  56% (286/510)
+ DEBUG [9770364a] 	Receiving objects:  57% (291/510)
+ DEBUG [9770364a] 	Receiving objects:  58% (296/510)
+ DEBUG [9770364a] 	Receiving objects:  59% (301/510)
+ DEBUG [9770364a] 	Receiving objects:  60% (306/510)
+ DEBUG [9770364a] 	Receiving objects:  61% (312/510)
+ DEBUG [9770364a] 	Receiving objects:  62% (317/510)
+ DEBUG [9770364a] 	Receiving objects:  63% (322/510)
+ DEBUG [9770364a] 	remote: Total 510 (delta 288), reused 407 (delta 199), pack-reused 0[K
+ DEBUG [9770364a] 	Receiving objects:  64% (327/510)
+ DEBUG [9770364a] 	Receiving objects:  65% (332/510)
+ DEBUG [9770364a] 	Receiving objects:  66% (337/510)
+ DEBUG [9770364a] 	Receiving objects:  67% (342/510)
+ DEBUG [9770364a] 	Receiving objects:  68% (347/510)
+ DEBUG [9770364a] 	Receiving objects:  69% (352/510)
+ DEBUG [9770364a] 	Receiving objects:  70% (357/510)
+ DEBUG [9770364a] 	Receiving objects:  71% (363/510)
+ DEBUG [9770364a] 	Receiving objects:  72% (368/510)
+ DEBUG [9770364a] 	Receiving objects:  73% (373/510)
+ DEBUG [9770364a] 	Receiving objects:  74% (378/510)
+ DEBUG [9770364a] 	Receiving objects:  75% (383/510)
+ DEBUG [9770364a] 	Receiving objects:  76% (388/510)
+ DEBUG [9770364a] 	Receiving objects:  77% (393/510)
+ DEBUG [9770364a] 	Receiving objects:  78% (398/510)
+ DEBUG [9770364a] 	Receiving objects:  79% (403/510)
+ DEBUG [9770364a] 	Receiving objects:  80% (408/510)
+ DEBUG [9770364a] 	Receiving objects:  81% (414/510)
+ DEBUG [9770364a] 	Receiving objects:  82% (419/510)
+ DEBUG [9770364a] 	Receiving objects:  83% (424/510)
+ DEBUG [9770364a] 	Receiving objects:  84% (429/510)
+ DEBUG [9770364a] 	Receiving objects:  85% (434/510)
+ DEBUG [9770364a] 	Receiving objects:  86% (439/510)
+ DEBUG [9770364a] 	Receiving objects:  87% (444/510)
+ DEBUG [9770364a] 	Receiving objects:  88% (449/510)
+ DEBUG [9770364a] 	Receiving objects:  89% (454/510)
+ DEBUG [9770364a] 	Receiving objects:  90% (459/510)
+ DEBUG [9770364a] 	Receiving objects:  91% (465/510)
+ DEBUG [9770364a] 	Receiving objects:  92% (470/510)
+ DEBUG [9770364a] 	Receiving objects:  93% (475/510)
+ DEBUG [9770364a] 	Receiving objects:  94% (480/510)
+ DEBUG [9770364a] 	Receiving objects:  95% (485/510)
+ DEBUG [9770364a] 	Receiving objects:  96% (490/510)
+ DEBUG [9770364a] 	Receiving objects:  97% (495/510)
+ DEBUG [9770364a] 	Receiving objects:  98% (500/510)
+ DEBUG [9770364a] 	Receiving objects:  99% (505/510)
+ DEBUG [9770364a] 	Receiving objects: 100% (510/510)
+ DEBUG [9770364a] 	Receiving objects: 100% (510/510), 94.03 KiB | 590.00 KiB/s, done.
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	Resolving deltas:   0% (0/288)
+ DEBUG [9770364a] 	Resolving deltas:   1% (3/288)
+ DEBUG [9770364a] 	Resolving deltas:   2% (6/288)
+ DEBUG [9770364a] 	Resolving deltas:   3% (9/288)
+ DEBUG [9770364a] 	Resolving deltas:   4% (12/288)
+ DEBUG [9770364a] 	Resolving deltas:   5% (15/288)
+ DEBUG [9770364a] 	Resolving deltas:   6% (18/288)
+ DEBUG [9770364a] 	Resolving deltas:   7% (21/288)
+ DEBUG [9770364a] 	Resolving deltas:   8% (24/288)
+ DEBUG [9770364a] 	Resolving deltas:   9% (26/288)
+ DEBUG [9770364a] 	Resolving deltas:  10% (29/288)
+ DEBUG [9770364a] 	Resolving deltas:  11% (32/288)
+ DEBUG [9770364a] 	Resolving deltas:  12% (35/288)
+ DEBUG [9770364a] 	Resolving deltas:  13% (38/288)
+ DEBUG [9770364a] 	Resolving deltas:  14% (41/288)
+ DEBUG [9770364a] 	Resolving deltas:  15% (44/288)
+ DEBUG [9770364a] 	Resolving deltas:  16% (47/288)
+ DEBUG [9770364a] 	Resolving deltas:  17% (49/288)
+ DEBUG [9770364a] 	Resolving deltas:  18% (52/288)
+ DEBUG [9770364a] 	Resolving deltas:  19% (55/288)
+ DEBUG [9770364a] 	Resolving deltas:  20% (58/288)
+ DEBUG [9770364a] 	Resolving deltas:  21% (61/288)
+ DEBUG [9770364a] 	Resolving deltas:  22% (64/288)
+ DEBUG [9770364a] 	Resolving deltas:  23% (67/288)
+ DEBUG [9770364a] 	Resolving deltas:  24% (70/288)
+ DEBUG [9770364a] 	Resolving deltas:  25% (72/288)
+ DEBUG [9770364a] 	Resolving deltas:  26% (75/288)
+ DEBUG [9770364a] 	Resolving deltas:  27% (78/288)
+ DEBUG [9770364a] 	Resolving deltas:  28% (81/288)
+ DEBUG [9770364a] 	Resolving deltas:  29% (84/288)
+ DEBUG [9770364a] 	Resolving deltas:  30% (87/288)
+ DEBUG [9770364a] 	Resolving deltas:  31% (90/288)
+ DEBUG [9770364a] 	Resolving deltas:  32% (93/288)
+ DEBUG [9770364a] 	Resolving deltas:  33% (96/288)
+ DEBUG [9770364a] 	Resolving deltas:  34% (98/288)
+ DEBUG [9770364a] 	Resolving deltas:  35% (101/288)
+ DEBUG [9770364a] 	Resolving deltas:  36% (104/288)
+ DEBUG [9770364a] 	Resolving deltas:  37% (107/288)
+ DEBUG [9770364a] 	Resolving deltas:  38% (110/288)
+ DEBUG [9770364a] 	Resolving deltas:  39% (113/288)
+ DEBUG [9770364a] 	Resolving deltas:  40% (116/288)
+ DEBUG [9770364a] 	Resolving deltas:  41% (119/288)
+ DEBUG [9770364a] 	Resolving deltas:  42% (121/288)
+ DEBUG [9770364a] 	Resolving deltas:  43% (124/288)
+ DEBUG [9770364a] 	Resolving deltas:  44% (127/288)
+ DEBUG [9770364a] 	Resolving deltas:  45% (130/288)
+ DEBUG [9770364a] 	Resolving deltas:  46% (133/288)
+ DEBUG [9770364a] 	Resolving deltas:  47% (136/288)
+ DEBUG [9770364a] 	Resolving deltas:  48% (139/288)
+ DEBUG [9770364a] 	Resolving deltas:  49% (142/288)
+ DEBUG [9770364a] 	Resolving deltas:  50% (144/288)
+ DEBUG [9770364a] 	Resolving deltas:  51% (147/288)
+ DEBUG [9770364a] 	Resolving deltas:  52% (150/288)
+ DEBUG [9770364a] 	Resolving deltas:  53% (153/288)
+ DEBUG [9770364a] 	Resolving deltas:  54% (156/288)
+ DEBUG [9770364a] 	Resolving deltas:  55% (159/288)
+ DEBUG [9770364a] 	Resolving deltas:  56% (162/288)
+ DEBUG [9770364a] 	Resolving deltas:  57% (165/288)
+ DEBUG [9770364a] 	Resolving deltas:  58% (168/288)
+ DEBUG [9770364a] 	Resolving deltas:  59% (170/288)
+ DEBUG [9770364a] 	Resolving deltas:  60% (173/288)
+ DEBUG [9770364a] 	Resolving deltas:  61% (176/288)
+ DEBUG [9770364a] 	Resolving deltas:  62% (179/288)
+ DEBUG [9770364a] 	Resolving deltas:  63% (182/288)
+ DEBUG [9770364a] 	Resolving deltas:  64% (185/288)
+ DEBUG [9770364a] 	Resolving deltas:  65% (188/288)
+ DEBUG [9770364a] 	Resolving deltas:  66% (191/288)
+ DEBUG [9770364a] 	Resolving deltas:  67% (193/288)
+ DEBUG [9770364a] 	Resolving deltas:  68% (196/288)
+ DEBUG [9770364a] 	Resolving deltas:  69% (199/288)
+ DEBUG [9770364a] 	Resolving deltas:  70% (202/288)
+ DEBUG [9770364a] 	Resolving deltas:  71% (205/288)
+ DEBUG [9770364a] 	Resolving deltas:  72% (208/288)
+ DEBUG [9770364a] 	Resolving deltas:  73% (211/288)
+ DEBUG [9770364a] 	Resolving deltas:  74% (214/288)
+ DEBUG [9770364a] 	Resolving deltas:  75% (216/288)
+ DEBUG [9770364a] 	Resolving deltas:  76% (219/288)
+ DEBUG [9770364a] 	Resolving deltas:  77% (222/288)
+ DEBUG [9770364a] 	Resolving deltas:  78% (225/288)
+ DEBUG [9770364a] 	Resolving deltas:  79% (228/288)
+ DEBUG [9770364a] 	Resolving deltas:  80% (231/288)
+ DEBUG [9770364a] 	Resolving deltas:  81% (234/288)
+ DEBUG [9770364a] 	Resolving deltas:  82% (237/288)
+ DEBUG [9770364a] 	Resolving deltas:  83% (240/288)
+ DEBUG [9770364a] 	Resolving deltas:  84% (242/288)
+ DEBUG [9770364a] 	Resolving deltas:  85% (245/288)
+ DEBUG [9770364a] 	Resolving deltas:  86% (248/288)
+ DEBUG [9770364a] 	Resolving deltas:  87% (251/288)
+ DEBUG [9770364a] 	Resolving deltas:  88% (254/288)
+ DEBUG [9770364a] 	Resolving deltas:  89% (257/288)
+ DEBUG [9770364a] 	Resolving deltas:  90% (260/288)
+ DEBUG [9770364a] 	Resolving deltas:  91% (263/288)
+ DEBUG [9770364a] 	Resolving deltas:  92% (265/288)
+ DEBUG [9770364a] 	Resolving deltas:  93% (268/288)
+ DEBUG [9770364a] 	Resolving deltas:  94% (271/288)
+ DEBUG [9770364a] 	Resolving deltas:  95% (274/288)
+ DEBUG [9770364a] 	Resolving deltas:  96% (277/288)
+ DEBUG [9770364a] 	Resolving deltas:  97% (280/288)
+ DEBUG [9770364a] 	Resolving deltas:  98% (283/288)
+ DEBUG [9770364a] 	Resolving deltas:  99% (286/288)
+ DEBUG [9770364a] 	Resolving deltas: 100% (288/288)
+ DEBUG [9770364a] 	Resolving deltas: 100% (288/288), completed with 15 local objects.
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	From github.com:Boniole/ror_geekhub_jira
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      add/feat/tasks             -> add/feat/tasks
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      add/project_and_desk_logic -> add/project_and_desk_logic
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      add_columns_for_desk       -> add_columns_for_desk
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      add_reference_to_comments_and_tasks -> add_reference_to_comments_and_tasks
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      add_type_task              -> add_type_task
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      fix/modified_user_authentication -> fix/modified_user_authentication
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	   dfb1623..76aaf64  main                       -> main
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      register_and_authenticate_users -> register_and_authenticate_users
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new branch]      rework_comments            -> rework_comments
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/1/head           -> refs/pull/1/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/10/head          -> refs/pull/10/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/2/head           -> refs/pull/2/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/3/head           -> refs/pull/3/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/4/head           -> refs/pull/4/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/5/head           -> refs/pull/5/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/6/head           -> refs/pull/6/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/7/head           -> refs/pull/7/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/8/head           -> refs/pull/8/head
+ DEBUG [9770364a] 	
+ DEBUG [9770364a] 	 * [new ref]         refs/pull/9/head           -> refs/pull/9/head
+ DEBUG [9770364a] 	
+  INFO [9770364a] Finished in 1.906 seconds with exit status 0 (successful).
+ DEBUG [17e86787] Running if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [17e86787] Command: if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi
+ DEBUG [17e86787] Finished in 0.234 seconds with exit status 0 (successful).
+  INFO [aa441ce0] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230317194657 as deployer@164.90.165.89
+ DEBUG [aa441ce0] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ccae7eff726e868f19f5.sh" ; /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230317194657 )
+  INFO [aa441ce0] Finished in 0.156 seconds with exit status 0 (successful).
+  INFO [5e2a6abe] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /home/deployer/apps/mini_jira/releases/20230317194657 as deployer@164.90.165.89
+ DEBUG [5e2a6abe] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ccae7eff726e868f19f5.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /home/deployer/apps/mini_jira/releases/20230317194657 )
+  INFO [5e2a6abe] Finished in 0.329 seconds with exit status 0 (successful).
+ DEBUG [af56cd50] Running if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [af56cd50] Command: if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi
+ DEBUG [af56cd50] Finished in 0.161 seconds with exit status 0 (successful).
+ DEBUG [65bf022a] Running /usr/bin/env git rev-list --max-count=1 main as deployer@164.90.165.89
+ DEBUG [65bf022a] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ccae7eff726e868f19f5.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [65bf022a] 	76aaf64338cf34586393c8226206eeeaf2b7af9f
+ DEBUG [65bf022a] 	
+ DEBUG [65bf022a] Finished in 0.306 seconds with exit status 0 (successful).
+ DEBUG [4ebd5184] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [4ebd5184] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi
+ DEBUG [4ebd5184] Finished in 0.165 seconds with exit status 0 (successful).
+  INFO [b891a02e] Running /usr/bin/env echo "76aaf64338cf34586393c8226206eeeaf2b7af9f" > REVISION as deployer@164.90.165.89
+ DEBUG [b891a02e] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && /usr/bin/env echo "76aaf64338cf34586393c8226206eeeaf2b7af9f" > REVISION
+  INFO [b891a02e] Finished in 0.160 seconds with exit status 0 (successful).
+  INFO [87ae7837] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230317194657/config as deployer@164.90.165.89
+ DEBUG [87ae7837] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230317194657/config
+  INFO [87ae7837] Finished in 0.272 seconds with exit status 0 (successful).
+ DEBUG [3070c099] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml ] as deployer@164.90.165.89
+ DEBUG [3070c099] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml ]
+ DEBUG [3070c099] Finished in 0.176 seconds with exit status 1 (failed).
+ DEBUG [0f6060c6] Running [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml ] as deployer@164.90.165.89
+ DEBUG [0f6060c6] Command: [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml ]
+ DEBUG [0f6060c6] Finished in 0.303 seconds with exit status 0 (successful).
+  INFO [cca62f5e] Running /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml as deployer@164.90.165.89
+ DEBUG [cca62f5e] Command: /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml
+  INFO [cca62f5e] Finished in 0.166 seconds with exit status 0 (successful).
+  INFO [8dc88ed9] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/database.yml /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml as deployer@164.90.165.89
+ DEBUG [8dc88ed9] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/database.yml /home/deployer/apps/mini_jira/releases/20230317194657/config/database.yml
+  INFO [8dc88ed9] Finished in 0.321 seconds with exit status 0 (successful).
+ DEBUG [15ff360e] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key ] as deployer@164.90.165.89
+ DEBUG [15ff360e] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key ]
+ DEBUG [15ff360e] Finished in 0.167 seconds with exit status 1 (failed).
+ DEBUG [ff3b1418] Running [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key ] as deployer@164.90.165.89
+ DEBUG [ff3b1418] Command: [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key ]
+ DEBUG [ff3b1418] Finished in 0.352 seconds with exit status 0 (successful).
+  INFO [71e5db05] Running /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key as deployer@164.90.165.89
+ DEBUG [71e5db05] Command: /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key
+  INFO [71e5db05] Finished in 0.092 seconds with exit status 0 (successful).
+  INFO [e2f7cdbc] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/master.key /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key as deployer@164.90.165.89
+ DEBUG [e2f7cdbc] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/master.key /home/deployer/apps/mini_jira/releases/20230317194657/config/master.key
+  INFO [e2f7cdbc] Finished in 0.172 seconds with exit status 0 (successful).
+ DEBUG [057109bd] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [057109bd] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb ]
+ DEBUG [057109bd] Finished in 0.326 seconds with exit status 1 (failed).
+ DEBUG [fff1ff08] Running [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [fff1ff08] Command: [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb ]
+ DEBUG [fff1ff08] Finished in 0.177 seconds with exit status 0 (successful).
+  INFO [b6dd65cb] Running /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb as deployer@164.90.165.89
+ DEBUG [b6dd65cb] Command: /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb
+  INFO [b6dd65cb] Finished in 0.275 seconds with exit status 0 (successful).
+  INFO [38f3a06d] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/puma.rb /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb as deployer@164.90.165.89
+ DEBUG [38f3a06d] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/puma.rb /home/deployer/apps/mini_jira/releases/20230317194657/config/puma.rb
+  INFO [38f3a06d] Finished in 0.156 seconds with exit status 0 (successful).
+ DEBUG [d014a4aa] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/application.yml ] as deployer@164.90.165.89
+ DEBUG [d014a4aa] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/config/application.yml ]
+ DEBUG [d014a4aa] Finished in 0.184 seconds with exit status 1 (failed).
+ DEBUG [8ead28fb] Running [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/application.yml ] as deployer@164.90.165.89
+ DEBUG [8ead28fb] Command: [ -f /home/deployer/apps/mini_jira/releases/20230317194657/config/application.yml ]
+ DEBUG [8ead28fb] Finished in 0.461 seconds with exit status 1 (failed).
+  INFO [60ed9954] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/application.yml /home/deployer/apps/mini_jira/releases/20230317194657/config/application.yml as deployer@164.90.165.89
+ DEBUG [60ed9954] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/application.yml /home/deployer/apps/mini_jira/releases/20230317194657/config/application.yml
+  INFO [60ed9954] Finished in 0.530 seconds with exit status 0 (successful).
+  INFO [988967eb] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230317194657 /home/deployer/apps/mini_jira/releases/20230317194657/tmp /home/deployer/apps/mini_jira/releases/20230317194657/vendor /home/deployer/apps/mini_jira/releases/20230317194657/public as deployer@164.90.165.89
+ DEBUG [988967eb] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230317194657 /home/deployer/apps/mini_jira/releases/20230317194657/tmp /home/deployer/apps/mini_jira/releases/20230317194657/vendor /home/deployer/apps/mini_jira/releases/20230317194657/public
+  INFO [988967eb] Finished in 0.333 seconds with exit status 0 (successful).
+ DEBUG [052f71ef] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/log ] as deployer@164.90.165.89
+ DEBUG [052f71ef] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/log ]
+ DEBUG [052f71ef] Finished in 0.175 seconds with exit status 1 (failed).
+ DEBUG [40cd93d7] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/log ] as deployer@164.90.165.89
+ DEBUG [40cd93d7] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/log ]
+ DEBUG [40cd93d7] Finished in 0.249 seconds with exit status 0 (successful).
+  INFO [d33ca5a4] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/log as deployer@164.90.165.89
+ DEBUG [d33ca5a4] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/log
+  INFO [d33ca5a4] Finished in 0.154 seconds with exit status 0 (successful).
+  INFO [7bdacd10] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/releases/20230317194657/log as deployer@164.90.165.89
+ DEBUG [7bdacd10] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/releases/20230317194657/log
+  INFO [7bdacd10] Finished in 0.194 seconds with exit status 0 (successful).
+ DEBUG [4fbb117c] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids ] as deployer@164.90.165.89
+ DEBUG [4fbb117c] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids ]
+ DEBUG [4fbb117c] Finished in 0.273 seconds with exit status 1 (failed).
+ DEBUG [de59d269] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids ] as deployer@164.90.165.89
+ DEBUG [de59d269] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids ]
+ DEBUG [de59d269] Finished in 0.185 seconds with exit status 0 (successful).
+  INFO [d32bdc0f] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids as deployer@164.90.165.89
+ DEBUG [d32bdc0f] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids
+  INFO [d32bdc0f] Finished in 0.291 seconds with exit status 0 (successful).
+  INFO [a4921435] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids as deployer@164.90.165.89
+ DEBUG [a4921435] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/releases/20230317194657/tmp/pids
+  INFO [a4921435] Finished in 0.169 seconds with exit status 0 (successful).
+ DEBUG [0f2e6cd1] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache ] as deployer@164.90.165.89
+ DEBUG [0f2e6cd1] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache ]
+ DEBUG [0f2e6cd1] Finished in 0.297 seconds with exit status 1 (failed).
+ DEBUG [8f1889dc] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache ] as deployer@164.90.165.89
+ DEBUG [8f1889dc] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache ]
+ DEBUG [8f1889dc] Finished in 0.166 seconds with exit status 0 (successful).
+  INFO [57997476] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache as deployer@164.90.165.89
+ DEBUG [57997476] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache
+  INFO [57997476] Finished in 0.224 seconds with exit status 0 (successful).
+  INFO [4894ce1b] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache as deployer@164.90.165.89
+ DEBUG [4894ce1b] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/releases/20230317194657/tmp/cache
+  INFO [4894ce1b] Finished in 0.204 seconds with exit status 0 (successful).
+ DEBUG [cb8cf56a] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/tmp/sockets ] as deployer@164.90.165.89
+ DEBUG [cb8cf56a] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/tmp/sockets ]
+ DEBUG [cb8cf56a] Finished in 0.162 seconds with exit status 1 (failed).
+ DEBUG [4acd97a2] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/tmp/sockets ] as deployer@164.90.165.89
+ DEBUG [4acd97a2] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/tmp/sockets ]
+ DEBUG [4acd97a2] Finished in 0.341 seconds with exit status 1 (failed).
+  INFO [d23d77b5] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/releases/20230317194657/tmp/sockets as deployer@164.90.165.89
+ DEBUG [d23d77b5] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/releases/20230317194657/tmp/sockets
+  INFO [d23d77b5] Finished in 0.170 seconds with exit status 0 (successful).
+ DEBUG [7d01fec2] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/vendor/bundle ] as deployer@164.90.165.89
+ DEBUG [7d01fec2] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/vendor/bundle ]
+ DEBUG [7d01fec2] Finished in 0.293 seconds with exit status 1 (failed).
+ DEBUG [f51d6e75] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/vendor/bundle ] as deployer@164.90.165.89
+ DEBUG [f51d6e75] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/vendor/bundle ]
+ DEBUG [f51d6e75] Finished in 0.175 seconds with exit status 1 (failed).
+  INFO [42372cda] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/releases/20230317194657/vendor/bundle as deployer@164.90.165.89
+ DEBUG [42372cda] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/releases/20230317194657/vendor/bundle
+  INFO [42372cda] Finished in 0.346 seconds with exit status 0 (successful).
+ DEBUG [2691d86e] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/public/system ] as deployer@164.90.165.89
+ DEBUG [2691d86e] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/public/system ]
+ DEBUG [2691d86e] Finished in 0.203 seconds with exit status 1 (failed).
+ DEBUG [f24ace81] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/public/system ] as deployer@164.90.165.89
+ DEBUG [f24ace81] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/public/system ]
+ DEBUG [f24ace81] Finished in 0.228 seconds with exit status 1 (failed).
+  INFO [7d758903] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/releases/20230317194657/public/system as deployer@164.90.165.89
+ DEBUG [7d758903] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/releases/20230317194657/public/system
+  INFO [7d758903] Finished in 0.255 seconds with exit status 0 (successful).
+ DEBUG [4b584c30] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/public/uploads ] as deployer@164.90.165.89
+ DEBUG [4b584c30] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/public/uploads ]
+ DEBUG [4b584c30] Finished in 0.152 seconds with exit status 1 (failed).
+ DEBUG [9de94d7b] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/public/uploads ] as deployer@164.90.165.89
+ DEBUG [9de94d7b] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/public/uploads ]
+ DEBUG [9de94d7b] Finished in 0.279 seconds with exit status 1 (failed).
+  INFO [d439b839] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/releases/20230317194657/public/uploads as deployer@164.90.165.89
+ DEBUG [d439b839] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/releases/20230317194657/public/uploads
+  INFO [d439b839] Finished in 0.165 seconds with exit status 0 (successful).
+ DEBUG [b1d1695c] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/public/images ] as deployer@164.90.165.89
+ DEBUG [b1d1695c] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/public/images ]
+ DEBUG [b1d1695c] Finished in 0.283 seconds with exit status 1 (failed).
+ DEBUG [86e524d1] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/public/images ] as deployer@164.90.165.89
+ DEBUG [86e524d1] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/public/images ]
+ DEBUG [86e524d1] Finished in 0.210 seconds with exit status 1 (failed).
+  INFO [ecec76c1] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/releases/20230317194657/public/images as deployer@164.90.165.89
+ DEBUG [ecec76c1] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/releases/20230317194657/public/images
+  INFO [ecec76c1] Finished in 0.156 seconds with exit status 0 (successful).
+ DEBUG [5becdfd1] Running [ -L /home/deployer/apps/mini_jira/releases/20230317194657/storage ] as deployer@164.90.165.89
+ DEBUG [5becdfd1] Command: [ -L /home/deployer/apps/mini_jira/releases/20230317194657/storage ]
+ DEBUG [5becdfd1] Finished in 0.309 seconds with exit status 1 (failed).
+ DEBUG [59e394e7] Running [ -d /home/deployer/apps/mini_jira/releases/20230317194657/storage ] as deployer@164.90.165.89
+ DEBUG [59e394e7] Command: [ -d /home/deployer/apps/mini_jira/releases/20230317194657/storage ]
+ DEBUG [59e394e7] Finished in 0.243 seconds with exit status 0 (successful).
+  INFO [482056dd] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/storage as deployer@164.90.165.89
+ DEBUG [482056dd] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230317194657/storage
+  INFO [482056dd] Finished in 0.170 seconds with exit status 0 (successful).
+  INFO [13b94951] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/storage /home/deployer/apps/mini_jira/releases/20230317194657/storage as deployer@164.90.165.89
+ DEBUG [13b94951] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/storage /home/deployer/apps/mini_jira/releases/20230317194657/storage
+  INFO [13b94951] Finished in 0.167 seconds with exit status 0 (successful).
+ DEBUG [d4074d55] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [d4074d55] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi
+ DEBUG [d4074d55] Finished in 0.151 seconds with exit status 0 (successful).
+  INFO [8894f9fe] Running ~/.rvm/bin/rvm 3.1.2 do bundle config --local deployment true as deployer@164.90.165.89
+ DEBUG [8894f9fe] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && ~/.rvm/bin/rvm 3.1.2 do bundle config --local deployment true
+  INFO [8894f9fe] Finished in 0.881 seconds with exit status 0 (successful).
+  INFO [f3094180] Running ~/.rvm/bin/rvm 3.1.2 do bundle config --local path /home/deployer/apps/mini_jira/shared/bundle as deployer@164.90.165.89
+ DEBUG [f3094180] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && ~/.rvm/bin/rvm 3.1.2 do bundle config --local path /home/deployer/apps/mini_jira/shared/bundle
+  INFO [f3094180] Finished in 0.720 seconds with exit status 0 (successful).
+  INFO [725f8260] Running ~/.rvm/bin/rvm 3.1.2 do bundle config --local without development:test as deployer@164.90.165.89
+ DEBUG [725f8260] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && ~/.rvm/bin/rvm 3.1.2 do bundle config --local without development:test
+  INFO [725f8260] Finished in 0.941 seconds with exit status 0 (successful).
+ DEBUG [700c152e] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [700c152e] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi
+ DEBUG [700c152e] Finished in 0.270 seconds with exit status 0 (successful).
+ DEBUG [e67d68fa] Running ~/.rvm/bin/rvm 3.1.2 do bundle check as deployer@164.90.165.89
+ DEBUG [e67d68fa] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && ~/.rvm/bin/rvm 3.1.2 do bundle check
+ DEBUG [e67d68fa] 	[31mThe following gems are missing[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * bcrypt (3.1.18)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * jwt (2.7.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rswag (2.8.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rspec-rails (6.0.1)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rswag-specs (2.8.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rswag-api (2.8.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rswag-ui (2.8.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rspec-core (3.12.1)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rspec-expectations (3.12.2)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rspec-mocks (3.12.3)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * rspec-support (3.12.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * json-schema (3.0.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * diff-lcs (1.5.0)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * addressable (2.8.1)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[31m * public_suffix (5.0.1)[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] 	[33mInstall missing gems with `bundle install`[0m
+ DEBUG [e67d68fa] 	
+ DEBUG [e67d68fa] Finished in 0.925 seconds with exit status 1 (failed).
+  INFO [2deaf6ad] Running ~/.rvm/bin/rvm 3.1.2 do bundle install --jobs 4 --quiet as deployer@164.90.165.89
+ DEBUG [2deaf6ad] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && ~/.rvm/bin/rvm 3.1.2 do bundle install --jobs 4 --quiet
+  INFO [2deaf6ad] Finished in 6.624 seconds with exit status 0 (successful).
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [48e33189] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [48e33189] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230317194657; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230317194657'" 1>&2; false; fi
+ DEBUG [48e33189] Finished in 0.352 seconds with exit status 0 (successful).
+  INFO [858d55c9] Running ~/.rvm/bin/rvm 3.1.2 do bundle exec rake db:migrate as deployer@164.90.165.89
+ DEBUG [858d55c9] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && ( export RAILS_ENV="production" ; ~/.rvm/bin/rvm 3.1.2 do bundle exec rake db:migrate )
+ DEBUG [858d55c9] 	== 20230309122551 CreateUsers: migrating ======================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- create_table(:users)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0204s
+== 20230309122551 CreateUsers: migrated (0.0206s) =============================
+
+ DEBUG [858d55c9] 	== 20230309184537 CreateTasks: migrating ======================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- create_table(:tasks)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0075s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230309184537 CreateTasks: migrated (0.0078s) =============================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230309185456 CreateComments: migrating ===================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- create_table(:comments)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0103s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230309185456 CreateComments: migrated (0.0105s) ==========================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230310144341 CreateProjects: migrating ===================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- create_table(:projects)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0330s
+== 20230310144341 CreateProjects: migrated (0.0331s) ==========================
+
+ DEBUG [858d55c9] 	== 20230310150440 CreateDesks: migrating ======================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- create_table(:desks)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0084s
+== 20230310150440 CreateDesks: migrated (0.0085s) =============================
+
+ DEBUG [858d55c9] 	== 20230311073948 AddReferencesToComments: migrating ==========================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_reference(:comments, :user, {:null=>false, :foreign_key=>true})
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0047s
+== 20230311073948 AddReferencesToComments: migrated (0.0048s) =================
+
+ DEBUG [858d55c9] 	== 20230311074920 AddReferencesToTasks: migrating =============================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_reference(:tasks, :user, {:null=>false, :foreign_key=>true})
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0083s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_reference(:tasks, :project, {:null=>false, :foreign_key=>true})
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0044s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_reference(:tasks, :desk, {:null=>false, :foreign_key=>true})
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0040s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230311074920 AddReferencesToTasks: migrated (0.0173s) ====================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230311094822 AddTypeToTasks: migrating ===================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_column(:tasks, :type, :integer, {:default=>0})
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0009s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230311094822 AddTypeToTasks: migrated (0.0011s) ==========================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230311153803 AddDetailsToUser: migrating =================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_column(:users, :last_name, :string)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0005s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_column(:users, :email, :string)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0006s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230311153803 AddDetailsToUser: migrated (0.0013s) ========================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230312105215 AddCommetableToComments: migrating ==========================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_reference(:comments, :commetable, {:polymorphic=>true, :null=>false})
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0036s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230312105215 AddCommetableToComments: migrated (0.0038s) =================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230312111331 CreateColumns: migrating ====================================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- create_table(:columns)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0073s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230312111331 CreateColumns: migrated (0.0074s) ===========================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230315155835 AddPasswordResetColumnsToUser: migrating ====================
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_column(:users, :reset_password_token, :string)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0008s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	-- add_column(:users, :reset_password_sent_at, :datetime)
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	   -> 0.0003s
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	== 20230315155835 AddPasswordResetColumnsToUser: migrated (0.0014s) ===========
+ DEBUG [858d55c9] 	
+ DEBUG [858d55c9] 	
+  INFO [858d55c9] Finished in 2.221 seconds with exit status 0 (successful).
+  INFO [a3c575a4] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/releases/20230317194657 /home/deployer/apps/mini_jira/releases/current as deployer@164.90.165.89
+ DEBUG [a3c575a4] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/releases/20230317194657 /home/deployer/apps/mini_jira/releases/current
+  INFO [a3c575a4] Finished in 0.320 seconds with exit status 0 (successful).
+  INFO [e629b043] Running /usr/bin/env mv /home/deployer/apps/mini_jira/releases/current /home/deployer/apps/mini_jira as deployer@164.90.165.89
+ DEBUG [e629b043] Command: /usr/bin/env mv /home/deployer/apps/mini_jira/releases/current /home/deployer/apps/mini_jira
+  INFO [e629b043] Finished in 0.176 seconds with exit status 0 (successful).
+ DEBUG [68f8f557] Running /usr/bin/env ls -x /home/deployer/apps/mini_jira/releases as deployer@164.90.165.89
+ DEBUG [68f8f557] Command: /usr/bin/env ls -x /home/deployer/apps/mini_jira/releases
+ DEBUG [68f8f557] 	20230227202423
+ DEBUG [68f8f557] 		
+ DEBUG [68f8f557] 	20230227202707
+ DEBUG [68f8f557] 		
+ DEBUG [68f8f557] 	20230227203144
+ DEBUG [68f8f557] 		
+ DEBUG [68f8f557] 	20230227203908
+ DEBUG [68f8f557] 		
+ DEBUG [68f8f557] 	20230227204146
+ DEBUG [68f8f557] 	
+ DEBUG [68f8f557] 	20230317194657
+ DEBUG [68f8f557] 	
+ DEBUG [68f8f557] Finished in 0.159 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on 164.90.165.89
+ DEBUG [96705dff] Running [ -d /home/deployer/apps/mini_jira/current ] as deployer@164.90.165.89
+ DEBUG [96705dff] Command: [ -d /home/deployer/apps/mini_jira/current ]
+ DEBUG [96705dff] Finished in 0.269 seconds with exit status 0 (successful).
+ DEBUG [f4b1429d] Running /usr/bin/env readlink /home/deployer/apps/mini_jira/current as deployer@164.90.165.89
+ DEBUG [f4b1429d] Command: /usr/bin/env readlink /home/deployer/apps/mini_jira/current
+ DEBUG [f4b1429d] 	/home/deployer/apps/mini_jira/releases/20230317194657
+ DEBUG [f4b1429d] 	
+ DEBUG [f4b1429d] Finished in 0.196 seconds with exit status 0 (successful).
+  INFO [f22cfaa3] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230227202423 as deployer@164.90.165.89
+ DEBUG [f22cfaa3] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230227202423
+  INFO [f22cfaa3] Finished in 0.239 seconds with exit status 0 (successful).
+ DEBUG [bf69cd93] Running if test ! -d /home/deployer/apps/mini_jira/releases; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [bf69cd93] Command: if test ! -d /home/deployer/apps/mini_jira/releases; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases'" 1>&2; false; fi
+ DEBUG [bf69cd93] Finished in 0.182 seconds with exit status 0 (successful).
+  INFO [1c4e9040] Running /usr/bin/env echo "Branch main (at 76aaf64338cf34586393c8226206eeeaf2b7af9f) deployed as release 20230317194657 by boniole" >> /home/deployer/apps/mini_jira/revisions.log as deployer@164.90.165.89
+ DEBUG [1c4e9040] Command: cd /home/deployer/apps/mini_jira/releases && /usr/bin/env echo "Branch main (at 76aaf64338cf34586393c8226206eeeaf2b7af9f) deployed as release 20230317194657 by boniole" >> /home/deployer/apps/mini_jira/revisions.log
+  INFO [1c4e9040] Finished in 0.339 seconds with exit status 0 (successful).
+  INFO [bf857eff] Running /usr/bin/env sudo service nginx restart as deployer@164.90.165.89
+ DEBUG [bf857eff] Command: /usr/bin/env sudo service nginx restart
+ DEBUG [bf857eff] 	[sudo] password for deployer: 
+ DEBUG [bf857eff] 	
+  INFO [bf857eff] Finished in 0.280 seconds with exit status 0 (successful).
+  INFO [2f961a9d] Running cd /home/deployer/apps/mini_jira/releases/20230317194657 && /home/deployer/.rvm/gems/ruby-3.1.2/wrappers/bundle exec pumactl -P /home/deployer/apps/mini_jira/shared/tmp/pids/puma.pid stop as deployer@164.90.165.89
+ DEBUG [2f961a9d] Command: cd /home/deployer/apps/mini_jira/releases/20230317194657 && /home/deployer/.rvm/gems/ruby-3.1.2/wrappers/bundle exec pumactl -P /home/deployer/apps/mini_jira/shared/tmp/pids/puma.pid stop
+ DEBUG [2f961a9d] 	Command stop sent success
+ DEBUG [2f961a9d] 	
+  INFO [2f961a9d] Finished in 0.766 seconds with exit status 0 (successful).
+  INFO [856884c3] Running /usr/bin/env sudo service puma restart as deployer@164.90.165.89
+ DEBUG [856884c3] Command: /usr/bin/env sudo service puma restart
+ DEBUG [856884c3] 	[sudo] password for deployer: 
+ DEBUG [856884c3] 	
+  INFO [856884c3] Finished in 0.389 seconds with exit status 0 (successful).
