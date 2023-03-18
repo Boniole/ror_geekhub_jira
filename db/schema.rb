@@ -36,12 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "descs", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "desks", force: :cascade do |t|
     t.string "name"
     t.bigint "project_id", null: false
@@ -62,8 +56,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
   create_table "tasks", force: :cascade do |t|
     t.text "title"
     t.string "description"
-    t.integer "priority", default: 0
-    t.integer "status", default: 0
+    t.integer "priority"
+    t.integer "status"
     t.text "label"
     t.datetime "estimate"
     t.date "start"
