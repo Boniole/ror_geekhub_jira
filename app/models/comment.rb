@@ -25,6 +25,7 @@
 class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
 
+  validates :task_id, numericality: { only_integer: true }
   validates :user_id, numericality: { only_integer: true }
   validates :body, presence: true, length: { in: 3..2500 }
 end
