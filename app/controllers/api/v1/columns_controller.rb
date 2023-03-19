@@ -1,4 +1,4 @@
-class Api::V1::ColumnsController < ApplicationControll:error
+class Api::V1::ColumnsController < ApplicationController
   before_action :set_column, only: %i[show update destroy]
   before_action :set_columns, only: %i[index]
 

@@ -4460,3 +4460,584 @@ sudo stderr: Nothing written
  DEBUG [856884c3] 	[sudo] password for deployer: 
  DEBUG [856884c3] 	
   INFO [856884c3] Finished in 0.389 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-19 11:09:32 +0200 cap production puma:nginx_config
+  INFO ---------------------------------------------------------------------------
+ DEBUG [75a57e87] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [75a57e87] Command: [ -d ~/.rvm ]
+ DEBUG [75a57e87] Finished in 1.207 seconds with exit status 0 (successful).
+ DEBUG [8ed89a78] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [8ed89a78] Command: ~/.rvm/bin/rvm version
+ DEBUG [8ed89a78] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [8ed89a78] 	
+ DEBUG [8ed89a78] Finished in 0.421 seconds with exit status 0 (successful).
+ DEBUG [643c9ab4] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [643c9ab4] Command: ~/.rvm/bin/rvm current
+ DEBUG [643c9ab4] 	ruby-3.1.2
+ DEBUG [643c9ab4] 	
+ DEBUG [643c9ab4] Finished in 0.279 seconds with exit status 0 (successful).
+ DEBUG [01c1a0be] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [01c1a0be] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [01c1a0be] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [01c1a0be] 	
+ DEBUG [01c1a0be] Finished in 0.638 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/nginx_mini_jira_production 0.0%
+  INFO Uploading /tmp/nginx_mini_jira_production 100.0%
+  INFO [72b0f3db] Running /usr/bin/env sudo mv /tmp/nginx_mini_jira_production /etc/nginx/sites-available/mini_jira_production as deployer@164.90.165.89
+ DEBUG [72b0f3db] Command: /usr/bin/env sudo mv /tmp/nginx_mini_jira_production /etc/nginx/sites-available/mini_jira_production
+ DEBUG [72b0f3db] 	[sudo] password for deployer: 
+ DEBUG [72b0f3db] 	
+  INFO [72b0f3db] Finished in 3.780 seconds with exit status 0 (successful).
+  INFO [c60530a1] Running /usr/bin/env sudo ln -fs /etc/nginx/sites-available/mini_jira_production /etc/nginx/sites-enabled/mini_jira_production as deployer@164.90.165.89
+ DEBUG [c60530a1] Command: /usr/bin/env sudo ln -fs /etc/nginx/sites-available/mini_jira_production /etc/nginx/sites-enabled/mini_jira_production
+ DEBUG [c60530a1] 	[sudo] password for deployer: 
+ DEBUG [c60530a1] 	
+  INFO [c60530a1] Finished in 0.317 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2023-03-19 11:10:12 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [65a24218] Running [ -d ~/.rvm ] as deployer@164.90.165.89
+ DEBUG [65a24218] Command: [ -d ~/.rvm ]
+ DEBUG [65a24218] Finished in 1.238 seconds with exit status 0 (successful).
+ DEBUG [dbd89d24] Running ~/.rvm/bin/rvm version as deployer@164.90.165.89
+ DEBUG [dbd89d24] Command: ~/.rvm/bin/rvm version
+ DEBUG [dbd89d24] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [dbd89d24] 	
+ DEBUG [dbd89d24] Finished in 0.576 seconds with exit status 0 (successful).
+ DEBUG [7606cd6c] Running ~/.rvm/bin/rvm current as deployer@164.90.165.89
+ DEBUG [7606cd6c] Command: ~/.rvm/bin/rvm current
+ DEBUG [7606cd6c] 	ruby-3.1.2
+ DEBUG [7606cd6c] 	
+ DEBUG [7606cd6c] Finished in 0.425 seconds with exit status 0 (successful).
+ DEBUG [a0f11035] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as deployer@164.90.165.89
+ DEBUG [a0f11035] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [a0f11035] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [a0f11035] 	
+ DEBUG [a0f11035] Finished in 0.752 seconds with exit status 0 (successful).
+  INFO [c71c6e27] Running /usr/bin/env mkdir -p /tmp as deployer@164.90.165.89
+ DEBUG [c71c6e27] Command: /usr/bin/env mkdir -p /tmp
+  INFO [c71c6e27] Finished in 0.217 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-cf1960abdb619d55c21a.sh 0.0%
+  INFO Uploading /tmp/git-ssh-cf1960abdb619d55c21a.sh 100.0%
+  INFO [6393c7be] Running /usr/bin/env chmod 700 /tmp/git-ssh-cf1960abdb619d55c21a.sh as deployer@164.90.165.89
+ DEBUG [6393c7be] Command: /usr/bin/env chmod 700 /tmp/git-ssh-cf1960abdb619d55c21a.sh
+  INFO [6393c7be] Finished in 0.284 seconds with exit status 0 (successful).
+  INFO [d0eaa922] Running /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD as deployer@164.90.165.89
+ DEBUG [d0eaa922] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-cf1960abdb619d55c21a.sh" ; /usr/bin/env git ls-remote git@github.com:Boniole/ror_geekhub_jira.git HEAD )
+ DEBUG [d0eaa922] 	388dc7965dcbb0fa6ad5d02267c748fb94c5b4a0
+ DEBUG [d0eaa922] 		
+ DEBUG [d0eaa922] 	HEAD
+ DEBUG [d0eaa922] 	
+  INFO [d0eaa922] Finished in 2.223 seconds with exit status 0 (successful).
+  INFO [f3e2be70] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared /home/deployer/apps/mini_jira/releases as deployer@164.90.165.89
+ DEBUG [f3e2be70] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared /home/deployer/apps/mini_jira/releases
+  INFO [f3e2be70] Finished in 0.263 seconds with exit status 0 (successful).
+  INFO [cf1a976c] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/shared/storage as deployer@164.90.165.89
+ DEBUG [cf1a976c] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/shared/storage
+  INFO [cf1a976c] Finished in 0.578 seconds with exit status 0 (successful).
+  INFO [7678c42b] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/config as deployer@164.90.165.89
+ DEBUG [7678c42b] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/shared/config
+  INFO [7678c42b] Finished in 0.541 seconds with exit status 0 (successful).
+ DEBUG [cf6caff2] Running [ -f /home/deployer/apps/mini_jira/shared/config/master.key ] as deployer@164.90.165.89
+ DEBUG [cf6caff2] Command: [ -f /home/deployer/apps/mini_jira/shared/config/master.key ]
+ DEBUG [cf6caff2] Finished in 0.383 seconds with exit status 0 (successful).
+ DEBUG [78d0d75d] Running if test ! -d /home/deployer/apps/mini_jira/shared; then echo "Directory does not exist '/home/deployer/apps/mini_jira/shared'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [78d0d75d] Command: if test ! -d /home/deployer/apps/mini_jira/shared; then echo "Directory does not exist '/home/deployer/apps/mini_jira/shared'" 1>&2; false; fi
+ DEBUG [78d0d75d] Finished in 0.322 seconds with exit status 0 (successful).
+  INFO Uploading config ./config/database.production.yml as config/database.yml
+ DEBUG Uploading /home/deployer/apps/mini_jira/shared/config/database.yml 0.0%
+  INFO Uploading /home/deployer/apps/mini_jira/shared/config/database.yml 100.0%
+  INFO Uploading config ./config/application.production.yml as config/application.yml
+  WARN Error calculating percentage 0/0, is /home/deployer/apps/mini_jira/shared/config/application.yml empty?
+ DEBUG Uploading /home/deployer/apps/mini_jira/shared/config/puma.rb 0.0%
+  INFO Uploading /home/deployer/apps/mini_jira/shared/config/puma.rb 100.0%
+ DEBUG Uploading /tmp/run-puma 0.0%
+  INFO Uploading /tmp/run-puma 100.0%
+  INFO [e69b1202] Running chmod +x /tmp/run-puma as deployer@164.90.165.89
+ DEBUG [e69b1202] Command: chmod +x /tmp/run-puma
+  INFO [e69b1202] Finished in 0.292 seconds with exit status 0 (successful).
+  INFO [170e275c] Running /usr/bin/env sudo mv /tmp/run-puma /usr/local/bin/run-puma as deployer@164.90.165.89
+ DEBUG [170e275c] Command: /usr/bin/env sudo mv /tmp/run-puma /usr/local/bin/run-puma
+ DEBUG [170e275c] 	[sudo] password for deployer: 
+ DEBUG [170e275c] 	
+  INFO [170e275c] Finished in 3.695 seconds with exit status 0 (successful).
+ DEBUG [d2e342c5] Running [ -f /etc/redhat-release ] as deployer@164.90.165.89
+ DEBUG [d2e342c5] Command: [ -f /etc/redhat-release ]
+ DEBUG [d2e342c5] Finished in 0.351 seconds with exit status 1 (failed).
+ DEBUG [d7b2c8c6] Running [ -f /etc/lsb-release ] as deployer@164.90.165.89
+ DEBUG [d7b2c8c6] Command: [ -f /etc/lsb-release ]
+ DEBUG [d7b2c8c6] Finished in 0.659 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/puma 0.0%
+  INFO Uploading /tmp/puma 100.0%
+  INFO [39984056] Running chmod +x /tmp/puma as deployer@164.90.165.89
+ DEBUG [39984056] Command: chmod +x /tmp/puma
+  INFO [39984056] Finished in 0.394 seconds with exit status 0 (successful).
+  INFO [37def1f7] Running /usr/bin/env sudo mv /tmp/puma /etc/init.d/puma as deployer@164.90.165.89
+ DEBUG [37def1f7] Command: /usr/bin/env sudo mv /tmp/puma /etc/init.d/puma
+ DEBUG [37def1f7] 	[sudo] password for deployer: 
+ DEBUG [37def1f7] 	
+  INFO [37def1f7] Finished in 0.513 seconds with exit status 0 (successful).
+  INFO [d2e6c74c] Running /usr/bin/env sudo update-rc.d -f puma defaults as deployer@164.90.165.89
+ DEBUG [d2e6c74c] Command: /usr/bin/env sudo update-rc.d -f puma defaults
+ DEBUG [d2e6c74c] 	[sudo] password for deployer: 
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 	perl: warning: Setting locale failed.
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 	perl: warning: Please check that your locale settings:
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 		
+ DEBUG [d2e6c74c] 	LANGUAGE = (unset),
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 		
+ DEBUG [d2e6c74c] 	LC_ALL = (unset),
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 		
+ DEBUG [d2e6c74c] 	LC_CTYPE = "uk_UA.UTF-8",
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 		
+ DEBUG [d2e6c74c] 	LANG = "C.UTF-8"
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 	    are supported and installed on your system.
+ DEBUG [d2e6c74c] 	
+ DEBUG [d2e6c74c] 	perl: warning: Falling back to a fallback locale ("C.UTF-8").
+ DEBUG [d2e6c74c] 	
+  INFO [d2e6c74c] Finished in 0.794 seconds with exit status 0 (successful).
+  INFO [84b162d9] Running /usr/bin/env sudo touch /etc/puma.conf as deployer@164.90.165.89
+ DEBUG [84b162d9] Command: /usr/bin/env sudo touch /etc/puma.conf
+ DEBUG [84b162d9] 	[sudo] password for deployer: 
+ DEBUG [84b162d9] 	
+  INFO [84b162d9] Finished in 0.434 seconds with exit status 0 (successful).
+  INFO [540863bf] Running /usr/bin/env sudo /etc/init.d/puma add '/home/deployer/apps/mini_jira/current' deployer '/home/deployer/apps/mini_jira/shared/config/puma.rb' as deployer@164.90.165.89
+ DEBUG [540863bf] Command: /usr/bin/env sudo /etc/init.d/puma add '/home/deployer/apps/mini_jira/current' deployer '/home/deployer/apps/mini_jira/shared/config/puma.rb'
+ DEBUG [540863bf] 	[sudo] password for deployer: 
+ DEBUG [540863bf] 	
+ DEBUG [540863bf] 	The app is already being managed. Remove it if you want to update its config.
+ DEBUG [540863bf] 	
+  WARN sudo exit status: 1
+sudo stdout: [sudo] password for deployer: 
+The app is already being managed. Remove it if you want to update its config.
+sudo stderr: Nothing written
+ DEBUG [e9d05969] Running [ -f /home/deployer/apps/mini_jira/shared/config/database.yml ] as deployer@164.90.165.89
+ DEBUG [e9d05969] Command: [ -f /home/deployer/apps/mini_jira/shared/config/database.yml ]
+ DEBUG [e9d05969] Finished in 0.266 seconds with exit status 0 (successful).
+ DEBUG [297e67bb] Running [ -f /home/deployer/apps/mini_jira/shared/config/master.key ] as deployer@164.90.165.89
+ DEBUG [297e67bb] Command: [ -f /home/deployer/apps/mini_jira/shared/config/master.key ]
+ DEBUG [297e67bb] Finished in 0.386 seconds with exit status 0 (successful).
+ DEBUG [a15137ee] Running [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [a15137ee] Command: [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ]
+ DEBUG [a15137ee] Finished in 0.174 seconds with exit status 0 (successful).
+ DEBUG [f177a8ad] Running [ -f /home/deployer/apps/mini_jira/shared/config/application.yml ] as deployer@164.90.165.89
+ DEBUG [f177a8ad] Command: [ -f /home/deployer/apps/mini_jira/shared/config/application.yml ]
+ DEBUG [f177a8ad] Finished in 0.350 seconds with exit status 0 (successful).
+ DEBUG [770dcf3d] Running [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [770dcf3d] Command: [ -f /home/deployer/apps/mini_jira/shared/config/puma.rb ]
+ DEBUG [770dcf3d] Finished in 0.263 seconds with exit status 0 (successful).
+ DEBUG [b47bc83b] Running [ -f /home/deployer/apps/mini_jira/current/REVISION ] as deployer@164.90.165.89
+ DEBUG [b47bc83b] Command: [ -f /home/deployer/apps/mini_jira/current/REVISION ]
+ DEBUG [b47bc83b] Finished in 0.386 seconds with exit status 0 (successful).
+ DEBUG [1fdbf257] Running /usr/bin/env cat /home/deployer/apps/mini_jira/current/REVISION 2>/dev/null as deployer@164.90.165.89
+ DEBUG [1fdbf257] Command: /usr/bin/env cat /home/deployer/apps/mini_jira/current/REVISION 2>/dev/null
+ DEBUG [1fdbf257] 	76aaf64338cf34586393c8226206eeeaf2b7af9f
+ DEBUG [1fdbf257] 	
+ DEBUG [1fdbf257] Finished in 0.392 seconds with exit status 0 (successful).
+ DEBUG [30859e8f] Running [ -f /home/deployer/apps/mini_jira/repo/HEAD ] as deployer@164.90.165.89
+ DEBUG [30859e8f] Command: [ -f /home/deployer/apps/mini_jira/repo/HEAD ]
+ DEBUG [30859e8f] Finished in 0.240 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/deployer/apps/mini_jira/repo
+ DEBUG [d317cd4a] Running if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [d317cd4a] Command: if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi
+ DEBUG [d317cd4a] Finished in 0.372 seconds with exit status 0 (successful).
+  INFO [f5fc4964] Running /usr/bin/env git remote set-url origin git@github.com:Boniole/ror_geekhub_jira.git as deployer@164.90.165.89
+ DEBUG [f5fc4964] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-cf1960abdb619d55c21a.sh" ; /usr/bin/env git remote set-url origin git@github.com:Boniole/ror_geekhub_jira.git )
+  INFO [f5fc4964] Finished in 0.298 seconds with exit status 0 (successful).
+  INFO [19f3f805] Running /usr/bin/env git remote update --prune as deployer@164.90.165.89
+ DEBUG [19f3f805] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-cf1960abdb619d55c21a.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [19f3f805] 	Fetching origin
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	remote: Enumerating objects: 56, done.[K
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	remote: Counting objects:   1% (1/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:   3% (2/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:   5% (3/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:   7% (4/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:   8% (5/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  10% (6/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  12% (7/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  14% (8/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  16% (9/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  17% (10/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  19% (11/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  21% (12/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  23% (13/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  25% (14/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  26% (15/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  28% (16/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  30% (17/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  32% (18/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  33% (19/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  35% (20/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  37% (21/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  39% (22/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  41% (23/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  42% (24/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  44% (25/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  46% (26/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  48% (27/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  50% (28/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  51% (29/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  53% (30/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  55% (31/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  57% (32/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  58% (33/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  60% (34/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  62% (35/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  64% (36/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  66% (37/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  67% (38/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  69% (39/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  71% (40/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  73% (41/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  75% (42/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  76% (43/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  78% (44/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  80% (45/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  82% (46/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  83% (47/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  85% (48/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  87% (49/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  89% (50/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  91% (51/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  92% (52/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  94% (53/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  96% (54/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects:  98% (55/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects: 100% (56/56)[K
+ DEBUG [19f3f805] 	remote: Counting objects: 100% (56/56), done.[K
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	remote: Compressing objects:   5% (1/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  11% (2/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  16% (3/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  22% (4/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  27% (5/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  33% (6/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  38% (7/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  44% (8/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  50% (9/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  55% (10/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  61% (11/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  66% (12/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  72% (13/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  77% (14/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  83% (15/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  88% (16/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects:  94% (17/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects: 100% (18/18)[K
+ DEBUG [19f3f805] 	remote: Compressing objects: 100% (18/18), done.[K
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	remote: Total 42 (delta 23), reused 36 (delta 19), pack-reused 0[K
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	Unpacking objects:   2% (1/42)
+ DEBUG [19f3f805] 	Unpacking objects:   4% (2/42)
+ DEBUG [19f3f805] 	Unpacking objects:   7% (3/42)
+ DEBUG [19f3f805] 	Unpacking objects:   9% (4/42)
+ DEBUG [19f3f805] 	Unpacking objects:  11% (5/42)
+ DEBUG [19f3f805] 	Unpacking objects:  14% (6/42)
+ DEBUG [19f3f805] 	Unpacking objects:  16% (7/42)
+ DEBUG [19f3f805] 	Unpacking objects:  19% (8/42)
+ DEBUG [19f3f805] 	Unpacking objects:  21% (9/42)
+ DEBUG [19f3f805] 	Unpacking objects:  23% (10/42)
+ DEBUG [19f3f805] 	Unpacking objects:  26% (11/42)
+ DEBUG [19f3f805] 	Unpacking objects:  28% (12/42)
+ DEBUG [19f3f805] 	Unpacking objects:  30% (13/42)
+ DEBUG [19f3f805] 	Unpacking objects:  33% (14/42)
+ DEBUG [19f3f805] 	Unpacking objects:  35% (15/42)
+ DEBUG [19f3f805] 	Unpacking objects:  38% (16/42)
+ DEBUG [19f3f805] 	Unpacking objects:  40% (17/42)
+ DEBUG [19f3f805] 	Unpacking objects:  42% (18/42)
+ DEBUG [19f3f805] 	Unpacking objects:  45% (19/42)
+ DEBUG [19f3f805] 	Unpacking objects:  47% (20/42)
+ DEBUG [19f3f805] 	Unpacking objects:  50% (21/42)
+ DEBUG [19f3f805] 	Unpacking objects:  52% (22/42)
+ DEBUG [19f3f805] 	Unpacking objects:  54% (23/42)
+ DEBUG [19f3f805] 	Unpacking objects:  57% (24/42)
+ DEBUG [19f3f805] 	Unpacking objects:  59% (25/42)
+ DEBUG [19f3f805] 	Unpacking objects:  61% (26/42)
+ DEBUG [19f3f805] 	Unpacking objects:  64% (27/42)
+ DEBUG [19f3f805] 	Unpacking objects:  66% (28/42)
+ DEBUG [19f3f805] 	Unpacking objects:  69% (29/42)
+ DEBUG [19f3f805] 	Unpacking objects:  71% (30/42)
+ DEBUG [19f3f805] 	Unpacking objects:  73% (31/42)
+ DEBUG [19f3f805] 	Unpacking objects:  76% (32/42)
+ DEBUG [19f3f805] 	Unpacking objects:  78% (33/42)
+ DEBUG [19f3f805] 	Unpacking objects:  80% (34/42)
+ DEBUG [19f3f805] 	Unpacking objects:  83% (35/42)
+ DEBUG [19f3f805] 	Unpacking objects:  85% (36/42)
+ DEBUG [19f3f805] 	Unpacking objects:  88% (37/42)
+ DEBUG [19f3f805] 	Unpacking objects:  90% (38/42)
+ DEBUG [19f3f805] 	Unpacking objects:  92% (39/42)
+ DEBUG [19f3f805] 	Unpacking objects:  95% (40/42)
+ DEBUG [19f3f805] 	Unpacking objects:  97% (41/42)
+ DEBUG [19f3f805] 	Unpacking objects: 100% (42/42)
+ DEBUG [19f3f805] 	Unpacking objects: 100% (42/42), 4.79 KiB | 700.00 KiB/s, done.
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	From github.com:Boniole/ror_geekhub_jira
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	 * [new branch]      development        -> development
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	 * [new branch]      fix_desk_table     -> fix_desk_table
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	   76aaf64..388dc79  main               -> main
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	 * [new ref]         refs/pull/11/head  -> refs/pull/11/head
+ DEBUG [19f3f805] 	
+ DEBUG [19f3f805] 	 * [new ref]         refs/pull/11/merge -> refs/pull/11/merge
+ DEBUG [19f3f805] 	
+  INFO [19f3f805] Finished in 1.996 seconds with exit status 0 (successful).
+ DEBUG [60d9530d] Running if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [60d9530d] Command: if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi
+ DEBUG [60d9530d] Finished in 0.564 seconds with exit status 0 (successful).
+  INFO [62c9bed4] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230319091036 as deployer@164.90.165.89
+ DEBUG [62c9bed4] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-cf1960abdb619d55c21a.sh" ; /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230319091036 )
+  INFO [62c9bed4] Finished in 0.361 seconds with exit status 0 (successful).
+  INFO [5719f4f1] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /home/deployer/apps/mini_jira/releases/20230319091036 as deployer@164.90.165.89
+ DEBUG [5719f4f1] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-cf1960abdb619d55c21a.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /home/deployer/apps/mini_jira/releases/20230319091036 )
+  INFO [5719f4f1] Finished in 0.351 seconds with exit status 0 (successful).
+ DEBUG [73f40271] Running if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [73f40271] Command: if test ! -d /home/deployer/apps/mini_jira/repo; then echo "Directory does not exist '/home/deployer/apps/mini_jira/repo'" 1>&2; false; fi
+ DEBUG [73f40271] Finished in 0.252 seconds with exit status 0 (successful).
+ DEBUG [dd4f12ce] Running /usr/bin/env git rev-list --max-count=1 main as deployer@164.90.165.89
+ DEBUG [dd4f12ce] Command: cd /home/deployer/apps/mini_jira/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-cf1960abdb619d55c21a.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [dd4f12ce] 	388dc7965dcbb0fa6ad5d02267c748fb94c5b4a0
+ DEBUG [dd4f12ce] 	
+ DEBUG [dd4f12ce] Finished in 0.409 seconds with exit status 0 (successful).
+ DEBUG [7673ab1d] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [7673ab1d] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi
+ DEBUG [7673ab1d] Finished in 0.380 seconds with exit status 0 (successful).
+  INFO [3850bf64] Running /usr/bin/env echo "388dc7965dcbb0fa6ad5d02267c748fb94c5b4a0" > REVISION as deployer@164.90.165.89
+ DEBUG [3850bf64] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && /usr/bin/env echo "388dc7965dcbb0fa6ad5d02267c748fb94c5b4a0" > REVISION
+  INFO [3850bf64] Finished in 0.270 seconds with exit status 0 (successful).
+  INFO [26812fa7] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230319091036/config as deployer@164.90.165.89
+ DEBUG [26812fa7] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230319091036/config
+  INFO [26812fa7] Finished in 0.403 seconds with exit status 0 (successful).
+ DEBUG [fc2a22d0] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml ] as deployer@164.90.165.89
+ DEBUG [fc2a22d0] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml ]
+ DEBUG [fc2a22d0] Finished in 0.375 seconds with exit status 1 (failed).
+ DEBUG [3a832aec] Running [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml ] as deployer@164.90.165.89
+ DEBUG [3a832aec] Command: [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml ]
+ DEBUG [3a832aec] Finished in 0.261 seconds with exit status 0 (successful).
+  INFO [2e81456b] Running /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml as deployer@164.90.165.89
+ DEBUG [2e81456b] Command: /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml
+  INFO [2e81456b] Finished in 0.411 seconds with exit status 0 (successful).
+  INFO [5e3320f9] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/database.yml /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml as deployer@164.90.165.89
+ DEBUG [5e3320f9] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/database.yml /home/deployer/apps/mini_jira/releases/20230319091036/config/database.yml
+  INFO [5e3320f9] Finished in 0.371 seconds with exit status 0 (successful).
+ DEBUG [f8669c04] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key ] as deployer@164.90.165.89
+ DEBUG [f8669c04] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key ]
+ DEBUG [f8669c04] Finished in 0.253 seconds with exit status 1 (failed).
+ DEBUG [829ab37e] Running [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key ] as deployer@164.90.165.89
+ DEBUG [829ab37e] Command: [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key ]
+ DEBUG [829ab37e] Finished in 0.426 seconds with exit status 0 (successful).
+  INFO [aa0bd076] Running /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key as deployer@164.90.165.89
+ DEBUG [aa0bd076] Command: /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key
+  INFO [aa0bd076] Finished in 0.367 seconds with exit status 0 (successful).
+  INFO [6319479f] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/master.key /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key as deployer@164.90.165.89
+ DEBUG [6319479f] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/master.key /home/deployer/apps/mini_jira/releases/20230319091036/config/master.key
+  INFO [6319479f] Finished in 0.262 seconds with exit status 0 (successful).
+ DEBUG [49ace98f] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [49ace98f] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb ]
+ DEBUG [49ace98f] Finished in 0.394 seconds with exit status 1 (failed).
+ DEBUG [f50d6b5c] Running [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb ] as deployer@164.90.165.89
+ DEBUG [f50d6b5c] Command: [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb ]
+ DEBUG [f50d6b5c] Finished in 0.388 seconds with exit status 0 (successful).
+  INFO [de1297d0] Running /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb as deployer@164.90.165.89
+ DEBUG [de1297d0] Command: /usr/bin/env rm /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb
+  INFO [de1297d0] Finished in 0.250 seconds with exit status 0 (successful).
+  INFO [67f81257] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/puma.rb /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb as deployer@164.90.165.89
+ DEBUG [67f81257] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/puma.rb /home/deployer/apps/mini_jira/releases/20230319091036/config/puma.rb
+  INFO [67f81257] Finished in 0.342 seconds with exit status 0 (successful).
+ DEBUG [3d2f2118] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/application.yml ] as deployer@164.90.165.89
+ DEBUG [3d2f2118] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/config/application.yml ]
+ DEBUG [3d2f2118] Finished in 0.321 seconds with exit status 1 (failed).
+ DEBUG [6889c446] Running [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/application.yml ] as deployer@164.90.165.89
+ DEBUG [6889c446] Command: [ -f /home/deployer/apps/mini_jira/releases/20230319091036/config/application.yml ]
+ DEBUG [6889c446] Finished in 0.272 seconds with exit status 1 (failed).
+  INFO [ebd0b310] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/application.yml /home/deployer/apps/mini_jira/releases/20230319091036/config/application.yml as deployer@164.90.165.89
+ DEBUG [ebd0b310] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/config/application.yml /home/deployer/apps/mini_jira/releases/20230319091036/config/application.yml
+  INFO [ebd0b310] Finished in 0.382 seconds with exit status 0 (successful).
+  INFO [1439112d] Running /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230319091036 /home/deployer/apps/mini_jira/releases/20230319091036/tmp /home/deployer/apps/mini_jira/releases/20230319091036/vendor /home/deployer/apps/mini_jira/releases/20230319091036/public as deployer@164.90.165.89
+ DEBUG [1439112d] Command: /usr/bin/env mkdir -p /home/deployer/apps/mini_jira/releases/20230319091036 /home/deployer/apps/mini_jira/releases/20230319091036/tmp /home/deployer/apps/mini_jira/releases/20230319091036/vendor /home/deployer/apps/mini_jira/releases/20230319091036/public
+  INFO [1439112d] Finished in 0.138 seconds with exit status 0 (successful).
+ DEBUG [15a49ee2] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/log ] as deployer@164.90.165.89
+ DEBUG [15a49ee2] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/log ]
+ DEBUG [15a49ee2] Finished in 0.250 seconds with exit status 1 (failed).
+ DEBUG [106f19ab] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/log ] as deployer@164.90.165.89
+ DEBUG [106f19ab] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/log ]
+ DEBUG [106f19ab] Finished in 0.458 seconds with exit status 0 (successful).
+  INFO [ec3d5c81] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/log as deployer@164.90.165.89
+ DEBUG [ec3d5c81] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/log
+  INFO [ec3d5c81] Finished in 0.606 seconds with exit status 0 (successful).
+  INFO [d2375811] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/releases/20230319091036/log as deployer@164.90.165.89
+ DEBUG [d2375811] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/log /home/deployer/apps/mini_jira/releases/20230319091036/log
+  INFO [d2375811] Finished in 0.233 seconds with exit status 0 (successful).
+ DEBUG [55f964d0] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids ] as deployer@164.90.165.89
+ DEBUG [55f964d0] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids ]
+ DEBUG [55f964d0] Finished in 0.405 seconds with exit status 1 (failed).
+ DEBUG [804bd310] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids ] as deployer@164.90.165.89
+ DEBUG [804bd310] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids ]
+ DEBUG [804bd310] Finished in 0.210 seconds with exit status 0 (successful).
+  INFO [07b033f7] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids as deployer@164.90.165.89
+ DEBUG [07b033f7] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids
+  INFO [07b033f7] Finished in 0.374 seconds with exit status 0 (successful).
+  INFO [7d44147c] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids as deployer@164.90.165.89
+ DEBUG [7d44147c] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/pids /home/deployer/apps/mini_jira/releases/20230319091036/tmp/pids
+  INFO [7d44147c] Finished in 0.234 seconds with exit status 0 (successful).
+ DEBUG [dcb5cfc3] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache ] as deployer@164.90.165.89
+ DEBUG [dcb5cfc3] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache ]
+ DEBUG [dcb5cfc3] Finished in 0.346 seconds with exit status 1 (failed).
+ DEBUG [b5555763] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache ] as deployer@164.90.165.89
+ DEBUG [b5555763] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache ]
+ DEBUG [b5555763] Finished in 0.399 seconds with exit status 0 (successful).
+  INFO [05d34216] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache as deployer@164.90.165.89
+ DEBUG [05d34216] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache
+  INFO [05d34216] Finished in 0.218 seconds with exit status 0 (successful).
+  INFO [bd320445] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache as deployer@164.90.165.89
+ DEBUG [bd320445] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/cache /home/deployer/apps/mini_jira/releases/20230319091036/tmp/cache
+  INFO [bd320445] Finished in 0.390 seconds with exit status 0 (successful).
+ DEBUG [e74f3cf7] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/tmp/sockets ] as deployer@164.90.165.89
+ DEBUG [e74f3cf7] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/tmp/sockets ]
+ DEBUG [e74f3cf7] Finished in 0.309 seconds with exit status 1 (failed).
+ DEBUG [29ee7b6f] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/tmp/sockets ] as deployer@164.90.165.89
+ DEBUG [29ee7b6f] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/tmp/sockets ]
+ DEBUG [29ee7b6f] Finished in 0.273 seconds with exit status 1 (failed).
+  INFO [24eb7301] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/releases/20230319091036/tmp/sockets as deployer@164.90.165.89
+ DEBUG [24eb7301] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/tmp/sockets /home/deployer/apps/mini_jira/releases/20230319091036/tmp/sockets
+  INFO [24eb7301] Finished in 0.379 seconds with exit status 0 (successful).
+ DEBUG [81b21fdb] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/vendor/bundle ] as deployer@164.90.165.89
+ DEBUG [81b21fdb] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/vendor/bundle ]
+ DEBUG [81b21fdb] Finished in 0.236 seconds with exit status 1 (failed).
+ DEBUG [fb73bccf] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/vendor/bundle ] as deployer@164.90.165.89
+ DEBUG [fb73bccf] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/vendor/bundle ]
+ DEBUG [fb73bccf] Finished in 0.358 seconds with exit status 1 (failed).
+  INFO [c25a40a8] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/releases/20230319091036/vendor/bundle as deployer@164.90.165.89
+ DEBUG [c25a40a8] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/vendor/bundle /home/deployer/apps/mini_jira/releases/20230319091036/vendor/bundle
+  INFO [c25a40a8] Finished in 0.289 seconds with exit status 0 (successful).
+ DEBUG [e99630c8] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/public/system ] as deployer@164.90.165.89
+ DEBUG [e99630c8] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/public/system ]
+ DEBUG [e99630c8] Finished in 0.310 seconds with exit status 1 (failed).
+ DEBUG [9f87b8a3] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/public/system ] as deployer@164.90.165.89
+ DEBUG [9f87b8a3] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/public/system ]
+ DEBUG [9f87b8a3] Finished in 0.373 seconds with exit status 1 (failed).
+  INFO [852c2982] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/releases/20230319091036/public/system as deployer@164.90.165.89
+ DEBUG [852c2982] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/system /home/deployer/apps/mini_jira/releases/20230319091036/public/system
+  INFO [852c2982] Finished in 0.270 seconds with exit status 0 (successful).
+ DEBUG [70d84cfd] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/public/uploads ] as deployer@164.90.165.89
+ DEBUG [70d84cfd] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/public/uploads ]
+ DEBUG [70d84cfd] Finished in 0.420 seconds with exit status 1 (failed).
+ DEBUG [c980538e] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/public/uploads ] as deployer@164.90.165.89
+ DEBUG [c980538e] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/public/uploads ]
+ DEBUG [c980538e] Finished in 0.354 seconds with exit status 1 (failed).
+  INFO [80881c09] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/releases/20230319091036/public/uploads as deployer@164.90.165.89
+ DEBUG [80881c09] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/uploads /home/deployer/apps/mini_jira/releases/20230319091036/public/uploads
+  INFO [80881c09] Finished in 0.309 seconds with exit status 0 (successful).
+ DEBUG [4ff75edb] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/public/images ] as deployer@164.90.165.89
+ DEBUG [4ff75edb] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/public/images ]
+ DEBUG [4ff75edb] Finished in 0.340 seconds with exit status 1 (failed).
+ DEBUG [674602d2] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/public/images ] as deployer@164.90.165.89
+ DEBUG [674602d2] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/public/images ]
+ DEBUG [674602d2] Finished in 0.395 seconds with exit status 1 (failed).
+  INFO [7f6c31a6] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/releases/20230319091036/public/images as deployer@164.90.165.89
+ DEBUG [7f6c31a6] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/public/images /home/deployer/apps/mini_jira/releases/20230319091036/public/images
+  INFO [7f6c31a6] Finished in 0.226 seconds with exit status 0 (successful).
+ DEBUG [5699662f] Running [ -L /home/deployer/apps/mini_jira/releases/20230319091036/storage ] as deployer@164.90.165.89
+ DEBUG [5699662f] Command: [ -L /home/deployer/apps/mini_jira/releases/20230319091036/storage ]
+ DEBUG [5699662f] Finished in 0.493 seconds with exit status 1 (failed).
+ DEBUG [0e78c2ed] Running [ -d /home/deployer/apps/mini_jira/releases/20230319091036/storage ] as deployer@164.90.165.89
+ DEBUG [0e78c2ed] Command: [ -d /home/deployer/apps/mini_jira/releases/20230319091036/storage ]
+ DEBUG [0e78c2ed] Finished in 0.653 seconds with exit status 0 (successful).
+  INFO [e9a60857] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/storage as deployer@164.90.165.89
+ DEBUG [e9a60857] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230319091036/storage
+  INFO [e9a60857] Finished in 0.345 seconds with exit status 0 (successful).
+  INFO [d9f8701c] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/storage /home/deployer/apps/mini_jira/releases/20230319091036/storage as deployer@164.90.165.89
+ DEBUG [d9f8701c] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/shared/storage /home/deployer/apps/mini_jira/releases/20230319091036/storage
+  INFO [d9f8701c] Finished in 0.377 seconds with exit status 0 (successful).
+ DEBUG [80c11ca1] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [80c11ca1] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi
+ DEBUG [80c11ca1] Finished in 0.263 seconds with exit status 0 (successful).
+  INFO [e191d393] Running ~/.rvm/bin/rvm 3.1.2 do bundle config --local deployment true as deployer@164.90.165.89
+ DEBUG [e191d393] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && ~/.rvm/bin/rvm 3.1.2 do bundle config --local deployment true
+  INFO [e191d393] Finished in 0.888 seconds with exit status 0 (successful).
+  INFO [8ef8554d] Running ~/.rvm/bin/rvm 3.1.2 do bundle config --local path /home/deployer/apps/mini_jira/shared/bundle as deployer@164.90.165.89
+ DEBUG [8ef8554d] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && ~/.rvm/bin/rvm 3.1.2 do bundle config --local path /home/deployer/apps/mini_jira/shared/bundle
+  INFO [8ef8554d] Finished in 0.808 seconds with exit status 0 (successful).
+  INFO [426ac83b] Running ~/.rvm/bin/rvm 3.1.2 do bundle config --local without development:test as deployer@164.90.165.89
+ DEBUG [426ac83b] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && ~/.rvm/bin/rvm 3.1.2 do bundle config --local without development:test
+  INFO [426ac83b] Finished in 0.934 seconds with exit status 0 (successful).
+ DEBUG [efd2b258] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [efd2b258] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi
+ DEBUG [efd2b258] Finished in 0.336 seconds with exit status 0 (successful).
+ DEBUG [d7f9776c] Running ~/.rvm/bin/rvm 3.1.2 do bundle check as deployer@164.90.165.89
+ DEBUG [d7f9776c] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && ~/.rvm/bin/rvm 3.1.2 do bundle check
+ DEBUG [d7f9776c] 	The Gemfile's dependencies are satisfied
+ DEBUG [d7f9776c] 	
+ DEBUG [d7f9776c] Finished in 0.985 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+  INFO [deploy:migrate] Run `rake db:migrate`
+ DEBUG [028d93f7] Running if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [028d93f7] Command: if test ! -d /home/deployer/apps/mini_jira/releases/20230319091036; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases/20230319091036'" 1>&2; false; fi
+ DEBUG [028d93f7] Finished in 0.237 seconds with exit status 0 (successful).
+  INFO [f9d52693] Running ~/.rvm/bin/rvm 3.1.2 do bundle exec rake db:migrate as deployer@164.90.165.89
+ DEBUG [f9d52693] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && ( export RAILS_ENV="production" ; ~/.rvm/bin/rvm 3.1.2 do bundle exec rake db:migrate )
+  INFO [f9d52693] Finished in 1.887 seconds with exit status 0 (successful).
+  INFO [1210ee7c] Running /usr/bin/env ln -s /home/deployer/apps/mini_jira/releases/20230319091036 /home/deployer/apps/mini_jira/releases/current as deployer@164.90.165.89
+ DEBUG [1210ee7c] Command: /usr/bin/env ln -s /home/deployer/apps/mini_jira/releases/20230319091036 /home/deployer/apps/mini_jira/releases/current
+  INFO [1210ee7c] Finished in 0.460 seconds with exit status 0 (successful).
+  INFO [17943331] Running /usr/bin/env mv /home/deployer/apps/mini_jira/releases/current /home/deployer/apps/mini_jira as deployer@164.90.165.89
+ DEBUG [17943331] Command: /usr/bin/env mv /home/deployer/apps/mini_jira/releases/current /home/deployer/apps/mini_jira
+  INFO [17943331] Finished in 0.274 seconds with exit status 0 (successful).
+ DEBUG [ac319080] Running /usr/bin/env ls -x /home/deployer/apps/mini_jira/releases as deployer@164.90.165.89
+ DEBUG [ac319080] Command: /usr/bin/env ls -x /home/deployer/apps/mini_jira/releases
+ DEBUG [ac319080] 	20230227202707
+ DEBUG [ac319080] 		
+ DEBUG [ac319080] 	20230227203144
+ DEBUG [ac319080] 		
+ DEBUG [ac319080] 	20230227203908
+ DEBUG [ac319080] 		
+ DEBUG [ac319080] 	20230227204146
+ DEBUG [ac319080] 		
+ DEBUG [ac319080] 	20230317194657
+ DEBUG [ac319080] 	
+ DEBUG [ac319080] 	20230319091036
+ DEBUG [ac319080] 	
+ DEBUG [ac319080] Finished in 0.382 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 6 deployed releases on 164.90.165.89
+ DEBUG [f80f2d51] Running [ -d /home/deployer/apps/mini_jira/current ] as deployer@164.90.165.89
+ DEBUG [f80f2d51] Command: [ -d /home/deployer/apps/mini_jira/current ]
+ DEBUG [f80f2d51] Finished in 0.590 seconds with exit status 0 (successful).
+ DEBUG [637e73fe] Running /usr/bin/env readlink /home/deployer/apps/mini_jira/current as deployer@164.90.165.89
+ DEBUG [637e73fe] Command: /usr/bin/env readlink /home/deployer/apps/mini_jira/current
+ DEBUG [637e73fe] 	/home/deployer/apps/mini_jira/releases/20230319091036
+ DEBUG [637e73fe] 	
+ DEBUG [637e73fe] Finished in 0.472 seconds with exit status 0 (successful).
+  INFO [886be173] Running /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230227202707 as deployer@164.90.165.89
+ DEBUG [886be173] Command: /usr/bin/env rm -rf /home/deployer/apps/mini_jira/releases/20230227202707
+  INFO [886be173] Finished in 0.373 seconds with exit status 0 (successful).
+ DEBUG [d60fdcac] Running if test ! -d /home/deployer/apps/mini_jira/releases; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases'" 1>&2; false; fi as deployer@164.90.165.89
+ DEBUG [d60fdcac] Command: if test ! -d /home/deployer/apps/mini_jira/releases; then echo "Directory does not exist '/home/deployer/apps/mini_jira/releases'" 1>&2; false; fi
+ DEBUG [d60fdcac] Finished in 0.257 seconds with exit status 0 (successful).
+  INFO [0ebca587] Running /usr/bin/env echo "Branch main (at 388dc7965dcbb0fa6ad5d02267c748fb94c5b4a0) deployed as release 20230319091036 by boniole" >> /home/deployer/apps/mini_jira/revisions.log as deployer@164.90.165.89
+ DEBUG [0ebca587] Command: cd /home/deployer/apps/mini_jira/releases && /usr/bin/env echo "Branch main (at 388dc7965dcbb0fa6ad5d02267c748fb94c5b4a0) deployed as release 20230319091036 by boniole" >> /home/deployer/apps/mini_jira/revisions.log
+  INFO [0ebca587] Finished in 0.334 seconds with exit status 0 (successful).
+  INFO [616b3be8] Running /usr/bin/env sudo service nginx restart as deployer@164.90.165.89
+ DEBUG [616b3be8] Command: /usr/bin/env sudo service nginx restart
+ DEBUG [616b3be8] 	[sudo] password for deployer: 
+ DEBUG [616b3be8] 	
+  INFO [616b3be8] Finished in 0.445 seconds with exit status 0 (successful).
+  INFO [494a6ba5] Running cd /home/deployer/apps/mini_jira/releases/20230319091036 && /home/deployer/.rvm/gems/ruby-3.1.2/wrappers/bundle exec pumactl -P /home/deployer/apps/mini_jira/shared/tmp/pids/puma.pid stop as deployer@164.90.165.89
+ DEBUG [494a6ba5] Command: cd /home/deployer/apps/mini_jira/releases/20230319091036 && /home/deployer/.rvm/gems/ruby-3.1.2/wrappers/bundle exec pumactl -P /home/deployer/apps/mini_jira/shared/tmp/pids/puma.pid stop
+ DEBUG [494a6ba5] 	No pid '742' found
+ DEBUG [494a6ba5] 	
+  INFO [133b2322] Running /usr/bin/env sudo service puma restart as deployer@164.90.165.89
+ DEBUG [133b2322] Command: /usr/bin/env sudo service puma restart
+ DEBUG [133b2322] 	[sudo] password for deployer: 
+ DEBUG [133b2322] 	
+  INFO [133b2322] Finished in 0.545 seconds with exit status 0 (successful).
