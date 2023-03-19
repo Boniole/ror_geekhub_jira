@@ -7,9 +7,9 @@
 #  end         :date
 #  estimate    :datetime
 #  label       :text
-#  priority    :integer
+#  priority    :integer          default(0)
 #  start       :date
-#  status      :integer
+#  status      :integer          default(0)
 #  title       :text
 #  type        :integer          default(0)
 #  created_at  :datetime         not null

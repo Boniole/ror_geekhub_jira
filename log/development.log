@@ -240,3 +240,534 @@ Started GET "/api-docs/swagger-ui.css" for ::1 at 2023-03-19 12:35:22 +0200
 Started GET "/api-docs/swagger-ui-bundle.js" for ::1 at 2023-03-19 12:35:22 +0200
 Started GET "/api-docs/swagger-ui-standalone-preset.js" for ::1 at 2023-03-19 12:35:22 +0200
 Started GET "/api-docs/v1/swagger.yaml" for ::1 at 2023-03-19 12:35:22 +0200
+Started POST "/v1/users" for 127.0.0.1 at 2023-03-19 14:56:41 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [POST] "/v1/users"):
+  
+Started POST "/v1/users" for 127.0.0.1 at 2023-03-19 14:56:54 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/v1/users"):
+  
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-19 14:57:42 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"Sergio2", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio2"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x000000010f166010>, params: {"name"=>"Sergio2", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"Sergio2"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 276ms (Views: 0.2ms | ActiveRecord: 18.2ms | Allocations: 14105)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-19 14:58:13 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"Sergio2", "email"=>"mm@mail.ru", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio2", "email"=>"mm@mail.ru"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x000000010f534ac0>, params: {"name"=>"Sergio2", "email"=>"mm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"Sergio2", "email"=>"mm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "mm@mail.ru"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 254ms (Views: 0.1ms | ActiveRecord: 1.2ms | Allocations: 2849)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-19 14:58:24 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x000000010f58fda8>, params: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "mm@mail.ru"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Create (5.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at", "last_name", "email", "reset_password_token", "reset_password_sent_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Sergio2"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-19 12:58:25.127690"], ["updated_at", "2023-03-19 12:58:25.127690"], ["last_name", "Sergio2"], ["email", "mm@mail.ru"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 200 OK in 275ms (Views: 0.1ms | ActiveRecord: 6.9ms | Allocations: 4955)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-19 14:58:34 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.9ms | Allocations: 475)
+Completed 200 OK in 7ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 3094)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-19 14:58:38 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | Allocations: 281)
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.0ms | Allocations: 926)
+
+
+Started GET "/" for 127.0.0.1 at 2023-03-19 14:58:40 +0200
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/boniole/.rvm/gems/ruby-3.1.2/gems/railties-7.0.4.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 16)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 228)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-19 15:11:44 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x000000010f6fe108>, params: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "mm@mail.ru"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 274ms (Views: 0.1ms | ActiveRecord: 9.4ms | Allocations: 5761)
+
+
+Started POST "/api/v1/users" for 127.0.0.1 at 2023-03-19 15:11:52 +0200
+Processing by Api::V1::UsersController#create as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+[31mUnpermitted parameter: :user. Context: { controller: Api::V1::UsersController, action: create, request: #<ActionDispatch::Request:0x000000010f784e88>, params: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"create", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "mmm@mail.ru"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mUser Create (1.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "password_digest", "created_at", "updated_at", "last_name", "email", "reset_password_token", "reset_password_sent_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["name", "Sergio2"], ["password_digest", "[FILTERED]"], ["created_at", "2023-03-19 13:11:52.580557"], ["updated_at", "2023-03-19 13:11:52.580557"], ["last_name", "Sergio2"], ["email", "mmm@mail.ru"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"]]
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:19:in `create'
+Completed 200 OK in 268ms (Views: 0.1ms | ActiveRecord: 3.1ms | Allocations: 3136)
+
+
+Started POST "/api/v1/users/1" for 127.0.0.1 at 2023-03-19 15:12:03 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/api/v1/users/1"):
+  
+Started GET "/api/v1/users/1" for 127.0.0.1 at 2023-03-19 15:13:00 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"1", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 171)
+
+
+Started GET "/api/v1/users/1" for 127.0.0.1 at 2023-03-19 15:13:10 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"1", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 1747)
+
+
+Started GET "/api/v1/users" for 127.0.0.1 at 2023-03-19 15:13:15 +0200
+Processing by Api::V1::UsersController#index as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/api/v1/users_controller.rb:8:in `index'
+Completed 200 OK in 10ms (Views: 3.0ms | ActiveRecord: 2.5ms | Allocations: 2002)
+
+
+Started PATCH "/api/v1/users/6" for 127.0.0.1 at 2023-03-19 15:13:53 +0200
+Processing by Api::V1::UsersController#update as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"6", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+[31mUnpermitted parameters: :id, :user. Context: { controller: Api::V1::UsersController, action: update, request: #<ActionDispatch::Request:0x000000010c3b2f38>, params: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"update", "id"=>"6", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "mmm@mail.ru"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Update (4.0ms)[0m  [1m[33mUPDATE "users" SET "password_digest" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["password_digest", "[FILTERED]"], ["updated_at", "2023-03-19 13:13:54.054700"], ["id", 6]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+Completed 204 No Content in 271ms (ActiveRecord: 5.3ms | Allocations: 4247)
+
+
+Started PATCH "/api/v1/users/6" for 127.0.0.1 at 2023-03-19 15:13:59 +0200
+Processing by Api::V1::UsersController#update as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"6", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+[31mUnpermitted parameters: :id, :user. Context: { controller: Api::V1::UsersController, action: update, request: #<ActionDispatch::Request:0x000000010ce14710>, params: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"update", "id"=>"6", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "mmm@mail.ru"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "password_digest" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["password_digest", "[FILTERED]"], ["updated_at", "2023-03-19 13:13:59.885054"], ["id", 6]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+Completed 204 No Content in 273ms (ActiveRecord: 3.7ms | Allocations: 3999)
+
+
+Started POST "/api/v1/users/6" for 127.0.0.1 at 2023-03-19 15:14:04 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/api/v1/users/6"):
+  
+Started PATCH "/api/v1/users/6" for 127.0.0.1 at 2023-03-19 15:14:48 +0200
+Processing by Api::V1::UsersController#update as */*
+  Parameters: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"6", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+[31mUnpermitted parameters: :id, :user. Context: { controller: Api::V1::UsersController, action: update, request: #<ActionDispatch::Request:0x000000010f03d0f8>, params: {"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"update", "id"=>"6", "user"=>{"name"=>"Sergio2", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "mmm@mail.ru"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "password_digest" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["password_digest", "[FILTERED]"], ["updated_at", "2023-03-19 13:14:48.669061"], ["id", 6]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+Completed 204 No Content in 264ms (ActiveRecord: 2.0ms | Allocations: 3986)
+
+
+Started PATCH "/api/v1/users/6" for 127.0.0.1 at 2023-03-19 15:14:55 +0200
+Processing by Api::V1::UsersController#update as */*
+  Parameters: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"6", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+[31mUnpermitted parameters: :id, :user. Context: { controller: Api::V1::UsersController, action: update, request: #<ActionDispatch::Request:0x000000010f114440>, params: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"update", "id"=>"6", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "mmm@mail.ru"], ["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "name" = $1, "password_digest" = $2, "updated_at" = $3 WHERE "users"."id" = $4[0m  [["name", "Sergio444444"], ["password_digest", "[FILTERED]"], ["updated_at", "2023-03-19 13:14:56.013911"], ["id", 6]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+Completed 204 No Content in 278ms (ActiveRecord: 2.1ms | Allocations: 3993)
+
+
+Started PATCH "/api/v1/users/5" for 127.0.0.1 at 2023-03-19 15:14:59 +0200
+Processing by Api::V1::UsersController#update as */*
+  Parameters: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"5", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+[31mUnpermitted parameters: :id, :user. Context: { controller: Api::V1::UsersController, action: update, request: #<ActionDispatch::Request:0x000000010f17c220>, params: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"update", "id"=>"5", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "mmm@mail.ru"], ["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+Completed 422 Unprocessable Entity in 265ms (Views: 0.1ms | ActiveRecord: 1.2ms | Allocations: 3826)
+
+
+Started PATCH "/api/v1/users/4" for 127.0.0.1 at 2023-03-19 15:15:04 +0200
+Processing by Api::V1::UsersController#update as */*
+  Parameters: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"4", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+[31mUnpermitted parameters: :id, :user. Context: { controller: Api::V1::UsersController, action: update, request: #<ActionDispatch::Request:0x000000010f1ff0a8>, params: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "controller"=>"api/v1/users", "action"=>"update", "id"=>"4", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}} }[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mUser Exists? (3.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "mmm@mail.ru"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/api/v1/users_controller.rb:32:in `update'
+Completed 422 Unprocessable Entity in 268ms (Views: 0.1ms | ActiveRecord: 3.9ms | Allocations: 3816)
+
+
+Started GET "/api/v1/users/6" for 127.0.0.1 at 2023-03-19 15:15:12 +0200
+Processing by Api::V1::UsersController#show as */*
+  Parameters: {"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru", "password"=>"[FILTERED]", "id"=>"6", "user"=>{"name"=>"Sergio444444", "last_name"=>"Sergio2", "email"=>"mmm@mail.ru"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `authorize_request'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/users_controller.rb:46:in `set_user'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1253)
+
+
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:16:42 +0200
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:17:49 +0200
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:18:14 +0200
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:18:37 +0200
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:18:57 +0200
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:19:30 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 15:20:54 +0200
+  
+NoMethodError (undefined method `all?' for :open:Symbol
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:12:40 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ArgumentError (You tried to define an enum named "status" on the model "Project", but this will generate a class method "new", which is already defined by Active Record.):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:13:26 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ArgumentError (You tried to define an enum named "status" on the model "Project", but this will generate a class method "new", which is already defined by Active Record.):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:13:51 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ArgumentError (You tried to define an enum named "status" on the model "Project", but this will generate a class method "new", which is already defined by Active Record.):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:14:27 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `all?' for 0:Integer
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:15:13 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `all?' for 0:Integer
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:16:25 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `all?' for 0:Integer
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:16:45 +0200
+  
+NoMethodError (undefined method `all?' for 0:Integer
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (28.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mini_jira_development"[0m
+  [1m[35m (25.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "mini_jira_test"[0m
+  [1m[35m (144.3ms)[0m  [1m[35mCREATE DATABASE "mini_jira_development" ENCODING = 'unicode'[0m
+  [1m[35m (34.0ms)[0m  [1m[35mCREATE DATABASE "mini_jira_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230309122551)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309122551"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTasks (20230309184537)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" text, "description" character varying, "priority" integer DEFAULT 0, "status" integer DEFAULT 0, "label" text, "estimate" timestamp(6), "start" date, "end" date, "assignee_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309184537"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20230309185456)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE "comments" ("id" bigserial primary key, "body" character varying, "task_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_6bd05453df"
+FOREIGN KEY ("task_id")
+  REFERENCES "tasks" ("id")
+)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_comments_on_task_id" ON "comments" ("task_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230309185456"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProjects (20230310144341)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "projects" ("id" bigserial primary key, "name" character varying, "status" integer DEFAULT 0, "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_b872a6760a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_projects_on_user_id" ON "projects" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310144341"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDesks (20230310150440)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "desks" ("id" bigserial primary key, "name" character varying, "project_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_d692808753"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_desks_on_project_id" ON "desks" ("project_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230310150440"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReferencesToComments (20230311073948)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "comments" ADD "user_id" bigint NOT NULL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_comments_on_user_id" ON "comments" ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230311073948"]]
+  [1m[36mTRANSACTION (6.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddReferencesToTasks (20230311074920)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tasks" ADD "user_id" bigint NOT NULL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_user_id" ON "tasks" ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_4d2a9e4d7e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "tasks" ADD "project_id" bigint NOT NULL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_project_id" ON "tasks" ("project_id")[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_02e851e3b7"
+FOREIGN KEY ("project_id")
+  REFERENCES "projects" ("id")
+[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "tasks" ADD "desk_id" bigint NOT NULL[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_desk_id" ON "tasks" ("desk_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_0264244f46"
+FOREIGN KEY ("desk_id")
+  REFERENCES "desks" ("id")
+[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230311074920"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTypeToTasks (20230311094822)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "tasks" ADD "type" integer DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230311094822"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddDetailsToUser (20230311153803)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "last_name" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230311153803"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddCommetableToComments (20230312105215)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "comments" ADD "commetable_type" character varying NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mALTER TABLE "comments" ADD "commetable_id" bigint NOT NULL[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE INDEX "index_comments_on_commetable" ON "comments" ("commetable_type", "commetable_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230312105215"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateColumns (20230312111331)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "columns" ("id" bigserial primary key, "name" text, "columnntable_type" character varying NOT NULL, "columnntable_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE INDEX "index_columns_on_columnntable" ON "columns" ("columnntable_type", "columnntable_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230312111331"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddPasswordResetColumnsToUser (20230315155835)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_token" character varying[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "reset_password_sent_at" timestamp(6)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230315155835"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-19 16:17:22.139881"], ["updated_at", "2023-03-19 16:17:22.139881"]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(8459554082307986700)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:17:35 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `all?' for 0:Integer
+
+        unless values.is_a?(Hash) || values.all?(Symbol) || values.all?(String)
+                                           ^^^^^):
+  
+app/models/project.rb:27:in `<class:Project>'
+app/models/project.rb:20:in `<main>'
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:18:48 +0200
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::ProjectsController#index as */*
+  Parameters: {"project"=>{"user_id"=>6, "name"=>"project", "status"=>0}}
+  [1m[36mProject Load (1.0ms)[0m  [1m[34mSELECT "projects".* FROM "projects"[0m
+  ↳ app/controllers/api/v1/projects_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 1.0ms | Allocations: 3215)
+
+
+Started GET "/api/v1/projects" for 127.0.0.1 at 2023-03-19 18:19:04 +0200
+Processing by Api::V1::ProjectsController#index as */*
+  Parameters: {"project"=>{"user_id"=>6, "name"=>"project", "status"=>0}}
+  [1m[36mProject Load (0.2ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = $1[0m  [["user_id", nil]]
+  ↳ app/controllers/api/v1/projects_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 3.2ms | Allocations: 2473)
+
+
