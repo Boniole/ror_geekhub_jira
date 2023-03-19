@@ -14,7 +14,7 @@
 #  index_columns_on_columnntable  (columnntable_type,columnntable_id)
 #
 class Column < ApplicationRecord
-  belongs_to :columnntable, polymorphic: true
+  belongs_to :columnable, polymorphic: true
 
   validates :name, presence: true, length: { in: 3..14 }
 end

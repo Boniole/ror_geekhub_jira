@@ -18,7 +18,7 @@
 #
 class Desk < ApplicationRecord
   belongs_to :project
-  has_many :column, as: :columnable
+  has_many :columns, as: :columnable
 
   validates :name, presence: true, length: { minimum: 3 }
 end
