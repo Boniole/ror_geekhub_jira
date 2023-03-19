@@ -16,11 +16,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
 
   create_table "columns", force: :cascade do |t|
     t.text "name"
-    t.string "columnntable_type", null: false
-    t.bigint "columnntable_id", null: false
+    t.string "columnable_type", null: false
+    t.bigint "columnable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["columnntable_type", "columnntable_id"], name: "index_columns_on_columnntable"
+    t.index ["columnable_type", "columnable_id"], name: "index_columns_on_columnable"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -29,9 +29,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
-    t.string "commetable_type", null: false
-    t.bigint "commetable_id", null: false
-    t.index ["commetable_type", "commetable_id"], name: "index_comments_on_commetable"
+    t.string "commentable_type", null: false
+    t.bigint "commentable_id", null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end

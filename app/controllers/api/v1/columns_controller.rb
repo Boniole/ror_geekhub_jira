@@ -1,4 +1,5 @@
 class Api::V1::ColumnsController < ApplicationController
+  before_action :column_params, only: %i[index create update]
   before_action :set_column, only: %i[show update destroy]
   before_action :set_columns, only: %i[index]
 
@@ -12,7 +13,6 @@ class Api::V1::ColumnsController < ApplicationController
 
   def create
     @column = Column.new(column_params)
-
     if @column.save
       render json: @column
     else
@@ -42,7 +42,7 @@ class Api::V1::ColumnsController < ApplicationController
     @columns = Column.all
   end
 
-  def task_params
-    params.require(:column).permit(:name, :desk_id)
+  def column_params
+    params.require(:column).permit(:name, :columnable_id, :columnable_type)
   end
 end

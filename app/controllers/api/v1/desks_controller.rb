@@ -12,7 +12,7 @@ class Api::V1::DesksController < ApplicationController
   end
 
   def create
-    desk = Desc.create(desk_params)
+    desk = Desk.create(desk_params)
 
     if desk.save
       render json: desk, status: :created

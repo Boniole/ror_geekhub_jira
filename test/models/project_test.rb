@@ -4,7 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  name       :string
-#  status     :integer          default("closed_project")
+#  status     :integer          default("open")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :bigint           not null
