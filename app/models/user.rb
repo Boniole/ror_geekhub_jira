@@ -27,7 +27,7 @@ class User < ApplicationRecord
   def generate_password_token!
     self.reset_password_token = generate_token
     self.reset_password_sent_at = Time.now.utc
-    save!
+    save!(validate: false)
   end
 
   def password_token_valid?
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   def reset_password!(password)
     self.reset_password_token = nil
     self.password = password
-    save!
+    save!(validate: false)
   end
 
   private

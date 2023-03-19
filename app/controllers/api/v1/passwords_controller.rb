@@ -1,4 +1,6 @@
 class Api::V1::PasswordsController < ApplicationController
+  before_action :authorize_request, except: :forgot
+
   def forgot
     return render json: { error: 'Email not present' } if params[:email].blank?
 
@@ -13,19 +15,20 @@ class Api::V1::PasswordsController < ApplicationController
     end
   end
 
-  def reset # TODO
-    token = params[:token].to_s
+  def reset
+    user = User.find_by(email: params[:email])
+    user.generate_password_token!
 
-    return render json: { error: 'Token not present' } if params[:email].blank?
+    return render json: { error: 'Token not present' } if user.reset_password_token.blank?
 
-    user = User.find_by(reset_password_token: token)
-
-    if user.present? && user.password_token_valid?
+    if user.present? && user.password_token_valid? && user == @current_user
       if user.reset_password!(params[:password])
         render json: { status: 'ok' }, status: :ok
       else
         render json: { error: user.errors.full_messages }, status: :unprocessable_entity
       end
+    else
+      render json: { error: ['Link not valid or expired. Try generating a new link.'] }, status: :not_found
     end
   end
 end
