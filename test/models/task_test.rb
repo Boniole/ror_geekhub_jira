@@ -11,7 +11,6 @@
 #  start       :date
 #  status      :integer          default(0)
 #  title       :text
-#  type        :integer          default(0)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer

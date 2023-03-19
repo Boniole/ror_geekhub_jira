@@ -68,7 +68,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
     t.bigint "desk_id", null: false
-    t.integer "type", default: 0
     t.index ["desk_id"], name: "index_tasks_on_desk_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"

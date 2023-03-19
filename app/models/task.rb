@@ -11,7 +11,6 @@
 #  start       :date
 #  status      :integer          default(0)
 #  title       :text
-#  type        :integer          default(0)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
@@ -34,23 +33,23 @@
 class Task < ApplicationRecord
   belongs_to :project
   belongs_to :desk
-  belongs_to :column, as: :polymorphic
+  # belongs_to :column, polymorphic: true
   belongs_to :user
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy
 
-  enum :priority, %i[lowest low high highest], default: :lowest
-  enum :type, %i[task bug epic], default: :task
-  enum :status, %i[open close], default: :open
+  # enum :priority, %i[low high highest], default: :low
+  # enum :type, %i[task bug epic], default: :task
+  # enum :status, %i[open close], default: :open
 
   validates :user_id, numericality: { only_integer: true }
   validates :project_id, numericality: { only_integer: true }
-  validates :desk_id, numericality: { only_integer: true }
+  # validates :desk_id, numericality: { only_integer: true }
 
-  validates :title, presence: true, length: { in: 3..30 }
+  validates :title, length: { in: 3..30 }
   validates :description, presence: true, length: { in: 3..2500 }
-  validates :label, presence: true, optional: true
-  validates :start, presence: true, date: true, optional: true
-  validates :end, presence: true, date: true, optional: true
-  validates :estimate, datetime: { allow_blank: true }
+  # validates :label, optional: true
+  # validates :start,  date: true, optional: true
+  # validates :end, date: true, optional: true
+  # validates :estimate, datetime: { allow_blank: true }
 end
