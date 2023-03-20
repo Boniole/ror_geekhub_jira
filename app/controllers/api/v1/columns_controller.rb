@@ -9,6 +9,7 @@ class Api::V1::ColumnsController < ApplicationController
 
   def create
     @column = Column.new(column_params)
+
     if @column.save
       render json: @column
     else
@@ -39,6 +40,6 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def column_params
-    params.require(:column).permit(:name, :columnable_id, :columnable_type)
+    params.require(:column).permit(:columnable_id, :columnable_type, :name, :desk_id)
   end
 end
