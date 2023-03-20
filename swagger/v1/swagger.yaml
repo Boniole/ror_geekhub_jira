@@ -249,97 +249,201 @@ paths:
         '200':
           description: successful
   "/api/v1/users":
-    post:
-      summary: create user
+    get:
+      summary: Retrieves all users
       tags:
       - Users
-      description: Create a new user
-      parameters: []
       responses:
-        '201':
-          description: User created
+        '200':
+          description: Users found
           content:
             application/json:
-              examples:
-                create_new_user:
-                  value:
-                    user:
-                      name: Jovani Giorgio
-                      password: password2023
-        '422':
-          description: Unprocessable Entity
-          content:
-            application/json:
-              examples:
-                create_new_user_without_name:
-                  value:
-                    user:
-                      password: password2023
-                create_new_user_without_password:
-                  value:
-                    user:
-                      name: Jola
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user:
+              schema:
+                type: array
+                items:
                   type: object
                   properties:
+                    id:
+                      type: integer
                     name:
                       type: string
-                    password:
+                    last_name:
                       type: string
-              required:
-              - user
-  "/api/v1/login":
+                    email:
+                      type: string
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                  required:
+                  - id
+                  - name
+                  - last_name
+                  - email
+                  - created_at
+                  - updated_at
     post:
-      summary: login user
+      summary: Creates a user
       tags:
       - Users
-      description: Login as user
       parameters: []
       responses:
         '200':
-          description: Success
-          content:
-            application/json:
-              examples:
-                create_new_user:
-                  value:
-                    user:
-                      name: Jovani Giorgio
-                      password: password2023
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              examples:
-                create_new_user_without_name:
-                  value:
-                    user:
-                      password: password2023
-                create_new_user_without_password:
-                  value:
-                    user:
-                      name: Jola
+          description: user created
+        '422':
+          description: invalid request
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                user:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    password:
-                      type: string
+                name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
               required:
-              - user
+              - name
+              - last_name
+              - email
+              - password
+  "/api/v1//users/{id}":
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: user found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  last_name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - last_name
+                - email
+        '404':
+          description: user not found
+  "/api/v1/users/{id}":
+    patch:
+      summary: Updates a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: user updated
+        '422':
+          description: invalid request
+        '404':
+          description: user not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: user deleted
+        '404':
+          description: user not found
+  "/api/v1/login":
+    post:
+      summary: Logs in a user
+      tags:
+      - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: logged in successfully
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v1/reset":
+    post:
+      summary: Resets a user password
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: Password reset successfully
+        '404':
+          description: Link not valid or expired
+        '422':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
 servers:
 - url: http://{defaultHost}
   variables:
