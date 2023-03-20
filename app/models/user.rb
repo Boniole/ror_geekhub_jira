@@ -17,7 +17,7 @@ class User < ApplicationRecord
 
   has_many :projects, dependent: :destroy
   has_many :tasks
-  has_many :comments, as: :polymorphic
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :name, presence: true
   validates :last_name, presence: true

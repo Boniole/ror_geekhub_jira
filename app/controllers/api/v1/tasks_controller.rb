@@ -1,5 +1,5 @@
 class Api::V1::TasksController < ApplicationController
-  before_action :task_params, only: %i[show create update]
+  before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
   before_action :set_tasks, only: %i[index]
 
@@ -44,6 +44,6 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :project_id, :user_id, :desk_id)
+    params.require(:task).permit(:title, :description, :project_id, :user_id, :desk_id, :column_id, :column_type)
   end
 end
