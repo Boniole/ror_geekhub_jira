@@ -18,7 +18,7 @@
 #
 class Desk < ApplicationRecord
   belongs_to :project
-  has_many :columns, as: :columnable
+  has_many :columns, as: :columnable, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 3 }
 end
