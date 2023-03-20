@@ -1,14 +1,10 @@
 class Api::V1::ColumnsController < ApplicationController
-  before_action :column_params, only: %i[index create update]
-  before_action :set_column, only: %i[show update destroy]
+  before_action :column_params, only: %i[create update]
+  before_action :set_column, only: %i[update destroy]
   before_action :set_columns, only: %i[index]
 
   def index
     render json: @columns
-  end
-
-  def show
-    render json: @column
   end
 
   def create

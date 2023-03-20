@@ -1,5 +1,5 @@
 class Api::V1::TasksController < ApplicationController
-  before_action :task_params, only: %i[show create update]
+  before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
   before_action :set_tasks, only: %i[index]
 
