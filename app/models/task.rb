@@ -3,6 +3,7 @@
 # Table name: tasks
 #
 #  id          :bigint           not null, primary key
+#  column_type :string           not null
 #  description :string
 #  end         :date
 #  estimate    :datetime
@@ -14,12 +15,14 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
+#  column_id   :bigint           not null
 #  desk_id     :bigint           not null
 #  project_id  :bigint           not null
 #  user_id     :bigint           not null
 #
 # Indexes
 #
+#  index_tasks_on_column      (column_type,column_id)
 #  index_tasks_on_desk_id     (desk_id)
 #  index_tasks_on_project_id  (project_id)
 #  index_tasks_on_user_id     (user_id)
@@ -44,7 +47,7 @@ class Task < ApplicationRecord
 
   validates :user_id, numericality: { only_integer: true }
   validates :project_id, numericality: { only_integer: true }
-  # validates :desk_id, numericality: { only_integer: true }
+  validates :desk_id, numericality: { only_integer: true }
 
   validates :title, length: { in: 3..30 }
   validates :description, presence: true, length: { in: 3..2500 }
