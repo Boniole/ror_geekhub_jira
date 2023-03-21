@@ -21,8 +21,8 @@
 #
 class Column < ApplicationRecord
   belongs_to :columnable, polymorphic: true
+  belongs_to :desk
   has_many :tasks
-  has_one :desk
 
   validates :name, presence: true, length: { in: 3..14 }
 end
