@@ -1,5 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
-  before_action :set_comment, only: %i[show update destroy]
+  before_action :comment_params, only: %i[create update]
+  before_action :set_comment, only: %i[update destroy]
   before_action :set_comments, only: %i[index]
 
   def index
@@ -39,6 +40,6 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :task_id, :user_id)
+    params.require(:comment).permit(:commentable_id, :commentable_type, :body, :task_id, :user_id)
   end
 end

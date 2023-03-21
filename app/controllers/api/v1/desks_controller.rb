@@ -1,5 +1,5 @@
 class Api::V1::DesksController < ApplicationController
-  before_action :desk_params, only: %i[index create update]
+  before_action :desk_params, only: %i[create update]
   before_action :set_desk, only: %i[show update destroy]
   before_action :set_desks, only: :index
 
@@ -38,7 +38,7 @@ class Api::V1::DesksController < ApplicationController
   end
 
   def set_desks
-    @desks = Desk.where(desk_params)
+    @desks = Desk.all
   end
 
   def desk_params

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_20_202045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,17 +20,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
     t.bigint "columnable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "desk_id", null: false
     t.index ["columnable_type", "columnable_id"], name: "index_columns_on_columnable"
+    t.index ["desk_id"], name: "index_columns_on_desk_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.string "body"
-    t.bigint "task_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
+    t.bigint "task_id", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -68,6 +70,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
     t.bigint "desk_id", null: false
+    t.string "column_type", null: false
+    t.bigint "column_id", null: false
+    t.index ["column_type", "column_id"], name: "index_tasks_on_column"
     t.index ["desk_id"], name: "index_tasks_on_desk_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
@@ -84,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_155835) do
     t.datetime "reset_password_sent_at"
   end
 
+  add_foreign_key "columns", "desks"
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "desks", "projects"

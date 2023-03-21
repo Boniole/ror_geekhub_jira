@@ -1,88 +1,207 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/users', type: :request do
+  let(:user) { create(:user) }
+  let(:user_id) { user.id }
 
   path '/api/v1/users' do
-    post('create user') do
+    get 'Retrieves all users' do
       tags 'Users'
-      description 'Create a new user'
-      consumes "application/json"
-      parameter name: :user, in: :body, schema: {
-        type: :object,
-        properties: {
-          user: {
-            type: :object,
-          properties: {
-            name: { type: :string },
-            password: { type: :string }
-          }
-          }
-        },
-        required: %w[user],
-      }
-      response '201', 'User created' do
-        example 'application/json', :create_new_user, {
-          user: {
-            name: "Jovani Giorgio",
-            password: 'password2023'}
-        }
-        let(:user) { { name: 'Jovani Giorgio', password: 'password2023' } }
+      produces 'application/json'
+
+      response '200', 'Users found' do
+        schema type: :array,
+               items: {
+                 type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   name: { type: :string },
+                   last_name: { type: :string },
+                   email: { type: :string },
+                   created_at: { type: :string },
+                   updated_at: { type: :string }
+                 },
+                 required: %w[id name last_name email created_at updated_at]
+               }
         run_test!
       end
-      response '422', 'Unprocessable Entity' do
-        example 'application/json', :create_new_user_without_name, {
-          user: {
-            password: 'password2023'}
+    end
+
+    path '/api/v1//users/{id}' do
+      get 'Retrieves a user' do
+        tags 'Users'
+        produces 'application/json'
+        parameter name: :id, in: :path, type: :integer
+
+        response '200', 'user found' do
+          schema type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   name: { type: :string },
+                   last_name: { type: :string },
+                   email: { type: :string }
+                 },
+                 required: %w[id name last_name email]
+
+          let(:id) { user.id }
+          run_test!
+        end
+
+        response '404', 'user not found' do
+          let(:id) { 'invalid' }
+          run_test!
+        end
+      end
+    end
+
+    path '/api/v1/users' do
+      post 'Creates a user' do
+        tags 'Users'
+        consumes 'application/json'
+        parameter name: :user, in: :body, schema: {
+          type: :object,
+          properties: {
+            name: { type: :string },
+            last_name: { type: :string },
+            email: { type: :string },
+            password: { type: :string }
+          },
+          required: %w[name last_name email password]
         }
-        example 'application/json', :create_new_user_without_password, {
-          user: {
-            name: 'Jola'}
+
+        response '200', 'user created' do
+          let(:user) { build(:user) }
+          run_test!
+        end
+
+        response '422', 'invalid request' do
+          let(:user) { { name: 'John', last_name: 'Doe' } }
+          run_test!
+        end
+      end
+    end
+
+    path '/api/v1/users/{id}' do
+      patch 'Updates a user' do
+        tags 'Users'
+        consumes 'application/json'
+        parameter name: :id, in: :path, type: :integer
+        parameter name: :user, in: :body, schema: {
+          type: :object,
+          properties: {
+            name: { type: :string },
+            last_name: { type: :string },
+            email: { type: :string },
+            password: { type: :string }
+          }
         }
-        let(:user) { { password: 'password2023' } }
-        run_test!
+
+        response '200', 'user updated' do
+          let(:user) { { name: 'New Name' } }
+          let(:id) { user_id }
+          run_test!
+        end
+
+        response '422', 'invalid request' do
+          let(:user) { { name: nil } }
+          let(:id) { user_id }
+          run_test!
+        end
+
+        response '404', 'user not found' do
+          let(:id) { 'invalid' }
+          let(:user) { { name: 'New Name' } }
+          run_test!
+        end
+      end
+
+      delete 'Deletes a user' do
+        tags 'Users'
+        consumes 'application/json'
+        parameter name: :id, in: :path, type: :integer
+
+        response '204', 'user deleted' do
+          let(:id) { user_id }
+          run_test!
+        end
+
+        response '404', 'user not found' do
+          let(:id) { 'invalid' }
+          run_test!
+        end
       end
     end
   end
 
   path '/api/v1/login' do
-
-    post('login user') do
-      tags 'Users'
-      description 'Login as user'
-      consumes "application/json"
-      parameter name: :user, in: :body, schema: {
+    post 'Logs in a user' do
+      tags 'Authentication'
+      consumes 'application/json'
+      parameter name: :login, in: :body, schema: {
         type: :object,
         properties: {
-          user: {
-            type: :object,
-            properties: {
-              name: { type: :string },
-              password: { type: :string }
-            }
-          }
+          email: { type: :string },
+          password: { type: :string }
         },
-        required: %w[user],
+        required: %w[email password]
       }
 
-      response '200', 'Success' do
-        example 'application/json', :create_new_user, {
-          user: {
-            name: "Jovani Giorgio",
-            password: 'password2023'}
-        }
-        let(:user) { { name: 'Jovani Giorgio', password: 'password2023' } }
+      response '200', 'logged in successfully' do
+        schema type: :object,
+               properties: {
+                 token: { type: :string },
+                 exp: { type: :string },
+                 name: { type: :string }
+               },
+               required: %w[token exp name]
+
+        let(:user) { create(:user) }
+        let(:login) { { email: user.email, password: user.password } }
         run_test!
       end
-      response '400', 'Bad request' do
-        example 'application/json', :create_new_user_without_name, {
-          user: {
-            password: 'password2023'}
-        }
-        example 'application/json', :create_new_user_without_password, {
-          user: {
-            name: 'Jola'}
-        }
-        let(:user) { { password: 'password2023' } }
+
+      response '401', 'unauthorized' do
+        let(:login) { { email: 'invalid_email@example.com', password: 'invalid_password' } }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/reset' do
+    post 'Resets a user password' do
+      tags 'Users'
+      consumes 'application/json'
+      parameter name: :email, in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string },
+          password: { type: :string }
+        },
+        required: %w[email password]
+      }
+
+      response '200', 'Password reset successfully' do
+        let(:email) { user.email }
+        let(:password) { 'new_password' }
+        run_test!
+      end
+
+      response '404', 'Link not valid or expired' do
+        let(:email) { 'invalid_email@example.com' }
+        let(:password) { 'new_password' }
+        run_test!
+      end
+
+      response '422', 'Invalid request' do
+        let(:email) { user.email }
+        let(:password) { '' }
+        run_test!
+      end
+
+      response '401', 'Unauthorized' do
+        let(:email) { user.email }
+        let(:password) { 'new_password' }
+        let(:Authorization) { '' }
         run_test!
       end
     end

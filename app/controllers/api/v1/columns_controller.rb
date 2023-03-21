@@ -1,18 +1,15 @@
 class Api::V1::ColumnsController < ApplicationController
-  before_action :column_params, only: %i[index create update]
-  before_action :set_column, only: %i[show update destroy]
+  before_action :column_params, only: %i[create update]
+  before_action :set_column, only: %i[update destroy]
   before_action :set_columns, only: %i[index]
 
   def index
     render json: @columns
   end
 
-  def show
-    render json: @column
-  end
-
   def create
     @column = Column.new(column_params)
+
     if @column.save
       render json: @column
     else
@@ -43,6 +40,6 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def column_params
-    params.require(:column).permit(:name, :columnable_id, :columnable_type)
+    params.require(:column).permit(:columnable_id, :columnable_type, :name, :desk_id)
   end
 end
