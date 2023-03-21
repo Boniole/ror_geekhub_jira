@@ -459,4 +459,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 164.90.165.89:3000
+      default: 164.90.165.89
