@@ -3,6 +3,15 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT  # optional, for documentation purposes only
+
+security:
+  - bearerAuth: []
 paths:
   "/api/v1/comments":
     get:
@@ -286,6 +295,7 @@ paths:
       summary: Creates a user
       tags:
       - Users
+      security: []
       parameters: []
       responses:
         '200':
@@ -397,6 +407,7 @@ paths:
       summary: Logs in a user
       tags:
       - Authentication
+      security: []
       parameters: []
       responses:
         '200':
@@ -448,4 +459,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000
+      default: 164.90.165.89:3000
