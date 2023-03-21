@@ -5,11 +5,11 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           not null
 #  description :string
-#  end         :date
+#  end         :text
 #  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
-#  start       :date
+#  start       :text
 #  status      :integer          default("open")
 #  title       :text
 #  type_of     :integer          default("task")
@@ -57,5 +57,9 @@ class Task < ApplicationRecord
     with: /\A\d+(w|d|h|m)\z/,
     message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
   }, allow_blank: true
-  validates_format_of :start, :end, with: /\d{4}\-\d{2}\-\d{2}/, message: 'must be in the format YYYY-MM-DD'
+
+  current_year = Time.now.year
+  validates_format_of :start, :end, with: /\A(#{current_year})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
+    message: 'must be in the format YYYY-MM-DD and current year',
+    allow_blank: true
 end
