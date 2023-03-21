@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_141405) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_21_143123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_141405) do
     t.bigint "user_id", null: false
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
+    t.bigint "task_id", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -88,6 +90,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_141405) do
   end
 
   add_foreign_key "columns", "desks"
+  add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "desks", "projects"
   add_foreign_key "projects", "users"
