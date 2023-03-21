@@ -6,12 +6,13 @@
 #  column_type :string           not null
 #  description :string
 #  end         :date
-#  estimate    :datetime
+#  estimate    :text
 #  label       :text
-#  priority    :integer          default(0)
+#  priority    :integer          default("low")
 #  start       :date
-#  status      :integer          default(0)
+#  status      :integer          default("open")
 #  title       :text
+#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
