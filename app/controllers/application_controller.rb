@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pundit::Authorization
+
   def not_found
     render json: { error: 'not_found' }
   end
