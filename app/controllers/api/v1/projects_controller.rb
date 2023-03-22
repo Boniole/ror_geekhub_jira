@@ -4,18 +4,18 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :set_project, only: %i[show update destroy]
 
   def index
-    render json: @projects, status: :ok
+    render json: @projects, status: :ok, include: [], each_serializer: ProjectSerializer
   end
 
   def show
-    render json: @project, status: :ok
+    render json: @project, status: :ok, serializer: ProjectSerializer
   end
 
   def create
     project = Project.new(project_params)
 
     if project.save
-      render json: project, status: :created
+      render json: project, status: :created, serializer: ProjectSerializer
     else
       render json: project.errors, status: :unprocessable_entity
     end

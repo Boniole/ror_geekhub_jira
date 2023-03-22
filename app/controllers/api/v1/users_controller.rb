@@ -5,12 +5,12 @@ class Api::V1::UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    render json: @users, status: :ok
+    render json: @users, status: :ok, include: [], each_serializer: UserSerializer
   end
 
   # GET /users/user_id
   def show
-    render json: @user, status: :ok
+    render json: @user, status: :ok, serializer: UserSerializer
   end
 
   # POST /users
@@ -20,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
       token = JsonWebToken.encode(user_id: @user.id)
       time = Time.now + 24.hours.to_i
       render json: { token: token, exp: time.strftime('%m-%d-%Y %H:%M'),
-                     name: @user.name }, status: :ok
+                     name: @user.name }, status: :created
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
