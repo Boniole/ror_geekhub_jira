@@ -52,5 +52,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :status)
+  rescue ActionController::ParameterMissing
+    render json: { error: 'Missing required parameter(s)' }, status: :bad_request
   end
 end
