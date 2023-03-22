@@ -4,18 +4,18 @@ class Api::V1::TasksController < ApplicationController
   before_action :set_tasks, only: %i[index]
 
   def index
-    render json: @tasks
+    render json: @tasks, status: :ok, include: [], each_serializer: TaskSerializer
   end
 
   def show
-    render json: @task
+    render json: @task, status: :ok, serializer: TaskSerializer
   end
 
   def create
     @task = Task.new(task_params)
 
     if @task.save
-      render json: @task
+      render json: @task, status: :created, serializer: TaskSerializer
     else
       render json: @task.errors, status: :unprocessable_entity
     end

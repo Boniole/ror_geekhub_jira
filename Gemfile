@@ -49,8 +49,10 @@ gem 'ed25519'
 gem 'bcrypt_pbkdf'
 
 gem 'rswag'
-gem "rspec-rails"
-gem "rswag-specs"
+gem 'rspec-rails'
+gem 'rswag-specs'
+
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

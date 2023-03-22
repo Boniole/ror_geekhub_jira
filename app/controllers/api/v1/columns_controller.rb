@@ -4,14 +4,14 @@ class Api::V1::ColumnsController < ApplicationController
   before_action :set_columns, only: %i[index]
 
   def index
-    render json: @columns
+    render json: @columns, status: :ok, include: [], each_serializer: ColumnSerializer
   end
 
   def create
     @column = Column.new(column_params)
 
     if @column.save
-      render json: @column
+      render json: @column, status: :ok, serializer: ColumnSerializer
     else
       render json: @column.errors, status: :unprocessable_entity
     end
@@ -19,7 +19,7 @@ class Api::V1::ColumnsController < ApplicationController
 
   def update
     if @column.update(column_params)
-      render json: @column
+      render json: @column, status: :ok, serializer: ColumnSerializer
     else
       render json: @column.errors, status: :unprocessable_entity
     end
