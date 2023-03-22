@@ -47,6 +47,7 @@ class Api::V1::TasksController < ApplicationController
     params.require(:task).permit(
       :project_id,
       :user_id,
+      :assignee_id,
       :desk_id,
       :column_id,
       :column_type,

@@ -38,5 +38,6 @@ class TaskSerializer < ActiveModel::Serializer
   attributes :user, :column, :title, :description, :estimate, :label, :priority, :type_of, :status, :start, :end
 
   has_one :user, serializer: UserSerializer
+  has_one :assignee, serializer: AssigneeSerializer
   has_one :column, serializer: ColumnSerializer
 end
