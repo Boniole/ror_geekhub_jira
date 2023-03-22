@@ -1,14 +1,15 @@
 class Api::V1::DesksController < ApplicationController
+  before_action :authorize_request
   before_action :desk_params, only: %i[create update]
   before_action :set_desk, only: %i[show update destroy]
   before_action :set_desks, only: :index
 
   def index
-    render json: @desks
+    render json: @desks, status: :ok
   end
 
   def show
-    render json: @desk
+    render json: @desk, status: :ok
   end
 
   def create
@@ -21,12 +22,10 @@ class Api::V1::DesksController < ApplicationController
     end
   end
 
-  # TODO catch errors(Vlad)
   def update
     render json: @desk, status: :ok if @desk.update(desk_params)
   end
 
-  # TODO catch errors(Vlad)
   def destroy
     render json: @desk, status: :ok if @desk.destroy
   end
