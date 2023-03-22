@@ -24,7 +24,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :status, :body, :created_at
+  attributes :id, :status, :body, :created_at, :updated_at
 
   # has_one :user_id, serializer: UserSerializer
   # has_one :task, serializer: TaskSerializer
