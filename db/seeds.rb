@@ -10,13 +10,14 @@ require 'ffaker'
 end
 
 10.times do
+  user = User.all.sample
   project = Project.create(
     name: "project ##{Project.count == 0 ? 1 : Project.pluck(:id).last + 1}",
-    user_id: User.pluck(:id).sample
+    user_id: user.id
   )
 
   # create Desk
-  desk = Desk.create(project_id: project.id)
+  desk = Desk.create(project_id: project.id, user_id: user.id)
 
   # create Columns
   ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str, desk_id: desk.id) }
