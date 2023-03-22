@@ -23,12 +23,9 @@
 #  fk_rails_...  (task_id => tasks.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class Comment < ApplicationRecord
-  belongs_to :commentable, polymorphic: true
+class CommentSerializer < ActiveModel::Serializer
+  attributes :id, :status, :body, :created_at, :updated_at
 
-  enum :status, %i[open close], default: :open
-
-  validates :task_id, numericality: { only_integer: true }
-  validates :user_id, numericality: { only_integer: true }
-  validates :body, presence: true, length: { in: 3..2500 }
+  # has_one :user_id, serializer: UserSerializer
+  # has_one :task, serializer: TaskSerializer
 end

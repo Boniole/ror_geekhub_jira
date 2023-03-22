@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_215509) do
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
     t.bigint "task_id", null: false
+    t.integer "status", default: 0
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
@@ -65,8 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_215509) do
     t.integer "type_of", default: 0
     t.text "label"
     t.text "estimate"
-    t.date "start"
-    t.date "end"
+    t.text "start"
+    t.text "end"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
