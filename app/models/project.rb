@@ -30,6 +30,6 @@ class Project < ApplicationRecord
 
   private
   def build_desk
-    desks.build(user_id: self.user.id)
+    desks.build
   end
 end
