@@ -17,7 +17,7 @@ end
   )
 
   # create Desk
-  desk = Desk.create(project_id: project.id, user_id: user.id)
+  desk = Desk.create(project_id: project.id)
 
   # create Columns
   ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str, desk_id: desk.id) }
