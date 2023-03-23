@@ -48,8 +48,198 @@ RSpec.describe 'api/v1/tasks', type: :request do
       tags 'Tasks'
       description 'Create task'
       consumes "application/json"
-      response(200, 'successful') do
 
+      parameter(
+        name: :user_id,
+        in: :post,
+        required: true,
+        schema: {
+          type: :integer
+        },
+        default: 1,
+        description: 'The ID of the user (integer)'
+      )
+
+      parameter(
+        name: :project_id,
+        in: :post,
+        required: true,
+        schema: {
+          type: :integer
+        },
+        default: 1,
+        description: 'The ID of the project (integer)'
+      )
+
+      parameter(
+        name: :assignee_id,
+        in: :post,
+        required: true,
+        schema: {
+          type: :integer
+        },
+        default: 1,
+        description: 'The ID of the assignee (integer)'
+      )
+
+      parameter(
+        name: :desk_id,
+        in: :post,
+        required: true,
+        schema: {
+          type: :integer
+        },
+        default: 1,
+        description: 'The ID of the desk (integer)'
+      )
+
+      parameter(
+        name: :column_id,
+        in: :post,
+        required: true,
+        schema: {
+          type: :integer
+        },
+        default: 1,
+        description: 'The ID of the column (integer)'
+      )
+
+      parameter(
+        name: :column_type,
+        in: :post,
+        required: true,
+        schema: {
+          type: :string
+        },
+        default: 'Column',
+        description: 'The type of the column'
+      )
+
+      parameter(
+        name: :title,
+        in: :post,
+        required: true,
+        schema: {
+          type: :string
+        },
+        default: 'Task title',
+        description: 'The title of the task (string)'
+      )
+
+      parameter(
+        name: :description,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string,
+        },
+        default: 'Task description',
+        description: 'The description of the task (optional)'
+      )
+
+      parameter(
+        name: :estimate,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string
+        },
+        default: '2w',
+        description: 'The estimated time for completion (e.g. 2w, 4d, 6h, 45m) (optional)'
+      )
+
+      parameter(
+        name: :label,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string
+        },
+        default: 'task',
+        description: 'The label of the task (optional)'
+      )
+
+      parameter(
+        name: :start,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string,
+          format: 'date'
+        },
+        default: '2023-12-12',
+        description: 'The start date of the task (date in YYYY-MM-DD format) (optional)'
+      )
+
+      parameter(
+        name: :end,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string,
+          format: 'date'
+        },
+        default: '2023-12-12',
+        description: 'The end date of the task (date in YYYY-MM-DD format) (optional)'
+      )
+
+      parameter(
+        name: :priority,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string,
+          enum: %w[lowest low high highest]
+        },
+        default: 'lowest',
+        description: 'Task priority: lowest/low/high/highest.'
+      )
+
+      parameter(
+        name: :type_of,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string,
+          enum: %w[task bug epic]
+        },
+        default: 'task',
+        description: 'Task type: task/bug/epic.'
+      )
+
+      parameter(
+        name: :status,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string,
+          enum: %w[open close]
+        },
+        default: 'open',
+        description: 'Task status: open/close.'
+      )
+      parameter name: :task, in: :body, schema: {
+        type: :object,
+        properties: {
+          assignee_id: { type: :integer, default: 1 },
+          column_id: { type: :integer, default: 1 },
+          column_type: { type: :string, default: 'Column' },
+          desk_id: { type: :integer, default: 1 },
+          project_id: { type: :integer, default: 1 },
+          user_id: { type: :integer, default: 1 },
+          title: { type: :string },
+          description: { type: :string },
+          label: { type: :string },
+          priority: { type: :integer },
+          start: { type: :string },
+          end: { type: :string },
+          status: { type: :integer },
+          type_of: { type: :integer }
+        },
+        required: %w[title column_id column_type desk_id project_id user_id]
+      }
+
+      response(200, 'successful') do
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -88,24 +278,27 @@ RSpec.describe 'api/v1/tasks', type: :request do
       tags 'Tasks'
       description 'Update task'
       consumes "application/json"
-      response(200, 'successful') do
-        let(:id) { '123' }
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
-    put('update task') do
-      tags 'Tasks'
-      description 'Put task'
-      consumes "application/json"
+      parameter name: :task, in: :body, schema: {
+        type: :object,
+        properties: {
+          assignee_id: { type: :integer, default: 1 },
+          column_id: { type: :integer, default: 1 },
+          column_type: { type: :string, default: 'Column' },
+          desk_id: { type: :integer, default: 1 },
+          project_id: { type: :integer, default: 1 },
+          user_id: { type: :integer, default: 1 },
+          title: { type: :string },
+          description: { type: :string },
+          label: { type: :string },
+          priority: { type: :integer },
+          start: { type: :string },
+          end: { type: :string },
+          status: { type: :integer },
+          type_of: { type: :integer }
+        },
+        required: %w[title column_id column_type desk_id project_id user_id]
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
