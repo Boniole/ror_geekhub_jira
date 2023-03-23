@@ -460,7 +460,3 @@ servers:
   variables:
     defaultHost:
       default: 164.90.165.89
-- url: http://{localHost}
-  variables:
-    localhost:
-      default: 127.0.0.1:3000
