@@ -47,7 +47,8 @@ class Api::V1::DesksController < ApplicationController
   end
 
   def set_desks
-    @desks = @current_user.desks
+    project = Project.find(desk_params[:project_id])
+    @desks = project.desks
   end
 
   def desk_params
