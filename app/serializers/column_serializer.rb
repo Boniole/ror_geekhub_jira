@@ -19,10 +19,9 @@
 #
 #  fk_rails_...  (desk_id => desks.id)
 #
-class Column < ApplicationRecord
-  belongs_to :columnable, polymorphic: true
-  belongs_to :desk
-  has_many :tasks
+class ColumnSerializer < ActiveModel::Serializer
+  attributes :name
 
-  validates :name, presence: true, length: { in: 3..14 }
+  has_one :desk, serializer: DeskSerializer
+  has_many :tasks, serializer: TaskSerializer
 end

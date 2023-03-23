@@ -5,13 +5,14 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           not null
 #  description :string
-#  end         :date
-#  estimate    :datetime
+#  end         :text
+#  estimate    :text
 #  label       :text
-#  priority    :integer          default(0)
-#  start       :date
-#  status      :integer          default(0)
+#  priority    :integer          default("low")
+#  start       :text
+#  status      :integer          default("open")
 #  title       :text
+#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
@@ -41,18 +42,24 @@ class Task < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy
 
-  # enum :priority, %i[low high highest], default: :low
-  # enum :type, %i[task bug epic], default: :task
-  # enum :status, %i[open close], default: :open
+  enum :priority, %i[lowest low high highest], default: :low
+  enum :type_of, %i[task bug epic], default: :task
+  enum :status, %i[open close], default: :open
 
   validates :user_id, numericality: { only_integer: true }
   validates :project_id, numericality: { only_integer: true }
   validates :desk_id, numericality: { only_integer: true }
 
   validates :title, length: { in: 3..30 }
-  validates :description, presence: true, length: { in: 3..2500 }
-  # validates :label, optional: true
-  # validates :start,  date: true, optional: true
-  # validates :end, date: true, optional: true
-  # validates :estimate, datetime: { allow_blank: true }
+  validates :description, presence: true, length: { in: 3..2500 }, allow_blank: true
+  validates :label, presence: true, length: { in: 3..30 }, allow_blank: true
+  validates :estimate, format: {
+    with: /\A\d+(w|d|h|m)\z/,
+    message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
+  }, allow_blank: true
+
+  current_year = Time.now.year
+  validates_format_of :start, :end, with: /\A(#{current_year})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
+    message: 'must be in the format YYYY-MM-DD and current year',
+    allow_blank: true
 end

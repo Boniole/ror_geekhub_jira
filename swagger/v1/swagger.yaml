@@ -3,15 +3,6 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT  # optional, for documentation purposes only
-
-security:
-  - bearerAuth: []
 paths:
   "/api/v1/comments":
     get:
@@ -214,9 +205,176 @@ paths:
       tags:
       - Tasks
       description: Create task
+      parameters:
+      - name: user_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the user (integer)
+      - name: project_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the project (integer)
+      - name: assignee_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the assignee (integer)
+      - name: desk_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the desk (integer)
+      - name: column_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the column (integer)
+      - name: column_type
+        in: post
+        required: true
+        schema:
+          type: string
+        default: Column
+        description: The type of the column
+      - name: title
+        in: post
+        required: true
+        schema:
+          type: string
+        default: Task title
+        description: The title of the task (string)
+      - name: description
+        in: post
+        required: false
+        schema:
+          type: string
+        default: Task description
+        description: The description of the task (optional)
+      - name: estimate
+        in: post
+        required: false
+        schema:
+          type: string
+        default: 2w
+        description: The estimated time for completion (e.g. 2w, 4d, 6h, 45m) (optional)
+      - name: label
+        in: post
+        required: false
+        schema:
+          type: string
+        default: task
+        description: The label of the task (optional)
+      - name: start
+        in: post
+        required: false
+        schema:
+          type: string
+          format: date
+        default: '2023-12-12'
+        description: The start date of the task (date in YYYY-MM-DD format) (optional)
+      - name: end
+        in: post
+        required: false
+        schema:
+          type: string
+          format: date
+        default: '2023-12-12'
+        description: The end date of the task (date in YYYY-MM-DD format) (optional)
+      - name: priority
+        in: post
+        required: false
+        schema:
+          type: string
+          enum:
+          - lowest
+          - low
+          - high
+          - highest
+        default: lowest
+        description: 'Task priority: lowest/low/high/highest.'
+      - name: type_of
+        in: post
+        required: false
+        schema:
+          type: string
+          enum:
+          - task
+          - bug
+          - epic
+        default: task
+        description: 'Task type: task/bug/epic.'
+      - name: status
+        in: post
+        required: false
+        schema:
+          type: string
+          enum:
+          - open
+          - close
+        default: open
+        description: 'Task status: open/close.'
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: integer
+                  default: 1
+                column_id:
+                  type: integer
+                  default: 1
+                column_type:
+                  type: string
+                  default: Column
+                desk_id:
+                  type: integer
+                  default: 1
+                project_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 1
+                title:
+                  type: string
+                description:
+                  type: string
+                label:
+                  type: string
+                priority:
+                  type: integer
+                start:
+                  type: string
+                end:
+                  type: string
+                status:
+                  type: integer
+                type_of:
+                  type: integer
+              required:
+              - title
+              - column_id
+              - column_type
+              - desk_id
+              - project_id
+              - user_id
   "/api/v1/tasks/{id}":
     parameters:
     - name: id
@@ -238,17 +396,57 @@ paths:
       tags:
       - Tasks
       description: Update task
+      parameters: []
       responses:
         '200':
           description: successful
-    put:
-      summary: update task
-      tags:
-      - Tasks
-      description: Put task
-      responses:
-        '200':
-          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: integer
+                  default: 1
+                column_id:
+                  type: integer
+                  default: 1
+                column_type:
+                  type: string
+                  default: Column
+                desk_id:
+                  type: integer
+                  default: 1
+                project_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 1
+                title:
+                  type: string
+                description:
+                  type: string
+                label:
+                  type: string
+                priority:
+                  type: integer
+                start:
+                  type: string
+                end:
+                  type: string
+                status:
+                  type: integer
+                type_of:
+                  type: integer
+              required:
+              - title
+              - column_id
+              - column_type
+              - desk_id
+              - project_id
+              - user_id
     delete:
       summary: delete task
       tags:
@@ -295,7 +493,6 @@ paths:
       summary: Creates a user
       tags:
       - Users
-      security: []
       parameters: []
       responses:
         '200':
@@ -407,7 +604,6 @@ paths:
       summary: Logs in a user
       tags:
       - Authentication
-      security: []
       parameters: []
       responses:
         '200':
@@ -459,4 +655,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 164.90.165.89
+      default: 127.0.0.1:3000

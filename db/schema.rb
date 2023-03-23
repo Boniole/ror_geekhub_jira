@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_143123) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,13 +33,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_143123) do
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
     t.bigint "task_id", null: false
+    t.integer "status", default: 0
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "desks", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "Your Desk"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,10 +61,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_143123) do
     t.string "description"
     t.integer "priority", default: 0
     t.integer "status", default: 0
+    t.integer "type_of", default: 0
     t.text "label"
-    t.datetime "estimate"
-    t.date "start"
-    t.date "end"
+    t.text "estimate"
+    t.text "start"
+    t.text "end"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
