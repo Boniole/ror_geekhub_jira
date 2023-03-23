@@ -69,4 +69,5 @@ group :development do
   gem 'sshkit-sudo'
 
   gem 'annotate'
+  gem 'ffaker', '~> 2.21'
 end

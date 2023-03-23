@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
   end
 
   create_table "desks", force: :cascade do |t|
-    t.string "name"
+    t.string "name", default: "Your Desk"
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
