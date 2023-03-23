@@ -4,14 +4,14 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_comments, only: %i[index]
 
   def index
-    render json: @comments
+    render json: @comments, include: [], each_serializer: CommentSerializer
   end
 
   def create
     @comment = Comment.new(comment_params)
 
     if @comment.save
-      render json: @comment
+      render json: @comment, status: :ok, serializer: CommentSerializer
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -19,7 +19,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      render json: @comment
+      render json: @comment, serializer: CommentSerializer
     else
       render json: @comment.errors, status: :unprocessable_entity
     end

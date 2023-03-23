@@ -5,11 +5,11 @@ class Api::V1::DesksController < ApplicationController
   before_action :set_desks, only: :index
 
   def index
-    render json: @desks, status: :ok
+    render json: @desks, status: :ok, include: [], each_serializer: DeskSerializer
   end
 
   def show
-    render json: @desk, status: :ok
+    render json: @desk, status: :ok, serializer: DeskSerializer
   end
 
   def create
@@ -17,7 +17,7 @@ class Api::V1::DesksController < ApplicationController
     desk.user_id = @current_user.id
 
     if desk.save
-      render json: desk, status: :created
+      render json: desk, status: :ok, serializer: DeskSerializer
     else
       render json: desk.errors, status: :unprocessable_entity
     end
