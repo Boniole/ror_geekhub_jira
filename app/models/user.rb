@@ -19,10 +19,17 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :comments, as: :commentable, dependent: :destroy
 
+  has_many :memberships
+  has_many :projects, through: :memberships
+
   validates :name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, presence: true
+
+  def admin?(project)
+    project.memberships.find_by(user_id: id)&.role == 'admin'
+  end
 
   def generate_password_token!
     self.reset_password_token = generate_token

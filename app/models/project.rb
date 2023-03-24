@@ -21,6 +21,9 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :desks, dependent: :destroy
 
+  has_many :memberships
+  has_many :users, through: :memberships
+
   before_create :build_desk
 
   validates :name, presence: true, length: { minimum: 3 }
@@ -29,6 +32,7 @@ class Project < ApplicationRecord
   enum :status, %i[open close], default: :open
 
   private
+
   def build_desk
     desks.build
   end
