@@ -13,20 +13,22 @@ class Api::V1::ProjectsController < ApplicationController
 
   def create
     project = Project.new(project_params)
+    authorize @project
 
     if project.save
+      current_user.update(admin: true)
       render json: project, status: :created
     else
       render json: project.errors, status: :unprocessable_entity
     end
   end
 
-  # TODO catch errors(Vlad)
+  # TODO: catch errors(Vlad)
   def update
     render json: @project, status: :ok if @project.update(project_params)
   end
 
-  # TODO catch errors(Vlad)
+  # TODO: catch errors(Vlad)
   def destroy
     render json: @project, status: :ok if @project.destroy
   end
