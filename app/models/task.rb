@@ -5,14 +5,13 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           not null
 #  description :string
-#  end         :text
-#  estimate    :text
+#  end         :date
+#  estimate    :datetime
 #  label       :text
 #  priority    :integer          default("low")
-#  start       :text
+#  start       :date
 #  status      :integer          default("open")
 #  title       :text
-#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer

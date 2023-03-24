@@ -3,15 +3,6 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT  # optional, for documentation purposes only
-
-security:
-  - bearerAuth: []
 paths:
   "/api/v1/comments":
     get:
@@ -136,14 +127,76 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    status:
+                      type: string
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                  required:
+                  - id
+                  - name
+                  - status
     post:
       summary: create project
       tags:
       - Projects
       description: Create projects
+      parameters: []
       responses:
-        '200':
+        '201':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user:
+                    type: object
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - name
+                - status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    status:
+                      type: string
+                    user_id:
+                      type: string
+              required:
+              - name
+              - status
+              - user_id
   "/api/v1/projects/{id}":
     parameters:
     - name: id
@@ -165,24 +218,108 @@ paths:
       tags:
       - Projects
       description: Update project
+      parameters: []
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user:
+                    type: object
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - name
+                - status
+                - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    status:
+                      type: string
+                    user_id:
+                      type: string
+              required:
+              - name
+              - status
+              - user_id
     put:
       summary: update project
       tags:
       - Projects
       description: Update project
+      parameters: []
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user:
+                    type: object
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - name
+                - status
+                - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    status:
+                      type: string
+                    user_id:
+                      type: string
+              required:
+              - name
+              - status
+              - user_id
     delete:
       summary: delete project
       tags:
       - Projects
       description: Delete project
       responses:
-        '200':
+        '204':
           description: successful
   "/api/v1/tasks/{id}/comments":
     parameters:
@@ -295,7 +432,6 @@ paths:
       summary: Creates a user
       tags:
       - Users
-      security: []
       parameters: []
       responses:
         '200':
@@ -407,7 +543,6 @@ paths:
       summary: Logs in a user
       tags:
       - Authentication
-      security: []
       parameters: []
       responses:
         '200':
@@ -459,4 +594,4 @@ servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: 164.90.165.89
+      default: 127.0.0.1:3000
