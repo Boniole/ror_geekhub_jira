@@ -33,10 +33,10 @@
 #  fk_rails_...  (project_id => projects.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require "test_helper"
+class TaskSerializer < ActiveModel::Serializer
+  attributes :user, :column, :title, :description, :estimate, :label, :priority, :type_of, :status, :start, :end, :created_at, :updated_at
 
-class TaskTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  has_one :user, serializer: UserSerializer
+  has_one :assignee, serializer: AssigneeSerializer
+  has_one :column, serializer: ColumnSerializer
 end

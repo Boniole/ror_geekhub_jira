@@ -17,19 +17,8 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class Project < ApplicationRecord
-  belongs_to :user
-  has_many :desks, dependent: :destroy
+class ProjectSerializer < ActiveModel::Serializer
+  attributes :name, :status
 
-  before_create :build_desk
-
-  validates :name, presence: true, length: { minimum: 3 }
-  validates :status, presence: true
-
-  enum :status, %i[open close], default: :open
-
-  private
-  def build_desk
-    desks.build
-  end
+  has_one :user, serializer: UserSerializer
 end

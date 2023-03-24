@@ -3,7 +3,7 @@
 # Table name: desks
 #
 #  id         :bigint           not null, primary key
-#  name       :string
+#  name       :string           default("Your Desk")
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  project_id :bigint           not null

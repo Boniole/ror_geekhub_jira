@@ -16,10 +16,9 @@
 #
 #  fk_rails_...  (project_id => projects.id)
 #
-require "test_helper"
+class DeskSerializer < ActiveModel::Serializer
+  attributes :name
 
-class DeskTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  has_one :project, serializer: ProjectSerializer
+  has_many :columns, serializer: ColumnSerializer
 end

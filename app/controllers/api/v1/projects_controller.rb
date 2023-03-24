@@ -1,5 +1,6 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_action :project_params, only: %i[index create update]
+  before_action :authorize_request
+  before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
   before_action :set_project, only: %i[show update destroy]
 
@@ -13,7 +14,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def create
     project = Project.new(project_params)
-    authorize @project
+    project.user_id = @current_user.id
 
     if project.save
       current_user.update(admin: true)
@@ -23,27 +24,36 @@ class Api::V1::ProjectsController < ApplicationController
     end
   end
 
-  # TODO: catch errors(Vlad)
   def update
-    render json: @project, status: :ok if @project.update(project_params)
+    return render json: @project, status: :ok if @project.update(project_params)
+
+    render json: @project.errors, status: :unprocessable_entity
   end
 
-  # TODO: catch errors(Vlad)
   def destroy
-    render json: @project, status: :ok if @project.destroy
+    @project.destroy
   end
 
   private
 
   def set_project
     @project = Project.find(params[:id])
+    if @project.user_id == @current_user.id
+      @project
+    else
+      render json: { errors: 'User is not authorized to access this resource' }, status: :unauthorized
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { errors: 'Project not found' }, status: :not_found
   end
 
   def set_projects
-    @projects = Project.where(user_id: project_params)
+    @projects = Project.where(user_id: @current_user)
   end
 
   def project_params
-    params.require(:project).permit(:name, :status, :user_id)
+    params.require(:project).permit(:name, :status)
+  rescue ActionController::ParameterMissing
+    render json: { error: 'Missing required parameter(s)' }, status: :bad_request
   end
 end
