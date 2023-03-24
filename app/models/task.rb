@@ -41,7 +41,7 @@ class Task < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy
 
-  enum :priority, %i[low high highest], default: :low
+  enum :priority, %i[lowest low high highest], default: :low
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
