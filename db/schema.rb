@@ -61,11 +61,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
     t.string "description"
     t.integer "priority", default: 0
     t.integer "status", default: 0
-    t.integer "type_of", default: 0
     t.text "label"
-    t.text "estimate"
-    t.text "start"
-    t.text "end"
+    t.datetime "estimate"
+    t.date "start"
+    t.date "end"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
