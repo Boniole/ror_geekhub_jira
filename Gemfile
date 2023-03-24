@@ -48,13 +48,11 @@ gem 'ed25519'
 
 gem 'bcrypt_pbkdf'
 
-gem 'rspec-rails'
-gem 'rswag'
-
 # Gem for authorization system
 gem 'pundit'
 
 gem 'rspec-rails'
+gem 'rswag'
 gem 'rswag-specs'
 
 gem 'active_model_serializers', '~> 0.10.0'

@@ -9,28 +9,43 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def show
+    authorize @project
     render json: @project, status: :ok
   end
 
   def create
-    project = Project.new(project_params)
-    project.user_id = @current_user.id
+    @project = Project.new(project_params)
+    @project.user_id = @current_user.id
+    @project.save
+    @project.memberships.build(user_id: @current_user.id, role: 'admin')
+    authorize @project
 
-    if project.save
-      current_user.update(admin: true)
-      render json: project, status: :created
+    if @project.save
+      render json: @project, status: :created
     else
-      render json: project.errors, status: :unprocessable_entity
+      render json: @project.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    return render json: @project, status: :ok if @project.update(project_params)
+    @project = Project.find(params[:id])
+    authorize @project
 
-    render json: @project.errors, status: :unprocessable_entity
+    if @project.update(project_params)
+      if params[:membership] && params[:membership][:user_id].present?
+        @user = User.find(params[:membership][:user_id])
+        @membership = @project.memberships.build(user: @user, role: 'member')
+        @membership.save
+      end
+
+      render json: @project, status: :ok
+    else
+      render json: @project.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    authorize @project
     @project.destroy
   end
 
