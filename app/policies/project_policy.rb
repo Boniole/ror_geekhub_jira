@@ -19,10 +19,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?
+    user.admin?(project)
   end
 
   def destroy?
-    user.admin?
+    user.admin?(project)
   end
 end
