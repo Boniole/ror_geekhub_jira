@@ -1,6 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :authorize_request, except: :create
-  before_action :set_user, except: %i[create index]
+  before_action :set_user, except: %i[create index about_current_user]
 
   # GET /users
   def index
@@ -13,14 +13,18 @@ class Api::V1::UsersController < ApplicationController
     render json: @user, status: :ok, serializer: UserSerializer
   end
 
+  def about_current_user
+    render json: @current_user, status: :ok
+  end
+
   # POST /users
   def create
     @user = User.new(user_params)
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id)
       time = Time.now + 24.hours.to_i
-      render json: { token: token, exp: time.strftime('%m-%d-%Y %H:%M'),
-                     name: @user.name }, status: :created
+      render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
+                     name: @user }, status: :created
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
