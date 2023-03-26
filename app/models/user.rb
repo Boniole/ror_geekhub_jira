@@ -24,8 +24,13 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, presence: true
+  validates :email, presence: true, uniqueness: true,
+                    length: { minimum: 8, maximum: 64 },
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true,
+                       length: { minimum: 8, maximum: 20 },
+                       format: { with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/,
+                                 message: 'must contain at least one uppercase letter, one lowercase letter, and one digit' }
 
   def admin?(project)
     project.memberships.find_by(user_id: id)&.role == 'admin'
