@@ -34,9 +34,9 @@ class User < ApplicationRecord
                                  message: 'must contain at least one uppercase letter, one lowercase letter, and one digit' }
 
   validates :github_token, format: {
-    with: /\A[a-zA-Z0-9_-]{40}\z/,
+    with: /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/m,
     message: 'Must be a valid GitHub personal access token!'
-  }
+  }, allow_blank: true
 
   def admin?(project)
     project.memberships.find_by(user_id: id)&.role == 'admin'
