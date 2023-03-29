@@ -10,7 +10,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def show
     authorize @project
-    render json: @project, status: :ok
+    render json: { project: @project, member: @project.memberships }, status: :ok
   end
 
   def create
@@ -53,11 +53,6 @@ class Api::V1::ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
-    if @project.user_id == @current_user.id
-      @project
-    else
-      render json: { errors: 'User is not authorized to access this resource' }, status: :unauthorized
-    end
   rescue ActiveRecord::RecordNotFound
     render json: { errors: 'Project not found' }, status: :not_found
   end

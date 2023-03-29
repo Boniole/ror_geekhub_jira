@@ -9,6 +9,7 @@ class Api::V1::CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    authorize @comments
 
     if @comment.save
       render json: @comment, status: :ok, serializer: CommentSerializer
@@ -18,6 +19,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def update
+    authorize @comments
     if @comment.update(comment_params)
       render json: @comment, serializer: CommentSerializer
     else
@@ -26,6 +28,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def destroy
+    authorize @comments
     @comment.destroy
   end
 

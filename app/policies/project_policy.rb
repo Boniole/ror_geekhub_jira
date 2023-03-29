@@ -1,17 +1,10 @@
 class ProjectPolicy < ApplicationPolicy
-  attr_reader :user, :project
-
-  def initialize(user, project)
-    @user = user
-    @project = project
-  end
-
   def index?
     true
   end
 
   def show?
-    project.memberships.exists?(user_id: user.id)
+    record.memberships.exists?(user_id: user.id)
   end
 
   def create?
@@ -19,10 +12,10 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?(project)
+    user.admin?(record)
   end
 
   def destroy?
-    user.admin?(project)
+    user.admin?(record)
   end
 end
