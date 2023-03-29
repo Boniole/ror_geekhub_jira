@@ -9,6 +9,7 @@ class Api::V1::ColumnsController < ApplicationController
 
   def create
     @column = Column.new(column_params)
+    authorize @column
 
     if @column.save
       render json: @column, status: :ok, serializer: ColumnSerializer
@@ -18,6 +19,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def update
+    authorize @column
     if @column.update(column_params)
       render json: @column, status: :ok, serializer: ColumnSerializer
     else
@@ -26,6 +28,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def destroy
+    authorize @column
     @column.destroy
   end
 

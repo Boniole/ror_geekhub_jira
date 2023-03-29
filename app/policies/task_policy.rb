@@ -1,11 +1,4 @@
 class TaskPolicy < ApplicationPolicy
-  attr_reader :user, :task
-
-  def initialize(user, task)
-    @user = user
-    @task = task
-  end
-
   def show?
     project_member?
   end
@@ -25,15 +18,14 @@ class TaskPolicy < ApplicationPolicy
   private
 
   def project_member?
-    Membership.where(project_id: task.project_id, user_id: user.id).exists?
+    Membership.where(project_id: record.project_id, user_id: user.id).exists?
   end
 
   def admin_or_owner?
-    user.admin? || task.user_id == user.id
+    user.admin?(record.project) || record.user_id == user.id
   end
 
   def admin_or_owner_or_assignee?
-    user.admin? || task.assignee_id == user.id || task.user_id == user.id
+    user.admin?(record.project) || record.assignee_id == user.id || record.user_id == user.id
   end
-
 end
