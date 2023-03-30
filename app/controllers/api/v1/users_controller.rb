@@ -23,6 +23,8 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id)
       time = Time.now + 24.hours.to_i
+debugger
+      client = Octokit::Client.new(:access_token => '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')
       render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
                      name: @user }, status: :created
     else
@@ -53,6 +55,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :last_name, :email, :password)
+    params.permit(:name, :last_name, :email, :password, :github_token)
   end
 end
