@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def not_found
     render json: { error: 'not_found' }
@@ -18,5 +19,11 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  private
+
+  def user_not_authorized
+    render json: { error: 'You do not have permission to perform this action' }, status: :unauthorized
   end
 end
