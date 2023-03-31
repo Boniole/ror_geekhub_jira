@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/about_user', to: 'users#about_current_user'
+      get '/github/show', to: 'github#show'
       resources :users do
         member do
           get :comments

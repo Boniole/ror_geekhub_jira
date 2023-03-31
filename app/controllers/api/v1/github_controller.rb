@@ -1,28 +1,16 @@
 class Api::V1::GithubController < ApplicationController
-  before_action :set_user, only: %i[show]
+  before_action :authorize_request
+  before_action :set_client, only: %i[show]
 
   def show
-    github_token = @user.github_token
-    client = Octokit::Client.new(access_token: github_token)
+    user = @client.user
 
-    render json: client, status: :ok
+    render json: { username: user.login, name: user.name, avatar: user.avatar_url, url: user.url }, status: :ok
   end
-  # def login
-  #   @user = User.find_by_email(params[:email])
-  #   if @user&.authenticate(params[:password])
-  #     token = JsonWebToken.encode(user_id: @user.id)
-  #     time = Time.now + 24.hours.to_i
-  #     render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
-  #                    name: @user }, status: :ok
-  #   else
-  #     render json: { error: 'unauthorized' }, status: :unauthorized
-  #   end
-  # end
 
   private
-  def set_user
-    @user = User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'User not found' }, status: :not_found
+
+  def set_client
+    @client = Octokit::Client.new(access_token: @current_user.github_token, auto_paginate: true)
   end
 end
