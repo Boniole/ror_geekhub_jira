@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :projects, dependent: :destroy
   has_many :tasks
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   has_many :memberships
   has_many :projects, through: :memberships

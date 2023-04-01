@@ -20,6 +20,7 @@
 class Project < ApplicationRecord
   belongs_to :user
   has_many :desks, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   has_many :memberships
   has_many :users, through: :memberships
