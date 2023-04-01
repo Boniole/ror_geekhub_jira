@@ -71,3 +71,6 @@ yarn-error.log*
 
 # ignore tmp/cache
 tmp/cache
+
+# ignore passwords
+.env
