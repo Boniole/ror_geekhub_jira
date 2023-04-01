@@ -1,11 +1,13 @@
 require 'ffaker'
 
+include Pundit::Authorization
+
 # User.all.each(&:destroy)
 
 10.times do
   user = User.new(name: FFaker::Name.first_name, last_name: FFaker::Name.last_name, email: FFaker::Internet.free_email)
-  user.password = 'password'
-  user.password_confirmation = 'password'
+  user.password = 'Password123'
+  user.password_confirmation = 'Password123'
   user.save
 end
 
@@ -15,6 +17,7 @@ end
     name: "project ##{Project.count == 0 ? 1 : Project.pluck(:id).last + 1}",
     user_id: user.id
   )
+  project.memberships.create(user_id: user.id, role: 'admin')
 
   # create Desk
   desk = Desk.create(project_id: project.id)
