@@ -275,6 +275,7 @@ DEPENDENCIES
   capistrano3-puma
   debug
   ed25519
+  faraday
   ffaker (~> 2.21)
   figaro
   jwt
