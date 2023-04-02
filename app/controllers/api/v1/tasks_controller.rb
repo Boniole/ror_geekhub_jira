@@ -1,4 +1,5 @@
 class Api::V1::TasksController < ApplicationController
+  before_action :authorize_request
   before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
   before_action :set_tasks, only: %i[index]
@@ -8,11 +9,14 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def show
+    authorize @task
     render json: @task, status: :ok, serializer: TaskSerializer
   end
 
   def create
     @task = Task.new(task_params)
+    @task.user_id = @current_user.id
+    authorize @task
 
     if @task.save
       render json: @task, status: :created, serializer: TaskSerializer
@@ -22,6 +26,8 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update
+    authorize @task
+
     if @task.update(task_params)
       render json: @task
     else
@@ -30,6 +36,7 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def destroy
+    authorize @task
     @task.destroy
   end
 
@@ -37,6 +44,8 @@ class Api::V1::TasksController < ApplicationController
 
   def set_task
     @task = Task.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { errors: 'Task not found' }, status: :not_found
   end
 
   def set_tasks

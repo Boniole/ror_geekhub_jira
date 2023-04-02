@@ -5,13 +5,14 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           not null
 #  description :string
-#  end         :date
-#  estimate    :datetime
+#  end         :text
+#  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
-#  start       :date
+#  start       :text
 #  status      :integer          default("open")
 #  title       :text
+#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
@@ -40,6 +41,7 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   enum :priority, %i[lowest low high highest], default: :low
   enum :type_of, %i[task bug epic], default: :task

@@ -4,8 +4,8 @@ require 'ffaker'
 
 10.times do
   user = User.new(name: FFaker::Name.first_name, last_name: FFaker::Name.last_name, email: FFaker::Internet.free_email)
-  user.password = 'password'
-  user.password_confirmation = 'password'
+  user.password = 'Password123'
+  user.password_confirmation = 'Password123'
   user.save
 end
 
@@ -16,8 +16,11 @@ end
     user_id: user.id
   )
 
+  # add memberships
+  project.memberships.create(user_id: user.id, role: 'admin')
+
   # create Desk
-  desk = Desk.create(project_id: project.id)
+  desk = Desk.find_by(project_id: project.id)
 
   # create Columns
   ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str, desk_id: desk.id) }

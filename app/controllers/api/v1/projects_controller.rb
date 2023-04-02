@@ -9,27 +9,43 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def show
-    render json: @project, status: :ok
+    authorize @project
+    render json: { project: @project, member: @project.memberships }, status: :ok
   end
 
   def create
-    project = Project.new(project_params)
-    project.user_id = @current_user.id
+    @project = Project.new(project_params)
+    @project.user_id = @current_user.id
+    @project.save
+    @project.memberships.build(user_id: @current_user.id, role: 'admin')
+    authorize @project
 
-    if project.save
-      render json: project, status: :created
+    if @project.save
+      render json: @project, status: :created
     else
-      render json: project.errors, status: :unprocessable_entity
+      render json: @project.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    return render json: @project, status: :ok if @project.update(project_params)
+    @project = Project.find(params[:id])
+    authorize @project
 
-    render json: @project.errors, status: :unprocessable_entity
+    if @project.update(project_params)
+      if params[:membership] && params[:membership][:user_id].present?
+        @user = User.find(params[:membership][:user_id])
+        @membership = @project.memberships.build(user: @user, role: 'member')
+        @membership.save
+      end
+
+      render json: @project, status: :ok
+    else
+      render json: @project.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
+    authorize @project
     @project.destroy
   end
 
@@ -37,13 +53,8 @@ class Api::V1::ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
-    if @project.user_id == @current_user.id
-      @project
-    else
-      render json: { errors: 'User is not authorized to access this resource' }, status: :unauthorized
-    end
-  rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'Project not found' }, status: :not_found
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { errors: e.message }, status: :not_found
   end
 
   def set_projects
@@ -52,7 +63,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:name, :status)
-  rescue ActionController::ParameterMissing
-    render json: { error: 'Missing required parameter(s)' }, status: :bad_request
+  rescue ActionController::ParameterMissing => e
+    render json: { errors: e.message }, status: :bad_request
   end
 end

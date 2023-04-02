@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_01_121437) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,32 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
     t.index ["project_id"], name: "index_desks_on_project_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "task_id"
+    t.bigint "comment_id"
+    t.string "name", null: false
+    t.string "document_type", null: false
+    t.string "url", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_documents_on_comment_id"
+    t.index ["project_id"], name: "index_documents_on_project_id"
+    t.index ["task_id"], name: "index_documents_on_task_id"
+    t.index ["user_id"], name: "index_documents_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_memberships_on_project_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.integer "status", default: 0
@@ -61,10 +87,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
     t.string "description"
     t.integer "priority", default: 0
     t.integer "status", default: 0
+    t.integer "type_of", default: 0
     t.text "label"
-    t.datetime "estimate"
-    t.date "start"
-    t.date "end"
+    t.text "estimate"
+    t.text "start"
+    t.text "end"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,12 +115,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_174241) do
     t.string "email"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.string "github_token"
   end
 
   add_foreign_key "columns", "desks"
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "desks", "projects"
+  add_foreign_key "documents", "comments"
+  add_foreign_key "documents", "projects"
+  add_foreign_key "documents", "tasks"
+  add_foreign_key "documents", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "tasks", "desks"
   add_foreign_key "tasks", "projects"
