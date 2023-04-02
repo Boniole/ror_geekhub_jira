@@ -1,7 +1,7 @@
 class Api::V1::DocumentsController < ApplicationController
   before_action :authorize_request
-  before_action :set_attachable, only: [:index, :create]
-  before_action :set_document, only: [:show, :update, :destroy]
+  before_action :set_attachable, only: %i[index create]
+  before_action :set_document, only: %i[show update destroy]
 
   def index
     @documents = @attachable.documents
@@ -9,13 +9,15 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def show
+    authorize @document
     render json: @document
   end
 
   def create
     @document = @attachable.documents.new(document_params)
     @document.user_id = @current_user
-    debugger
+    authorize @document
+
     if @document.save
       render json: @document, status: :created
     else
@@ -24,6 +26,8 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def update
+    authorize @document
+
     if @document.update(document_params)
       render json: @document
     else
@@ -32,6 +36,8 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def destroy
+    authorize @document
+
     @document.destroy
     head :no_content
   end
@@ -50,7 +56,7 @@ class Api::V1::DocumentsController < ApplicationController
     elsif params[:tag_id]
       @attachable = Tag.find(params[:tag_id])
     else
-      render json: { error: "Attachable not found" }, status: :not_found
+      render json: { error: 'Attachable not found' }, status: :not_found
     end
   end
 
