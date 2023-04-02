@@ -1,7 +1,5 @@
 require 'ffaker'
 
-include Pundit::Authorization
-
 # User.all.each(&:destroy)
 
 10.times do
@@ -17,10 +15,12 @@ end
     name: "project ##{Project.count == 0 ? 1 : Project.pluck(:id).last + 1}",
     user_id: user.id
   )
+
+  # add memberships
   project.memberships.create(user_id: user.id, role: 'admin')
 
   # create Desk
-  desk = Desk.create(project_id: project.id)
+  desk = Desk.find_by(project_id: project.id)
 
   # create Columns
   ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str, desk_id: desk.id) }
