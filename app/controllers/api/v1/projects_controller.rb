@@ -54,7 +54,7 @@ class Api::V1::ProjectsController < ApplicationController
   def set_project
     @project = Project.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
-    render json: { error: e.message }, status: :not_found
+    render json: { errors: e.message }, status: :not_found
   end
 
   def set_projects
@@ -64,6 +64,6 @@ class Api::V1::ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :status)
   rescue ActionController::ParameterMissing => e
-    render json: { error: e.message }, status: :bad_request
+    render json: { errors: e.message }, status: :bad_request
   end
 end

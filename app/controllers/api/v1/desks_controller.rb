@@ -29,20 +29,15 @@ class Api::V1::DesksController < ApplicationController
   def destroy
     @desk.destroy
   rescue ActiveRecord::InvalidForeignKey => e
-    render json: { error: e.message }, status: :unauthorized
+    render json: { errors: e.message }, status: :unauthorized
   end
 
   private
 
   def set_desk
     @desk = Desk.find(params[:id])
-    if @desk.user_id == @current_user.id
-      @desk
-    else
-      render json: { error: 'User is not authorized to access this resource' }, status: :unauthorized
-    end
   rescue ActiveRecord::RecordNotFound => e
-    render json: { error: e.message }, status: :not_found
+    render json: { errors: e.message }, status: :not_found
   end
 
   def set_desks
@@ -53,6 +48,6 @@ class Api::V1::DesksController < ApplicationController
   def desk_params
     params.require(:desk).permit(:name, :project_id)
   rescue ActionController::ParameterMissing => e
-    render json: { error: e.message }, status: :bad_request
+    render json: { errors: e.message }, status: :bad_request
   end
 end
