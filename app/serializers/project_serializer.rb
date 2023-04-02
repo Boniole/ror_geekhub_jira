@@ -20,5 +20,6 @@
 class ProjectSerializer < ActiveModel::Serializer
   attributes :name, :status
 
+  has_many :desks, serializer: DeskSerializer
   has_one :user, serializer: UserSerializer
 end

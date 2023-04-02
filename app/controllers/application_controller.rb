@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
     render json: { error: 'not_found' }
   end
 
-  attr_reader :current_user
+  attr_reader :current_user, :github_user
 
   def authorize_request
     header = request.headers['Authorization']
@@ -19,6 +19,12 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  def authorize_github
+    @github_client = Octokit::Client.new(access_token: @current_user.github_token, auto_paginate: true)
+  rescue Octokit::BadRequest
+    render json: { errors: 'Github token invalid or empty!' }, status: :not_found
   end
 
   private
