@@ -3,14 +3,6 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-security:
-  - bearerAuth: [ ]
 paths:
   "/api/v1/comments":
     get:
@@ -376,7 +368,7 @@ paths:
         description: The ID of the project (integer)
       - name: assignee_id
         in: post
-        required: true
+        required: false
         schema:
           type: integer
         default: 1
@@ -632,17 +624,11 @@ paths:
                       type: string
                     email:
                       type: string
-                    created_at:
-                      type: string
-                    updated_at:
-                      type: string
                   required:
                   - id
                   - name
                   - last_name
                   - email
-                  - created_at
-                  - updated_at
     post:
       summary: Creates a user
       tags:
@@ -706,6 +692,40 @@ paths:
                 - email
         '404':
           description: user not found
+  "/api/v1/about_user":
+    get:
+      summary: Retrieves information about the current user
+      tags:
+      - Users
+      parameters:
+      - name: current_user
+        in: header
+        description: JWT token to identify current user
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user information found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  last_name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - last_name
+                - email
+        '401':
+          description: unauthorized access
   "/api/v1/users/{id}":
     patch:
       summary: Updates a user
