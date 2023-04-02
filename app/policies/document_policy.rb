@@ -1,10 +1,10 @@
 class DocumentPolicy < ApplicationPolicy
   def show?
-    user_is_project_member?
+    project_member?
   end
 
   def create?
-    user_is_project_member?
+    project_member?
   end
 
   def update?
@@ -17,8 +17,8 @@ class DocumentPolicy < ApplicationPolicy
 
   private
 
-  def user_is_project_member?
-    record.project.members.include?(user)
+  def project_member?
+    record.project.memberships.exists?(user_id: user.id)
   end
 
   def user_is_file_author_or_admin?
