@@ -74,7 +74,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       parameter(
         name: :assignee_id,
         in: :post,
-        required: true,
+        required: false,
         schema: {
           type: :integer
         },

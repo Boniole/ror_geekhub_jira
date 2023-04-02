@@ -4,6 +4,7 @@
 #
 #  id                     :bigint           not null, primary key
 #  email                  :string
+#  github_token           :string
 #  last_name              :string
 #  name                   :string
 #  password_digest        :string
@@ -32,6 +33,11 @@ class User < ApplicationRecord
                        length: { minimum: 8, maximum: 20 },
                        format: { with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/,
                                  message: 'must contain at least one uppercase letter, one lowercase letter, and one digit' }
+
+  validates :github_token, format: {
+    with: /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/m,
+    message: 'Must be a valid GitHub personal access token!'
+  }, allow_blank: true
 
   def admin?(project)
     project.memberships.find_by(user_id: id)&.role == 'admin'

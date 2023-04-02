@@ -28,8 +28,13 @@ Rails.application.routes.draw do
           get :comments
         end
       end
-      resources :comments do
-        resources :documents
+
+      resources :comments
+      resources :documents
+      # get '/github/show', to: 'github#show'
+      resources :githubs do
+        post 'show', on: :collection
+        post 'create', on: :collection
       end
     end
   end

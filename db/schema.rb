@@ -115,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_01_121437) do
     t.string "email"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.string "github_token"
   end
 
   add_foreign_key "columns", "desks"

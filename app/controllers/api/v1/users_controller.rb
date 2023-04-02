@@ -53,6 +53,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :last_name, :email, :password)
+    params.permit(:name, :last_name, :email, :password, :github_token)
   end
 end
