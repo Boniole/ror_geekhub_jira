@@ -1,61 +1,86 @@
+require 'aws-sdk-s3'
+
 class Api::V1::DocumentsController < ApplicationController
-  before_action :authorize_request
-  before_action :set_attachable, only: [:index, :create]
-  before_action :set_document, only: [:show, :update, :destroy]
+  # before_action :authorize_request
+  before_action :document_params, only: %i[create update]
+  before_action :set_attachable
+  before_action :set_document, only: [:show, :destroy]
 
   def index
+    s3 = Aws::S3::Resource.new
+    @result = []
     @documents = @attachable.documents
-    render json: @documents
+    @documents.each.with_index do |document, index|
+      document.files.blobs.each do |blob|
+        obj = s3.bucket(ENV['AWS_BUCKET']).object(blob.key)
+        file_name = blob.filename
+        url = obj.presigned_url(:get, expires_in: 3600)
+        @result << { name: file_name, url: url }
+      end
+    end
+    render json: @result, status: :ok
   end
 
   def show
-    render json: @document
+    s3 = Aws::S3::Resource.new
+    url = []
+    @document.files.blobs.each do |blob|
+      obj = s3.bucket(ENV['AWS_BUCKET']).object(blob.key)
+      url << { name: [blob.filename], url: obj.presigned_url(:get, expires_in: 3600) }
+    end
+    render json: url
   end
 
   def create
-    @document = @attachable.documents.new(document_params)
-    @document.user_id = @current_user
-    debugger
+    @document = Document.new
+    @document.documentable = @attachable
+    @document.files.attach(params[:documents])
     if @document.save
-      render json: @document, status: :created
-    else
-      render json: @document.errors, status: :unprocessable_entity
-    end
-  end
-
-  def update
-    if @document.update(document_params)
-      render json: @document
+      render json: {}, status: :created
     else
       render json: @document.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
+    s3 = Aws::S3::Client.new
+    @document.files.blobs.each do |blob|
+      s3.delete_object(bucket: ENV['AWS_BUCKET'], key: blob[:filename])
+    end
+    @document.files.purge
     @document.destroy
-    head :no_content
+    if @document.destroy
+      head :no_content
+    else
+      head :unprocessable_entity
+    end
   end
 
   private
 
   def set_attachable
-    if params[:project_id]
+    case
+    when params[:project_id]
       @attachable = Project.find(params[:project_id])
-    elsif params[:user_id]
+    when params[:user_id]
       @attachable = User.find(params[:user_id])
-    elsif params[:task_id]
+    when params[:task_id]
       @attachable = Task.find(params[:task_id])
-    elsif params[:comment_id]
+    when params[:comment_id]
       @attachable = Comment.find(params[:comment_id])
-    elsif params[:tag_id]
-      @attachable = Tag.find(params[:tag_id])
     else
-      render json: { error: "Attachable not found" }, status: :not_found
+      render json: { errors: 'Attachable not found' }, status: :not_found
     end
   end
 
   def set_document
-    @document = document.find(params[:id])
+    # TODO VLAD catch errors, fix documentable_id: @attachable.id
+    @document = @attachable.documents.find_by(documentable_id: @attachable.id)
+    # if @document == nil
+    #   render json: { errors: 'Not found files' }, status: :not_found
+    # else
+    #   @document
+    # end
   end
 
   def document_params
