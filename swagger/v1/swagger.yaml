@@ -376,7 +376,7 @@ paths:
         description: The ID of the project (integer)
       - name: assignee_id
         in: post
-        required: true
+        required: false
         schema:
           type: integer
         default: 1
@@ -667,12 +667,14 @@ paths:
                   type: string
                 password:
                   type: string
+                github_token:
+                  type: string
               required:
               - name
               - last_name
               - email
               - password
-  "/api/v1//users/{id}":
+  "/api/v1/users/{id}":
     get:
       summary: Retrieves a user
       tags:
@@ -698,6 +700,8 @@ paths:
                   last_name:
                     type: string
                   email:
+                    type: string
+                  github_token:
                     type: string
                 required:
                 - id
@@ -737,6 +741,8 @@ paths:
                 email:
                   type: string
                 password:
+                  type: string
+                github_token:
                   type: string
     delete:
       summary: Deletes a user
