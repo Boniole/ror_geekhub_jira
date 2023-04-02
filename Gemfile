@@ -69,6 +69,7 @@ gem "octokit", "~> 5.0"
 
 # Faraday is an HTTP client library abstraction layer that provides a common interface over many adapters
 gem "faraday"
+gem "faraday-retry"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
