@@ -28,21 +28,16 @@ class Api::V1::DesksController < ApplicationController
 
   def destroy
     @desk.destroy
-  rescue ActiveRecord::InvalidForeignKey
-    render json: { errors: 'You cannot delete a board while you have dependencies' }, status: :unauthorized
+  rescue ActiveRecord::InvalidForeignKey => e
+    render json: { errors: e.message }, status: :unauthorized
   end
 
   private
 
   def set_desk
     @desk = Desk.find(params[:id])
-    if @desk.user_id == @current_user.id
-      @desk
-    else
-      render json: { errors: 'User is not authorized to access this resource' }, status: :unauthorized
-    end
-  rescue ActiveRecord::RecordNotFound
-    render errors.full_messages, status: :not_found
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { errors: e.message }, status: :not_found
   end
 
   def set_desks
@@ -52,7 +47,7 @@ class Api::V1::DesksController < ApplicationController
 
   def desk_params
     params.require(:desk).permit(:name, :project_id)
-  rescue ActionController::ParameterMissing
-    render json: { error: 'Missing required parameter(s)' }, status: :bad_request
+  rescue ActionController::ParameterMissing => e
+    render json: { errors: e.message }, status: :bad_request
   end
 end

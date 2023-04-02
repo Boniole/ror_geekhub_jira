@@ -58,6 +58,12 @@ gem 'rswag-specs'
 # ActiveModelSerializers brings convention over configuration to your JSON generation. [https://github.com/rails-api/active_model_serializers/tree/0-10-stable]
 gem 'active_model_serializers', '~> 0.10.0'
 
+# connect to amazon S3
+gem 'aws-sdk-s3', require: false
+
+# for passwords in .env file
+gem 'dotenv-rails'
+
 # Octokit.rb wraps the GitHub API in a flat API [https://github.com/octokit/octokit.rb]
 gem "octokit", "~> 5.0"
 
