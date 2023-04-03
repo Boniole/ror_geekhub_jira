@@ -41,7 +41,7 @@ class Api::V1::ProjectsController < ApplicationController
   def add_member
     user = User.find(params[:user_id])
     membership = @project.memberships.build(user:, role: 'member')
-    # TODO: authorize membership
+    authorize @project
 
     if membership.save
       render json: membership, status: :created
@@ -52,7 +52,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def delete_member
     membership = @project.memberships.find_by(user_id: params[:user_id])
-    # TODO: authorize membership
+    authorize @project
     membership.destroy
   end
 
