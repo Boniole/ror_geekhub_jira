@@ -2,7 +2,7 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :authorize_request
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
-  before_action :set_project, only: %i[show update destroy]
+  before_action :set_project, only: %i[show update destroy add_member delete_member]
 
   def index
     render json: @projects, status: :ok
@@ -32,16 +32,28 @@ class Api::V1::ProjectsController < ApplicationController
     authorize @project
 
     if @project.update(project_params)
-      if params[:membership] && params[:membership][:user_id].present?
-        @user = User.find(params[:membership][:user_id])
-        @membership = @project.memberships.build(user: @user, role: 'member')
-        @membership.save
-      end
-
       render json: @project, status: :ok
     else
       render json: @project.errors, status: :unprocessable_entity
     end
+  end
+
+  def add_member
+    user = User.find(params[:user_id])
+    membership = @project.memberships.build(user:, role: 'member')
+    # TODO: authorize membership
+
+    if membership.save
+      render json: membership, status: :created
+    else
+      render json: membership.errors, status: :unprocessable_entity
+    end
+  end
+
+  def delete_member
+    membership = @project.memberships.find_by(user_id: params[:user_id])
+    # TODO: authorize membership
+    membership.destroy
   end
 
   def destroy
@@ -62,7 +74,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :status)
+    params.permit(:name, :status)
   rescue ActionController::ParameterMissing => e
     render json: { errors: e.message }, status: :bad_request
   end
