@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post '/forgot', to: 'passwords#forgot'
       post '/reset', to: 'passwords#reset'
       resources :projects do
+        member do
+          post 'add_member', to: 'projects#add_member'
+          delete 'delete_member/:user_id', to: 'projects#delete_member'
+        end
         resources :documents
       end
       resources :desks do

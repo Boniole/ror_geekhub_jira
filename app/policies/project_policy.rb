@@ -15,6 +15,14 @@ class ProjectPolicy < ApplicationPolicy
     user.admin?(record)
   end
 
+  def add_member?
+    update?
+  end
+
+  def delete_member?
+    update?
+  end
+
   def destroy?
     user.admin?(record)
   end

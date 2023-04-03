@@ -184,15 +184,14 @@ paths:
             schema:
               type: object
               properties:
-                project:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    status:
-                      type: string
-                    user_id:
-                      type: string
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user_id:
+                    type: string
               required:
               - name
               - status
@@ -250,15 +249,14 @@ paths:
             schema:
               type: object
               properties:
-                project:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    status:
-                      type: string
-                    user_id:
-                      type: string
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user_id:
+                    type: string
               required:
               - name
               - status
@@ -300,15 +298,14 @@ paths:
             schema:
               type: object
               properties:
-                project:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    status:
-                      type: string
-                    user_id:
-                      type: string
+                type: object
+                properties:
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user_id:
+                    type: string
               required:
               - name
               - status
@@ -318,6 +315,84 @@ paths:
       tags:
       - Projects
       description: Delete project
+      responses:
+        '204':
+          description: successful
+  "/api/v1/projects/{project_id}/add_member":
+    post:
+      summary: add member to project
+      tags:
+      - Projects
+      description: Add member to project
+      parameters:
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  user:
+                    type: object
+                  role:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - user
+                - role
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                - error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+              required:
+              - user_id
+  "/api/v1/projects/{project_id}/members/{user_id}":
+    delete:
+      summary: delete member from project
+      tags:
+      - Projects
+      description: Delete member from project
+      parameters:
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: string
+      - name: user_id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: successful
