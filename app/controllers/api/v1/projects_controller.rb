@@ -40,19 +40,25 @@ class Api::V1::ProjectsController < ApplicationController
 
   def add_member
     user = User.find(params[:user_id])
-    membership = @project.memberships.build(user:, role: 'member')
-    # TODO: authorize membership
+    existing_membership = @project.memberships.where(user:).first
 
-    if membership.save
-      render json: membership, status: :created
+    if existing_membership
+      render json: { error: 'User is already a member of the project' }, status: :unprocessable_entity
     else
-      render json: membership.errors, status: :unprocessable_entity
+      membership = @project.memberships.build(user:, role: 'member')
+      authorize @project
+
+      if membership.save
+        render json: membership, status: :created
+      else
+        render json: membership.errors, status: :unprocessable_entity
+      end
     end
   end
 
   def delete_member
     membership = @project.memberships.find_by(user_id: params[:user_id])
-    # TODO: authorize membership
+    authorize @project
     membership.destroy
   end
 
