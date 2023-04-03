@@ -40,13 +40,19 @@ class Api::V1::ProjectsController < ApplicationController
 
   def add_member
     user = User.find(params[:user_id])
-    membership = @project.memberships.build(user:, role: 'member')
-    authorize @project
+    existing_membership = @project.memberships.where(user:).first
 
-    if membership.save
-      render json: membership, status: :created
+    if existing_membership
+      render json: { error: 'User is already a member of the project' }, status: :unprocessable_entity
     else
-      render json: membership.errors, status: :unprocessable_entity
+      membership = @project.memberships.build(user:, role: 'member')
+      authorize @project
+
+      if membership.save
+        render json: membership, status: :created
+      else
+        render json: membership.errors, status: :unprocessable_entity
+      end
     end
   end
 
