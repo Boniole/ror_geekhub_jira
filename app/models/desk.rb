@@ -21,4 +21,12 @@ class Desk < ApplicationRecord
   has_many :columns, as: :columnable, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 3 }
+
+  after_create :create_columns
+
+  private
+
+  def create_columns
+    ['ToDo', 'In progress', 'In review', 'Done'].each {|name| columns.create(name: name) }
+  end
 end
