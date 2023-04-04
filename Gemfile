@@ -69,6 +69,7 @@ gem "octokit", "~> 5.0"
 
 # Faraday is an HTTP client library abstraction layer that provides a common interface over many adapters
 gem "faraday"
+gem "faraday-retry"
 
 #A thread safe Ruby client for the NATS messaging system written in pure Ruby. [https://github.com/nats-io/nats-pure.rb]
 gem 'nats-pure'
