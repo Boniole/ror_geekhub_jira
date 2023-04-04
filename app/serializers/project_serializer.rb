@@ -18,7 +18,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :name, :status
+  attributes :id, :name, :status
 
   has_one :user, serializer: UserSerializer
 end
