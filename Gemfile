@@ -51,6 +51,11 @@ gem 'bcrypt_pbkdf'
 # Gem for authorization system
 gem 'pundit'
 
+# Gems for authentication system
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 gem 'rspec-rails'
 gem 'rswag'
 gem 'rswag-specs'
@@ -65,13 +70,13 @@ gem 'aws-sdk-s3', require: false
 gem 'dotenv-rails'
 
 # Octokit.rb wraps the GitHub API in a flat API [https://github.com/octokit/octokit.rb]
-gem "octokit", "~> 5.0"
+gem 'octokit', '~> 5.0'
 
 # Faraday is an HTTP client library abstraction layer that provides a common interface over many adapters
-gem "faraday"
-gem "faraday-retry"
+gem 'faraday'
+gem 'faraday-retry'
 
-#A thread safe Ruby client for the NATS messaging system written in pure Ruby. [https://github.com/nats-io/nats-pure.rb]
+# A thread safe Ruby client for the NATS messaging system written in pure Ruby. [https://github.com/nats-io/nats-pure.rb]
 gem 'nats-pure'
 
 group :development, :test do
