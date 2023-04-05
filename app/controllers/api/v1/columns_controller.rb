@@ -1,16 +1,22 @@
 class Api::V1::ColumnsController < ApplicationController
   before_action :column_params, only: %i[create update]
-  before_action :set_column, only: %i[update destroy]
+  before_action :set_column, only: %i[show update destroy]
   before_action :set_columns, only: %i[index]
 
   def index
     render json: @columns, status: :ok, include: [], each_serializer: ColumnSerializer
   end
 
+  def show
+    # debugger
+    # authorize @column
+    render json: { column: @column }, status: :ok, serializer: ColumnSerializer
+  end
+
   def create
     @column = Column.new(column_params)
     @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
-    authorize @column
+    # authorize @column
 
     if @column.save
       render json: @column, status: :ok, serializer: ColumnSerializer
@@ -44,6 +50,6 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def column_params
-    params.permit(:columnable_id, :columnable_type, :name)
+    params.permit(:desk_id, :name, :ordinal_number)
   end
 end

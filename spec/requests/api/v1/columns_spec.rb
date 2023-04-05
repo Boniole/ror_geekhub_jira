@@ -26,10 +26,9 @@ RSpec.describe 'api/v1/columns', type: :request do
         type: :object,
         properties: {
           name: { type: :string, default: 'To do' },
-          columnable_id: { type: :integer, default: 1 },
-          columnable_type: { type: :string, default: 'Desk' }
+          desk_id: { type: :integer, default: 1 }
         },
-        required: %w[name columnable_id columnable_type]
+        required: %w[name desk_id]
       }
 
       response(200, 'successful') do
@@ -76,12 +75,12 @@ RSpec.describe 'api/v1/columns', type: :request do
         type: :object,
         properties: {
           name: { type: :string, default: 'To do' },
-          columnable_id: { type: :integer, default: 1 },
-          columnable_type: { type: :string, default: 'Desk' }
+          desk_id: { type: :integer, default: 1 },
+          ordinal_number: { type: :integer, default: 1 }
         },
-        required: %w[name columnable_id columnable_type]
+        required: %w[name desk_id ordinal_number]
       }
-      
+
       response(200, 'successful') do
         let(:id) { '123' }
 

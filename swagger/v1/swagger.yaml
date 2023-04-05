@@ -30,16 +30,12 @@ paths:
                 name:
                   type: string
                   default: To do
-                columnable_id:
+                desk_id:
                   type: integer
                   default: 1
-                columnable_type:
-                  type: string
-                  default: Desk
               required:
               - name
-              - columnable_id
-              - columnable_type
+              - desk_id
   "/api/v1/columns/{id}":
     parameters:
     - name: id
@@ -73,16 +69,16 @@ paths:
                 name:
                   type: string
                   default: To do
-                columnable_id:
+                desk_id:
                   type: integer
                   default: 1
-                columnable_type:
-                  type: string
-                  default: Desk
+                ordinal_number:
+                  type: integer
+                  default: 1
               required:
               - name
-              - columnable_id
-              - columnable_type
+              - desk_id
+              - ordinal_number
     delete:
       summary: delete column
       tags:
@@ -541,20 +537,13 @@ paths:
           type: integer
         default: 1
         description: The ID of the desk (integer)
-      - name: columnable_id
+      - name: column_id
         in: post
         required: true
         schema:
           type: integer
         default: 1
         description: The ID of the desk (integer)
-      - name: columnable_type
-        in: post
-        required: true
-        schema:
-          type: string
-        default: Desk
-        description: The type of the desk
       - name: title
         in: post
         required: true
@@ -644,12 +633,9 @@ paths:
                 assignee_id:
                   type: integer
                   default: 1
-                columnable_id:
+                column_id:
                   type: integer
                   default: 1
-                columnable_type:
-                  type: string
-                  default: Desk
                 desk_id:
                   type: integer
                   default: 1
@@ -677,8 +663,7 @@ paths:
                   type: integer
               required:
               - title
-              - columnable_id
-              - columnable_type
+              - column_id
               - desk_id
               - project_id
               - user_id
@@ -716,12 +701,9 @@ paths:
                 assignee_id:
                   type: integer
                   default: 1
-                columnable_id:
+                column_id:
                   type: integer
                   default: 1
-                columnable_type:
-                  type: string
-                  default: Desk
                 desk_id:
                   type: integer
                   default: 1
@@ -749,8 +731,7 @@ paths:
                   type: integer
               required:
               - title
-              - columnable_id
-              - columnable_type
+              - column_id
               - desk_id
               - project_id
               - user_id
@@ -990,10 +971,7 @@ servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
-<<<<<<< HEAD
       default: kotello.space
-=======
-      default: 127.0.0.1:3000
 components:
   securitySchemes:
     bearerAuth:
@@ -1002,7 +980,3 @@ components:
       bearerFormat: JWT
 security:
 - bearerAuth: []
-<<<<<<< HEAD
->>>>>>> change swagger
-=======
->>>>>>> 8dd8a3a30139bd8426c4604c727a992fa8f5f988

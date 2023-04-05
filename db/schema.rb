@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_05_191823) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_06_180350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,8 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_191823) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "ordinal_number", default: 0
     t.bigint "desk_id", null: false
+    t.integer "ordinal_number", default: 0
     t.index ["desk_id"], name: "index_columns_on_desk_id"
   end
 
@@ -96,9 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_191823) do
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
     t.bigint "desk_id", null: false
-    t.string "column_type", null: false
-    t.bigint "column_id", null: false
-    t.index ["column_type", "column_id"], name: "index_tasks_on_column"
+    t.bigint "column_id"
+    t.index ["column_id"], name: "index_tasks_on_column_id"
     t.index ["desk_id"], name: "index_tasks_on_desk_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
@@ -125,6 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_191823) do
   add_foreign_key "documents", "tasks"
   add_foreign_key "documents", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "columns"
   add_foreign_key "tasks", "desks"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
