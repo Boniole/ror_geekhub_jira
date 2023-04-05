@@ -12,6 +12,100 @@ components:
 security:
   - bearerAuth: [ ]
 paths:
+  "/api/v1/columns":
+    get:
+      summary: list columns
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create column
+      tags:
+      - Columns
+      description: Create task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: To do
+                column_id:
+                  type: integer
+                  default: 1
+                column_type:
+                  type: string
+                  default: Column
+                desk_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - column_id
+              - column_type
+              - desk_id
+  "/api/v1/columns/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show column
+      tags:
+      - Columns
+      description: Create task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: To do
+                column_id:
+                  type: integer
+                  default: 1
+                column_type:
+                  type: string
+                  default: Column
+                desk_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - column_id
+              - column_type
+              - desk_id
+    patch:
+      summary: update column
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete column
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
   "/api/v1/comments":
     get:
       summary: list comments
