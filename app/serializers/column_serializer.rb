@@ -14,8 +14,7 @@
 #  index_columns_on_columnable  (columnable_type,columnable_id)
 #
 class ColumnSerializer < ActiveModel::Serializer
-  attributes :name
+  attributes :id, :name
 
-  has_one :desk, serializer: DeskSerializer
   has_many :tasks, serializer: TaskSerializer
 end

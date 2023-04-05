@@ -5,13 +5,14 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           not null
 #  description :string
-#  end         :date
-#  estimate    :datetime
+#  end         :text
+#  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
-#  start       :date
+#  start       :text
 #  status      :integer          default("open")
 #  title       :text
+#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
@@ -34,7 +35,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class TaskSerializer < ActiveModel::Serializer
-  attributes :user, :column, :title, :description, :estimate, :label, :priority, :type_of, :status, :start, :end, :created_at, :updated_at
+  attributes :id, :user, :column, :title, :description, :estimate, :label, :priority, :type_of, :status, :start, :end, :created_at, :updated_at
 
   has_one :user, serializer: UserSerializer
   has_one :assignee, serializer: AssigneeSerializer
