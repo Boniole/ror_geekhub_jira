@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_103104) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_191823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "columns", force: :cascade do |t|
     t.text "name"
-    t.string "columnable_type", null: false
-    t.bigint "columnable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["columnable_type", "columnable_id"], name: "index_columns_on_columnable"
+    t.integer "ordinal_number", default: 0
+    t.bigint "desk_id", null: false
+    t.index ["desk_id"], name: "index_columns_on_desk_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -85,10 +85,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_103104) do
     t.string "description"
     t.integer "priority", default: 0
     t.integer "status", default: 0
+    t.integer "type_of", default: 0
     t.text "label"
-    t.datetime "estimate"
-    t.date "start"
-    t.date "end"
+    t.text "estimate"
+    t.text "start"
+    t.text "end"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_103104) do
     t.string "github_token"
   end
 
+  add_foreign_key "columns", "desks"
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "desks", "projects"

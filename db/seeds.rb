@@ -27,7 +27,7 @@ end
 
   # create Tasks
   25.times do
-    Column.where(columnable_id: desk.id).sample.tasks.create(
+    Column.where(desk_id: desk.id).sample.tasks.create(
       title: 'title',
       description: 'description',
       label: 'need to add label',
