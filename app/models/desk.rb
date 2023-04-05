@@ -18,7 +18,7 @@
 #
 class Desk < ApplicationRecord
   belongs_to :project
-  has_many :columns, as: :columnable, dependent: :destroy
+  has_many :columns, dependent: :destroy
 
   validates :name, presence: true, length: { minimum: 3 }
 
@@ -27,6 +27,6 @@ class Desk < ApplicationRecord
   private
 
   def create_columns
-    ['ToDo', 'In progress', 'In review', 'Done'].each {|name| columns.create(name: name) }
+    ['ToDo', 'In progress', 'In review', 'Done'].each.with_index {|name, index| columns.create(name: name, ordinal_number: index + 1) }
   end
 end
