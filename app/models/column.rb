@@ -15,7 +15,7 @@
 #
 class Column < ApplicationRecord
   belongs_to :columnable, polymorphic: true
-  has_many :tasks
+  has_many :tasks, as: :columnable, dependent: :destroy
 
   validates :name, presence: true, length: { in: 3..14 }
 end

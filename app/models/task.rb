@@ -5,13 +5,14 @@
 #  id          :bigint           not null, primary key
 #  column_type :string           not null
 #  description :string
-#  end         :date
-#  estimate    :datetime
+#  end         :text
+#  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
-#  start       :date
+#  start       :text
 #  status      :integer          default("open")
 #  title       :text
+#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
@@ -36,7 +37,7 @@
 class Task < ApplicationRecord
   belongs_to :project
   belongs_to :desk
-  belongs_to :column, polymorphic: true
+  belongs_to :columnable, polymorphic: true
   belongs_to :user
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy

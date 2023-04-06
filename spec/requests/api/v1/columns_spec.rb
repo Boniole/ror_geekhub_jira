@@ -1,14 +1,11 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/columns', type: :request do
-
   path '/api/v1/columns' do
-
     get('list columns') do
       tags 'Columns'
 
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -23,21 +20,19 @@ RSpec.describe 'api/v1/columns', type: :request do
     post('create column') do
       tags 'Columns'
       description 'Create task'
-      consumes "application/json"
+      consumes 'application/json'
 
       parameter name: :column, in: :body, schema: {
         type: :object,
         properties: {
           name: { type: :string, default: 'To do' },
-          column_id: { type: :integer, default: 1 },
-          column_type: { type: :string, default: 'Column' },
-          desk_id: { type: :integer, default: 1 }
+          columnable_id: { type: :integer, default: 1 },
+          columnable_type: { type: :string, default: 'Desk' }
         },
-        required: %w[name column_id column_type desk_id]
+        required: %w[name columnable_id columnable_type]
       }
 
       response(200, 'successful') do
-
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -56,19 +51,7 @@ RSpec.describe 'api/v1/columns', type: :request do
 
     get('show column') do
       tags 'Columns'
-      description 'Create task'
-      consumes "application/json"
 
-      parameter name: :column, in: :body, schema: {
-        type: :object,
-        properties: {
-          name: { type: :string, default: 'To do' },
-          column_id: { type: :integer, default: 1 },
-          column_type: { type: :string, default: 'Column' },
-          desk_id: { type: :integer, default: 1 }
-        },
-        required: %w[name column_id column_type desk_id]
-      }
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -85,6 +68,20 @@ RSpec.describe 'api/v1/columns', type: :request do
 
     patch('update column') do
       tags 'Columns'
+
+      description 'update task'
+      consumes 'application/json'
+
+      parameter name: :column, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string, default: 'To do' },
+          columnable_id: { type: :integer, default: 1 },
+          columnable_type: { type: :string, default: 'Desk' }
+        },
+        required: %w[name columnable_id columnable_type]
+      }
+      
       response(200, 'successful') do
         let(:id) { '123' }
 

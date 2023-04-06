@@ -9,7 +9,7 @@ class Api::V1::ColumnsController < ApplicationController
 
   def create
     @column = Column.new(column_params)
-    authorize @column
+    # authorize @column
 
     if @column.save
       render json: @column, status: :ok, serializer: ColumnSerializer
@@ -19,7 +19,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def update
-    authorize @column
+    # authorize @column
     if @column.update(column_params)
       render json: @column, status: :ok, serializer: ColumnSerializer
     else
@@ -28,7 +28,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def destroy
-    authorize @column
+    # authorize @column
     @column.destroy
   end
 
@@ -43,6 +43,6 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def column_params
-    params.require(:column).permit(:columnable_id, :columnable_type, :name, :desk_id)
+    params.permit(:columnable_id, :columnable_type, :name)
   end
 end
