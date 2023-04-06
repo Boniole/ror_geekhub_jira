@@ -9,6 +9,7 @@ class Api::V1::ColumnsController < ApplicationController
 
   def create
     @column = Column.new(column_params)
+    @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
     authorize @column
 
     if @column.save
@@ -43,6 +44,6 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def column_params
-    params.require(:column).permit(:columnable_id, :columnable_type, :name, :desk_id)
+    params.require(:column).permit(:name, :desk_id, :ordinary_number)
   end
 end
