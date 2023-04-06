@@ -3,15 +3,89 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-security:
-  - bearerAuth: [ ]
 paths:
+  "/api/v1/columns":
+    get:
+      summary: list columns
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create column
+      tags:
+      - Columns
+      description: Create task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: To do
+                desk_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - desk_id
+  "/api/v1/columns/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show column
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update column
+      tags:
+      - Columns
+      description: update task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: To do
+                desk_id:
+                  type: integer
+                  default: 1
+                ordinal_number:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - desk_id
+              - ordinal_number
+    delete:
+      summary: delete column
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
   "/api/v1/comments":
     get:
       summary: list comments
@@ -469,14 +543,7 @@ paths:
         schema:
           type: integer
         default: 1
-        description: The ID of the column (integer)
-      - name: column_type
-        in: post
-        required: true
-        schema:
-          type: string
-        default: Column
-        description: The type of the column
+        description: The ID of the desk (integer)
       - name: title
         in: post
         required: true
@@ -569,9 +636,6 @@ paths:
                 column_id:
                   type: integer
                   default: 1
-                column_type:
-                  type: string
-                  default: Column
                 desk_id:
                   type: integer
                   default: 1
@@ -600,7 +664,6 @@ paths:
               required:
               - title
               - column_id
-              - column_type
               - desk_id
               - project_id
               - user_id
@@ -641,9 +704,6 @@ paths:
                 column_id:
                   type: integer
                   default: 1
-                column_type:
-                  type: string
-                  default: Column
                 desk_id:
                   type: integer
                   default: 1
@@ -672,7 +732,6 @@ paths:
               required:
               - title
               - column_id
-              - column_type
               - desk_id
               - project_id
               - user_id
@@ -716,7 +775,6 @@ paths:
       summary: Creates a user
       tags:
       - Users
-      security: []
       parameters: []
       responses:
         '200':
@@ -862,7 +920,6 @@ paths:
       summary: Logs in a user
       tags:
       - Authentication
-      security: []
       parameters: []
       responses:
         '200':
@@ -915,3 +972,11 @@ servers:
   variables:
     defaultHost:
       default: kotello.space
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []

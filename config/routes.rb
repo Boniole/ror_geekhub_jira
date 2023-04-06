@@ -25,14 +25,15 @@ Rails.application.routes.draw do
           get :columns
         end
       end
-      resources :columns
-      resources :tasks do
-        resources :documents
-        member do
-          get :comments
+      resources :columns do
+        resources :tasks do
+          resources :documents
+          member do
+            get :comments
+          end
         end
       end
-
+      resources :tasks
       resources :comments
       resources :documents
       # get '/github/show', to: 'github#show'
