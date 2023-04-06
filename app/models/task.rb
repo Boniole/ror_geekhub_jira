@@ -50,6 +50,7 @@ class Task < ApplicationRecord
   validates :user_id, numericality: { only_integer: true }
   validates :project_id, numericality: { only_integer: true }
   validates :desk_id, numericality: { only_integer: true }
+  validates :column_id, numericality: { only_integer: true }
 
   validates :title, length: { in: 3..30 }
   validates :description, presence: true, length: { in: 3..2500 }, allow_blank: true

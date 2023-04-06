@@ -22,4 +22,5 @@ class Column < ApplicationRecord
   has_many :tasks
 
   validates :name, presence: true, length: { in: 3..14 }
+  validates :ordinal_number, presence: true, numericality: { only_integer: true }, allow_blank: true
 end
