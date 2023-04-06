@@ -123,36 +123,43 @@ paths:
       summary: list projects
       tags:
       - Projects
-      description: Get projects
+      description: Get a list of all projects that exist in the system for the authorized
+        user.
       responses:
         '200':
           description: successful
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    name:
-                      type: string
-                    status:
-                      type: string
-                    created_at:
-                      type: string
-                    updated_at:
-                      type: string
-                  required:
-                  - id
-                  - name
-                  - status
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      last_name:
+                        type: string
+                      email:
+                        type: string
     post:
       summary: create project
       tags:
       - Projects
-      description: Create projects
+      description: Create a project. To create a project, you need to pass a name
+        and user_id. The default status is open.
       parameters: []
       responses:
         '201':
@@ -168,55 +175,77 @@ paths:
                     type: string
                   status:
                     type: string
-                  user:
-                    type: object
                   created_at:
                     type: string
                   updated_at:
                     type: string
-                required:
-                - id
-                - name
-                - status
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      last_name:
+                        type: string
+                      email:
+                        type: string
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user_id:
-                    type: string
+                name:
+                  type: string
+                status:
+                  type: string
+                  default: open
+                user_id:
+                  type: integer
               required:
               - name
               - status
               - user_id
   "/api/v1/projects/{id}":
     parameters:
-    - name: id
+    - name: project_id
       in: path
       description: id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show project
       tags:
       - Projects
-      description: Get project
+      description: Show the selected project to an authorized user. The required parameter
+        is the project_id.
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
     patch:
       summary: update project
       tags:
       - Projects
-      description: Update project
+      description: 'Update the selected project of an authorized user. The required
+        parameters are the project Id and the parameter you want to update: status,
+        name.'
       parameters: []
       responses:
         '200':
@@ -238,74 +267,19 @@ paths:
                     type: string
                   updated_at:
                     type: string
-                required:
-                - id
-                - name
-                - status
-                - user
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user_id:
-                    type: string
-              required:
-              - name
-              - status
-              - user_id
-    put:
-      summary: update project
-      tags:
-      - Projects
-      description: Update project
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user:
-                    type: object
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
-                required:
-                - id
-                - name
-                - status
-                - user
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user_id:
-                    type: string
+                name:
+                  type: string
+                status:
+                  type: string
+                  default: open
+                user_id:
+                  type: integer
               required:
               - name
               - status
@@ -314,7 +288,8 @@ paths:
       summary: delete project
       tags:
       - Projects
-      description: Delete project
+      description: Deleting a project by an unauthorized user. The required parameter
+        is project_id
       responses:
         '204':
           description: successful
@@ -330,7 +305,7 @@ paths:
         description: project_id
         required: true
         schema:
-          type: string
+          type: integer
       responses:
         '201':
           description: successful
@@ -386,13 +361,13 @@ paths:
         description: project_id
         required: true
         schema:
-          type: string
+          type: integer
       - name: user_id
         in: path
         description: user_id
         required: true
         schema:
-          type: string
+          type: integer
       responses:
         '204':
           description: successful

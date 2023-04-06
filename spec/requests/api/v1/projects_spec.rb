@@ -4,21 +4,24 @@ RSpec.describe 'api/v1/projects', type: :request do
   path '/api/v1/projects' do
     get('list projects') do
       tags 'Projects'
-      description 'Get projects'
+      description 'Get a list of all projects that exist in the system for the authorized user.'
       produces 'application/json'
       consumes 'application/json'
       response(200, 'successful') do
-        schema type: :array,
-               items: {
-                 type: :object,
-                 properties: {
-                   id: { type: :integer },
-                   name: { type: :string },
-                   status: { type: :string },
-                   created_at: { type: :string },
-                   updated_at: { type: :string }
-                 },
-                 required: %w[id name status]
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 status: { type: :string },
+                 created_at: { type: :string },
+                 updated_at: { type: :string },
+                 user: { type: :object,
+                         properties: {
+                           id: { type: :integer },
+                           name: { type: :string },
+                           last_name: { type: :string },
+                           email: { type: :string }
+                         } },
                }
         run_test!
       end
@@ -26,20 +29,15 @@ RSpec.describe 'api/v1/projects', type: :request do
 
     post('create project') do
       tags 'Projects'
-      description 'Create projects'
+      description 'Create a project. To create a project, you need to pass a name and user_id. The default status is open.'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-
-          type: :object,
-          properties: {
-            name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string }
-          }
-
+          name: { type: :string },
+          status: { type: :string, default: :open },
+          user_id: { type: :integer }
         },
         required: %w[name status user_id]
       }
@@ -49,52 +47,53 @@ RSpec.describe 'api/v1/projects', type: :request do
                  id: { type: :integer },
                  name: { type: :string },
                  status: { type: :string },
-                 user: { type: :object },
                  created_at: { type: :string },
-                 updated_at: { type: :string }
-               },
-               required: %w[id name status]
+                 updated_at: { type: :string },
+                 user: { type: :object,
+                         properties: {
+                           id: { type: :integer },
+                           name: { type: :string },
+                           last_name: { type: :string },
+                           email: { type: :string }
+                         } },
+               }
         run_test!
       end
     end
   end
 
   path '/api/v1/projects/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: 'project_id', in: :path, type: :integer, description: 'id'
 
     get('show project') do
       tags 'Projects'
-      description 'Get project'
+      description 'Show the selected project to an authorized user. The required parameter is the project_id.'
       produces 'application/json'
       consumes 'application/json'
       response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 status: { type: :string },
+                 created_at: { type: :string },
+                 updated_at: { type: :string }
+               }
         run_test!
       end
     end
 
     patch('update project') do
       tags 'Projects'
-      description 'Update project'
+      description 'Update the selected project of an authorized user. The required parameters are the project Id and the parameter you want to update: status, name.'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string }
-          }
+          name: { type: :string },
+          status: { type: :string, default: :open },
+          user_id: { type: :integer }
         },
         required: %w[name status user_id]
       }
@@ -107,47 +106,14 @@ RSpec.describe 'api/v1/projects', type: :request do
                  user: { type: :object },
                  created_at: { type: :string },
                  updated_at: { type: :string }
-               },
-               required: %w[id name status user]
-        run_test!
-      end
-    end
-
-    put('update project') do
-      tags 'Projects'
-      description 'Update project'
-      produces 'application/json'
-      consumes 'application/json'
-      parameter name: :project, in: :body, schema: {
-        type: :object,
-        properties: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string }
-          }
-        },
-        required: %w[name status user_id]
-      }
-      response(200, 'successful') do
-        schema type: :object,
-               properties: {
-                 id: { type: :integer },
-                 name: { type: :string },
-                 status: { type: :string },
-                 user: { type: :object },
-                 created_at: { type: :string },
-                 updated_at: { type: :string }
-               },
-               required: %w[id name status user]
+               }
         run_test!
       end
     end
 
     delete('delete project') do
       tags 'Projects'
-      description 'Delete project'
+      description 'Deleting a project by an unauthorized user. The required parameter is project_id'
       produces 'application/json'
       consumes 'application/json'
       response(204, 'successful') do
@@ -162,8 +128,8 @@ RSpec.describe 'api/v1/projects', type: :request do
       description 'Add member to project'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: 'project_id', in: :path, type: :string, description: 'project_id'
-      parameter name: :user_id, in: :body, schema: {
+      parameter name: 'project_id', in: :path, type: :integer, description: 'project_id'
+      parameter name: :user_id, type: :integer, in: :body, schema: {
         type: :object,
         properties: {
           user_id: { type: :integer }
@@ -199,8 +165,8 @@ RSpec.describe 'api/v1/projects', type: :request do
       description 'Delete member from project'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: 'project_id', in: :path, type: :string, description: 'project_id'
-      parameter name: 'user_id', in: :path, type: :string, description: 'user_id'
+      parameter name: 'project_id', in: :path, type: :integer, description: 'project_id'
+      parameter name: 'user_id', in: :path, type: :integer, description: 'user_id'
       response(204, 'successful') do
         run_test!
       end
