@@ -33,7 +33,7 @@ Rails.application.routes.draw do
           end
         end
       end
-
+      resources :tasks
       resources :comments
       resources :documents
       # get '/github/show', to: 'github#show'
