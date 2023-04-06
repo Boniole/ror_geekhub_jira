@@ -20,7 +20,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def update
-    authorize @column
+    # authorize @column
     if @column.update(column_params)
       render json: @column, status: :ok, serializer: ColumnSerializer
     else
@@ -29,7 +29,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def destroy
-    authorize @column
+    # authorize @column
     @column.destroy
   end
 
@@ -44,6 +44,6 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def column_params
-    params.require(:column).permit(:name, :desk_id, :ordinary_number)
+    params.permit(:columnable_id, :columnable_type, :name)
   end
 end

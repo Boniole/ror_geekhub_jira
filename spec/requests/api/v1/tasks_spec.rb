@@ -94,25 +94,25 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :column_id,
+        name: :columnable_id,
         in: :post,
         required: true,
         schema: {
           type: :integer
         },
         default: 1,
-        description: 'The ID of the column (integer)'
+        description: 'The ID of the desk (integer)'
       )
 
       parameter(
-        name: :column_type,
+        name: :columnable_type,
         in: :post,
         required: true,
         schema: {
           type: :string
         },
-        default: 'Column',
-        description: 'The type of the column'
+        default: 'Desk',
+        description: 'The type of the desk'
       )
 
       parameter(
@@ -222,8 +222,8 @@ RSpec.describe 'api/v1/tasks', type: :request do
         type: :object,
         properties: {
           assignee_id: { type: :integer, default: 1 },
-          column_id: { type: :integer, default: 1 },
-          column_type: { type: :string, default: 'Column' },
+          columnable_id: { type: :integer, default: 1 },
+          columnable_type: { type: :string, default: 'Desk' },
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
           user_id: { type: :integer, default: 1 },
@@ -236,7 +236,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id column_type desk_id project_id user_id]
+        required: %w[title columnable_id columnable_type desk_id project_id user_id]
       }
 
       response(200, 'successful') do
@@ -283,8 +283,8 @@ RSpec.describe 'api/v1/tasks', type: :request do
         type: :object,
         properties: {
           assignee_id: { type: :integer, default: 1 },
-          column_id: { type: :integer, default: 1 },
-          column_type: { type: :string, default: 'Column' },
+          columnable_id: { type: :integer, default: 1 },
+          columnable_type: { type: :string, default: 'Desk'},
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
           user_id: { type: :integer, default: 1 },
@@ -297,7 +297,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id column_type desk_id project_id user_id]
+        required: %w[title columnable_id columnable_type desk_id project_id user_id]
       }
       response(200, 'successful') do
         let(:id) { '123' }

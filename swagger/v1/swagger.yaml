@@ -3,14 +3,6 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-security:
-  - bearerAuth: [ ]
 paths:
   "/api/v1/columns":
     get:
@@ -38,20 +30,16 @@ paths:
                 name:
                   type: string
                   default: To do
-                column_id:
+                columnable_id:
                   type: integer
                   default: 1
-                column_type:
+                columnable_type:
                   type: string
-                  default: Column
-                desk_id:
-                  type: integer
-                  default: 1
+                  default: Desk
               required:
               - name
-              - column_id
-              - column_type
-              - desk_id
+              - columnable_id
+              - columnable_type
   "/api/v1/columns/{id}":
     parameters:
     - name: id
@@ -64,7 +52,14 @@ paths:
       summary: show column
       tags:
       - Columns
-      description: Create task
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update column
+      tags:
+      - Columns
+      description: update task
       parameters: []
       responses:
         '200':
@@ -78,27 +73,16 @@ paths:
                 name:
                   type: string
                   default: To do
-                column_id:
+                columnable_id:
                   type: integer
                   default: 1
-                column_type:
+                columnable_type:
                   type: string
-                  default: Column
-                desk_id:
-                  type: integer
-                  default: 1
+                  default: Desk
               required:
               - name
-              - column_id
-              - column_type
-              - desk_id
-    patch:
-      summary: update column
-      tags:
-      - Columns
-      responses:
-        '200':
-          description: successful
+              - columnable_id
+              - columnable_type
     delete:
       summary: delete column
       tags:
@@ -557,20 +541,20 @@ paths:
           type: integer
         default: 1
         description: The ID of the desk (integer)
-      - name: column_id
+      - name: columnable_id
         in: post
         required: true
         schema:
           type: integer
         default: 1
-        description: The ID of the column (integer)
-      - name: column_type
+        description: The ID of the desk (integer)
+      - name: columnable_type
         in: post
         required: true
         schema:
           type: string
-        default: Column
-        description: The type of the column
+        default: Desk
+        description: The type of the desk
       - name: title
         in: post
         required: true
@@ -660,12 +644,12 @@ paths:
                 assignee_id:
                   type: integer
                   default: 1
-                column_id:
+                columnable_id:
                   type: integer
                   default: 1
-                column_type:
+                columnable_type:
                   type: string
-                  default: Column
+                  default: Desk
                 desk_id:
                   type: integer
                   default: 1
@@ -693,8 +677,8 @@ paths:
                   type: integer
               required:
               - title
-              - column_id
-              - column_type
+              - columnable_id
+              - columnable_type
               - desk_id
               - project_id
               - user_id
@@ -732,12 +716,12 @@ paths:
                 assignee_id:
                   type: integer
                   default: 1
-                column_id:
+                columnable_id:
                   type: integer
                   default: 1
-                column_type:
+                columnable_type:
                   type: string
-                  default: Column
+                  default: Desk
                 desk_id:
                   type: integer
                   default: 1
@@ -765,8 +749,8 @@ paths:
                   type: integer
               required:
               - title
-              - column_id
-              - column_type
+              - columnable_id
+              - columnable_type
               - desk_id
               - project_id
               - user_id
@@ -810,7 +794,6 @@ paths:
       summary: Creates a user
       tags:
       - Users
-      security: []
       parameters: []
       responses:
         '200':
@@ -956,7 +939,6 @@ paths:
       summary: Logs in a user
       tags:
       - Authentication
-      security: []
       parameters: []
       responses:
         '200':
@@ -1008,4 +990,16 @@ servers:
 - url: https://{defaultHost}
   variables:
     defaultHost:
+<<<<<<< HEAD
       default: kotello.space
+=======
+      default: 127.0.0.1:3000
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []
+>>>>>>> change swagger
