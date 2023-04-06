@@ -8,9 +8,8 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def show
-    # debugger
     # authorize @column
-    render json: { column: @column }, status: :ok, serializer: ColumnSerializer
+    render json: @column, status: :ok, serializer: ColumnSerializer
   end
 
   def create
