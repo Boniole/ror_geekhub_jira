@@ -22,9 +22,6 @@ end
   # create Desk
   desk = Desk.find_by(project_id: project.id)
 
-  # create Columns
-  ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str) }
-
   # create Tasks
   25.times do
     Column.where(columnable_id: desk.id).sample.tasks.create(

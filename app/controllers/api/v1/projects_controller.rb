@@ -16,11 +16,10 @@ class Api::V1::ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user_id = @current_user.id
-    @project.save
-    @project.memberships.build(user_id: @current_user.id, role: 'admin')
-    authorize @project
 
     if @project.save
+      @project.memberships.build(user_id: @current_user.id, role: 'admin')
+      authorize @project
       render json: @project, status: :created
     else
       render json: @project.errors, status: :unprocessable_entity
