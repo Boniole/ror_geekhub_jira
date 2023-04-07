@@ -882,6 +882,7 @@ paths:
       tags:
       - Authentication
       parameters: []
+      security: []
       responses:
         '200':
           description: logged in successfully
@@ -906,6 +907,7 @@ paths:
       tags:
       - Users
       parameters: []
+      security: []
       responses:
         '200':
           description: Password reset successfully
@@ -929,10 +931,14 @@ paths:
               - email
               - password
 servers:
-- url: https://{defaultHost}
+- url: https://{kotello.space}
   variables:
     defaultHost:
       default: kotello.space
+- url: http://{localhost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
 components:
   securitySchemes:
     bearerAuth:

@@ -24,10 +24,18 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://{defaultHost}',
+          url: 'localhost',
           variables: {
             defaultHost: {
-              default: '127.0.0.1:3000'
+              default: 'http://127.0.0.1:3000'
+            }
+          }
+        },
+        {
+          url: 'kotello.space',
+          variables: {
+            defaultHost: {
+              default: 'https://kotello.space'
             }
           }
         }

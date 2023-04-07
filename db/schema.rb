@@ -18,8 +18,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_180350) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "desk_id", null: false
     t.integer "ordinal_number", default: 0
+    t.bigint "desk_id", null: false
     t.index ["desk_id"], name: "index_columns_on_desk_id"
   end
 
@@ -85,11 +85,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_06_180350) do
     t.string "description"
     t.integer "priority", default: 0
     t.integer "status", default: 0
-    t.integer "type_of", default: 0
     t.text "label"
-    t.text "estimate"
-    t.text "start"
-    t.text "end"
+    t.datetime "estimate"
+    t.date "start"
+    t.date "end"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
