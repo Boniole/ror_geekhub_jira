@@ -85,9 +85,37 @@ paths:
       tags:
       - Comments
       description: Create comment
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                body:
+                  type: string
+                  default: My comment
+                commentable_type:
+                  type: string
+                  default: Task
+                commentable_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 43
+              required:
+              - task_id
+              - body
+              - commentable_type
+              - commentable_id
+              - user_id
   "/api/v1/comments/{id}":
     parameters:
     - name: id
@@ -96,37 +124,85 @@ paths:
       required: true
       schema:
         type: string
-    get:
-      summary: show comment
-      tags:
-      - Comments
-      description: Get comment
-      responses:
-        '200':
-          description: successful
     patch:
       summary: update comment
       tags:
       - Comments
       description: Update comment
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                body:
+                  type: string
+                  default: My comment
+                commentable_type:
+                  type: string
+                  default: Task
+                commentable_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 43
+              required:
+              - task_id
+              - body
+              - commentable_type
+              - commentable_id
+              - user_id
     put:
       summary: update comment
       tags:
       - Comments
       description: Put comment
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                body:
+                  type: string
+                  default: My comment
+                commentable_type:
+                  type: string
+                  default: Task
+                commentable_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 43
+              required:
+              - task_id
+              - body
+              - commentable_type
+              - commentable_id
+              - user_id
     delete:
       summary: delete comment
       tags:
       - Comments
       description: Delete comment
       responses:
-        '200':
+        '204':
           description: successful
   "/api/v1/desks":
     get:
@@ -134,17 +210,70 @@ paths:
       tags:
       - Desks
       description: Get desks
+      parameters:
+      - name: project_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the project (integer)
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                required:
+                - id
+                - name
     post:
       summary: create desk
       tags:
       - Desks
       description: Create desk
+      parameters: []
       responses:
-        '200':
+        '201':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user:
+                    type: object
+                required:
+                - id
+                - name
+                - status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: My desk
+                project_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - project_id
   "/api/v1/desks/{id}":
     parameters:
     - name: id
@@ -166,17 +295,49 @@ paths:
       tags:
       - Desks
       description: Update desk
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: My desk
+                project_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - project_id
     put:
       summary: update desk
       tags:
       - Desks
       description: Update desk
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: My desk
+                project_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - project_id
     delete:
       summary: delete desk
       tags:
@@ -207,10 +368,8 @@ paths:
                       type: string
                     status:
                       type: string
-                    created_at:
-                      type: string
-                    updated_at:
-                      type: string
+                    user:
+                      type: object
                   required:
                   - id
                   - name
@@ -237,10 +396,6 @@ paths:
                     type: string
                   user:
                     type: object
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
                 required:
                 - id
                 - name
@@ -251,18 +406,12 @@ paths:
             schema:
               type: object
               properties:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user_id:
-                    type: string
+                name:
+                  type: string
+                status:
+                  type: string
               required:
               - name
-              - status
-              - user_id
   "/api/v1/projects/{id}":
     parameters:
     - name: id
@@ -279,6 +428,23 @@ paths:
       responses:
         '200':
           description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                  user:
+                    type: object
+                required:
+                - id
+                - name
+                - status
     patch:
       summary: update project
       tags:
@@ -737,6 +903,7 @@ paths:
       tags:
       - Users
       parameters: []
+      security: []
       responses:
         '200':
           description: user created
@@ -931,14 +1098,14 @@ paths:
               - email
               - password
 servers:
-- url: https://{kotello.space}
-  variables:
-    defaultHost:
-      default: kotello.space
 - url: http://{localhost}
   variables:
-    defaultHost:
+    localhost:
       default: 127.0.0.1:3000
+- url: https://{kotello}
+  variables:
+    kotello:
+      default: kotello.space
 components:
   securitySchemes:
     bearerAuth:

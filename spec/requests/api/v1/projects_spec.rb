@@ -15,8 +15,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                    id: { type: :integer },
                    name: { type: :string },
                    status: { type: :string },
-                   created_at: { type: :string },
-                   updated_at: { type: :string }
+                   user: { type: :object }
                  },
                  required: %w[id name status]
                }
@@ -32,16 +31,10 @@ RSpec.describe 'api/v1/projects', type: :request do
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-
-          type: :object,
-          properties: {
             name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string }
-          }
-
+            status: { type: :string }
         },
-        required: %w[name status user_id]
+        required: %w[name]
       }
       response(201, 'successful') do
         schema type: :object,
@@ -49,9 +42,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                  id: { type: :integer },
                  name: { type: :string },
                  status: { type: :string },
-                 user: { type: :object },
-                 created_at: { type: :string },
-                 updated_at: { type: :string }
+                 user: { type: :object }
                },
                required: %w[id name status]
         run_test!
@@ -68,15 +59,14 @@ RSpec.describe 'api/v1/projects', type: :request do
       produces 'application/json'
       consumes 'application/json'
       response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 status: { type: :string },
+                 user: { type: :object }
+               },
+               required: %w[id name status]
         run_test!
       end
     end

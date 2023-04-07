@@ -6,7 +6,19 @@ RSpec.describe 'api/v1/comments', type: :request do
     post('create comment') do
       tags 'Comments'
       description 'Create comment'
-      consumes "application/json"
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: :сomment, in: :body, schema: {
+        type: :object,
+        properties: {
+          task_id: { type: :integer, default: 1 },
+          body: { type: :string,  default: 'My comment' },
+          commentable_type: { type: :string, default: 'Task' },
+          commentable_id: { type: :integer, default: 1 },
+          user_id: { type: :integer, default: 43 },
+        },
+        required: %w[task_id body commentable_type commentable_id user_id]
+      }
       response(200, 'successful') do
 
         after do |example|
@@ -25,28 +37,22 @@ RSpec.describe 'api/v1/comments', type: :request do
     # You'll want to customize the parameter types...
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
-    get('show comment') do
-      tags 'Comments'
-      description 'Get comment'
-      consumes "application/json"
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
     patch('update comment') do
       tags 'Comments'
       description 'Update comment'
-      consumes "application/json"
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: :сomment, in: :body, schema: {
+        type: :object,
+        properties: {
+          task_id: { type: :integer, default: 1 },
+          body: { type: :string,  default: 'My comment' },
+          commentable_type: { type: :string, default: 'Task' },
+          commentable_id: { type: :integer, default: 1 },
+          user_id: { type: :integer, default: 43 },
+        },
+        required: %w[task_id body commentable_type commentable_id user_id]
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -64,7 +70,19 @@ RSpec.describe 'api/v1/comments', type: :request do
     put('update comment') do
       tags 'Comments'
       description 'Put comment'
-      consumes "application/json"
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: :сomment, in: :body, schema: {
+        type: :object,
+        properties: {
+          task_id: { type: :integer, default: 1 },
+          body: { type: :string,  default: 'My comment' },
+          commentable_type: { type: :string, default: 'Task' },
+          commentable_id: { type: :integer, default: 1 },
+          user_id: { type: :integer, default: 43 },
+        },
+        required: %w[task_id body commentable_type commentable_id user_id]
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -83,7 +101,7 @@ RSpec.describe 'api/v1/comments', type: :request do
       tags 'Comments'
       description 'Delete comment'
       consumes "application/json"
-      response(200, 'successful') do
+      response(204, 'successful') do
         let(:id) { '123' }
 
         after do |example|
