@@ -1,26 +1,8 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/comments', type: :request do
-
   path '/api/v1/comments' do
-
-    get('list comments') do
-      tags 'Comments'
-      description 'Get comments'
-      consumes "application/json"
-      response(200, 'successful') do
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-
+    
     post('create comment') do
       tags 'Comments'
       description 'Create comment'

@@ -4,19 +4,15 @@ class Api::V1::TasksController < ApplicationController
   before_action :set_task, only: %i[show update destroy]
   before_action :set_tasks, only: %i[index]
 
-  def index
-    render json: @tasks, status: :ok, include: [], each_serializer: TaskSerializer
-  end
-
   def show
-    # authorize @task
+    authorize @task
     render json: @task, status: :ok, serializer: TaskSerializer
   end
 
   def create
     @task = Task.new(task_params)
     @task.user_id = @current_user.id
-    # authorize @task
+    authorize @task
 
     if @task.save
       render json: @task, status: :created, serializer: TaskSerializer
@@ -26,7 +22,7 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update
-    # authorize @task
+    authorize @task
 
     if @task.update(task_params)
       render json: @task
@@ -36,7 +32,7 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def destroy
-    # authorize @task
+    authorize @task
     @task.destroy
   end
 

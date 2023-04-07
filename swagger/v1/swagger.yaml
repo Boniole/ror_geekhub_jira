@@ -5,13 +5,6 @@ info:
   version: v1
 paths:
   "/api/v1/columns":
-    get:
-      summary: list columns
-      tags:
-      - Columns
-      responses:
-        '200':
-          description: successful
     post:
       summary: create column
       tags:
@@ -87,14 +80,6 @@ paths:
         '200':
           description: successful
   "/api/v1/comments":
-    get:
-      summary: list comments
-      tags:
-      - Comments
-      description: Get comments
-      responses:
-        '200':
-          description: successful
     post:
       summary: create comment
       tags:
@@ -478,31 +463,7 @@ paths:
       responses:
         '204':
           description: successful
-  "/api/v1/tasks/{id}/comments":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: comments task
-      tags:
-      - Tasks
-      description: Get comments by task id
-      responses:
-        '200':
-          description: successful
   "/api/v1/tasks":
-    get:
-      summary: list tasks
-      tags:
-      - Tasks
-      description: Get tasks list
-      responses:
-        '200':
-          description: successful
     post:
       summary: create task
       tags:

@@ -1,4 +1,6 @@
 class CommentPolicy < ApplicationPolicy
+  attr_reader :user, :record
+
   def show?
     project_member?
   end
@@ -8,7 +10,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    comment_author? || user.admin?(record.task.project)
+    comment_author? || user.admin?(@record.task.project)
   end
 
   def destroy?
@@ -18,10 +20,10 @@ class CommentPolicy < ApplicationPolicy
   private
 
   def project_member?
-    record.task.project.memberships.exists?(user_id: user.id)
+    @record.task.project.memberships.exists?(user_id: user.id)
   end
 
   def comment_author?
-    record.user_id == user.id
+    @record.user_id == user.id
   end
 end
