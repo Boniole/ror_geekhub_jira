@@ -26,11 +26,17 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :projects, through: :memberships
 
-  validates :name, presence: true
-  validates :last_name, presence: true
+  validates :name, presence: true,
+                   length: { minimum: 2, maximum: 30 },
+                   format: { with: %r{\A[a-zA-Z^~!@#$%^&*()_+\-=\[\]{}|;':",./<>?£ ]+\z},
+                             message: 'Special characters not allowed' }
+  validates :last_name, presence: true,
+                        length: { minimum: 2, maximum: 30 },
+                        format: { with: %r{\A[a-zA-Z^~!@#$%^&*()_+\-=\[\]{}|;':",./<>?£ ]+\z},
+                                  message: 'Special characters not allowed' }
   validates :email, presence: true, uniqueness: true,
                     length: { minimum: 8, maximum: 64 },
-                    format: { with: URI::MailTo::EMAIL_REGEXP }
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
   validates :password, presence: true,
                        length: { minimum: 8, maximum: 20 },
                        format: { with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/,
