@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         end
       end
       post '/login', to: 'authentication#login'
+      get '/auth/google_oauth2/callback', to: 'sessions#google_auth'
       post '/forgot', to: 'passwords#forgot'
       post '/reset', to: 'passwords#reset'
       resources :projects do
