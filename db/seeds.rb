@@ -36,8 +36,7 @@ end
       end: Date.today + 1,
       user_id: project.user_id,
       project_id: project.id,
-      desk_id: desk.id,
-      column_type: 'Column'
+      desk_id: desk.id
     )
   end
 
