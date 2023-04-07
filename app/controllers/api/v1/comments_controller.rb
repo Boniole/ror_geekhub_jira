@@ -1,15 +1,12 @@
 class Api::V1::CommentsController < ApplicationController
+  before_action :authorize_request
   before_action :comment_params, only: %i[create update]
   before_action :set_comment, only: %i[update destroy]
   before_action :set_comments, only: %i[index]
 
-  def index
-    render json: @comments, include: [], each_serializer: CommentSerializer
-  end
-
   def create
     @comment = Comment.new(comment_params)
-    # authorize @comments
+    authorize @comment
 
     if @comment.save
       render json: @comment, status: :ok, serializer: CommentSerializer
@@ -19,7 +16,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def update
-    # authorize @comments
+    authorize @comment
     if @comment.update(comment_params)
       render json: @comment, serializer: CommentSerializer
     else
@@ -28,7 +25,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def destroy
-    # authorize @comments
+    authorize @comment
     @comment.destroy
   end
 
