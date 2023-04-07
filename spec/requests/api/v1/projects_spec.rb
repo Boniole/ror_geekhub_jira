@@ -36,10 +36,9 @@ RSpec.describe 'api/v1/projects', type: :request do
         type: :object,
         properties: {
           name: { type: :string },
-          status: { type: :string, default: :open },
-          user_id: { type: :integer }
+          status: { type: :string, default: :open }
         },
-        required: %w[name status user_id]
+        required: %w[name status]
       }
       response(201, 'successful') do
         schema type: :object,
