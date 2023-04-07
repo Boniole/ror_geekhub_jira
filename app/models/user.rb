@@ -8,8 +8,10 @@
 #  last_name              :string
 #  name                   :string
 #  password_digest        :string
+#  provider               :string
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -57,6 +59,17 @@ class User < ApplicationRecord
     self.reset_password_token = nil
     self.password = password
     save!(validate: false)
+  end
+
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
+      user.provider = auth[:provider]
+      user.uid = auth[:uid]
+      user.name = auth[:info][:first_name]
+      user.last_name = auth[:info][:last_name]
+      user.email = auth[:info][:email]
+      user.password = SecureRandom.hex(15)
+    end
   end
 
   private

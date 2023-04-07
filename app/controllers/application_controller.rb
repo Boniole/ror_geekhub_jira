@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  #helper_method :nats_publish
+
+  # helper_method :nats_publish
 
   def not_found
     render json: { error: 'not_found' }
