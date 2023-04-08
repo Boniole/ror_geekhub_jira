@@ -2,7 +2,6 @@ class Api::V1::TasksController < ApplicationController
   before_action :authorize_request
   before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
-  before_action :set_tasks, only: %i[index]
 
   def show
     authorize @task
@@ -44,10 +43,6 @@ class Api::V1::TasksController < ApplicationController
     render json: { errors: 'Task not found' }, status: :not_found
   end
 
-  def set_tasks
-    @tasks = Task.all
-  end
-
   def task_params
     params.require(:task).permit(
       :project_id,
@@ -57,6 +52,7 @@ class Api::V1::TasksController < ApplicationController
       :column_id,
       :title,
       :description,
+      :sort_number,
       :estimate,
       :label,
       :priority,

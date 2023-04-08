@@ -128,42 +128,6 @@ paths:
       summary: update comment
       tags:
       - Comments
-      description: Update comment
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                task_id:
-                  type: integer
-                  default: 1
-                body:
-                  type: string
-                  default: My comment
-                commentable_type:
-                  type: string
-                  default: Task
-                commentable_id:
-                  type: integer
-                  default: 1
-                user_id:
-                  type: integer
-                  default: 43
-              required:
-              - task_id
-              - body
-              - commentable_type
-              - commentable_id
-              - user_id
-    put:
-      summary: update comment
-      tags:
-      - Comments
       description: Put comment
       parameters: []
       responses:
@@ -685,6 +649,13 @@ paths:
           type: string
         default: Task description
         description: The description of the task (optional)
+      - name: sort_number
+        in: post
+        required: false
+        schema:
+          type: string
+        default: '1'
+        description: sort number
       - name: estimate
         in: post
         required: false
@@ -776,6 +747,11 @@ paths:
                   type: string
                 description:
                   type: string
+                sort_number:
+                  type: integer
+                  default: 1
+                estimate:
+                  type: string
                 label:
                   type: string
                 priority:
@@ -844,6 +820,11 @@ paths:
                   type: string
                 description:
                   type: string
+                sort_number:
+                  type: integer
+                  default: 1
+                estimate:
+                  type: string
                 label:
                   type: string
                 priority:
@@ -903,7 +884,6 @@ paths:
       tags:
       - Users
       parameters: []
-      security: []
       responses:
         '200':
           description: user created
@@ -1049,7 +1029,6 @@ paths:
       tags:
       - Authentication
       parameters: []
-      security: []
       responses:
         '200':
           description: logged in successfully
@@ -1074,7 +1053,6 @@ paths:
       tags:
       - Users
       parameters: []
-      security: []
       responses:
         '200':
           description: Password reset successfully

@@ -2,7 +2,6 @@ class Api::V1::CommentsController < ApplicationController
   before_action :authorize_request
   before_action :comment_params, only: %i[create update]
   before_action :set_comment, only: %i[update destroy]
-  before_action :set_comments, only: %i[index]
 
   def create
     @comment = Comment.new(comment_params)
@@ -33,10 +32,6 @@ class Api::V1::CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
-  end
-
-  def set_comments
-    @comments = Comment.all
   end
 
   def comment_params
