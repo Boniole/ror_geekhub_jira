@@ -649,6 +649,13 @@ paths:
           type: string
         default: Task description
         description: The description of the task (optional)
+      - name: sort_number
+        in: post
+        required: false
+        schema:
+          type: string
+        default: '1'
+        description: sort number
       - name: estimate
         in: post
         required: false
@@ -740,6 +747,11 @@ paths:
                   type: string
                 description:
                   type: string
+                sort_number:
+                  type: integer
+                  default: 1
+                estimate:
+                  type: string
                 label:
                   type: string
                 priority:
@@ -807,6 +819,11 @@ paths:
                 title:
                   type: string
                 description:
+                  type: string
+                sort_number:
+                  type: integer
+                  default: 1
+                estimate:
                   type: string
                 label:
                   type: string
