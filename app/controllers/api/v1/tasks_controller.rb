@@ -58,8 +58,8 @@ class Api::V1::TasksController < ApplicationController
       :priority,
       :type_of,
       :status,
-      :start,
-      :end
+      :start_date,
+      :end_date
     )
   end
 end

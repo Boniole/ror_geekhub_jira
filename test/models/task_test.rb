@@ -4,12 +4,12 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
-#  end         :text
+#  end_date    :text
 #  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
 #  sort_number :integer
-#  start       :text
+#  start_date  :text
 #  status      :integer          default("open")
 #  tag_name    :text
 #  title       :text
