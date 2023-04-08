@@ -2,7 +2,6 @@ class Api::V1::TasksController < ApplicationController
   before_action :authorize_request
   before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
-  before_action :set_tasks, only: %i[index]
 
   def show
     authorize @task
