@@ -1,10 +1,6 @@
 class CommentPolicy < ApplicationPolicy
   attr_reader :user, :record
 
-  def show?
-    project_member?
-  end
-
   def create?
     project_member?
   end
@@ -20,7 +16,7 @@ class CommentPolicy < ApplicationPolicy
   private
 
   def project_member?
-    @record.task.project.memberships.exists?(user_id: user.id)
+    @record.commentable.project.memberships.exists?(user_id: user.id)
   end
 
   def comment_author?

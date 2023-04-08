@@ -2,7 +2,6 @@ class Api::V1::ColumnsController < ApplicationController
   before_action :authorize_request
   before_action :column_params, only: %i[create update]
   before_action :set_column, only: %i[show update destroy]
-  before_action :set_columns, only: %i[index]
 
   def show
     authorize @column
@@ -39,10 +38,6 @@ class Api::V1::ColumnsController < ApplicationController
 
   def set_column
     @column = Column.find(params[:id])
-  end
-
-  def set_columns
-    @columns = Column.all
   end
 
   def column_params

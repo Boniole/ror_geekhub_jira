@@ -67,7 +67,7 @@ RSpec.describe 'api/v1/comments', type: :request do
       end
     end
 
-    put('update comment') do
+    patch('update comment') do
       tags 'Comments'
       description 'Put comment'
       produces 'application/json'

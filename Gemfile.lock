@@ -302,6 +302,7 @@ GEM
       sshkit (~> 1.8)
     thor (1.2.1)
     timeout (0.3.2)
+    translit (0.1.5)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     version_gem (1.1.2)
@@ -352,6 +353,7 @@ DEPENDENCIES
   rswag
   rswag-specs
   sshkit-sudo
+  translit
   tzinfo-data
 
 RUBY VERSION
