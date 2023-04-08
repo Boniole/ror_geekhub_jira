@@ -10,6 +10,7 @@
 #  priority    :integer          default("low")
 #  start       :text
 #  status      :integer          default("open")
+#  tag_name    :text
 #  title       :text
 #  type_of     :integer          default("task")
 #  created_at  :datetime         not null

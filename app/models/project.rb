@@ -2,12 +2,13 @@
 #
 # Table name: projects
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  status     :integer          default("open")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id          :bigint           not null, primary key
+#  name        :string
+#  status      :integer          default("open")
+#  tasks_count :integer          default(0), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 # Indexes
 #
@@ -27,9 +28,9 @@ class Project < ApplicationRecord
   validates :name, presence: true, length: { minimum: 3 }
   validates :status, presence: true
 
-  after_create :create_desk
-
   enum :status, %i[open close], default: :open
+
+  after_create :create_desk
 
   private
 
