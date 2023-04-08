@@ -17,11 +17,9 @@ RSpec.describe 'api/v1/users', type: :request do
                    id: { type: :integer },
                    name: { type: :string },
                    last_name: { type: :string },
-                   email: { type: :string },
-                   created_at: { type: :string },
-                   updated_at: { type: :string }
+                   email: { type: :string }
                  },
-                 required: %w[id name last_name email created_at updated_at]
+                 required: %w[id name last_name email]
                }
         run_test!
       end
@@ -54,6 +52,34 @@ RSpec.describe 'api/v1/users', type: :request do
         end
       end
     end
+
+    path '/api/v1/about_user' do
+      get 'Retrieves information about the current user' do
+        tags 'Users'
+        produces 'application/json'
+        parameter name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
+
+        response '200', 'user information found' do
+          schema type: :object,
+                properties: {
+                  id: { type: :integer },
+                  name: { type: :string },
+                  last_name: { type: :string },
+                  email: { type: :string }
+                },
+                required: %w[id name last_name email]
+
+          let(:current_user) { 'Bearer ' + JsonWebToken.encode(user_id: user.id) }
+          run_test!
+        end
+
+        response '401', 'unauthorized access' do
+          let(:current_user) { '' }
+          run_test!
+        end
+      end
+    end
+
 
     path '/api/v1/users' do
       post 'Creates a user' do

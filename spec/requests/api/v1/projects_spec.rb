@@ -1,9 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/projects', type: :request do
-
   path '/api/v1/projects' do
-
     get('list projects') do
       tags 'Projects'
       description 'Get projects'
@@ -17,8 +15,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                    id: { type: :integer },
                    name: { type: :string },
                    status: { type: :string },
-                   created_at: { type: :string },
-                   updated_at: { type: :string }
+                   user: { type: :object }
                  },
                  required: %w[id name status]
                }
@@ -34,27 +31,20 @@ RSpec.describe 'api/v1/projects', type: :request do
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-        project: {
-          type: :object,
-          properties: {
             name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string },
-          }}
+            status: { type: :string }
         },
-        required: %w[name status user_id]
+        required: %w[name]
       }
       response(201, 'successful') do
         schema type: :object,
-                 properties: {
-                   id: { type: :integer },
-                   name: { type: :string },
-                   status: { type: :string },
-                   user: { type: :object},
-                   created_at: { type: :string },
-                   updated_at: { type: :string }
-                 },
-                 required: %w[id name status]
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 status: { type: :string },
+                 user: { type: :object }
+               },
+               required: %w[id name status]
         run_test!
       end
     end
@@ -69,15 +59,14 @@ RSpec.describe 'api/v1/projects', type: :request do
       produces 'application/json'
       consumes 'application/json'
       response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 status: { type: :string },
+                 user: { type: :object }
+               },
+               required: %w[id name status]
         run_test!
       end
     end
@@ -90,13 +79,12 @@ RSpec.describe 'api/v1/projects', type: :request do
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-          project: {
-            type: :object,
-            properties: {
-              name: { type: :string },
-              status: { type: :string },
-              user_id: { type: :string },
-            }}
+          type: :object,
+          properties: {
+            name: { type: :string },
+            status: { type: :string },
+            user_id: { type: :string }
+          }
         },
         required: %w[name status user_id]
       }
@@ -106,7 +94,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                  id: { type: :integer },
                  name: { type: :string },
                  status: { type: :string },
-                 user: { type: :object},
+                 user: { type: :object },
                  created_at: { type: :string },
                  updated_at: { type: :string }
                },
@@ -123,13 +111,12 @@ RSpec.describe 'api/v1/projects', type: :request do
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-          project: {
-            type: :object,
-            properties: {
-              name: { type: :string },
-              status: { type: :string },
-              user_id: { type: :string },
-            }}
+          type: :object,
+          properties: {
+            name: { type: :string },
+            status: { type: :string },
+            user_id: { type: :string }
+          }
         },
         required: %w[name status user_id]
       }
@@ -139,7 +126,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                  id: { type: :integer },
                  name: { type: :string },
                  status: { type: :string },
-                 user: { type: :object},
+                 user: { type: :object },
                  created_at: { type: :string },
                  updated_at: { type: :string }
                },
@@ -153,6 +140,57 @@ RSpec.describe 'api/v1/projects', type: :request do
       description 'Delete project'
       produces 'application/json'
       consumes 'application/json'
+      response(204, 'successful') do
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/projects/{project_id}/add_member' do
+    post('add member to project') do
+      tags 'Projects'
+      description 'Add member to project'
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: 'project_id', in: :path, type: :string, description: 'project_id'
+      parameter name: :user_id, in: :body, schema: {
+        type: :object,
+        properties: {
+          user_id: { type: :integer }
+        },
+        required: %w[user_id]
+      }
+      response(201, 'successful') do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 user: { type: :object },
+                 role: { type: :string },
+                 created_at: { type: :string },
+                 updated_at: { type: :string }
+               },
+               required: %w[id user role]
+        run_test!
+      end
+      response(422, 'unprocessable entity') do
+        schema type: :object,
+               properties: {
+                 error: { type: :string }
+               },
+               required: %w[error]
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/projects/{project_id}/members/{user_id}' do
+    delete('delete member from project') do
+      tags 'Projects'
+      description 'Delete member from project'
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: 'project_id', in: :path, type: :string, description: 'project_id'
+      parameter name: 'user_id', in: :path, type: :string, description: 'user_id'
       response(204, 'successful') do
         run_test!
       end

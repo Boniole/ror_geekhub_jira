@@ -8,8 +8,10 @@
 #  last_name              :string
 #  name                   :string
 #  password_digest        :string
+#  provider               :string
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -17,18 +19,24 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :projects, dependent: :destroy
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, dependent: :destroy
 
   has_many :memberships
   has_many :projects, through: :memberships
 
-  validates :name, presence: true
-  validates :last_name, presence: true
+  validates :name, presence: true,
+                   length: { minimum: 2, maximum: 30 },
+                   format: { with: %r{\A[a-zA-Z^~!@#$%^&*()_+\-=\[\]{}|;':",./<>?£ ]+\z},
+                             message: 'Special characters not allowed' }
+  validates :last_name, presence: true,
+                        length: { minimum: 2, maximum: 30 },
+                        format: { with: %r{\A[a-zA-Z^~!@#$%^&*()_+\-=\[\]{}|;':",./<>?£ ]+\z},
+                                  message: 'Special characters not allowed' }
   validates :email, presence: true, uniqueness: true,
                     length: { minimum: 8, maximum: 64 },
-                    format: { with: URI::MailTo::EMAIL_REGEXP }
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
   validates :password, presence: true,
                        length: { minimum: 8, maximum: 20 },
                        format: { with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/,
@@ -57,6 +65,17 @@ class User < ApplicationRecord
     self.reset_password_token = nil
     self.password = password
     save!(validate: false)
+  end
+
+  def self.from_omniauth(auth)
+    find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
+      user.provider = auth[:provider]
+      user.uid = auth[:uid]
+      user.name = auth[:info][:first_name]
+      user.last_name = auth[:info][:last_name]
+      user.email = auth[:info][:email]
+      user.password = SecureRandom.hex(15)
+    end
   end
 
   private

@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: mini_jira_production
-  username: mini_jira
+  database: mini_jira
+  username: deployer
   password: <%= ENV["MINI_JIRA_DATABASE_PASSWORD"] %>
