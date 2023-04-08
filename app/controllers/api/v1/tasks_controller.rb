@@ -43,10 +43,6 @@ class Api::V1::TasksController < ApplicationController
     render json: { errors: 'Task not found' }, status: :not_found
   end
 
-  def set_tasks
-    @tasks = Task.all
-  end
-
   def task_params
     params.require(:task).permit(
       :project_id,
