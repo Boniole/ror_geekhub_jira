@@ -52,6 +52,7 @@ class Api::V1::TasksController < ApplicationController
       :column_id,
       :title,
       :description,
+      :sort_number,
       :estimate,
       :label,
       :priority,

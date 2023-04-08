@@ -8,6 +8,7 @@
 #  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
+#  sort_number :integer
 #  start       :text
 #  status      :integer          default("open")
 #  tag_name    :text
@@ -36,7 +37,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class TaskSerializer < ActiveModel::Serializer
-  attributes :id, :user, :assignee, :title, :description, :tag_name, :estimate, :label, :priority, :type_of, :status, :start, :end, :created_at, :updated_at
+  attributes :id, :user, :assignee, :title, :description, :tag_name, :sort_number, :estimate, :label, :priority, :type_of, :status, :start, :end, :created_at, :updated_at
 
   has_one :user, serializer: UserSerializer
   has_one :assignee, serializer: AssigneeSerializer

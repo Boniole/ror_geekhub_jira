@@ -8,6 +8,7 @@
 #  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
+#  sort_number :integer
 #  start       :text
 #  status      :integer          default("open")
 #  tag_name    :text
@@ -68,6 +69,7 @@ class Task < ApplicationRecord
 
   before_create :generate_tag_name
   after_create :increment_project_task_count
+  before_save :set_sort_number
 
   private
 
@@ -78,5 +80,11 @@ class Task < ApplicationRecord
   def generate_tag_name
     first_project_letter = Translit.convert(project.name[0], :english).upcase
     self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
+  end
+
+  def set_sort_number
+    if self.sort_number.nil?
+      self.sort_number = self.column.tasks.maximum(:sort_number).to_i + 1
+    end
   end
 end
