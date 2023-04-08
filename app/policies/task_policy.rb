@@ -24,7 +24,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def admin_or_owner?
-    user.admin?(record.project) || @record.user_id == user.id
+    user.admin?(@record.project) || @record.user_id == user.id
   end
 
   def admin_or_owner_or_assignee?
