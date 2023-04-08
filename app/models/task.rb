@@ -77,6 +77,6 @@ class Task < ApplicationRecord
 
   def generate_tag_name
     first_project_letter = Translit.convert(project.name[0], :english).upcase
-    self.tag_name = "#{first_project_letter}J-#{project.tasks_count}"
+    self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
   end
 end
