@@ -670,7 +670,7 @@ paths:
           type: string
         default: task
         description: The label of the task (optional)
-      - name: start
+      - name: start_date
         in: post
         required: false
         schema:
@@ -678,7 +678,7 @@ paths:
           format: date
         default: '2023-12-12'
         description: The start date of the task (date in YYYY-MM-DD format) (optional)
-      - name: end
+      - name: end_date
         in: post
         required: false
         schema:
@@ -756,9 +756,9 @@ paths:
                   type: string
                 priority:
                   type: integer
-                start:
+                start_date:
                   type: string
-                end:
+                end_date:
                   type: string
                 status:
                   type: integer
@@ -829,9 +829,9 @@ paths:
                   type: string
                 priority:
                   type: integer
-                start:
+                start_date:
                   type: string
-                end:
+                end_date:
                   type: string
                 status:
                   type: integer
