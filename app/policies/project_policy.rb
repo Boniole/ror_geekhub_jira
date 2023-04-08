@@ -1,10 +1,12 @@
 class ProjectPolicy < ApplicationPolicy
+  attr_reader :user, :record
+
   def index?
     true
   end
 
   def show?
-    record.memberships.exists?(user_id: user.id)
+    @record.memberships.exists?(user_id: user.id)
   end
 
   def create?
@@ -12,18 +14,28 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin?(record)
+    project_admin
   end
 
   def add_member?
-    update?
+    project_admin
+  end
+
+  def delete_member
+    project_admin
   end
 
   def delete_member?
-    update?
+    project_admin
   end
 
   def destroy?
-    user.admin?(record)
+    project_admin
+  end
+
+  private
+
+  def project_admin
+    user.admin?(@record)
   end
 end
