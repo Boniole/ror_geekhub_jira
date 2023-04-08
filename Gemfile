@@ -79,6 +79,9 @@ gem 'faraday-retry'
 # A thread safe Ruby client for the NATS messaging system written in pure Ruby. [https://github.com/nats-io/nats-pure.rb]
 gem 'nats-pure'
 
+# It is a simple library allowing you to transliterate between cyrillic and latin. It is easy to use from the command line and in your code.
+gem 'translit'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
