@@ -18,7 +18,7 @@
 #  fk_rails_...  (desk_id => desks.id)
 #
 class ColumnSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :tasks
 
   has_many :tasks, serializer: TaskSerializer
 end
