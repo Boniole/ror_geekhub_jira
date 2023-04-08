@@ -10,6 +10,7 @@
 #  priority    :integer          default("low")
 #  start       :text
 #  status      :integer          default("open")
+#  tag_name    :text
 #  title       :text
 #  type_of     :integer          default("task")
 #  created_at  :datetime         not null
@@ -64,4 +65,18 @@ class Task < ApplicationRecord
   validates_format_of :start, :end, with: /\A(#{current_year})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
     message: 'must be in the format YYYY-MM-DD and current year',
     allow_blank: true
+
+  before_create :generate_tag_name
+  after_create :increment_project_task_count
+
+  private
+
+  def increment_project_task_count
+    project.increment!(:tasks_count)
+  end
+
+  def generate_tag_name
+    first_project_letter = Translit.convert(project.name[0], :english).upcase
+    self.tag_name = "#{first_project_letter}J-#{project.tasks_count}"
+  end
 end
