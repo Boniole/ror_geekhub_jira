@@ -50,7 +50,7 @@ Rails.application.routes.draw do
       resources :github_users, only: %i[show]
       resources :github_repositories do
         post 'create', on: :collection
-        delete 'update', on: :collection
+        patch 'update', on: :collection
         delete 'delete', on: :collection
       end
     end
