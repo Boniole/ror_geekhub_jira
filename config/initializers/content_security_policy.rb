@@ -1,3 +1,3 @@
 Rails.application.config.content_security_policy do |policy|
-  policy.connect_src :self, "https://kotello.space"
+  policy.script_src :self, :https
 end
