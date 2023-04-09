@@ -1,10 +1,6 @@
 class ProjectPolicy < ApplicationPolicy
   attr_reader :user, :record
 
-  def index?
-    true
-  end
-
   def show?
     @record.memberships.exists?(user_id: user.id)
   end
