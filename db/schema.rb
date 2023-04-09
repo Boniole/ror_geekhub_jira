@@ -30,10 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_140753) do
     t.bigint "user_id", null: false
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
-    t.bigint "task_id", null: false
     t.integer "status", default: 0
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
-    t.index ["task_id"], name: "index_comments_on_task_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
