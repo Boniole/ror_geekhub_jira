@@ -3,6 +3,7 @@
 # Table name: projects
 #
 #  id          :bigint           not null, primary key
+#  git_name    :string
 #  git_url     :string
 #  name        :string
 #  status      :integer          default("open")
@@ -34,6 +35,7 @@ class Project < ApplicationRecord
                         with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
                         message: 'must be a valid URL'
                       }, allow_blank: true
+  validates :git_name, presence: true, length: { in: 3..30 }, allow_blank: true
 
   enum :status, %i[open close], default: :open
 

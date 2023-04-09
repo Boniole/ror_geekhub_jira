@@ -3,6 +3,7 @@
 # Table name: projects
 #
 #  id          :bigint           not null, primary key
+#  git_name    :string
 #  git_url     :string
 #  name        :string
 #  status      :integer          default("open")
@@ -20,7 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :id, :name, :status
+  attributes :id, :name, :status, :git_url, :git_name
 
   has_many :desks, serializer: DeskSerializer
   has_one :user, serializer: UserSerializer

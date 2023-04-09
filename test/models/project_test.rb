@@ -3,6 +3,7 @@
 # Table name: projects
 #
 #  id          :bigint           not null, primary key
+#  git_name    :string
 #  git_url     :string
 #  name        :string
 #  status      :integer          default("open")
