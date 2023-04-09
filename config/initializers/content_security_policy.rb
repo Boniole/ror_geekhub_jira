@@ -1,3 +1,4 @@
 Rails.application.config.content_security_policy do |policy|
-  policy.script_src :self, :https
+  policy.default_src :self, :https
+  policy.img_src :self, :https
 end
