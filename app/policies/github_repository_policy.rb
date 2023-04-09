@@ -5,11 +5,11 @@ class GithubRepositoryPolicy < ApplicationPolicy
     user.admin?(set_project)
   end
 
-  def update
+  def update?
     create?
   end
 
-  def delete
+  def delete?
     user.admin?(set_project)
   end
 
