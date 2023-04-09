@@ -25,7 +25,7 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    path '/api/v1//users/{id}' do
+    path '/api/v1/users/{id}' do
       get 'Retrieves a user' do
         tags 'Users'
         produces 'application/json'
@@ -37,7 +37,8 @@ RSpec.describe 'api/v1/users', type: :request do
                    id: { type: :integer },
                    name: { type: :string },
                    last_name: { type: :string },
-                   email: { type: :string }
+                   email: { type: :string },
+                   github_token: { type: :string }
                  },
                  required: %w[id name last_name email]
 
@@ -90,7 +91,8 @@ RSpec.describe 'api/v1/users', type: :request do
             name: { type: :string },
             last_name: { type: :string },
             email: { type: :string },
-            password: { type: :string }
+            password: { type: :string },
+            github_token: { type: :string }
           },
           required: %w[name last_name email password]
         }
@@ -118,12 +120,13 @@ RSpec.describe 'api/v1/users', type: :request do
             name: { type: :string },
             last_name: { type: :string },
             email: { type: :string },
-            password: { type: :string }
+            password: { type: :string },
+            github_token: { type: :string }
           }
         }
 
         response '200', 'user updated' do
-          let(:user) { { name: 'New Name' } }
+          let(:user) { { name: 'New Name', github_token: 'New token' } }
           let(:id) { user_id }
           run_test!
         end

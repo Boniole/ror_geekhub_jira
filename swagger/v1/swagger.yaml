@@ -294,6 +294,122 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/github_users/show":
+    get:
+      summary: create column
+      tags:
+      - GithubUser
+      description: Github User
+      responses:
+        '200':
+          description: successful
+  "/api/v1/github_repositories/create":
+    post:
+      summary: Create repository
+      tags:
+      - Github repository
+      description: Create repository
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                  default: Name repository
+                description:
+                  type: string
+                  default: Name description
+                private:
+                  type: boolean
+                  example: true
+                has_issues:
+                  type: boolean
+                  default: true
+                has_downloads:
+                  type: boolean
+                  example: true
+              required:
+              - project_id
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
+  "/api/v1/github_repositories/update":
+    patch:
+      summary: Update repository
+      tags:
+      - Github repository
+      description: Update repository
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                  default: Name repository
+                description:
+                  type: string
+                  default: Name description
+                private:
+                  type: boolean
+                  example: true
+                has_issues:
+                  type: boolean
+                  default: true
+                has_downloads:
+                  type: boolean
+                  example: true
+              required:
+              - project_id
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
+  "/api/v1/github_repositories/delete":
+    delete:
+      summary: delete repository
+      tags:
+      - Github repository
+      description: Delete repository
+      parameters: []
+      responses:
+        '204':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                validate_text:
+                  type: string
+                  default: owner/repo_name
+              required:
+              - project_id
+              - validate_text
   "/api/v1/projects":
     get:
       summary: list projects
@@ -318,6 +434,8 @@ paths:
                       type: string
                     user:
                       type: object
+                    git_url:
+                      type: string
                   required:
                   - id
                   - name
@@ -344,6 +462,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                 required:
                 - id
                 - name
@@ -389,6 +509,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                 required:
                 - id
                 - name
@@ -415,6 +537,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                   created_at:
                     type: string
                   updated_at:
@@ -437,6 +561,8 @@ paths:
                   status:
                     type: string
                   user_id:
+                    type: string
+                  git_url:
                     type: string
               required:
               - name
@@ -464,6 +590,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                   created_at:
                     type: string
                   updated_at:
@@ -486,6 +614,8 @@ paths:
                   status:
                     type: string
                   user_id:
+                    type: string
+                  git_url:
                     type: string
               required:
               - name
@@ -887,12 +1017,14 @@ paths:
                   type: string
                 password:
                   type: string
+                github_token:
+                  type: string
               required:
               - name
               - last_name
               - email
               - password
-  "/api/v1//users/{id}":
+  "/api/v1/users/{id}":
     get:
       summary: Retrieves a user
       tags:
@@ -919,11 +1051,61 @@ paths:
                     type: string
                   email:
                     type: string
+                  github_token:
+                    type: string
                 required:
                 - id
                 - name
                 - last_name
                 - email
+        '404':
+          description: user not found
+    patch:
+      summary: Updates a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: user updated
+        '422':
+          description: invalid request
+        '404':
+          description: user not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                github_token:
+                  type: string
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: user deleted
         '404':
           description: user not found
   "/api/v1/about_user":
@@ -960,53 +1142,6 @@ paths:
                 - email
         '401':
           description: unauthorized access
-  "/api/v1/users/{id}":
-    patch:
-      summary: Updates a user
-      tags:
-      - Users
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-      responses:
-        '200':
-          description: user updated
-        '422':
-          description: invalid request
-        '404':
-          description: user not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                last_name:
-                  type: string
-                email:
-                  type: string
-                password:
-                  type: string
-    delete:
-      summary: Deletes a user
-      tags:
-      - Users
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-      responses:
-        '204':
-          description: user deleted
-        '404':
-          description: user not found
   "/api/v1/login":
     post:
       summary: Logs in a user
