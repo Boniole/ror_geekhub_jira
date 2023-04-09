@@ -10,127 +10,127 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_08_144049) do
+ActiveRecord::Schema[7.0].define(version: 20_230_408_144_049) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "columns", force: :cascade do |t|
-    t.text "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "desk_id", null: false
-    t.integer "ordinal_number", default: 0
-    t.index ["desk_id"], name: "index_columns_on_desk_id"
+  create_table 'columns', force: :cascade do |t|
+    t.text 'name'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'desk_id', null: false
+    t.integer 'ordinal_number', default: 0
+    t.index ['desk_id'], name: 'index_columns_on_desk_id'
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.string "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.string "commentable_type", null: false
-    t.bigint "commentable_id", null: false
-    t.bigint "task_id", null: false
-    t.integer "status", default: 0
-    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
-    t.index ["task_id"], name: "index_comments_on_task_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+  create_table 'comments', force: :cascade do |t|
+    t.string 'body'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
+    t.string 'commentable_type', null: false
+    t.bigint 'commentable_id', null: false
+    t.bigint 'task_id', null: false
+    t.integer 'status', default: 0
+    t.index %w[commentable_type commentable_id], name: 'index_comments_on_commentable'
+    t.index ['task_id'], name: 'index_comments_on_task_id'
+    t.index ['user_id'], name: 'index_comments_on_user_id'
   end
 
-  create_table "desks", force: :cascade do |t|
-    t.string "name", default: "Your Desk"
-    t.bigint "project_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_desks_on_project_id"
+  create_table 'desks', force: :cascade do |t|
+    t.string 'name', default: 'Your Desk'
+    t.bigint 'project_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['project_id'], name: 'index_desks_on_project_id'
   end
 
-  create_table "documents", force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "user_id", null: false
-    t.bigint "task_id"
-    t.bigint "comment_id"
-    t.string "name", null: false
-    t.string "document_type", null: false
-    t.string "url", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["comment_id"], name: "index_documents_on_comment_id"
-    t.index ["project_id"], name: "index_documents_on_project_id"
-    t.index ["task_id"], name: "index_documents_on_task_id"
-    t.index ["user_id"], name: "index_documents_on_user_id"
+  create_table 'documents', force: :cascade do |t|
+    t.bigint 'project_id', null: false
+    t.bigint 'user_id', null: false
+    t.bigint 'task_id'
+    t.bigint 'comment_id'
+    t.string 'name', null: false
+    t.string 'document_type', null: false
+    t.string 'url', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['comment_id'], name: 'index_documents_on_comment_id'
+    t.index ['project_id'], name: 'index_documents_on_project_id'
+    t.index ['task_id'], name: 'index_documents_on_task_id'
+    t.index ['user_id'], name: 'index_documents_on_user_id'
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "project_id"
-    t.string "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_memberships_on_project_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
+  create_table 'memberships', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.bigint 'project_id'
+    t.string 'role'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['project_id'], name: 'index_memberships_on_project_id'
+    t.index ['user_id'], name: 'index_memberships_on_user_id'
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.string "name"
-    t.integer "status", default: 0
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "tasks_count", default: 0, null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
+  create_table 'projects', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'status', default: 0
+    t.bigint 'user_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'tasks_count', default: 0, null: false
+    t.index ['user_id'], name: 'index_projects_on_user_id'
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.text "title"
-    t.string "description"
-    t.integer "priority", default: 0
-    t.integer "status", default: 0
-    t.integer "type_of", default: 0
-    t.text "label"
-    t.text "estimate"
-    t.text "start_date"
-    t.text "end_date"
-    t.integer "assignee_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
-    t.bigint "project_id", null: false
-    t.bigint "desk_id", null: false
-    t.bigint "column_id"
-    t.text "tag_name"
-    t.integer "sort_number"
-    t.index ["column_id"], name: "index_tasks_on_column_id"
-    t.index ["desk_id"], name: "index_tasks_on_desk_id"
-    t.index ["project_id"], name: "index_tasks_on_project_id"
-    t.index ["user_id"], name: "index_tasks_on_user_id"
+  create_table 'tasks', force: :cascade do |t|
+    t.text 'title'
+    t.string 'description'
+    t.integer 'priority', default: 0
+    t.integer 'status', default: 0
+    t.integer 'type_of', default: 0
+    t.text 'label'
+    t.text 'estimate'
+    t.text 'start_date'
+    t.text 'end_date'
+    t.integer 'assignee_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
+    t.bigint 'project_id', null: false
+    t.bigint 'desk_id', null: false
+    t.bigint 'column_id'
+    t.text 'tag_name'
+    t.integer 'sort_number'
+    t.index ['column_id'], name: 'index_tasks_on_column_id'
+    t.index ['desk_id'], name: 'index_tasks_on_desk_id'
+    t.index ['project_id'], name: 'index_tasks_on_project_id'
+    t.index ['user_id'], name: 'index_tasks_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "last_name"
-    t.string "email"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.string "github_token"
-    t.string "uid"
-    t.string "provider"
+  create_table 'users', force: :cascade do |t|
+    t.string 'name'
+    t.string 'password_digest'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'last_name'
+    t.string 'email'
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.string 'github_token'
+    t.string 'uid'
+    t.string 'provider'
   end
 
-  add_foreign_key "columns", "desks"
-  add_foreign_key "comments", "tasks"
-  add_foreign_key "comments", "users"
-  add_foreign_key "desks", "projects"
-  add_foreign_key "documents", "comments"
-  add_foreign_key "documents", "projects"
-  add_foreign_key "documents", "tasks"
-  add_foreign_key "documents", "users"
-  add_foreign_key "projects", "users"
-  add_foreign_key "tasks", "columns"
-  add_foreign_key "tasks", "desks"
-  add_foreign_key "tasks", "projects"
-  add_foreign_key "tasks", "users"
+  add_foreign_key 'columns', 'desks'
+  add_foreign_key 'comments', 'tasks'
+  add_foreign_key 'comments', 'users'
+  add_foreign_key 'desks', 'projects'
+  add_foreign_key 'documents', 'comments'
+  add_foreign_key 'documents', 'projects'
+  add_foreign_key 'documents', 'tasks'
+  add_foreign_key 'documents', 'users'
+  add_foreign_key 'projects', 'users'
+  add_foreign_key 'tasks', 'columns'
+  add_foreign_key 'tasks', 'desks'
+  add_foreign_key 'tasks', 'projects'
+  add_foreign_key 'tasks', 'users'
 end

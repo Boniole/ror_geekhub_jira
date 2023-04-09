@@ -6,7 +6,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    comment_author? || user.admin?(@record.task.project)
+    comment_author? || user.admin?(@record.commentable.project)
   end
 
   def destroy?

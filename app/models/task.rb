@@ -63,8 +63,8 @@ class Task < ApplicationRecord
   }, allow_blank: true
 
   validates_format_of :start_date, :end_date, with: /\A(20[2-9]\d|2[1-2]\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
-    message: 'must be in the format YYYY-MM-DD',
-    allow_blank: true
+                                              message: 'must be in the format YYYY-MM-DD',
+                                              allow_blank: true
 
   validate :start_and_end_dates_are_valid
 
@@ -95,8 +95,6 @@ class Task < ApplicationRecord
   end
 
   def set_sort_number
-    if self.sort_number.nil?
-      self.sort_number = self.column.tasks.maximum(:sort_number).to_i + 1
-    end
+    self.sort_number = column.tasks.maximum(:sort_number).to_i + 1 if sort_number.nil?
   end
 end

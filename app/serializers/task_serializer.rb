@@ -37,7 +37,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class TaskSerializer < ActiveModel::Serializer
-  attributes :id, :user, :assignee, :title, :description, :tag_name, :sort_number, :estimate, :label, :priority, :type_of, :status, :start_date, :end_date, :created_at, :updated_at
+  attributes :id, :user, :assignee, :title, :description, :tag_name, :sort_number, :estimate, :label, :priority,
+             :type_of, :status, :start_date, :end_date, :created_at, :updated_at
 
   has_one :user, serializer: UserSerializer
   has_one :assignee, serializer: AssigneeSerializer
