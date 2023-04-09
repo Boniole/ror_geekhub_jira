@@ -4,12 +4,12 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
-#  end         :text
+#  end_date    :text
 #  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
 #  sort_number :integer
-#  start       :text
+#  start_date  :text
 #  status      :integer          default("open")
 #  tag_name    :text
 #  title       :text
@@ -62,16 +62,28 @@ class Task < ApplicationRecord
     message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
   }, allow_blank: true
 
-  current_year = Time.now.year
-  validates_format_of :start, :end, with: /\A(#{current_year})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
-    message: 'must be in the format YYYY-MM-DD and current year',
-    allow_blank: true
+  validates_format_of :start_date, :end_date, with: /\A(20[2-9]\d|2[1-2]\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
+                                              message: 'must be in the format YYYY-MM-DD',
+                                              allow_blank: true
+
+  validate :start_and_end_dates_are_valid
 
   before_create :generate_tag_name
   after_create :increment_project_task_count
   before_save :set_sort_number
 
   private
+
+  def start_and_end_dates_are_valid
+    return unless parse_date([start_date, end_date])
+
+    errors.add(:errors, 'must be equal to or greater than the current date')
+  end
+
+  def parse_date(dates)
+    parsed_dates = dates.map { |date| Date.parse(date) }
+    parsed_dates.any? { |date| date.present? && date < Date.today }
+  end
 
   def increment_project_task_count
     project.increment!(:tasks_count)
@@ -83,8 +95,6 @@ class Task < ApplicationRecord
   end
 
   def set_sort_number
-    if self.sort_number.nil?
-      self.sort_number = self.column.tasks.maximum(:sort_number).to_i + 1
-    end
+    self.sort_number = column.tasks.maximum(:sort_number).to_i + 1 if sort_number.nil?
   end
 end

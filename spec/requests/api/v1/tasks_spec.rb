@@ -119,7 +119,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :start,
+        name: :start_date,
         in: :post,
         required: false,
         schema: {
@@ -131,7 +131,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :end,
+        name: :end_date,
         in: :post,
         required: false,
         schema: {
@@ -191,8 +191,8 @@ RSpec.describe 'api/v1/tasks', type: :request do
           estimate: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
-          start: { type: :string },
-          end: { type: :string },
+          start_date: { type: :string },
+          end_date: { type: :string },
           status: { type: :integer },
           type_of: { type: :integer }
         },
@@ -253,8 +253,8 @@ RSpec.describe 'api/v1/tasks', type: :request do
           estimate: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
-          start: { type: :string },
-          end: { type: :string },
+          start_date: { type: :string },
+          end_date: { type: :string },
           status: { type: :integer },
           type_of: { type: :integer }
         },

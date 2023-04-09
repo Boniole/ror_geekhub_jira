@@ -4,12 +4,12 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
-#  end         :text
+#  end_date    :text
 #  estimate    :text
 #  label       :text
 #  priority    :integer          default("low")
 #  sort_number :integer
-#  start       :text
+#  start_date  :text
 #  status      :integer          default("open")
 #  tag_name    :text
 #  title       :text
@@ -36,7 +36,7 @@
 #  fk_rails_...  (project_id => projects.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require "test_helper"
+require 'test_helper'
 
 class TaskTest < ActiveSupport::TestCase
   # test "the truth" do
