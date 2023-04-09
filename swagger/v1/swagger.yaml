@@ -95,9 +95,6 @@ paths:
             schema:
               type: object
               properties:
-                task_id:
-                  type: integer
-                  default: 1
                 body:
                   type: string
                   default: My comment
@@ -107,15 +104,10 @@ paths:
                 commentable_id:
                   type: integer
                   default: 1
-                user_id:
-                  type: integer
-                  default: 43
               required:
-              - task_id
               - body
               - commentable_type
               - commentable_id
-              - user_id
   "/api/v1/comments/{id}":
     parameters:
     - name: id
@@ -139,9 +131,6 @@ paths:
             schema:
               type: object
               properties:
-                task_id:
-                  type: integer
-                  default: 1
                 body:
                   type: string
                   default: My comment
@@ -151,15 +140,10 @@ paths:
                 commentable_id:
                   type: integer
                   default: 1
-                user_id:
-                  type: integer
-                  default: 43
               required:
-              - task_id
               - body
               - commentable_type
               - commentable_id
-              - user_id
     delete:
       summary: delete comment
       tags:
