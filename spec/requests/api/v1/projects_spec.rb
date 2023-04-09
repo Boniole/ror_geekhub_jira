@@ -15,7 +15,8 @@ RSpec.describe 'api/v1/projects', type: :request do
                    id: { type: :integer },
                    name: { type: :string },
                    status: { type: :string },
-                   user: { type: :object }
+                   user: { type: :object },
+                   git_url: { type: :string }
                  },
                  required: %w[id name status]
                }
@@ -42,7 +43,8 @@ RSpec.describe 'api/v1/projects', type: :request do
                  id: { type: :integer },
                  name: { type: :string },
                  status: { type: :string },
-                 user: { type: :object }
+                 user: { type: :object },
+                 git_url: { type: :string }
                },
                required: %w[id name status]
         run_test!
@@ -64,7 +66,8 @@ RSpec.describe 'api/v1/projects', type: :request do
                  id: { type: :integer },
                  name: { type: :string },
                  status: { type: :string },
-                 user: { type: :object }
+                 user: { type: :object },
+                 git_url: { type: :string }
                },
                required: %w[id name status]
         run_test!
@@ -83,7 +86,8 @@ RSpec.describe 'api/v1/projects', type: :request do
           properties: {
             name: { type: :string },
             status: { type: :string },
-            user_id: { type: :string }
+            user_id: { type: :string },
+            git_url: { type: :string }
           }
         },
         required: %w[name status user_id]
@@ -95,6 +99,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                  name: { type: :string },
                  status: { type: :string },
                  user: { type: :object },
+                 git_url: { type: :string },
                  created_at: { type: :string },
                  updated_at: { type: :string }
                },
@@ -115,7 +120,8 @@ RSpec.describe 'api/v1/projects', type: :request do
           properties: {
             name: { type: :string },
             status: { type: :string },
-            user_id: { type: :string }
+            user_id: { type: :string },
+            git_url: { type: :string }
           }
         },
         required: %w[name status user_id]
@@ -127,6 +133,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                  name: { type: :string },
                  status: { type: :string },
                  user: { type: :object },
+                 git_url: { type: :string },
                  created_at: { type: :string },
                  updated_at: { type: :string }
                },

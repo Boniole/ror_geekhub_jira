@@ -45,10 +45,13 @@ Rails.application.routes.draw do
       end
       resources :tasks
       resources :comments
-      # get '/github/show', to: 'github#show'
-      resources :githubs do
-        post 'show', on: :collection
+      resources :documents
+
+      resources :github_users, only: %i[show]
+      resources :github_repositories do
         post 'create', on: :collection
+        delete 'update', on: :collection
+        delete 'delete', on: :collection
       end
     end
   end

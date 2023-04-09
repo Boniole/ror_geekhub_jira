@@ -3,6 +3,8 @@
 # Table name: projects
 #
 #  id          :bigint           not null, primary key
+#  git_name    :string
+#  git_url     :string
 #  name        :string
 #  status      :integer          default("open")
 #  tasks_count :integer          default(0), not null
@@ -27,6 +29,13 @@ class Project < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :status, presence: true
+  validates :git_url, presence: true,
+                      length: { maximum: 255 },
+                      format: {
+                        with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                        message: 'must be a valid URL'
+                      }, allow_blank: true
+  validates :git_name, presence: true, length: { in: 3..30 }, allow_blank: true
 
   enum :status, %i[open close], default: :open
 

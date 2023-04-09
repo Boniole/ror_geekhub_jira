@@ -80,7 +80,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def project_params
-    params.permit(:name, :status)
+    params.permit(:name, :status, :git_url, :git_name)
   rescue ActionController::ParameterMissing => e
     render json: { errors: e.message }, status: :bad_request
   end

@@ -17,7 +17,7 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 class DeskSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :columns
 
   has_one :project, serializer: ProjectSerializer
   has_many :columns, serializer: ColumnSerializer
