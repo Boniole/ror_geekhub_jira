@@ -2,7 +2,7 @@ require 'swagger_helper'
 
 RSpec.describe 'api/v1/comments', type: :request do
   path '/api/v1/comments' do
-    
+
     post('create comment') do
       tags 'Comments'
       description 'Create comment'
@@ -11,13 +11,11 @@ RSpec.describe 'api/v1/comments', type: :request do
       parameter name: :сomment, in: :body, schema: {
         type: :object,
         properties: {
-          task_id: { type: :integer, default: 1 },
           body: { type: :string,  default: 'My comment' },
           commentable_type: { type: :string, default: 'Task' },
-          commentable_id: { type: :integer, default: 1 },
-          user_id: { type: :integer, default: 43 },
+          commentable_id: { type: :integer, default: 1 }
         },
-        required: %w[task_id body commentable_type commentable_id user_id]
+        required: %w[body commentable_type commentable_id]
       }
       response(200, 'successful') do
 
@@ -45,13 +43,11 @@ RSpec.describe 'api/v1/comments', type: :request do
       parameter name: :сomment, in: :body, schema: {
         type: :object,
         properties: {
-          task_id: { type: :integer, default: 1 },
           body: { type: :string,  default: 'My comment' },
           commentable_type: { type: :string, default: 'Task' },
-          commentable_id: { type: :integer, default: 1 },
-          user_id: { type: :integer, default: 43 },
+          commentable_id: { type: :integer, default: 1 }
         },
-        required: %w[task_id body commentable_type commentable_id user_id]
+        required: %w[body commentable_type commentable_id]
       }
       response(200, 'successful') do
         let(:id) { '123' }
@@ -75,13 +71,11 @@ RSpec.describe 'api/v1/comments', type: :request do
       parameter name: :сomment, in: :body, schema: {
         type: :object,
         properties: {
-          task_id: { type: :integer, default: 1 },
           body: { type: :string,  default: 'My comment' },
           commentable_type: { type: :string, default: 'Task' },
-          commentable_id: { type: :integer, default: 1 },
-          user_id: { type: :integer, default: 43 },
+          commentable_id: { type: :integer, default: 1 }
         },
-        required: %w[task_id body commentable_type commentable_id user_id]
+        required: %w[body commentable_type commentable_id]
       }
       response(200, 'successful') do
         let(:id) { '123' }
