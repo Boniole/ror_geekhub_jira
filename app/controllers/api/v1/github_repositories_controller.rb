@@ -5,18 +5,20 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   before_action :set_project, only: %i[delete]
 
   def create
-# debugger
-@contact_form = GithubRepository.new(repo_create_params)
-    debugger
-      # repo = @github_client.create_repository(
-      #   params[:name],
-      #   description: params[:description],
-      #   private: params[:private],
-      #   has_issues: params[:has_issues],
-      #   has_downloads: params[:has_downloads]
-      # )
-  
-      # render json: { name: repo.name, description: repo.description, url: repo.html_url }, status: :ok
+    @contact_form = GithubRepository.new(repo_create_params)
+
+    if @contact_form.valid?
+      repo = @github_client.create_repository(
+        params[:name],
+        description: params[:description],
+        private: params[:private],
+        has_issues: params[:has_issues],
+        has_downloads: params[:has_downloads]
+      )
+      render json: { name: repo.name, description: repo.description, url: repo.html_url }, status: :ok
+    else
+      render json: { errors: @contact_form.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def delete
