@@ -2,12 +2,13 @@
 #
 # Table name: projects
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  status     :integer          default("open")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id          :bigint           not null, primary key
+#  name        :string
+#  status      :integer          default("open")
+#  tasks_count :integer          default(0), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 # Indexes
 #
@@ -21,20 +22,19 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :desks, dependent: :destroy
   has_many :documents, as: :documentable
-
   has_many :memberships
   has_many :users, through: :memberships
-
-  before_create :build_desk
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :status, presence: true
 
   enum :status, %i[open close], default: :open
 
+  after_create :create_desk
+
   private
 
-  def build_desk
-    desks.build
+  def create_desk
+    desks.create
   end
 end

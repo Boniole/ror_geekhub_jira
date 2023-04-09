@@ -2,12 +2,13 @@
 #
 # Table name: projects
 #
-#  id         :bigint           not null, primary key
-#  name       :string
-#  status     :integer          default("open")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id          :bigint           not null, primary key
+#  name        :string
+#  status      :integer          default("open")
+#  tasks_count :integer          default(0), not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint           not null
 #
 # Indexes
 #
@@ -18,7 +19,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class ProjectSerializer < ActiveModel::Serializer
-  attributes :name, :status
+  attributes :id, :name, :status
 
   has_one :user, serializer: UserSerializer
 end

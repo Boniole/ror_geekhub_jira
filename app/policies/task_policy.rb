@@ -1,4 +1,6 @@
 class TaskPolicy < ApplicationPolicy
+  attr_reader :user, :record
+
   def show?
     project_member?
   end
@@ -8,7 +10,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    admin_or_owner_or_assignee?
+    project_member?
   end
 
   def destroy?
@@ -18,14 +20,10 @@ class TaskPolicy < ApplicationPolicy
   private
 
   def project_member?
-    Membership.where(project_id: record.project_id, user_id: user.id).exists?
+    Membership.where(project_id: @record.project_id, user_id: user.id).exists?
   end
 
   def admin_or_owner?
-    user.admin?(record.project) || record.user_id == user.id
-  end
-
-  def admin_or_owner_or_assignee?
-    user.admin?(record.project) || record.assignee_id == user.id || record.user_id == user.id
+    user.admin?(@record.project) || @record.user_id == user.id
   end
 end

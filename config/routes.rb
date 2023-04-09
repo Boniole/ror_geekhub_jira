@@ -10,10 +10,15 @@ Rails.application.routes.draw do
         end
       end
       post '/login', to: 'authentication#login'
+      get '/auth/:provider/callback', to: 'sessions#omniauth'
       post '/forgot', to: 'passwords#forgot'
       post '/reset', to: 'passwords#reset'
       resources :projects do
         resources :documents, except: :update
+        member do
+          post 'add_member', to: 'projects#add_member'
+          delete 'delete_member/:user_id', to: 'projects#delete_member'
+        end
       end
       resources :desks do
         member do
@@ -29,6 +34,18 @@ Rails.application.routes.draw do
       end
 
       resources :comments do
+        resources :documents, except: :update
+      end
+      resources :columns do
+        resources :tasks do
+          resources :documents, except: :update
+          member do
+            get :comments
+          end
+        end
+      end
+      resources :tasks
+            resources :comments do
         resources :documents, except: :update
       end
       # get '/github/show', to: 'github#show'

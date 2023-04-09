@@ -23,7 +23,7 @@ end
   desk = Desk.find_by(project_id: project.id)
 
   # create Columns
-  ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str, desk_id: desk.id) }
+  ['TO DO', 'In progress', 'Need test', 'In test', 'DONE'].each { |str| desk.columns.create(name: str) }
 
   # create Tasks
   25.times do
@@ -32,16 +32,15 @@ end
       description: 'description',
       label: 'need to add label',
       estimate: '2w',
-      start: Date.today,
-      end: Date.today + 1,
+      start_date: Date.today,
+      end_date: Date.today + 1,
       user_id: project.user_id,
       project_id: project.id,
-      desk_id: desk.id,
-      column_type: 'Column'
+      desk_id: desk.id
     )
   end
 
-  # create comments
+  # create Comments
   25.times do
     task = Task.where(project_id: project.id).sample
     task.comments.create(
@@ -52,5 +51,4 @@ end
       task_id: task.id
     )
   end
-
 end

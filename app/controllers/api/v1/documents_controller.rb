@@ -10,6 +10,8 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def show
+    authorize @document
+    
     render json: @document, status: :ok
   end
 
@@ -19,12 +21,13 @@ class Api::V1::DocumentsController < ApplicationController
     params[:documents].each do |document|
       @document = Document.new
       @document.documentable = @attachable
-      # @document.user_id = 1
       @document.user_id = @current_user.id
       @document.file.attach(document)
       @document.name = @document.file.blob.filename
       @document.document_type = @document.file.content_type.split('/').last
       @document.url = @document.file.url
+      authorize @document
+      
       if @document.save
         saved_documents << @document
       else
@@ -39,7 +42,10 @@ class Api::V1::DocumentsController < ApplicationController
     end
   end
 
+
   def destroy
+    authorize @document
+    
     if @document.destroy
       head :no_content
     else
