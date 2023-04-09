@@ -10,7 +10,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    admin_or_owner_or_assignee?
+    admin_or_member?
   end
 
   def destroy?
@@ -27,7 +27,7 @@ class TaskPolicy < ApplicationPolicy
     user.admin?(@record.project) || @record.user_id == user.id
   end
 
-  def admin_or_owner_or_assignee?
-    user.admin?(@record.project) || @record.assignee_id == user.id || @record.user_id == user.id
+  def admin_or_member?
+    user.admin?(@record.project) || @record.project.memberships.exists?(user_id: user.id)
   end
 end
