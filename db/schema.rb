@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_135043) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_09_145257) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,7 +80,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_135043) do
     t.datetime "updated_at", null: false
     t.string "documentable_type", null: false
     t.bigint "documentable_id", null: false
+    t.string "name", null: false
+    t.string "document_type", null: false
+    t.string "url", null: false
+    t.bigint "user_id"
     t.index ["documentable_type", "documentable_id"], name: "index_documents_on_documentable"
+    t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -144,6 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_135043) do
   add_foreign_key "comments", "tasks"
   add_foreign_key "comments", "users"
   add_foreign_key "desks", "projects"
+  add_foreign_key "documents", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "tasks", "desks"
   add_foreign_key "tasks", "projects"
