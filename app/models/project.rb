@@ -28,6 +28,12 @@ class Project < ApplicationRecord
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :status, presence: true
+  validates :git_url, presence: true,
+                      length: { maximum: 255 },
+                      format: {
+                        with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
+                        message: 'must be a valid URL'
+                      }, allow_blank: true
 
   enum :status, %i[open close], default: :open
 

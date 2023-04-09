@@ -310,6 +310,15 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/github_users/show":
+    get:
+      summary: create column
+      tags:
+      - GithubUser
+      description: Github User
+      responses:
+        '200':
+          description: successful
   "/api/v1/projects":
     get:
       summary: list projects
@@ -334,6 +343,8 @@ paths:
                       type: string
                     user:
                       type: object
+                    git_url:
+                      type: string
                   required:
                   - id
                   - name
@@ -360,6 +371,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                 required:
                 - id
                 - name
@@ -405,6 +418,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                 required:
                 - id
                 - name
@@ -431,6 +446,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                   created_at:
                     type: string
                   updated_at:
@@ -453,6 +470,8 @@ paths:
                   status:
                     type: string
                   user_id:
+                    type: string
+                  git_url:
                     type: string
               required:
               - name
@@ -480,6 +499,8 @@ paths:
                     type: string
                   user:
                     type: object
+                  git_url:
+                    type: string
                   created_at:
                     type: string
                   updated_at:
@@ -502,6 +523,8 @@ paths:
                   status:
                     type: string
                   user_id:
+                    type: string
+                  git_url:
                     type: string
               required:
               - name
@@ -946,41 +969,6 @@ paths:
                 - email
         '404':
           description: user not found
-  "/api/v1/about_user":
-    get:
-      summary: Retrieves information about the current user
-      tags:
-      - Users
-      parameters:
-      - name: current_user
-        in: header
-        description: JWT token to identify current user
-        schema:
-          type: string
-      responses:
-        '200':
-          description: user information found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  last_name:
-                    type: string
-                  email:
-                    type: string
-                required:
-                - id
-                - name
-                - last_name
-                - email
-        '401':
-          description: unauthorized access
-  "/api/v1/users/{id}":
     patch:
       summary: Updates a user
       tags:
@@ -1029,6 +1017,40 @@ paths:
           description: user deleted
         '404':
           description: user not found
+  "/api/v1/about_user":
+    get:
+      summary: Retrieves information about the current user
+      tags:
+      - Users
+      parameters:
+      - name: current_user
+        in: header
+        description: JWT token to identify current user
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user information found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  last_name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - name
+                - last_name
+                - email
+        '401':
+          description: unauthorized access
   "/api/v1/login":
     post:
       summary: Logs in a user
