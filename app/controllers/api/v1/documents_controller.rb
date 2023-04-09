@@ -1,53 +1,45 @@
-require 'aws-sdk-s3'
-
 class Api::V1::DocumentsController < ApplicationController
-  # before_action :authorize_request
+  before_action :authorize_request
   before_action :document_params, only: %i[create update]
   before_action :set_attachable
   before_action :set_document, only: [:show, :destroy]
+  before_action :set_documents, only: :index
 
   def index
-    s3 = Aws::S3::Resource.new
-    @result = []
-    @documents = @attachable.documents
-    @documents.each.with_index do |document, index|
-      document.files.blobs.each do |blob|
-        obj = s3.bucket(ENV['AWS_BUCKET']).object(blob.key)
-        @result << { name: blob.filename, url: obj.presigned_url(:get, expires_in: 3600) }
-      end
-    end
-    render json: @result, status: :ok
+    render json: @documents, status: :ok
   end
 
   def show
-    s3 = Aws::S3::Resource.new
-    @url = []
-    @document.files.blobs.each do |blob|
-      obj = s3.bucket(ENV['AWS_BUCKET']).object(blob.key)
-      @url << { name: [blob.filename], url: obj.presigned_url(:get, expires_in: 3600) }
-    end
-    render json: @url
+    render json: @document, status: :ok
   end
 
   def create
-    @document = Document.new
-    @document.documentable = @attachable
-    @document.files.attach(params[:documents])
-    if @document.save
-      render json: {}, status: :created
+    saved_documents = []
+    failed_documents = []
+    params[:documents].each do |document|
+      @document = Document.new
+      @document.documentable = @attachable
+      # @document.user_id = 1
+      @document.user_id = @current_user.id
+      @document.file.attach(document)
+      @document.name = @document.file.blob.filename
+      @document.document_type = @document.file.content_type.split('/').last
+      @document.url = @document.file.url
+      if @document.save
+        saved_documents << @document
+      else
+        failed_documents << { document: document, errors: @document.errors }
+      end
+    end
+
+    if failed_documents.any?
+      render json: { saved_documents: saved_documents, failed_documents: failed_documents }, status: :multi_status
     else
-      render json: @document.errors, status: :unprocessable_entity
+      render json: { saved_documents: saved_documents }, status: :created
     end
   end
 
   def destroy
-    s3 = Aws::S3::Resource.new(ENV[''])
-    # s3 = Aws::S3::Resource.new
-    @document.files.blobs.each do |blob|
-      s3.delete_object(bucket: ENV['AWS_BUCKET'], key: blob[:filename])
-    end
-    @document.files.purge
-    @document.destroy
     if @document.destroy
       head :no_content
     else
@@ -81,8 +73,13 @@ class Api::V1::DocumentsController < ApplicationController
     end
   end
 
-  def set_url
-
+  def set_documents
+    @documents = @attachable.documents
+    if @documents == nil
+      render json: { errors: 'Not found files' }, status: :not_found
+    else
+      @documents
+    end
   end
 
   def document_params
