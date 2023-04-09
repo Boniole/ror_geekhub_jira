@@ -20,7 +20,6 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (task_id => tasks.id)
 #  fk_rails_...  (user_id => users.id)
 #
 require "test_helper"
