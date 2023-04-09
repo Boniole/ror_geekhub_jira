@@ -3,14 +3,25 @@ require 'swagger_helper'
 RSpec.describe 'api/v1/desks', type: :request do
 
   path '/api/v1/desks' do
-
     get('list desks') do
       tags 'Desks'
       description 'Get desks'
       produces 'application/json'
-      consumes 'application/json'
+      parameter name: :project_id,
+                in: :post,
+                required: true,
+                schema: {
+                  type: :integer
+                },
+                default: 1,
+                description: 'The ID of the project (integer)'
       response(200, 'successful') do
-
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string }
+               },
+               required: %w[id name]
         run_test!
       end
     end
@@ -20,15 +31,23 @@ RSpec.describe 'api/v1/desks', type: :request do
       description 'Create desk'
       produces 'application/json'
       consumes 'application/json'
-      response(200, 'successful') do
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
+      parameter name: :desk, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string, default: 'My desk' },
+          project_id: { type: :integer, default: 1 }
+        },
+        required: %w[name project_id]
+      }
+      response(201, 'successful') do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 status: { type: :string },
+                 user: { type: :object }
+               },
+               required: %w[id name status]
         run_test!
       end
     end
@@ -62,6 +81,14 @@ RSpec.describe 'api/v1/desks', type: :request do
       description 'Update desk'
       produces 'application/json'
       consumes 'application/json'
+      parameter name: :desk, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string, default: 'My desk' },
+          project_id: { type: :integer, default: 1 }
+        },
+        required: %w[name project_id]
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 
@@ -81,6 +108,14 @@ RSpec.describe 'api/v1/desks', type: :request do
       description 'Update desk'
       produces 'application/json'
       consumes 'application/json'
+      parameter name: :desk, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string, default: 'My desk' },
+          project_id: { type: :integer, default: 1 }
+        },
+        required: %w[name project_id]
+      }
       response(200, 'successful') do
         let(:id) { '123' }
 

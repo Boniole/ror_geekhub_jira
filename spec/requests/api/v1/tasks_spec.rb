@@ -1,48 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/tasks', type: :request do
-
-  path '/api/v1/tasks/{id}/comments' do
-    # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
-
-    get('comments task') do
-      tags 'Tasks'
-      description 'Get comments by task id'
-      consumes "application/json"
-      response(200, 'successful') do
-        let(:id) { '123' }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
-  end
-
   path '/api/v1/tasks' do
-
-    get('list tasks') do
-      tags 'Tasks'
-      description 'Get tasks list'
-      consumes "application/json"
-      response(200, 'successful') do
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
-        end
-        run_test!
-      end
-    end
 
     post('create task') do
       tags 'Tasks'
@@ -101,18 +60,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           type: :integer
         },
         default: 1,
-        description: 'The ID of the column (integer)'
-      )
-
-      parameter(
-        name: :column_type,
-        in: :post,
-        required: true,
-        schema: {
-          type: :string
-        },
-        default: 'Column',
-        description: 'The type of the column'
+        description: 'The ID of the desk (integer)'
       )
 
       parameter(
@@ -138,6 +86,17 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
+        name: :sort_number,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string
+        },
+        default: '1',
+        description: 'sort number'
+      )
+
+      parameter(
         name: :estimate,
         in: :post,
         required: false,
@@ -160,7 +119,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :start,
+        name: :start_date,
         in: :post,
         required: false,
         schema: {
@@ -172,7 +131,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :end,
+        name: :end_date,
         in: :post,
         required: false,
         schema: {
@@ -223,20 +182,21 @@ RSpec.describe 'api/v1/tasks', type: :request do
         properties: {
           assignee_id: { type: :integer, default: 1 },
           column_id: { type: :integer, default: 1 },
-          column_type: { type: :string, default: 'Column' },
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
           user_id: { type: :integer, default: 1 },
           title: { type: :string },
           description: { type: :string },
+          sort_number: { type: :integer, default: 1 },
+          estimate: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
-          start: { type: :string },
-          end: { type: :string },
+          start_date: { type: :string },
+          end_date: { type: :string },
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id column_type desk_id project_id user_id]
+        required: %w[title column_id  desk_id project_id user_id]
       }
 
       response(200, 'successful') do
@@ -284,20 +244,21 @@ RSpec.describe 'api/v1/tasks', type: :request do
         properties: {
           assignee_id: { type: :integer, default: 1 },
           column_id: { type: :integer, default: 1 },
-          column_type: { type: :string, default: 'Column' },
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
           user_id: { type: :integer, default: 1 },
           title: { type: :string },
           description: { type: :string },
+          sort_number: { type: :integer, default: 1 },
+          estimate: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
-          start: { type: :string },
-          end: { type: :string },
+          start_date: { type: :string },
+          end_date: { type: :string },
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id column_type desk_id project_id user_id]
+        required: %w[title column_id desk_id project_id user_id]
       }
       response(200, 'successful') do
         let(:id) { '123' }

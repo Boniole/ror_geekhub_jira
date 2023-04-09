@@ -32,12 +32,11 @@ end
       description: 'description',
       label: 'need to add label',
       estimate: '2w',
-      start: Date.today,
-      end: Date.today + 1,
+      start_date: Date.today,
+      end_date: Date.today + 1,
       user_id: project.user_id,
       project_id: project.id,
-      desk_id: desk.id,
-      column_type: 'Column'
+      desk_id: desk.id
     )
   end
 
@@ -52,5 +51,4 @@ end
       task_id: task.id
     )
   end
-
 end

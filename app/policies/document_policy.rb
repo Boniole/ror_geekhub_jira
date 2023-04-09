@@ -1,4 +1,6 @@
 class DocumentPolicy < ApplicationPolicy
+  attr_reader :user, :record
+
   def show?
     project_member?
   end
@@ -18,10 +20,10 @@ class DocumentPolicy < ApplicationPolicy
   private
 
   def project_member?
-    record.project.memberships.exists?(user_id: user.id)
+    @record.project.memberships.exists?(user_id: user.id)
   end
 
   def user_is_file_author_or_admin?
-    record.user == user || user.admin?
+    @record.user == user || user.admin?
   end
 end
