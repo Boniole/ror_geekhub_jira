@@ -13,9 +13,7 @@ class Api::V1::DocumentsController < ApplicationController
     @documents.each.with_index do |document, index|
       document.files.blobs.each do |blob|
         obj = s3.bucket(ENV['AWS_BUCKET']).object(blob.key)
-        file_name = blob.filename
-        url = obj.presigned_url(:get, expires_in: 3600)
-        @result << { name: file_name, url: url }
+        @result << { name: blob.filename, url: obj.presigned_url(:get, expires_in: 3600) }
       end
     end
     render json: @result, status: :ok
@@ -23,12 +21,12 @@ class Api::V1::DocumentsController < ApplicationController
 
   def show
     s3 = Aws::S3::Resource.new
-    url = []
+    @url = []
     @document.files.blobs.each do |blob|
       obj = s3.bucket(ENV['AWS_BUCKET']).object(blob.key)
-      url << { name: [blob.filename], url: obj.presigned_url(:get, expires_in: 3600) }
+      @url << { name: [blob.filename], url: obj.presigned_url(:get, expires_in: 3600) }
     end
-    render json: url
+    render json: @url
   end
 
   def create
@@ -43,7 +41,8 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def destroy
-    s3 = Aws::S3::Client.new
+    s3 = Aws::S3::Resource.new(ENV[''])
+    # s3 = Aws::S3::Resource.new
     @document.files.blobs.each do |blob|
       s3.delete_object(bucket: ENV['AWS_BUCKET'], key: blob[:filename])
     end
@@ -74,13 +73,16 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def set_document
-    # TODO VLAD catch errors, fix documentable_id: @attachable.id
-    @document = @attachable.documents.find_by(documentable_id: @attachable.id)
-    # if @document == nil
-    #   render json: { errors: 'Not found files' }, status: :not_found
-    # else
-    #   @document
-    # end
+    @document = @attachable.documents.find_by(id: params[:id])
+    if @document == nil
+      render json: { errors: 'Not found files' }, status: :not_found
+    else
+      @document
+    end
+  end
+
+  def set_url
+
   end
 
   def document_params
