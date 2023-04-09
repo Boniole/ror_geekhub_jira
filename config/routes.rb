@@ -38,16 +38,13 @@ Rails.application.routes.draw do
       end
       resources :columns do
         resources :tasks do
-          resources :documents, except: :update
           member do
             get :comments
           end
         end
       end
       resources :tasks
-            resources :comments do
-        resources :documents, except: :update
-      end
+      resources :comments
       # get '/github/show', to: 'github#show'
       resources :githubs do
         post 'show', on: :collection
