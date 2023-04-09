@@ -1202,7 +1202,7 @@ servers:
 - url: https://{kotello}
   variables:
     kotello:
-      default: kotello.space
+      default: www.kotello.space
 components:
   securitySchemes:
     bearerAuth:
