@@ -16,7 +16,6 @@ class Api::V1::ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user_id = @current_user.id
-    @project.save
     @project.memberships.build(user_id: @current_user.id, role: 'admin')
     authorize @project
 
@@ -28,7 +27,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
     authorize @project
 
     if @project.update(project_params)

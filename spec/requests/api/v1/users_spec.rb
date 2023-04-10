@@ -97,6 +97,8 @@ RSpec.describe 'api/v1/users', type: :request do
           required: %w[name last_name email password]
         }
 
+        security []
+
         response '200', 'user created' do
           let(:user) { build(:user) }
           run_test!
@@ -174,6 +176,8 @@ RSpec.describe 'api/v1/users', type: :request do
         },
         required: %w[email password]
       }
+
+      security []
 
       response '200', 'logged in successfully' do
         schema type: :object,
