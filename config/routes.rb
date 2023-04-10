@@ -9,8 +9,8 @@ Rails.application.routes.draw do
           get :comments
         end
       end
-      post '/login', to: 'authentication#login'
       get '/auth/:provider/callback', to: 'sessions#omniauth'
+      post '/login', to: 'authentication#login'
       post '/forgot', to: 'passwords#forgot'
       post '/reset', to: 'passwords#reset'
       resources :projects do

@@ -14,7 +14,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                  properties: {
                    id: { type: :integer },
                    name: { type: :string },
-                   status: { type: :string },
+                   status: { type: :string, default: :open },
                    user: { type: :object },
                    git_url: { type: :string }
                  },
@@ -33,7 +33,7 @@ RSpec.describe 'api/v1/projects', type: :request do
         type: :object,
         properties: {
             name: { type: :string },
-            status: { type: :string }
+            status: { type: :string, default: :open }
         },
         required: %w[name]
       }
@@ -42,7 +42,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                properties: {
                  id: { type: :integer },
                  name: { type: :string },
-                 status: { type: :string },
+                 status: { type: :string, default: :open },
                  user: { type: :object },
                  git_url: { type: :string }
                },
@@ -53,7 +53,7 @@ RSpec.describe 'api/v1/projects', type: :request do
   end
 
   path '/api/v1/projects/{id}' do
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: :id, in: :path, type: :integer, description: 'project_id'
 
     get('show project') do
       tags 'Projects'
@@ -65,7 +65,7 @@ RSpec.describe 'api/v1/projects', type: :request do
                properties: {
                  id: { type: :integer },
                  name: { type: :string },
-                 status: { type: :string },
+                 status: { type: :string, default: :open },
                  user: { type: :object },
                  git_url: { type: :string }
                },
@@ -82,13 +82,10 @@ RSpec.describe 'api/v1/projects', type: :request do
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string },
-            git_url: { type: :string }
-          }
+          name: { type: :string },
+          status: { type: :string, default: :open },
+          user_id: { type: :integer },
+          git_url: { type: :string }
         },
         required: %w[name status user_id]
       }
@@ -97,45 +94,11 @@ RSpec.describe 'api/v1/projects', type: :request do
                properties: {
                  id: { type: :integer },
                  name: { type: :string },
-                 status: { type: :string },
-                 user: { type: :object },
-                 git_url: { type: :string },
+                 status: { type: :string, default: :open },
                  created_at: { type: :string },
-                 updated_at: { type: :string }
-               },
-               required: %w[id name status user]
-        run_test!
-      end
-    end
-
-    put('update project') do
-      tags 'Projects'
-      description 'Update project'
-      produces 'application/json'
-      consumes 'application/json'
-      parameter name: :project, in: :body, schema: {
-        type: :object,
-        properties: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            status: { type: :string },
-            user_id: { type: :string },
-            git_url: { type: :string }
-          }
-        },
-        required: %w[name status user_id]
-      }
-      response(200, 'successful') do
-        schema type: :object,
-               properties: {
-                 id: { type: :integer },
-                 name: { type: :string },
-                 status: { type: :string },
+                 updated_at: { type: :string },
                  user: { type: :object },
-                 git_url: { type: :string },
-                 created_at: { type: :string },
-                 updated_at: { type: :string }
+                 git_url: { type: :string }
                },
                required: %w[id name status user]
         run_test!
@@ -154,13 +117,14 @@ RSpec.describe 'api/v1/projects', type: :request do
   end
 
   path '/api/v1/projects/{project_id}/add_member' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
+
     post('add member to project') do
       tags 'Projects'
       description 'Add member to project'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: 'project_id', in: :path, type: :string, description: 'project_id'
-      parameter name: :user_id, in: :body, schema: {
+      parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
           user_id: { type: :integer }
@@ -190,14 +154,15 @@ RSpec.describe 'api/v1/projects', type: :request do
     end
   end
 
-  path '/api/v1/projects/{project_id}/members/{user_id}' do
+  path '/api/v1/projects/{project_id}/delete_member/{user_id}' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
+
     delete('delete member from project') do
       tags 'Projects'
       description 'Delete member from project'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: 'project_id', in: :path, type: :string, description: 'project_id'
-      parameter name: 'user_id', in: :path, type: :string, description: 'user_id'
+      parameter name: :user_id, in: :path, type: :integer, description: 'user_id'
       response(204, 'successful') do
         run_test!
       end

@@ -432,6 +432,7 @@ paths:
                       type: string
                     status:
                       type: string
+                      default: open
                     user:
                       type: object
                     git_url:
@@ -460,6 +461,7 @@ paths:
                     type: string
                   status:
                     type: string
+                    default: open
                   user:
                     type: object
                   git_url:
@@ -478,16 +480,17 @@ paths:
                   type: string
                 status:
                   type: string
+                  default: open
               required:
               - name
   "/api/v1/projects/{id}":
     parameters:
     - name: id
       in: path
-      description: id
+      description: project_id
       required: true
       schema:
-        type: string
+        type: integer
     get:
       summary: show project
       tags:
@@ -507,6 +510,7 @@ paths:
                     type: string
                   status:
                     type: string
+                    default: open
                   user:
                     type: object
                   git_url:
@@ -535,13 +539,14 @@ paths:
                     type: string
                   status:
                     type: string
-                  user:
-                    type: object
-                  git_url:
-                    type: string
+                    default: open
                   created_at:
                     type: string
                   updated_at:
+                    type: string
+                  user:
+                    type: object
+                  git_url:
                     type: string
                 required:
                 - id
@@ -554,69 +559,15 @@ paths:
             schema:
               type: object
               properties:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user_id:
-                    type: string
-                  git_url:
-                    type: string
-              required:
-              - name
-              - status
-              - user_id
-    put:
-      summary: update project
-      tags:
-      - Projects
-      description: Update project
-      parameters: []
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user:
-                    type: object
-                  git_url:
-                    type: string
-                  created_at:
-                    type: string
-                  updated_at:
-                    type: string
-                required:
-                - id
-                - name
-                - status
-                - user
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user_id:
-                    type: string
-                  git_url:
-                    type: string
+                name:
+                  type: string
+                status:
+                  type: string
+                  default: open
+                user_id:
+                  type: integer
+                git_url:
+                  type: string
               required:
               - name
               - status
@@ -630,18 +581,19 @@ paths:
         '204':
           description: successful
   "/api/v1/projects/{project_id}/add_member":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: add member to project
       tags:
       - Projects
       description: Add member to project
-      parameters:
-      - name: project_id
-        in: path
-        description: project_id
-        required: true
-        schema:
-          type: string
+      parameters: []
       responses:
         '201':
           description: successful
@@ -685,25 +637,26 @@ paths:
                   type: integer
               required:
               - user_id
-  "/api/v1/projects/{project_id}/members/{user_id}":
+  "/api/v1/projects/{project_id}/delete_member/{user_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     delete:
       summary: delete member from project
       tags:
       - Projects
       description: Delete member from project
       parameters:
-      - name: project_id
-        in: path
-        description: project_id
-        required: true
-        schema:
-          type: string
       - name: user_id
         in: path
         description: user_id
         required: true
         schema:
-          type: string
+          type: integer
       responses:
         '204':
           description: successful
@@ -998,6 +951,7 @@ paths:
       tags:
       - Users
       parameters: []
+      security: []
       responses:
         '200':
           description: user created
@@ -1148,6 +1102,7 @@ paths:
       tags:
       - Authentication
       parameters: []
+      security: []
       responses:
         '200':
           description: logged in successfully
@@ -1202,7 +1157,7 @@ servers:
 - url: https://{kotello}
   variables:
     kotello:
-      default: www.kotello.space
+      default: kotello.space
 components:
   securitySchemes:
     bearerAuth:
