@@ -47,8 +47,7 @@ end
       body: 'It is a body for comment',
       user_id: project.user_id,
       commentable_type: 'User',
-      commentable_id: project.user_id,
-      task_id: task.id
+      commentable_id: project.user_id
     )
   end
 end
