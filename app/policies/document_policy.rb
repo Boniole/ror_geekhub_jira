@@ -34,6 +34,7 @@ class DocumentPolicy < ApplicationPolicy
       @record.documentable
     when 'Task'
       @record.documentable.project
+      # TODO not working comment
     when 'Comment'
       @record.documentable.commentable.project
     end
