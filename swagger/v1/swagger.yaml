@@ -294,6 +294,211 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/projects/{project_id}/documents":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      description: Get documents for project
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      description: Create document for project
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents[]:
+                  type: array
+                  items:
+                    type: file
+                    format: binary
+        required: true
+        description: Array of files
+  "/api/v1/projects/{project_id}/documents/{id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: document_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show document
+      tags:
+      - Documents
+      description: Get document for project
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      description: Delete document for project
+      responses:
+        '200':
+          description: successful
+  "/api/v1/tasks/{task_id}/documents":
+    parameters:
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      description: Get documents for task
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      description: Create document for task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents[]:
+                  type: array
+                  items:
+                    type: file
+                    format: binary
+        required: true
+        description: Array of files
+  "/api/v1/tasks/{task_id}/documents/{id}":
+    parameters:
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: document_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show document
+      tags:
+      - Documents
+      description: Show document for task
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      description: Dekete document for task
+      responses:
+        '200':
+          description: successful
+  "/api/v1/comments/{comment_id}/documents":
+    parameters:
+    - name: comment_id
+      in: path
+      description: comment_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      description: Get documents for comment
+      parameters: []
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      description: Create document for comment
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents[]:
+                  type: array
+                  items:
+                    type: file
+                    format: binary
+        required: true
+        description: Array of files
+  "/api/v1/comments/{comment_id}/documents/{id}":
+    parameters:
+    - name: comment_id
+      in: path
+      description: comment_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: document_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show document
+      tags:
+      - Documents
+      description: Get documents for comment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      description: Delete documents for comment
+      responses:
+        '200':
+          description: successful
   "/api/v1/github_users/show":
     get:
       summary: create column

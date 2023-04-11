@@ -45,7 +45,6 @@ Rails.application.routes.draw do
       end
       resources :tasks
       resources :comments
-      resources :documents
 
       resources :github_users, only: %i[show]
       resources :github_repositories do
