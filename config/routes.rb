@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       post '/login', to: 'authentication#login'
       post '/forgot', to: 'passwords#forgot'
       post '/reset', to: 'passwords#reset'
+      post '/reset_password', to: 'passwords#reset_in_settings'
       resources :projects do
         resources :documents, except: :update
         member do

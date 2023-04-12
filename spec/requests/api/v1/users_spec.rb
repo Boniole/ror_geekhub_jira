@@ -61,13 +61,13 @@ RSpec.describe 'api/v1/users', type: :request do
 
         response '200', 'user information found' do
           schema type: :object,
-                properties: {
-                  id: { type: :integer },
-                  name: { type: :string },
-                  last_name: { type: :string },
-                  email: { type: :string }
-                },
-                required: %w[id name last_name email]
+                 properties: {
+                   id: { type: :integer },
+                   name: { type: :string },
+                   last_name: { type: :string },
+                   email: { type: :string }
+                 },
+                 required: %w[id name last_name email]
 
           let(:current_user) { 'Bearer ' + JsonWebToken.encode(user_id: user.id) }
           run_test!
@@ -79,7 +79,6 @@ RSpec.describe 'api/v1/users', type: :request do
         end
       end
     end
-
 
     path '/api/v1/users' do
       post 'Creates a user' do
@@ -204,37 +203,44 @@ RSpec.describe 'api/v1/users', type: :request do
     post 'Resets a user password' do
       tags 'Users'
       consumes 'application/json'
-      parameter name: :email, in: :body, schema: {
+      parameter name: :reset_password, in: :body, schema: {
         type: :object,
         properties: {
-          email: { type: :string },
+          old_password: { type: :string },
           password: { type: :string }
         },
-        required: %w[email password]
+        required: %w[old_password password]
       }
+      security [{ bearerAuth: [] }]
 
       response '200', 'Password reset successfully' do
-        let(:email) { user.email }
-        let(:password) { 'new_password' }
-        run_test!
-      end
-
-      response '404', 'Link not valid or expired' do
-        let(:email) { 'invalid_email@example.com' }
-        let(:password) { 'new_password' }
-        run_test!
-      end
-
-      response '422', 'Invalid request' do
-        let(:email) { user.email }
-        let(:password) { '' }
+        let(:Authorization) { "Bearer #{user_token}" }
+        let(:reset_password) { { old_password: user.password, password: 'new_password' } }
         run_test!
       end
 
       response '401', 'Unauthorized' do
-        let(:email) { user.email }
-        let(:password) { 'new_password' }
         let(:Authorization) { '' }
+        let(:reset_password) { { old_password: user.password, password: 'new_password' } }
+        run_test!
+      end
+
+      response '422', 'Invalid request' do
+        let(:Authorization) { "Bearer #{user_token}" }
+        let(:reset_password) { { old_password: user.password, password: '' } }
+        run_test!
+      end
+
+      response '404', 'Invalid or expired password reset token' do
+        let(:Authorization) { "Bearer #{user_token}" }
+        let(:reset_password) { { old_password: 'wrong_password', password: 'new_password' } }
+        run_test!
+      end
+
+      response '404', 'User not found' do
+        let(:Authorization) { "Bearer #{user_token}" }
+        let(:reset_password) { { old_password: user.password, password: 'new_password' } }
+        before { user.destroy }
         run_test!
       end
     end
