@@ -1,5 +1,5 @@
 class Api::V1::PasswordsController < ApplicationController
-  before_action :authorize_request, except: :forgot
+  before_action :authorize_request, only: :reset_in_settings
 
   def forgot
     return render json: { error: 'Email not present' } if params[:email].blank?
