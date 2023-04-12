@@ -1,6 +1,7 @@
 class Api::V1::DesksController < ApplicationController
   before_action :authorize_request
   before_action :desk_params, only: %i[create update]
+  before_action :set_project, only: %i[index create]
   before_action :set_desk, only: %i[show update destroy]
   before_action :set_desks, only: :index
 
@@ -13,7 +14,7 @@ class Api::V1::DesksController < ApplicationController
   end
 
   def create
-    desk = Desk.new(desk_params)
+    desk = @project.desks.new(desk_params)
 
     if desk.save
       render json: desk, status: :ok, serializer: DeskSerializer
@@ -34,6 +35,12 @@ class Api::V1::DesksController < ApplicationController
 
   private
 
+  def set_project
+    @project = Project.find(params[:project_id])
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { errors: e.message }, status: :not_found
+  end
+
   def set_desk
     @desk = Desk.find(params[:id])
   rescue ActiveRecord::RecordNotFound => e
@@ -41,12 +48,13 @@ class Api::V1::DesksController < ApplicationController
   end
 
   def set_desks
-    project = Project.find(desk_params[:project_id])
-    @desks = project.desks
+    @desks = @project.desks
+  rescue ActiveRecord::RecordNotFound => e
+    render json: { errors: e.message }, status: :not_found
   end
 
   def desk_params
-    params.require(:desk).permit(:name, :project_id)
+    params.permit(:name)
   rescue ActionController::ParameterMissing => e
     render json: { errors: e.message }, status: :bad_request
   end
