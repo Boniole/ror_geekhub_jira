@@ -35,18 +35,27 @@ class Api::V1::PasswordsController < ApplicationController
 
   def reset_in_settings
     user = @current_user
+    old_password = params[:old_password]
+    password = params[:password]
+
+    unless user.authenticate(old_password)
+      return render json: { error: 'Old password is incorrect' }, status: :unprocessable_entity
+    end
+
     user.generate_password_token!
 
-    return render json: { error: 'Token not present' } if user.reset_password_token.blank?
+    return render json: { error: 'Invalid or expired password reset token' } if user.reset_password_token.blank?
 
-    if user.present? && user.password_token_valid? && user.valid?
-      if user.reset_password!(params[:password])
+    if user.present? && user.password_token_valid?
+      user.password = params[:password]
+      if user.valid?
+        user.reset_password!(params[:password])
         render json: { status: 'ok' }, status: :ok
       else
         render json: { error: user.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { error: user.errors.full_messages }, status: :not_found
+      render json: { error: 'Token not valid or expired. Try again' }, status: :not_found
     end
   end
 end
