@@ -28,12 +28,12 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    length: { minimum: 2, maximum: 30 },
-                   format: { with: %r{\A[a-zA-Z^~!@#$%^&*()_+\-=\[\]{}|;':",./<>?£ ]+\z},
-                             message: 'Special characters not allowed' }
+                   format: { with: /\A[a-zA-Z]+\z/,
+                             message: 'Only latin letters allowed, no spaces or special characters' }
   validates :last_name, presence: true,
                         length: { minimum: 2, maximum: 30 },
-                        format: { with: %r{\A[a-zA-Z^~!@#$%^&*()_+\-=\[\]{}|;':",./<>?£ ]+\z},
-                                  message: 'Special characters not allowed' }
+                        format: { with: /\A[a-zA-Z]+\z/,
+                                  message: 'Only latin letters allowed, no spaces or special characters' }
   validates :email, presence: true, uniqueness: true,
                     length: { minimum: 8, maximum: 64 },
                     format: { with: /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/,
