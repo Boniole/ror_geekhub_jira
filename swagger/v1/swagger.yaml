@@ -1188,10 +1188,6 @@ paths:
                   type: string
                 last_name:
                   type: string
-                email:
-                  type: string
-                password:
-                  type: string
                 github_token:
                   type: string
     delete:

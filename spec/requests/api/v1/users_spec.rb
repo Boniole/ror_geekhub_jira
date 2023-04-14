@@ -120,8 +120,6 @@ RSpec.describe 'api/v1/users', type: :request do
           properties: {
             name: { type: :string },
             last_name: { type: :string },
-            email: { type: :string },
-            password: { type: :string },
             github_token: { type: :string }
           }
         }
