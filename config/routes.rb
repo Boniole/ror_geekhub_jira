@@ -9,22 +9,24 @@ Rails.application.routes.draw do
           get :comments
         end
       end
-      post '/login', to: 'authentication#login'
       get '/auth/:provider/callback', to: 'sessions#omniauth'
+      post '/login', to: 'authentication#login'
       post '/forgot', to: 'passwords#forgot'
       post '/reset', to: 'passwords#reset'
+      post '/reset_password', to: 'passwords#reset_in_settings'
       resources :projects do
+        resources :desks
         resources :documents, except: :update
         member do
           post 'add_member', to: 'projects#add_member'
           delete 'delete_member/:user_id', to: 'projects#delete_member'
         end
       end
-      resources :desks do
-        member do
-          get :columns
-        end
-      end
+      # resources :desks do
+      #   member do
+      #     get :columns
+      #   end
+      # end
       resources :columns
       resources :tasks do
         resources :documents, except: :update
@@ -45,7 +47,6 @@ Rails.application.routes.draw do
       end
       resources :tasks
       resources :comments
-      resources :documents
 
       resources :github_users, only: %i[show]
       resources :github_repositories do

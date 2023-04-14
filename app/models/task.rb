@@ -4,16 +4,15 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string
-#  end_date    :text
-#  estimate    :text
+#  end_date    :date
+#  estimate    :datetime
 #  label       :text
 #  priority    :integer          default("low")
 #  sort_number :integer
-#  start_date  :text
+#  start_date  :date
 #  status      :integer          default("open")
 #  tag_name    :text
 #  title       :text
-#  type_of     :integer          default("task")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  assignee_id :integer
