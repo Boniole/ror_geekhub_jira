@@ -1,4 +1,5 @@
 class Api::V1::PasswordsController < ApplicationController
+  include NatsPublisher
   before_action :authorize_request, only: :reset_in_settings
 
   def forgot
@@ -9,6 +10,12 @@ class Api::V1::PasswordsController < ApplicationController
     if user.present?
       user.generate_password_token!
       # SEND EMAIL HERE
+      nats_publish('service.mail', { class: "account",
+                                     type: "account_reset_password",
+                                     language: "en",
+                                     to: user.email,
+                                     token: user.reset_password_token,
+                                     username: user.name }.to_json)
       render json: { status: 'ok' }, status: :ok
     else
       render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found

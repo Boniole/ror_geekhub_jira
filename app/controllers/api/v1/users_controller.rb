@@ -1,4 +1,6 @@
 class Api::V1::UsersController < ApplicationController
+  include NatsPublisher
+
   before_action :authorize_request, except: :create
   before_action :set_user, except: %i[create index about_current_user]
 
@@ -20,6 +22,12 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id)
       time = Time.now + 24.hours.to_i
+      nats_publish('service.mail', {:class => "account",
+                                    :type => "account_register_new",
+                                    :language => "en",
+                                    :password => @user.password,
+                                    :to => @user.email,
+                                    :username => @user.name}.to_json)
       render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
                      name: @user }, status: :created
     else
