@@ -29,9 +29,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    unless @user.update(user_params)
-      render json: { errors: @user.errors.full_messages },
-             status: :unprocessable_entity
+    if user_params.key?(:email) || user_params.key?(:password)
+      render json: { errors: 'You cannot update email or password' }, status: :unprocessable_entity
+      return
+    end
+
+    if @user.update_columns(name: params[:name], last_name: params[:last_name])
+      render json: @user, status: :ok, serializer: UserSerializer
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
