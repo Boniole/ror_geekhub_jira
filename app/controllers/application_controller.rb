@@ -34,13 +34,12 @@ class ApplicationController < ActionController::API
   def user_not_authorized
     render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
   end
+  
+  def nats_publish(subject, data)
+    require 'nats/client'
+    require 'json'
 
-
-  # def nats_publish(subject, data)
-  #   require 'nats/client'
-  #   require 'json'
-  #
-  #   nats = NATS.connect(ENV['NATS_SERVER_PORT'])
-  #   nats.publish(subject, data)
-  # end
+    nats = NATS.connect(ENV['NATS_SERVER_PORT'])
+    nats.publish(subject, data)
+  end
 end

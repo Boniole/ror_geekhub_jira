@@ -152,61 +152,31 @@ paths:
       responses:
         '204':
           description: successful
-  "/api/v1/desks":
+  "/api/v1/projects/{project_id}/desks":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     get:
       summary: list desks
       tags:
       - Desks
       description: Get desks
-      parameters:
-      - name: project_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the project (integer)
       responses:
         '200':
           description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                required:
-                - id
-                - name
     post:
       summary: create desk
       tags:
       - Desks
-      description: Create desk
+      description: Create desks
       parameters: []
       responses:
-        '201':
+        '200':
           description: successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  status:
-                    type: string
-                  user:
-                    type: object
-                required:
-                - id
-                - name
-                - status
       requestBody:
         content:
           application/json:
@@ -215,26 +185,27 @@ paths:
               properties:
                 name:
                   type: string
-                  default: My desk
-                project_id:
-                  type: integer
-                  default: 1
               required:
               - name
-              - project_id
-  "/api/v1/desks/{id}":
+  "/api/v1/projects/{project_id}/desks/{id}":
     parameters:
-    - name: id
+    - name: project_id
       in: path
-      description: id
+      description: project_id
       required: true
       schema:
-        type: string
+        type: integer
+    - name: id
+      in: path
+      description: desk_id
+      required: true
+      schema:
+        type: integer
     get:
       summary: show desk
       tags:
       - Desks
-      description: Get desk by id
+      description: Get desk
       responses:
         '200':
           description: successful
@@ -255,37 +226,8 @@ paths:
               properties:
                 name:
                   type: string
-                  default: My desk
-                project_id:
-                  type: integer
-                  default: 1
               required:
               - name
-              - project_id
-    put:
-      summary: update desk
-      tags:
-      - Desks
-      description: Update desk
-      parameters: []
-      responses:
-        '200':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  default: My desk
-                project_id:
-                  type: integer
-                  default: 1
-              required:
-              - name
-              - project_id
     delete:
       summary: delete desk
       tags:
