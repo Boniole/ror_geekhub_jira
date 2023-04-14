@@ -15,17 +15,18 @@ Rails.application.routes.draw do
       post '/reset', to: 'passwords#reset'
       post '/reset_password', to: 'passwords#reset_in_settings'
       resources :projects do
+        resources :desks
         resources :documents, except: :update
         member do
           post 'add_member', to: 'projects#add_member'
           delete 'delete_member/:user_id', to: 'projects#delete_member'
         end
       end
-      resources :desks do
-        member do
-          get :columns
-        end
-      end
+      # resources :desks do
+      #   member do
+      #     get :columns
+      #   end
+      # end
       resources :columns
       resources :tasks do
         resources :documents, except: :update
