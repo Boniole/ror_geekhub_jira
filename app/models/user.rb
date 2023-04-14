@@ -36,11 +36,12 @@ class User < ApplicationRecord
                                   message: 'Special characters not allowed' }
   validates :email, presence: true, uniqueness: true,
                     length: { minimum: 8, maximum: 64 },
-                    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i }
+                    format: { with: /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/,
+                              message: 'Should be in the format: user@domain.com' }
   validates :password, presence: true,
                        length: { minimum: 8, maximum: 20 },
                        format: { with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/,
-                                 message: 'must contain at least one uppercase letter, one lowercase letter, and one digit' }
+                                 message: 'Must contain at least one uppercase letter, one lowercase letter, and one digit' }
 
   validates :github_token, format: {
     with: /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/m,
