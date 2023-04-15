@@ -1,6 +1,6 @@
 class CommentPolicy < ApplicationPolicy
   attr_reader :user, :record
-
+  # delete the same methods with alies
   def create?
     project_member?
   end

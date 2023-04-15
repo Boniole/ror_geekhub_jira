@@ -1,6 +1,7 @@
 class ColumnPolicy < ApplicationPolicy
   attr_reader :user, :record
 
+  # delete the same methods with alies
   def show?
     user.admin?(set_project) || member?(set_project)
   end
@@ -23,6 +24,7 @@ class ColumnPolicy < ApplicationPolicy
     project.memberships.exists?(user_id: user.id)
   end
 
+  # move to controller
   def set_project
     @record.desk.project
   end

@@ -21,11 +21,14 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+  # CONSTANT
   belongs_to :user
   belongs_to :commentable, polymorphic: true
   has_many :documents, as: :documentable
 
+  # status db default?
   enum :status, %i[open close], default: :open
 
+  # { in: 3..2500 } to constant
   validates :body, presence: true, length: { in: 3..2500 }
 end

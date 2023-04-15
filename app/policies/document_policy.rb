@@ -1,6 +1,6 @@
 class DocumentPolicy < ApplicationPolicy
   attr_reader :user, :record
-
+  # delete the same methods with alies
   def show?
     project_member?
   end

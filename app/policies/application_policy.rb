@@ -11,11 +11,18 @@ class ApplicationPolicy
   def index?
     false
   end
+  # add     alias_method :show?, :index?
+  # add     alias_method :create?, :index?
+  # add     alias_method :update?, :index?
+  # add     alias_method :destroy?, :index?
+  # add     alias_method :show?, :index?
 
+  # need delete show? because 14 string
   def show?
     false
   end
 
+  # need delete
   def create?
     false
   end
@@ -24,6 +31,7 @@ class ApplicationPolicy
     create?
   end
 
+  # need delete
   def update?
     false
   end
@@ -32,10 +40,12 @@ class ApplicationPolicy
     update?
   end
 
+  # need delete
   def destroy?
     false
   end
 
+  # mote to up(first method)
   class Scope
     attr_reader :user, :scope
 

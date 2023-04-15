@@ -11,8 +11,11 @@ Rails.application.routes.draw do
       end
       get '/auth/:provider/callback', to: 'sessions#omniauth'
       post '/login', to: 'authentication#login'
+      # rename forget_password
       post '/forgot', to: 'passwords#forgot'
+      # rename reset to reset_password
       post '/reset', to: 'passwords#reset'
+      # rename reset_password to update_password
       post '/reset_password', to: 'passwords#reset_in_settings'
       resources :projects do
         resources :desks
@@ -22,11 +25,14 @@ Rails.application.routes.draw do
           delete 'delete_member/:user_id', to: 'projects#delete_member'
         end
       end
+      # delete it
       # resources :desks do
       #   member do
       #     get :columns
       #   end
       # end
+
+      # need check it
       resources :columns
       resources :tasks do
         resources :documents, except: :update
@@ -38,6 +44,8 @@ Rails.application.routes.draw do
       resources :comments do
         resources :documents, except: :update
       end
+
+      # need check it the same(36-42)
       resources :columns do
         resources :tasks do
           member do
@@ -45,12 +53,15 @@ Rails.application.routes.draw do
           end
         end
       end
+      # delete resources :tasks
       resources :tasks
       resources :comments
 
       resources :github_users, only: %i[show]
       resources :github_repositories do
+        # collection do 63-66
         post 'create', on: :collection
+        # patch - put
         patch 'update', on: :collection
         delete 'delete', on: :collection
       end

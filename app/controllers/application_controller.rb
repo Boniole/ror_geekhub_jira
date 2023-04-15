@@ -46,4 +46,18 @@ class ApplicationController < ActionController::API
     nats = NATS.connect(ENV['NATS_SERVER_PORT'])
     nats.publish(subject, data)
   end
+
+  # add this
+  def render_success(data: nil, status: :ok, serializer: nil)
+    if data.nil?
+      render json: {}, status: status
+    else
+      render json: { data: data }, status: status
+    end
+  end
+
+  # add this and update
+  def render_failure
+    render json: { baseErrors: errors }, status: status
+  end
 end

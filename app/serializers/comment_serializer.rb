@@ -23,6 +23,7 @@
 class CommentSerializer < ActiveModel::Serializer
   attributes :id, :status, :body, :user, :created_at, :updated_at
 
+  # need check
   def user
     UserSerializer.new(object.user).attributes
   end

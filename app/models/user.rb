@@ -16,6 +16,7 @@
 #  updated_at             :datetime         not null
 #
 class User < ApplicationRecord
+  # CONST
   has_secure_password
 
   has_many :projects, dependent: :destroy
@@ -48,10 +49,13 @@ class User < ApplicationRecord
     message: 'Must be a valid GitHub personal access token!'
   }, allow_blank: true
 
+  # think about (enum)
   def admin?(project)
     project.memberships.find_by(user_id: id)&.role == 'admin'
   end
 
+  # self?
+  # PASSWORDABLE
   def generate_password_token!
     self.reset_password_token = generate_token
     self.reset_password_sent_at = Time.now.utc
@@ -67,7 +71,8 @@ class User < ApplicationRecord
     self.password = password
     save!(validate: false)
   end
-# to controller
+# to controller or concerns
+  # omniauthable
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
       user.provider = auth[:provider]
@@ -81,7 +86,11 @@ class User < ApplicationRecord
 
   private
 
+  # PASSWORDABLE
   def generate_token
     SecureRandom.hex(10)
   end
 end
+
+# CONCERNS
+# https://blog.appsignal.com/2020/09/16/rails-concers-to-concern-or-not-to-concern.html
