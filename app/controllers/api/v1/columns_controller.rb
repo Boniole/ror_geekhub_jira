@@ -5,6 +5,9 @@ class Api::V1::ColumnsController < ApplicationController
 
   def show
     authorize @column
+
+    # add render_success to all methods
+    # render_success(data: @column, serializer: ColumnSerializer)
     render json: @column, status: :ok, serializer: ColumnSerializer
   end
 

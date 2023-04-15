@@ -1,6 +1,6 @@
 class TaskPolicy < ApplicationPolicy
   attr_reader :user, :record
-
+  # delete the same methods with alies
   def show?
     project_member?
   end
@@ -19,6 +19,7 @@ class TaskPolicy < ApplicationPolicy
 
   private
 
+  # where to scopes
   def project_member?
     Membership.where(project_id: @record.project_id, user_id: user.id).exists?
   end

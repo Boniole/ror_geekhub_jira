@@ -1,6 +1,6 @@
 class ProjectPolicy < ApplicationPolicy
   attr_reader :user, :record
-
+  # delete the same methods with alies
   def show?
     @record.memberships.exists?(user_id: user.id)
   end

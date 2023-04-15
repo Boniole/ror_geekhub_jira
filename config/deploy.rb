@@ -8,11 +8,13 @@ set :puma_user, fetch(:user)
 set :rvm_ruby_version, '3.1.2'
 set :pty, true
 
+# delete 'config/application.yml - config/.env.production
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key', 'config/puma.rb', 'config/application.yml')
 set :linked_dirs,  fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads', 'public/images',
                                                 'storage')
 
 set :config_example_suffix, '.example'
+# delete 'config/application.yml - config/.env.production
 set :config_files, %w[config/database.yml config/application.yml]
 set :nginx_use_ssl, false
 
