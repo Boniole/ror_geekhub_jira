@@ -21,6 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+  belongs_to :user
   belongs_to :commentable, polymorphic: true
   has_many :documents, as: :documentable
 
