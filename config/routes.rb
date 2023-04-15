@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
-      get '/about_user', to: 'users#about_current_user'
-      resources :users do
+      get '/about_user', to: 'users#about_current_user' # collection show
+      resources :users do 
         member do
           get :comments
         end

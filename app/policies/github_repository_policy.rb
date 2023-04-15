@@ -2,6 +2,7 @@ class GithubRepositoryPolicy < ApplicationPolicy
   attr_reader :user, :record
 
   def create?
+    # remove record
     user.admin?(set_project)
   end
 

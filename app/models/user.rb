@@ -67,7 +67,7 @@ class User < ApplicationRecord
     self.password = password
     save!(validate: false)
   end
-
+# to controller
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
       user.provider = auth[:provider]

@@ -6,6 +6,7 @@ class Api::V1::CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
+    # current_user.comments.new
 
     authorize @comment
 

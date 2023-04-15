@@ -3,6 +3,8 @@ class Api::V1::ColumnsController < ApplicationController
   before_action :column_params, only: %i[create update]
   before_action :set_column, only: %i[show update destroy]
 
+  # before_action authorize
+#authorize @task || Task
   def show
     authorize @column
     render json: @column, status: :ok, serializer: ColumnSerializer
@@ -11,6 +13,7 @@ class Api::V1::ColumnsController < ApplicationController
   def create
     @column = Column.new(column_params)
     authorize @column
+    # move logic to model
     @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
 
     if @column.save
