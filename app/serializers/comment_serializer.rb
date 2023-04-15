@@ -21,5 +21,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :status, :body, :created_at, :updated_at
+  attributes :id, :status, :body, :user, :created_at, :updated_at
+
+  def user
+    UserSerializer.new(object.user).attributes
+  end
 end
