@@ -38,10 +38,12 @@ gem 'bootsnap', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
+# needed?
 gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'net-smtp', require: false
 
+# needed?
 gem 'figaro'
 
 gem 'ed25519'
@@ -52,7 +54,7 @@ gem 'bcrypt_pbkdf'
 gem 'pundit'
 
 # Gems for authentication system
-gem 'omniauth'
+# gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-google-oauth2'
@@ -75,8 +77,9 @@ gem 'dotenv-rails'
 gem 'octokit', '~> 5.0'
 
 # Faraday is an HTTP client library abstraction layer that provides a common interface over many adapters
-gem 'faraday'
-gem 'faraday-retry'
+# needed?
+# gem 'faraday'
+# gem 'faraday-retry'
 
 # A thread safe Ruby client for the NATS messaging system written in pure Ruby. [https://github.com/nats-io/nats-pure.rb]
 gem 'nats-pure'
