@@ -21,12 +21,14 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Project < ApplicationRecord
+  # CONST (concern)
   belongs_to :user
   has_many :desks, dependent: :destroy
   has_many :documents, as: :documentable
   has_many :memberships
   has_many :users, through: :memberships
 
+  # length: { minimum: 3 } to const
   validates :name, presence: true, length: { minimum: 3 }
   validates :status, presence: true
   validates :git_url, presence: true,
