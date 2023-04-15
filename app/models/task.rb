@@ -37,6 +37,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
+  # CONST
   belongs_to :project
   belongs_to :desk
   belongs_to :column
@@ -49,11 +50,13 @@ class Task < ApplicationRecord
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
-  validates :user_id, numericality: { only_integer: true }
-  validates :project_id, numericality: { only_integer: true }
-  validates :desk_id, numericality: { only_integer: true }
-  validates :column_id, numericality: { only_integer: true }
+  # validates :user_id, numericality: { only_integer: true }
+  # validates :project_id, numericality: { only_integer: true }
+  # validates :desk_id, numericality: { only_integer: true }
+  # validates :column_id, numericality: { only_integer: true }
 
+  # range constant
+  # with: /\A\d+(w|d|h|m)\z/ to const
   validates :title, length: { in: 3..30 }
   validates :description, presence: true, length: { in: 3..2500 }, allow_blank: true
   validates :label, presence: true, length: { in: 3..30 }, allow_blank: true
@@ -70,10 +73,13 @@ class Task < ApplicationRecord
 
   before_create :generate_tag_name
   after_create :increment_project_task_count
+  #after_update :set_sort_number , if: -> {sotr_number.nil?}
   before_save :set_sort_number
 
   private
 
+  # validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
+  #                                  :before => Proc.new { Time.now - 2.years } }
   def start_and_end_dates_are_valid
     return unless parse_date([start_date, end_date])
 
@@ -91,10 +97,12 @@ class Task < ApplicationRecord
 
   def generate_tag_name
     first_project_letter = Translit.convert(project.name[0], :english).upcase
+    #self?
     self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
   end
 
   def set_sort_number
+    #self?
     self.sort_number = column.tasks.maximum(:sort_number).to_i + 1 if sort_number.nil?
   end
 end
