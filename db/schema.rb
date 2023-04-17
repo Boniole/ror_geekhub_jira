@@ -74,7 +74,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_093610) do
   create_table "documents", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    # todo Vlad
     t.string "documentable_type", null: false
+    # todo Vlad
     t.bigint "documentable_id", null: false
     t.string "name", null: false
     t.string "document_type", null: false
