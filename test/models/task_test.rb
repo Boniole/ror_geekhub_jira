@@ -7,12 +7,12 @@
 #  end_date        :text
 #  estimate        :text
 #  label           :text
+#  name            :text
 #  priority        :integer
 #  priority_number :integer
 #  start_date      :text
 #  status          :integer
 #  tag_name        :text
-#  title           :text
 #  type_of         :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

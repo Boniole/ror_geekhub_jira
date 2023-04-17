@@ -64,14 +64,14 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :title,
+        name: :name,
         in: :post,
         required: true,
         schema: {
           type: :string
         },
-        default: 'Task title',
-        description: 'The title of the task (string)'
+        default: 'Task name',
+        description: 'The name of the task (string)'
       )
 
       parameter(
@@ -185,7 +185,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
           user_id: { type: :integer, default: 1 },
-          title: { type: :string },
+          name: { type: :string },
           description: { type: :string },
           priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
@@ -196,7 +196,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id  desk_id project_id user_id]
+        required: %w[name column_id  desk_id project_id user_id]
       }
 
       response(200, 'successful') do
@@ -247,7 +247,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
           user_id: { type: :integer, default: 1 },
-          title: { type: :string },
+          name: { type: :string },
           description: { type: :string },
           priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
@@ -258,7 +258,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id desk_id project_id user_id]
+        required: %w[name column_id desk_id project_id user_id]
       }
       response(200, 'successful') do
         let(:id) { '123' }
