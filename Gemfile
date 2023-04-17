@@ -38,7 +38,7 @@ gem 'bootsnap', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
-# needed?
+# needed? Net::IMAP implements Internet Message Access Protocol (IMAP) client functionality. The protocol is described in 
 gem 'net-imap', require: false
 gem 'net-pop', require: false
 gem 'net-smtp', require: false
@@ -46,8 +46,10 @@ gem 'net-smtp', require: false
 # needed?
 gem 'figaro'
 
+# A Ruby binding to the Ed25519 elliptic curve public-key signature system described in RFC 8032.
 gem 'ed25519'
 
+# bcrypt_pbkdf is a ruby gem implementing bcrypt_pbkdf from OpenBSD. This is currently used by net-ssh to read password encrypted Ed25519 keys.
 gem 'bcrypt_pbkdf'
 
 # Gem for authorization system
@@ -60,6 +62,7 @@ gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
+# rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
 gem 'rspec-rails'
 gem 'rswag'
 gem 'rswag-specs'
@@ -87,6 +90,9 @@ gem 'nats-pure'
 # It is a simple library allowing you to transliterate between cyrillic and latin. It is easy to use from the command line and in your code.
 gem 'translit'
 
+# Add a comment summarizing the current schema
+gem 'annotate'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -101,6 +107,6 @@ group :development do
   gem 'capistrano-upload-config'
   gem 'sshkit-sudo'
 
-  gem 'annotate'
+  # The faker and ffaker APIs are mostly the same, although the API on ffaker keeps diverging with its users additions.
   gem 'ffaker', '~> 2.21'
 end
