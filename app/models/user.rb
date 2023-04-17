@@ -16,11 +16,7 @@
 #  updated_at             :datetime         not null
 #
 class User < ApplicationRecord
-  include Validatable::FirstName
-  include Validatable::LastName
-  include Validatable::Email
-  include Validatable::Password
-  include Validatable::GitHubToken
+  include Validatable::Userable
 
   has_secure_password
 

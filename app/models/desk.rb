@@ -17,7 +17,7 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 class Desk < ApplicationRecord
-  include Validatable::Name
+  include Validatable::Deskable
 
   belongs_to :project
   has_many :columns, dependent: :destroy # TODO https://github.com/rubysherpas/paranoia

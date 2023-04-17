@@ -21,9 +21,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Project < ApplicationRecord
-  include Validatable::Name
-  include Validatable::GitRepo
-  include Validatable::GitUrl
+  include Validatable::Projectable
 
   belongs_to :user
   has_many :desks, dependent: :destroy

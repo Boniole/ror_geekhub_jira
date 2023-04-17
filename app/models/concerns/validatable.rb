@@ -18,52 +18,30 @@ module Validatable
   REGEXP_GITHUB_TOKEN =/\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/
   REGEXP_GIT_URL = URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
-  module Name
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+  included do
+    def self.validate_name
       validates :name, presence: true, length: { in: RANGE_NAME_LENGTH }
     end
-  end
 
-  module Description
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_description
       validates :description, length: { in: RANGE_DESC_LENGTH }
     end
-  end
 
-  module Body
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_body
       validates :body, length: { in: RANGE_DESC_LENGTH }
     end
-  end
 
-  module FirstName
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validates :first_name, presence: true,
-                             length: { in: RANGE_NAME_LENGTH },
-                             format: {
-                               with: REGEXP_USER,
-                               message: 'Only latin letters allowed, no spaces or special characters'
-                             }
+    def self.validate_firstname
+      validates :first_name,
+                presence: true,
+                length: { in: RANGE_NAME_LENGTH },
+                format: {
+                  with: REGEXP_USER,
+                  message: 'Only latin letters allowed, no spaces or special characters'
+                }
     end
-  end
 
-  module LastName
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_lastname
       validates :last_name, presence: true,
                             length: { in: RANGE_NAME_LENGTH },
                             format: {
@@ -71,27 +49,18 @@ module Validatable
                               message: 'Only latin letters allowed, no spaces or special characters'
                             }
     end
-  end
 
-  module Email
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validates :email, presence: true, uniqueness: true,
+    def self.validate_email
+      validates :email, presence: true,
+                        uniqueness: true,
                         length: { in: RANGE_EMAIL_LENGTH },
                         format: {
                           with: REGEXP_EMAIL,
                           message: 'Should be in the format: user@domain.com'
                         }
     end
-  end
 
-  module Password
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_password
       validates :password,
                 presence: true,
                 length: { in: RANGE_PASSWORD_LENGTH },
@@ -100,74 +69,114 @@ module Validatable
                   message: 'Must contain at least one uppercase letter, one lowercase letter, and one digit'
                 }
     end
-  end
 
-  module Estimate
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_estimate
       validates :estimate,
                 format: {
                   with: REGEXP_ESTIMATE,
                   message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
                 }, allow_blank: true
     end
-  end
 
-  module FormatDate
-    extend ActiveSupport::Concern
-    include Validatable
-
-      # TODO validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
-  #                                  :before => Proc.new { Time.now - 2.years } }
-
-    included do
+    def self.validate_format_date
       validates_format_of :start_date, :end_date, with: REGEXP_DATE, message: 'must be in the format YYYY-MM-DD', allow_blank: true
     end
-  end
 
-  module Label
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_label
       validates :label, length: { in: RANGE_LABEL_LENGTH }, allow_blank: true
     end
-  end
 
-  module GitHubToken
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_github_token
       validates :github_token,
                 format: {
                   with: REGEXP_GITHUB_TOKEN,
                   message: 'Must be a valid GitHub personal access token!'
                 }, allow_blank: true
     end
-  end
 
-  module GitRepo
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
+    def self.validate_git_repo
       validates :git_repo, length: { in: RANGE_REPO_NAME_LENGTH }, allow_blank: true
+    end
+
+    def self.validate_git_url
+      validates :git_url, length: { maximum: MAX_GIT_URL_LENGTH },
+                          format: {
+                            with: REGEXP_GIT_URL,
+                            message: 'must be a valid URL'
+                          }, allow_blank: true
     end
   end
 
-  module GitUrl
+  module Userable
     extend ActiveSupport::Concern
     include Validatable
 
     included do
-      validates :git_url, length: { maximum: MAX_GIT_URL_LENGTH },
-      format: {
-        with: REGEXP_GIT_URL,
-        message: 'must be a valid URL'
-      }, allow_blank: true
+      validate_firstname
+      validate_lastname
+      validate_email
+      validate_password
+      validate_github_token
+    end
+  end
+
+  module Projectable
+    extend ActiveSupport::Concern
+    include Validatable
+
+    included do
+      ssvalidate_name
+      validate_git_repo
+      validate_git_url
+    end
+  end
+
+  module Deskable
+    extend ActiveSupport::Concern
+    include Validatable
+
+    included do
+      ssvalidate_name
+    end
+  end
+
+  module Columnable
+    extend ActiveSupport::Concern
+    include Validatable
+
+    included do
+      ssvalidate_name
+    end
+  end
+
+  module Taskable
+    extend ActiveSupport::Concern
+    include Validatable
+
+    included do
+      validate_name
+      validate_description
+      validate_estimate
+      validate_format_date
+      validate_label
+    end
+  end
+
+  module Commentable
+    extend ActiveSupport::Concern
+    include Validatable
+
+    included do
+      validate_body
+    end
+  end
+
+  module Documentable
+    extend ActiveSupport::Concern
+    include Validatable
+
+    included do
+      ssvalidate_name
     end
   end
 end
