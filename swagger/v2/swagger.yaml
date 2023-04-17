@@ -1,0 +1,1313 @@
+---
+openapi: 3.0.1
+info:
+  title: API V2
+  version: v2
+paths:
+  "/api/v2/columns":
+    post:
+      summary: create column
+      tags:
+      - Columns
+      description: Create task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: To do
+                desk_id:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - desk_id
+  "/api/v2/columns/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show column
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update column
+      tags:
+      - Columns
+      description: update task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  default: To do
+                desk_id:
+                  type: integer
+                  default: 1
+                ordinal_number:
+                  type: integer
+                  default: 1
+              required:
+              - name
+              - desk_id
+              - ordinal_number
+    delete:
+      summary: delete column
+      tags:
+      - Columns
+      responses:
+        '200':
+          description: successful
+  "/api/v2/comments":
+    post:
+      summary: create comment
+      tags:
+      - Comments
+      description: Create comment
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  default: My comment
+                commentable_type:
+                  type: string
+                  default: Task
+                commentable_id:
+                  type: integer
+                  default: 1
+              required:
+              - body
+              - commentable_type
+              - commentable_id
+  "/api/v2/comments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    patch:
+      summary: update comment
+      tags:
+      - Comments
+      description: Put comment
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+                  default: My comment
+                commentable_type:
+                  type: string
+                  default: Task
+                commentable_id:
+                  type: integer
+                  default: 1
+              required:
+              - body
+              - commentable_type
+              - commentable_id
+    delete:
+      summary: delete comment
+      tags:
+      - Comments
+      description: Delete comment
+      responses:
+        '204':
+          description: successful
+  "/api/v2/projects/{project_id}/desks":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list desks
+      tags:
+      - Desks
+      description: Get desks
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create desk
+      tags:
+      - Desks
+      description: Create desks
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+              - name
+  "/api/v2/projects/{project_id}/desks/{id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: desk_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show desk
+      tags:
+      - Desks
+      description: Get desk
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update desk
+      tags:
+      - Desks
+      description: Update desk
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+              - name
+    delete:
+      summary: delete desk
+      tags:
+      - Desks
+      description: Delete desk
+      responses:
+        '200':
+          description: successful
+  "/api/v2/projects/{project_id}/documents":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      description: Get documents for project
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      description: Create document for project
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents[]:
+                  type: array
+                  items:
+                    type: file
+                    format: binary
+        required: true
+        description: Array of files
+  "/api/v2/projects/{project_id}/documents/{id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: document_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show document
+      tags:
+      - Documents
+      description: Get document for project
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      description: Delete document for project
+      responses:
+        '200':
+          description: successful
+  "/api/v2/tasks/{task_id}/documents":
+    parameters:
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      description: Get documents for task
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      description: Create document for task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents[]:
+                  type: array
+                  items:
+                    type: file
+                    format: binary
+        required: true
+        description: Array of files
+  "/api/v2/tasks/{task_id}/documents/{id}":
+    parameters:
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: document_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show document
+      tags:
+      - Documents
+      description: Show document for task
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      description: Dekete document for task
+      responses:
+        '200':
+          description: successful
+  "/api/v2/comments/{comment_id}/documents":
+    parameters:
+    - name: comment_id
+      in: path
+      description: comment_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: list documents
+      tags:
+      - Documents
+      description: Get documents for comment
+      parameters: []
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create document
+      tags:
+      - Documents
+      description: Create document for comment
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                documents[]:
+                  type: array
+                  items:
+                    type: file
+                    format: binary
+        required: true
+        description: Array of files
+  "/api/v2/comments/{comment_id}/documents/{id}":
+    parameters:
+    - name: comment_id
+      in: path
+      description: comment_id
+      required: true
+      schema:
+        type: integer
+    - name: id
+      in: path
+      description: document_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show document
+      tags:
+      - Documents
+      description: Get documents for comment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete document
+      tags:
+      - Documents
+      description: Delete documents for comment
+      responses:
+        '200':
+          description: successful
+  "/api/v2/github_users/show":
+    get:
+      summary: create column
+      tags:
+      - GithubUser
+      description: Github User
+      responses:
+        '200':
+          description: successful
+  "/api/v2/github_repositories/create":
+    post:
+      summary: Create repository
+      tags:
+      - Github repository
+      description: Create repository
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                  default: Name repository
+                description:
+                  type: string
+                  default: Name description
+                private:
+                  type: boolean
+                  example: true
+                has_issues:
+                  type: boolean
+                  default: true
+                has_downloads:
+                  type: boolean
+                  example: true
+              required:
+              - project_id
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
+  "/api/v2/github_repositories/update":
+    patch:
+      summary: Update repository
+      tags:
+      - Github repository
+      description: Update repository
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                  default: Name repository
+                description:
+                  type: string
+                  default: Name description
+                private:
+                  type: boolean
+                  example: true
+                has_issues:
+                  type: boolean
+                  default: true
+                has_downloads:
+                  type: boolean
+                  example: true
+              required:
+              - project_id
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
+  "/api/v2/github_repositories/delete":
+    delete:
+      summary: delete repository
+      tags:
+      - Github repository
+      description: Delete repository
+      parameters: []
+      responses:
+        '204':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                validate_text:
+                  type: string
+                  default: owner/repo_name
+              required:
+              - project_id
+              - validate_text
+  "/api/v2/projects":
+    get:
+      summary: list projects
+      tags:
+      - Projects
+      description: Get projects
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    status:
+                      type: string
+                      default: open
+                    user:
+                      type: object
+                    git_url:
+                      type: string
+                  required:
+                  - id
+                  - name
+                  - status
+    post:
+      summary: create project
+      tags:
+      - Projects
+      description: Create projects
+      parameters: []
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    default: open
+                  user:
+                    type: object
+                  git_url:
+                    type: string
+                required:
+                - id
+                - name
+                - status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: string
+                  default: open
+              required:
+              - name
+  "/api/v2/projects/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: show project
+      tags:
+      - Projects
+      description: Get project
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    default: open
+                  user:
+                    type: object
+                  git_url:
+                    type: string
+                required:
+                - id
+                - name
+                - status
+    patch:
+      summary: update project
+      tags:
+      - Projects
+      description: Update project
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  status:
+                    type: string
+                    default: open
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  user:
+                    type: object
+                  git_url:
+                    type: string
+                required:
+                - id
+                - name
+                - status
+                - user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: string
+                  default: open
+                user_id:
+                  type: integer
+                git_url:
+                  type: string
+              required:
+              - name
+              - status
+              - user_id
+    delete:
+      summary: delete project
+      tags:
+      - Projects
+      description: Delete project
+      responses:
+        '204':
+          description: successful
+  "/api/v2/projects/{project_id}/add_member":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: add member to project
+      tags:
+      - Projects
+      description: Add member to project
+      parameters: []
+      responses:
+        '201':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  user:
+                    type: object
+                  role:
+                    type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - user
+                - role
+        '422':
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                required:
+                - error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+              required:
+              - user_id
+  "/api/v2/projects/{project_id}/delete_member/{user_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    delete:
+      summary: delete member from project
+      tags:
+      - Projects
+      description: Delete member from project
+      parameters:
+      - name: user_id
+        in: path
+        description: user_id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: successful
+  "/api/v2/tasks":
+    post:
+      summary: create task
+      tags:
+      - Tasks
+      description: Create task
+      parameters:
+      - name: user_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the user (integer)
+      - name: project_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the project (integer)
+      - name: assignee_id
+        in: post
+        required: false
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the assignee (integer)
+      - name: desk_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the desk (integer)
+      - name: column_id
+        in: post
+        required: true
+        schema:
+          type: integer
+        default: 1
+        description: The ID of the desk (integer)
+      - name: name
+        in: post
+        required: true
+        schema:
+          type: string
+        default: Task name
+        description: The name of the task (string)
+      - name: description
+        in: post
+        required: false
+        schema:
+          type: string
+        default: Task description
+        description: The description of the task (optional)
+      - name: priority_number
+        in: post
+        required: false
+        schema:
+          type: string
+        default: '1'
+        description: sort number
+      - name: estimate
+        in: post
+        required: false
+        schema:
+          type: string
+        default: 2w
+        description: The estimated time for completion (e.g. 2w, 4d, 6h, 45m) (optional)
+      - name: label
+        in: post
+        required: false
+        schema:
+          type: string
+        default: task
+        description: The label of the task (optional)
+      - name: start_date
+        in: post
+        required: false
+        schema:
+          type: string
+          format: date
+        default: '2023-12-12'
+        description: The start date of the task (date in YYYY-MM-DD format) (optional)
+      - name: end_date
+        in: post
+        required: false
+        schema:
+          type: string
+          format: date
+        default: '2023-12-12'
+        description: The end date of the task (date in YYYY-MM-DD format) (optional)
+      - name: priority
+        in: post
+        required: false
+        schema:
+          type: string
+          enum:
+          - lowest
+          - low
+          - high
+          - highest
+        default: lowest
+        description: 'Task priority: lowest/low/high/highest.'
+      - name: type_of
+        in: post
+        required: false
+        schema:
+          type: string
+          enum:
+          - task
+          - bug
+          - epic
+        default: task
+        description: 'Task type: task/bug/epic.'
+      - name: status
+        in: post
+        required: false
+        schema:
+          type: string
+          enum:
+          - open
+          - close
+        default: open
+        description: 'Task status: open/close.'
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: integer
+                  default: 1
+                column_id:
+                  type: integer
+                  default: 1
+                desk_id:
+                  type: integer
+                  default: 1
+                project_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                description:
+                  type: string
+                priority_number:
+                  type: integer
+                  default: 1
+                estimate:
+                  type: string
+                label:
+                  type: string
+                priority:
+                  type: integer
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+                status:
+                  type: integer
+                type_of:
+                  type: integer
+              required:
+              - name
+              - column_id
+              - desk_id
+              - project_id
+              - user_id
+  "/api/v2/tasks/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show task
+      tags:
+      - Tasks
+      description: Get task by id
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update task
+      tags:
+      - Tasks
+      description: Update task
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee_id:
+                  type: integer
+                  default: 1
+                column_id:
+                  type: integer
+                  default: 1
+                desk_id:
+                  type: integer
+                  default: 1
+                project_id:
+                  type: integer
+                  default: 1
+                user_id:
+                  type: integer
+                  default: 1
+                name:
+                  type: string
+                description:
+                  type: string
+                priority_number:
+                  type: integer
+                  default: 1
+                estimate:
+                  type: string
+                label:
+                  type: string
+                priority:
+                  type: integer
+                start_date:
+                  type: string
+                end_date:
+                  type: string
+                status:
+                  type: integer
+                type_of:
+                  type: integer
+              required:
+              - name
+              - column_id
+              - desk_id
+              - project_id
+              - user_id
+    delete:
+      summary: delete task
+      tags:
+      - Tasks
+      description: Delete task
+      responses:
+        '200':
+          description: successful
+  "/api/v2/users":
+    get:
+      summary: Retrieves all users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Users found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    first_name:
+                      type: string
+                    last_name:
+                      type: string
+                    email:
+                      type: string
+                  required:
+                  - id
+                  - first_name
+                  - last_name
+                  - email
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      security: []
+      responses:
+        '200':
+          description: user created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                github_token:
+                  type: string
+              required:
+              - first_name
+              - last_name
+              - email
+              - password
+  "/api/v2/users/{id}":
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: user found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  email:
+                    type: string
+                  github_token:
+                    type: string
+                required:
+                - id
+                - first_name
+                - last_name
+                - email
+        '404':
+          description: user not found
+    patch:
+      summary: Updates a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: user updated
+        '422':
+          description: invalid request
+        '404':
+          description: user not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+                github_token:
+                  type: string
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: user deleted
+        '404':
+          description: user not found
+  "/api/v2/about_user":
+    get:
+      summary: Retrieves information about the current user
+      tags:
+      - Users
+      parameters:
+      - name: current_user
+        in: header
+        description: JWT token to identify current user
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user information found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  first_name:
+                    type: string
+                  last_name:
+                    type: string
+                  email:
+                    type: string
+                required:
+                - id
+                - first_name
+                - last_name
+                - email
+        '401':
+          description: unauthorized access
+  "/api/v2/login":
+    post:
+      summary: Logs in a user
+      tags:
+      - Authentication
+      parameters: []
+      security: []
+      responses:
+        '200':
+          description: logged in successfully
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/api/v2/reset":
+    post:
+      summary: Resets a user password
+      tags:
+      - Users
+      parameters: []
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Password reset successfully
+        '401':
+          description: Unauthorized
+        '422':
+          description: Invalid request
+        '404':
+          description: User not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                password:
+                  type: string
+              required:
+              - old_password
+              - password
+servers:
+- url: http://{localhost}
+  variables:
+    localhost:
+      default: 127.0.0.1:3000
+- url: https://{kotello}
+  variables:
+    kotello:
+      default: kotello.space
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+- bearerAuth: []
