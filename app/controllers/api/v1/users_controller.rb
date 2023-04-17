@@ -31,7 +31,7 @@ class Api::V1::UsersController < ApplicationController
                                     :language => "en",
                                     :password => @user.password,
                                     :to => @user.email,
-                                    :username => @user.name}.to_json)
+                                    :username => @user.first_name}.to_json)
                                     # rename exp and add const '%m-%d-%Y %H:%M'
       render json: { token:, expiration_date: time.strftime('%m-%d-%Y %H:%M'),
                      user: @user }, status: :created
