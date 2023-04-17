@@ -22,21 +22,14 @@
 #
 class Project < ApplicationRecord
   include Validatable::Name
+  include Validatable::GitRepo
+  include Validatable::GitUrl
 
-  # CONST (concern)
   belongs_to :user
   has_many :desks, dependent: :destroy
   has_many :documents, as: :documentable
   has_many :memberships
   has_many :users, through: :memberships
-
-  validates :status, presence: true
-  validates :git_url, length: { maximum: 255 },
-                      format: {
-                        with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
-                        message: 'must be a valid URL'
-                      }, allow_blank: true
-  validates :git_repo, length: { in: 3..30 }, allow_blank: true
 
   enum :status, %i[open close], default: :open
 

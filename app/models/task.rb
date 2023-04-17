@@ -39,6 +39,9 @@
 class Task < ApplicationRecord
   include Validatable::Name
   include Validatable::Description
+  include Validatable::Estimate
+  include Validatable::FormatDate
+  include Validatable::Label
 
   belongs_to :project
   belongs_to :desk
@@ -52,29 +55,14 @@ class Task < ApplicationRecord
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
-  # range constant
-  # with: /\A\d+(w|d|h|m)\z/ to const
-  validates :label, length: { in: 3..30 }, allow_blank: true
-  validates :estimate, format: {
-    with: /\A\d+(w|d|h|m)\z/,
-    message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
-  }, allow_blank: true
-
-  validates_format_of :start_date, :end_date, with: /\A(20[2-9]\d|2[1-2]\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
-                                              message: 'must be in the format YYYY-MM-DD',
-                                              allow_blank: true
-
   validate :start_and_end_dates_are_valid
 
   before_create :generate_tag_name
-  after_create :increment_project_task_count
-  #after_update :set_sort_number , if: -> {sotr_number.nil?} set_priority_number
-  before_save :set_priority_number
+  after_create :increment_project_task_count, :set_priority_number
+  after_update :set_priority_number, if: -> { set_priority_number.nil? }
 
   private
 
-  # validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
-  #                                  :before => Proc.new { Time.now - 2.years } }
   def start_and_end_dates_are_valid
     return unless parse_date([start_date, end_date])
 
@@ -92,12 +80,10 @@ class Task < ApplicationRecord
 
   def generate_tag_name
     first_project_letter = Translit.convert(project.name[0], :english).upcase
-    #self?
     self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
   end
 
   def set_priority_number
-    #self?
     self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
   end
 end

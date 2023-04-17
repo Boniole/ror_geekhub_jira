@@ -20,7 +20,7 @@ class Desk < ApplicationRecord
   include Validatable::Name
 
   belongs_to :project
-  has_many :columns, dependent: :destroy # https://github.com/rubysherpas/paranoia
+  has_many :columns, dependent: :destroy # TODO https://github.com/rubysherpas/paranoia
 
   after_create :create_columns
 
