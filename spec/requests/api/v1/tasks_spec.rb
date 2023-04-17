@@ -86,7 +86,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :sort_number,
+        name: :priority_number,
         in: :post,
         required: false,
         schema: {
@@ -187,7 +187,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           user_id: { type: :integer, default: 1 },
           title: { type: :string },
           description: { type: :string },
-          sort_number: { type: :integer, default: 1 },
+          priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
@@ -249,7 +249,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           user_id: { type: :integer, default: 1 },
           title: { type: :string },
           description: { type: :string },
-          sort_number: { type: :integer, default: 1 },
+          priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
