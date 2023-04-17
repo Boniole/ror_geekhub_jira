@@ -79,7 +79,7 @@ module Validatable
 
     included do
       validates :email, presence: true, uniqueness: true,
-                        length: { im: RANGE_EMAIL_LENGTH },
+                        length: { in: RANGE_EMAIL_LENGTH },
                         format: {
                           with: REGEXP_EMAIL,
                           message: 'Should be in the format: user@domain.com'
