@@ -16,7 +16,12 @@
 #  updated_at             :datetime         not null
 #
 class User < ApplicationRecord
-  # CONST
+  include Validatable::FirstName
+  include Validatable::LastName
+  include Validatable::Email
+  include Validatable::Password
+  include Validatable::GitHubToken
+
   has_secure_password
 
   has_many :projects, dependent: :destroy
@@ -26,28 +31,6 @@ class User < ApplicationRecord
 
   has_many :memberships
   has_many :projects, through: :memberships
-
-  validates :first_name, presence: true,
-                   length: { minimum: 2, maximum: 30 },
-                   format: { with: /\A[a-zA-Z]+\z/,
-                             message: 'Only latin letters allowed, no spaces or special characters' }
-  validates :last_name, presence: true,
-                        length: { minimum: 2, maximum: 30 },
-                        format: { with: /\A[a-zA-Z]+\z/,
-                                  message: 'Only latin letters allowed, no spaces or special characters' }
-  validates :email, presence: true, uniqueness: true,
-                    length: { minimum: 8, maximum: 64 },
-                    format: { with: /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/,
-                              message: 'Should be in the format: user@domain.com' }
-  validates :password, presence: true,
-                       length: { minimum: 8, maximum: 20 },
-                       format: { with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/,
-                                 message: 'Must contain at least one uppercase letter, one lowercase letter, and one digit' }
-
-  validates :github_token, format: {
-    with: /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/m,
-    message: 'Must be a valid GitHub personal access token!'
-  }, allow_blank: true
 
   # think about (enum)
   def admin?(project)

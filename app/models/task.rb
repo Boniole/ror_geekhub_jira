@@ -7,12 +7,12 @@
 #  end_date        :text
 #  estimate        :text
 #  label           :text
+#  name            :text
 #  priority        :integer
 #  priority_number :integer
 #  start_date      :text
 #  status          :integer
 #  tag_name        :text
-#  title           :text
 #  type_of         :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -37,49 +37,32 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  # CONST
+  include Validatable::Name
+  include Validatable::Description
+  include Validatable::Estimate
+  include Validatable::FormatDate
+  include Validatable::Label
+
   belongs_to :project
   belongs_to :desk
   belongs_to :column
   belongs_to :user
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy
-  has_many :documents, as: :documentable
+  has_many :documents, as: :documentable, dependent: :destroy
 
   enum :priority, %i[lowest low high highest], default: :low
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
-  # validates :user_id, numericality: { only_integer: true }
-  # validates :project_id, numericality: { only_integer: true }
-  # validates :desk_id, numericality: { only_integer: true }
-  # validates :column_id, numericality: { only_integer: true }
-
-  # range constant
-  # with: /\A\d+(w|d|h|m)\z/ to const
-  validates :title, length: { in: 3..30 }
-  validates :description, presence: true, length: { in: 3..2500 }, allow_blank: true
-  validates :label, presence: true, length: { in: 3..30 }, allow_blank: true
-  validates :estimate, format: {
-    with: /\A\d+(w|d|h|m)\z/,
-    message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
-  }, allow_blank: true
-
-  validates_format_of :start_date, :end_date, with: /\A(20[2-9]\d|2[1-2]\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/,
-                                              message: 'must be in the format YYYY-MM-DD',
-                                              allow_blank: true
-
   validate :start_and_end_dates_are_valid
 
   before_create :generate_tag_name
-  after_create :increment_project_task_count
-  #after_update :set_sort_number , if: -> {sotr_number.nil?} set_priority_number
-  before_save :set_priority_number
+  after_create :increment_project_task_count, :set_priority_number
+  after_update :set_priority_number, if: -> { set_priority_number.nil? }
 
   private
 
-  # validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
-  #                                  :before => Proc.new { Time.now - 2.years } }
   def start_and_end_dates_are_valid
     return unless parse_date([start_date, end_date])
 
@@ -97,12 +80,10 @@ class Task < ApplicationRecord
 
   def generate_tag_name
     first_project_letter = Translit.convert(project.name[0], :english).upcase
-    #self?
     self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
   end
 
   def set_priority_number
-    #self?
     self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
   end
 end

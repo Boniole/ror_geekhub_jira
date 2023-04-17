@@ -849,13 +849,13 @@ paths:
           type: integer
         default: 1
         description: The ID of the desk (integer)
-      - name: title
+      - name: name
         in: post
         required: true
         schema:
           type: string
-        default: Task title
-        description: The title of the task (string)
+        default: Task name
+        description: The name of the task (string)
       - name: description
         in: post
         required: false
@@ -957,7 +957,7 @@ paths:
                 user_id:
                   type: integer
                   default: 1
-                title:
+                name:
                   type: string
                 description:
                   type: string
@@ -979,7 +979,7 @@ paths:
                 type_of:
                   type: integer
               required:
-              - title
+              - name
               - column_id
               - desk_id
               - project_id
@@ -1030,7 +1030,7 @@ paths:
                 user_id:
                   type: integer
                   default: 1
-                title:
+                name:
                   type: string
                 description:
                   type: string
@@ -1052,7 +1052,7 @@ paths:
                 type_of:
                   type: integer
               required:
-              - title
+              - name
               - column_id
               - desk_id
               - project_id
@@ -1131,7 +1131,7 @@ paths:
       tags:
       - Users
       parameters:
-      - first_name: id
+      - name: id
         in: path
         required: true
         schema:
@@ -1166,7 +1166,7 @@ paths:
       tags:
       - Users
       parameters:
-      - first_name: id
+      - name: id
         in: path
         required: true
         schema:
@@ -1195,7 +1195,7 @@ paths:
       tags:
       - Users
       parameters:
-      - first_name: id
+      - name: id
         in: path
         required: true
         schema:
@@ -1211,7 +1211,7 @@ paths:
       tags:
       - Users
       parameters:
-      - first_name: current_user
+      - name: current_user
         in: header
         description: JWT token to identify current user
         schema:

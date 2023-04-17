@@ -17,12 +17,10 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 class Desk < ApplicationRecord
-  # CONSTANT
-  belongs_to :project
-  has_many :columns, dependent: :destroy # https://github.com/rubysherpas/paranoia
+  include Validatable::Name
 
-  # { minimum: 3 } to const
-  validates :name, presence: true, length: { minimum: 3 }
+  belongs_to :project
+  has_many :columns, dependent: :destroy # TODO https://github.com/rubysherpas/paranoia
 
   after_create :create_columns
 

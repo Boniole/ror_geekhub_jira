@@ -21,11 +21,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
         has_downloads: params[:has_downloads]
       )
 
-      @project.git_url = repo.clone_url
-      @project.git_repo = repo.name
-      # @project.update
-      @project.save
-
+      @project.update(git_url: repo.clone_url, git_repo: repo.full_name)
 
       #
       # attribute :changed_files do
@@ -58,10 +54,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
         has_downloads: params[:has_downloads]
       )
 
-      @project.git_url = repo.clone_url
-      @project.git_repo = repo.name
-      #update
-      @project.save
+      @project.update(git_url: repo.clone_url, git_repo: repo.full_name)
 
       render json: { success: 'Repository update' }, status: :ok
     else
@@ -72,16 +65,15 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   def delete
     owner, repo_name = params[:validate_text].split('/')
 
-    @project.git_url = nil
-    @project.git_repo = nil
-    #update
-    @project.save
-# user/repo
-    if get_repository_name(repo_name) == params[:validate_text]
+    if @github_client.repository(@project.git_repo).full_name == params[:validate_text]
+
+      @project.update(git_url: nil, git_repo: nil)
+
       @github_client.delete_repository(
         owner: owner,
         repo: repo_name
       )
+
       render json: { success: 'Repository was deleted' }, status: :ok
     else
       render json: { errors: 'Invalid validate text' }, status: :bad_request
@@ -89,12 +81,6 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   end
 
   private
-
-  def get_repository_name(name)
-    #repository 
-    repository = @github_client.search_repositories(name)
-    repository.items[0].full_name
-  end
 
   def repo_params
     params.permit(:project_id, :name, :description, :private, :has_issues, :has_downloads)

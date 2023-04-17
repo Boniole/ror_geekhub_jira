@@ -26,12 +26,12 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id) # to method or concern
       time = Time.now + 24.hours.to_i # to method or concern
-      nats_publish('service.mail', {:class => "account",
-                                    :type => "account_register_new",
-                                    :language => "en",
-                                    :password => @user.password,
-                                    :to => @user.email,
-                                    :username => @user.name}.to_json)
+      # nats_publish('service.mail', {:class => "account",
+      #                               :type => "account_register_new",
+      #                               :language => "en",
+      #                               :password => @user.password,
+      #                               :to => @user.email,
+      #                               :username => @user.first_name}.to_json)
                                     # rename exp and add const '%m-%d-%Y %H:%M'
       render json: { token:, expiration_date: time.strftime('%m-%d-%Y %H:%M'),
                      user: @user }, status: :created

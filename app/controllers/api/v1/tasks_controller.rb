@@ -46,7 +46,7 @@ class Api::V1::TasksController < ApplicationController
 
   def task_params
     params.permit(
-      :project_id, :user_id, :assignee_id, :desk_id, :column_id, :title, :description, :priority_number, :estimate,
+      :project_id, :user_id, :assignee_id, :desk_id, :column_id, :name, :description, :priority_number, :estimate,
       :label, :priority, :type_of, :status, :start_date, :end_date
     )
   end

@@ -29,7 +29,7 @@ RSpec.describe 'api/v1/users', type: :request do
       get 'Retrieves a user' do
         tags 'Users'
         produces 'application/json'
-        parameter first_name: :id, in: :path, type: :integer
+        parameter name: :id, in: :path, type: :integer
 
         response '200', 'user found' do
           schema type: :object,
@@ -57,7 +57,7 @@ RSpec.describe 'api/v1/users', type: :request do
       get 'Retrieves information about the current user' do
         tags 'Users'
         produces 'application/json'
-        parameter first_name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
+        parameter name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
 
         response '200', 'user information found' do
           schema type: :object,
@@ -84,7 +84,7 @@ RSpec.describe 'api/v1/users', type: :request do
       post 'Creates a user' do
         tags 'Users'
         consumes 'application/json'
-        parameter first_name: :user, in: :body, schema: {
+        parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
             first_name: { type: :string },
@@ -114,8 +114,8 @@ RSpec.describe 'api/v1/users', type: :request do
       patch 'Updates a user' do
         tags 'Users'
         consumes 'application/json'
-        parameter first_name: :id, in: :path, type: :integer
-        parameter first_name: :user, in: :body, schema: {
+        parameter name: :id, in: :path, type: :integer
+        parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
             first_name: { type: :string },
@@ -146,7 +146,7 @@ RSpec.describe 'api/v1/users', type: :request do
       delete 'Deletes a user' do
         tags 'Users'
         consumes 'application/json'
-        parameter first_name: :id, in: :path, type: :integer
+        parameter name: :id, in: :path, type: :integer
 
         response '204', 'user deleted' do
           let(:id) { user_id }
@@ -165,7 +165,7 @@ RSpec.describe 'api/v1/users', type: :request do
     post 'Logs in a user' do
       tags 'Authentication'
       consumes 'application/json'
-      parameter first_name: :login, in: :body, schema: {
+      parameter name: :login, in: :body, schema: {
         type: :object,
         properties: {
           email: { type: :string },
@@ -201,7 +201,7 @@ RSpec.describe 'api/v1/users', type: :request do
     post 'Resets a user password' do
       tags 'Users'
       consumes 'application/json'
-      parameter first_name: :reset_password, in: :body, schema: {
+      parameter name: :reset_password, in: :body, schema: {
         type: :object,
         properties: {
           old_password: { type: :string },
