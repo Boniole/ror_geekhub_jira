@@ -37,11 +37,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  include Validatable::Name
-  include Validatable::Description
-  include Validatable::Estimate
-  include Validatable::FormatDate
-  include Validatable::Label
+  include Validatable::Taskable
 
   belongs_to :project
   belongs_to :desk
@@ -63,6 +59,9 @@ class Task < ApplicationRecord
 
   private
 
+
+        # TODO validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
+  #                                  :before => Proc.new { Time.now - 2.years } }
   def start_and_end_dates_are_valid
     return unless parse_date([start_date, end_date])
 

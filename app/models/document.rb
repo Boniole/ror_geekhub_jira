@@ -22,7 +22,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Document < ApplicationRecord
-  include Validatable::Name
+  include Validatable::Documentable
 
   ALLOWED_TYPES = %w[pdf jpg jpeg png gif doc docx xls xlsx zip rar]
   belongs_to :documentable, polymorphic: true
