@@ -26,7 +26,6 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   has_many :documents, as: :documentable, dependent: :destroy
 
-  # status db default?
   enum :status, %i[open close], default: :open
 
   # { in: 3..2500 } to constant
