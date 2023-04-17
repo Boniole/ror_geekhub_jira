@@ -24,7 +24,7 @@ class Comment < ApplicationRecord
   # CONSTANT length: { in: 3..2500 }
   belongs_to :user
   belongs_to :commentable, polymorphic: true
-  has_many :documents, as: :documentable
+  has_many :documents, as: :documentable, dependent: :destroy
 
   # status db default?
   enum :status, %i[open close], default: :open

@@ -19,7 +19,8 @@
 #
 class Column < ApplicationRecord
   belongs_to :desk
-  has_many :tasks # https://github.com/rubysherpas/paranoia
+  has_many :tasks, dependent: :destroy
+  # TODO https://github.com/rubysherpas/paranoia
 
   validates :name, presence: true, length: { in: 3..14 }
   validates :ordinal_number, numericality: { only_integer: true }, allow_blank: true
