@@ -2,25 +2,25 @@
 #
 # Table name: tasks
 #
-#  id          :bigint           not null, primary key
-#  description :string
-#  end_date    :text
-#  estimate    :text
-#  label       :text
-#  priority    :integer          default("low")
-#  sort_number :integer
-#  start_date  :text
-#  status      :integer          default("open")
-#  tag_name    :text
-#  title       :text
-#  type_of     :integer          default("task")
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  assignee_id :integer
-#  column_id   :bigint
-#  desk_id     :bigint           not null
-#  project_id  :bigint           not null
-#  user_id     :bigint           not null
+#  id              :bigint           not null, primary key
+#  description     :string
+#  end_date        :text
+#  estimate        :text
+#  label           :text
+#  priority        :integer
+#  priority_number :integer
+#  start_date      :text
+#  status          :integer
+#  tag_name        :text
+#  title           :text
+#  type_of         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  assignee_id     :integer
+#  column_id       :bigint           not null
+#  desk_id         :bigint           not null
+#  project_id      :bigint           not null
+#  user_id         :bigint           not null
 #
 # Indexes
 #

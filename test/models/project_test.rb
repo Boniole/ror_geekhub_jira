@@ -3,10 +3,10 @@
 # Table name: projects
 #
 #  id          :bigint           not null, primary key
-#  git_name    :string
+#  git_repo    :string
 #  git_url     :string
 #  name        :string
-#  status      :integer          default("open")
+#  status      :integer
 #  tasks_count :integer          default(0), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

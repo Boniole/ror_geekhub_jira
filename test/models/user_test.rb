@@ -4,9 +4,9 @@
 #
 #  id                     :bigint           not null, primary key
 #  email                  :string
+#  first_name             :string
 #  github_token           :string
 #  last_name              :string
-#  name                   :string
 #  password_digest        :string
 #  provider               :string
 #  reset_password_sent_at :datetime

@@ -22,7 +22,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
       )
 
       @project.git_url = repo.clone_url
-      @project.git_name = repo.name
+      @project.git_repo = repo.name
       # @project.update
       @project.save
 
@@ -59,7 +59,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
       )
 
       @project.git_url = repo.clone_url
-      @project.git_name = repo.name
+      @project.git_repo = repo.name
       #update
       @project.save
 
@@ -73,7 +73,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
     owner, repo_name = params[:validate_text].split('/')
 
     @project.git_url = nil
-    @project.git_name = nil
+    @project.git_repo = nil
     #update
     @project.save
 # user/repo

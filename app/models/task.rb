@@ -2,25 +2,25 @@
 #
 # Table name: tasks
 #
-#  id          :bigint           not null, primary key
-#  description :string
-#  end_date    :text
-#  estimate    :text
-#  label       :text
-#  priority    :integer          default("low")
-#  sort_number :integer
-#  start_date  :text
-#  status      :integer          default("open")
-#  tag_name    :text
-#  title       :text
-#  type_of     :integer          default("task")
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  assignee_id :integer
-#  column_id   :bigint
-#  desk_id     :bigint           not null
-#  project_id  :bigint           not null
-#  user_id     :bigint           not null
+#  id              :bigint           not null, primary key
+#  description     :string
+#  end_date        :text
+#  estimate        :text
+#  label           :text
+#  priority        :integer
+#  priority_number :integer
+#  start_date      :text
+#  status          :integer
+#  tag_name        :text
+#  title           :text
+#  type_of         :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  assignee_id     :integer
+#  column_id       :bigint           not null
+#  desk_id         :bigint           not null
+#  project_id      :bigint           not null
+#  user_id         :bigint           not null
 #
 # Indexes
 #
@@ -73,8 +73,8 @@ class Task < ApplicationRecord
 
   before_create :generate_tag_name
   after_create :increment_project_task_count
-  #after_update :set_sort_number , if: -> {sotr_number.nil?}
-  before_save :set_sort_number
+  #after_update :set_sort_number , if: -> {sotr_number.nil?} set_priority_number
+  before_save :set_priority_number
 
   private
 
@@ -101,8 +101,8 @@ class Task < ApplicationRecord
     self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
   end
 
-  def set_sort_number
+  def set_priority_number
     #self?
-    self.sort_number = column.tasks.maximum(:sort_number).to_i + 1 if sort_number.nil?
+    self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
   end
 end

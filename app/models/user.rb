@@ -4,9 +4,9 @@
 #
 #  id                     :bigint           not null, primary key
 #  email                  :string
+#  first_name             :string
 #  github_token           :string
 #  last_name              :string
-#  name                   :string
 #  password_digest        :string
 #  provider               :string
 #  reset_password_sent_at :datetime
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :projects, through: :memberships
 
-  validates :name, presence: true,
+  validates :first_name, presence: true,
                    length: { minimum: 2, maximum: 30 },
                    format: { with: /\A[a-zA-Z]+\z/,
                              message: 'Only latin letters allowed, no spaces or special characters' }
@@ -77,7 +77,7 @@ class User < ApplicationRecord
     find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
       user.provider = auth[:provider]
       user.uid = auth[:uid]
-      user.name = auth[:info][:first_name]
+      user.first_name = auth[:info][:first_name]
       user.last_name = auth[:info][:last_name]
       user.email = auth[:info][:email]
       user.password = SecureRandom.hex(15)
