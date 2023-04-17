@@ -18,10 +18,11 @@
 #  fk_rails_...  (desk_id => desks.id)
 #
 class Column < ApplicationRecord
+  include Validatable::Name
+
   belongs_to :desk
   has_many :tasks, dependent: :destroy
   # TODO https://github.com/rubysherpas/paranoia
 
-  validates :name, presence: true, length: { in: 3..14 }
   validates :ordinal_number, numericality: { only_integer: true }, allow_blank: true
 end

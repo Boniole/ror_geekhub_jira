@@ -7,12 +7,12 @@
 #  end_date        :text
 #  estimate        :text
 #  label           :text
+#  name            :text
 #  priority        :integer
 #  priority_number :integer
 #  start_date      :text
 #  status          :integer
 #  tag_name        :text
-#  title           :text
 #  type_of         :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -37,7 +37,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  # CONST
+  include Validatable::Name
+  include Validatable::Description
+
   belongs_to :project
   belongs_to :desk
   belongs_to :column
@@ -52,8 +54,6 @@ class Task < ApplicationRecord
 
   # range constant
   # with: /\A\d+(w|d|h|m)\z/ to const
-  validates :title, length: { in: 3..30 }
-  validates :description, length: { in: 3..2500 }, allow_blank: true
   validates :label, length: { in: 3..30 }, allow_blank: true
   validates :estimate, format: {
     with: /\A\d+(w|d|h|m)\z/,

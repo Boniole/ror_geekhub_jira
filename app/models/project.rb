@@ -21,6 +21,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Project < ApplicationRecord
+  include Validatable::Name
+
   # CONST (concern)
   belongs_to :user
   has_many :desks, dependent: :destroy
@@ -28,8 +30,6 @@ class Project < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships
 
-  # length: { minimum: 3 } to const
-  validates :name, presence: true, length: {in: 3..30 }
   validates :status, presence: true
   validates :git_url, length: { maximum: 255 },
                       format: {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_17_093610) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_17_125249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -74,9 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_093610) do
   create_table "documents", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    # todo Vlad
     t.string "documentable_type", null: false
-    # todo Vlad
     t.bigint "documentable_id", null: false
     t.string "name", null: false
     t.string "document_type", null: false
@@ -109,7 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_17_093610) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.text "title"
+    t.text "name"
     t.string "description"
     t.integer "priority"
     t.integer "status"
