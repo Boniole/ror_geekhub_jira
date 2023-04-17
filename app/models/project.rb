@@ -29,15 +29,14 @@ class Project < ApplicationRecord
   has_many :users, through: :memberships
 
   # length: { minimum: 3 } to const
-  validates :name, presence: true, length: { minimum: 3 }
+  validates :name, presence: true, length: {in: 3..30 }
   validates :status, presence: true
-  validates :git_url, presence: true,
-                      length: { maximum: 255 },
+  validates :git_url, length: { maximum: 255 },
                       format: {
                         with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
                         message: 'must be a valid URL'
                       }, allow_blank: true
-  validates :git_repo, presence: true, length: { in: 3..30 }, allow_blank: true
+  validates :git_repo, length: { in: 3..30 }, allow_blank: true
 
   enum :status, %i[open close], default: :open
 

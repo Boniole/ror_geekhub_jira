@@ -58,8 +58,8 @@ class Task < ApplicationRecord
   # range constant
   # with: /\A\d+(w|d|h|m)\z/ to const
   validates :title, length: { in: 3..30 }
-  validates :description, presence: true, length: { in: 3..2500 }, allow_blank: true
-  validates :label, presence: true, length: { in: 3..30 }, allow_blank: true
+  validates :description, length: { in: 3..2500 }, allow_blank: true
+  validates :label, length: { in: 3..30 }, allow_blank: true
   validates :estimate, format: {
     with: /\A\d+(w|d|h|m)\z/,
     message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'

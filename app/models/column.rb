@@ -22,6 +22,5 @@ class Column < ApplicationRecord
   has_many :tasks # https://github.com/rubysherpas/paranoia
 
   validates :name, presence: true, length: { in: 3..14 }
-  # presence: true, allow_blank: true
-  validates :ordinal_number, presence: true, numericality: { only_integer: true }, allow_blank: true
+  validates :ordinal_number, numericality: { only_integer: true }, allow_blank: true
 end
