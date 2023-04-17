@@ -54,6 +54,47 @@ RSpec.configure do |config|
           bearerAuth: []
         }
       ]
+    },
+
+    'v2/swagger.yaml' => {
+      openapi: '3.0.1',
+      info: {
+        title: 'API V2',
+        version: 'v2'
+      },
+      paths: {},
+      servers: [
+        {
+          url: 'http://{localhost}',
+          variables: {
+            localhost: {
+              default: '127.0.0.1:3000'
+            }
+          }
+        },
+        {
+          url: 'https://{kotello}',
+          variables: {
+            kotello: {
+              default: 'kotello.space'
+            }
+          }
+        }
+      ],
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: 'JWT'
+          }
+        }
+      },
+      security: [
+        {
+          bearerAuth: []
+        }
+      ]
     }
   }
 
