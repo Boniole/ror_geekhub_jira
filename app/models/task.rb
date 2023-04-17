@@ -50,11 +50,6 @@ class Task < ApplicationRecord
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
-  # validates :user_id, numericality: { only_integer: true }
-  # validates :project_id, numericality: { only_integer: true }
-  # validates :desk_id, numericality: { only_integer: true }
-  # validates :column_id, numericality: { only_integer: true }
-
   # range constant
   # with: /\A\d+(w|d|h|m)\z/ to const
   validates :title, length: { in: 3..30 }
