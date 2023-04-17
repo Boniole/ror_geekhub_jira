@@ -33,8 +33,8 @@ class Api::V1::UsersController < ApplicationController
                                     :to => @user.email,
                                     :username => @user.name}.to_json)
                                     # rename exp and add const '%m-%d-%Y %H:%M'
-      render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
-                     name: @user }, status: :created
+      render json: { token:, expiration_date: time.strftime('%m-%d-%Y %H:%M'),
+                     user: @user }, status: :created
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
@@ -48,7 +48,7 @@ class Api::V1::UsersController < ApplicationController
       return
     end
 # @user.update and add skip_validation???
-    if @user.update_columns(name: params[:name], last_name: params[:last_name])
+    if @user.update_columns(first_name: params[:first_name], last_name: params[:last_name])
       render json: @user, status: :ok, serializer: UserSerializer
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
@@ -75,6 +75,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :last_name, :email, :password, :github_token)
+    params.permit(:first_name, :last_name, :email, :password, :github_token)
   end
 end

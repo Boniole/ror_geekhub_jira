@@ -17,7 +17,7 @@ class Api::V1::PasswordsController < ApplicationController
                                      language: "en",
                                      to: user.email,
                                      token: user.reset_password_token,
-                                     username: user.name }.to_json)
+                                     username: user.first_name }.to_json)
       render json: { status: 'ok' }, status: :ok
     else
       render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found

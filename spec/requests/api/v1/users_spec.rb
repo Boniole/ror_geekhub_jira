@@ -15,11 +15,11 @@ RSpec.describe 'api/v1/users', type: :request do
                  type: :object,
                  properties: {
                    id: { type: :integer },
-                   name: { type: :string },
+                   first_name: { type: :string },
                    last_name: { type: :string },
                    email: { type: :string }
                  },
-                 required: %w[id name last_name email]
+                 required: %w[id first_name last_name email]
                }
         run_test!
       end
@@ -29,18 +29,18 @@ RSpec.describe 'api/v1/users', type: :request do
       get 'Retrieves a user' do
         tags 'Users'
         produces 'application/json'
-        parameter name: :id, in: :path, type: :integer
+        parameter first_name: :id, in: :path, type: :integer
 
         response '200', 'user found' do
           schema type: :object,
                  properties: {
                    id: { type: :integer },
-                   name: { type: :string },
+                   first_name: { type: :string },
                    last_name: { type: :string },
                    email: { type: :string },
                    github_token: { type: :string }
                  },
-                 required: %w[id name last_name email]
+                 required: %w[id first_name last_name email]
 
           let(:id) { user.id }
           run_test!
@@ -57,17 +57,17 @@ RSpec.describe 'api/v1/users', type: :request do
       get 'Retrieves information about the current user' do
         tags 'Users'
         produces 'application/json'
-        parameter name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
+        parameter first_name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
 
         response '200', 'user information found' do
           schema type: :object,
                  properties: {
                    id: { type: :integer },
-                   name: { type: :string },
+                   first_name: { type: :string },
                    last_name: { type: :string },
                    email: { type: :string }
                  },
-                 required: %w[id name last_name email]
+                 required: %w[id first_name last_name email]
 
           let(:current_user) { 'Bearer ' + JsonWebToken.encode(user_id: user.id) }
           run_test!
@@ -84,16 +84,16 @@ RSpec.describe 'api/v1/users', type: :request do
       post 'Creates a user' do
         tags 'Users'
         consumes 'application/json'
-        parameter name: :user, in: :body, schema: {
+        parameter first_name: :user, in: :body, schema: {
           type: :object,
           properties: {
-            name: { type: :string },
+            first_name: { type: :string },
             last_name: { type: :string },
             email: { type: :string },
             password: { type: :string },
             github_token: { type: :string }
           },
-          required: %w[name last_name email password]
+          required: %w[first_name last_name email password]
         }
 
         security []
@@ -104,7 +104,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response '422', 'invalid request' do
-          let(:user) { { name: 'John', last_name: 'Doe' } }
+          let(:user) { { first_name: 'John', last_name: 'Doe' } }
           run_test!
         end
       end
@@ -114,31 +114,31 @@ RSpec.describe 'api/v1/users', type: :request do
       patch 'Updates a user' do
         tags 'Users'
         consumes 'application/json'
-        parameter name: :id, in: :path, type: :integer
-        parameter name: :user, in: :body, schema: {
+        parameter first_name: :id, in: :path, type: :integer
+        parameter first_name: :user, in: :body, schema: {
           type: :object,
           properties: {
-            name: { type: :string },
+            first_name: { type: :string },
             last_name: { type: :string },
             github_token: { type: :string }
           }
         }
 
         response '200', 'user updated' do
-          let(:user) { { name: 'New Name', github_token: 'New token' } }
+          let(:user) { { first_name: 'New Name', github_token: 'New token' } }
           let(:id) { user_id }
           run_test!
         end
 
         response '422', 'invalid request' do
-          let(:user) { { name: nil } }
+          let(:user) { { first_name: nil } }
           let(:id) { user_id }
           run_test!
         end
 
         response '404', 'user not found' do
           let(:id) { 'invalid' }
-          let(:user) { { name: 'New Name' } }
+          let(:user) { { first_name: 'New Name' } }
           run_test!
         end
       end
@@ -146,7 +146,7 @@ RSpec.describe 'api/v1/users', type: :request do
       delete 'Deletes a user' do
         tags 'Users'
         consumes 'application/json'
-        parameter name: :id, in: :path, type: :integer
+        parameter first_name: :id, in: :path, type: :integer
 
         response '204', 'user deleted' do
           let(:id) { user_id }
@@ -165,7 +165,7 @@ RSpec.describe 'api/v1/users', type: :request do
     post 'Logs in a user' do
       tags 'Authentication'
       consumes 'application/json'
-      parameter name: :login, in: :body, schema: {
+      parameter first_name: :login, in: :body, schema: {
         type: :object,
         properties: {
           email: { type: :string },
@@ -180,10 +180,10 @@ RSpec.describe 'api/v1/users', type: :request do
         schema type: :object,
                properties: {
                  token: { type: :string },
-                 exp: { type: :string },
-                 name: { type: :string }
+                 expiration_date: { type: :string },
+                 first_name: { type: :string }
                },
-               required: %w[token exp name]
+               required: %w[token expiration_date first_name]
 
         let(:user) { create(:user) }
         let(:login) { { email: user.email, password: user.password } }
@@ -201,7 +201,7 @@ RSpec.describe 'api/v1/users', type: :request do
     post 'Resets a user password' do
       tags 'Users'
       consumes 'application/json'
-      parameter name: :reset_password, in: :body, schema: {
+      parameter first_name: :reset_password, in: :body, schema: {
         type: :object,
         properties: {
           old_password: { type: :string },
