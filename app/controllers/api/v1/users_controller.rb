@@ -9,16 +9,16 @@ class Api::V1::UsersController < ApplicationController
   # remove index
   def index
     @users = User.all
-    render json: @users, status: :ok, include: [], each_serializer: UserSerializer
+    render json: @users, status: :ok, include: [], each_serializer: Api::V1::UserSerializer
   end
 
     # about_current_user replace to show @current_user
   def show
-    render json: @user, status: :ok, serializer: UserSerializer
+    render json: @user, status: :ok, serializer: Api::V1::UserSerializer
   end
 
   def about_current_user
-    render json: @current_user, status: :ok, serializer: UserSerializer
+    render json: @current_user, status: :ok, serializer: Api::V1::UserSerializer
   end
 
   def create
@@ -49,7 +49,7 @@ class Api::V1::UsersController < ApplicationController
     end
 # @user.update and add skip_validation???
     if @user.update_columns(first_name: params[:first_name], last_name: params[:last_name])
-      render json: @user, status: :ok, serializer: UserSerializer
+      render json: @user, status: :ok, serializer: Api::V1::UserSerializer
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end

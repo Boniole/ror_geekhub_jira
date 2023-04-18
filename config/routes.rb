@@ -54,6 +54,7 @@ Rails.application.routes.draw do
         end
       end
       # delete resources :tasks
+      resources :desks
       resources :tasks
       resources :comments
 
@@ -98,6 +99,7 @@ Rails.application.routes.draw do
       # end
 
       # need check it
+      resources :desks
       resources :columns
       resources :tasks do
         resources :documents, except: :update

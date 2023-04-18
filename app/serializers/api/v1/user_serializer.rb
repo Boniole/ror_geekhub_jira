@@ -15,8 +15,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-class UserSerializer < ActiveModel::Serializer
+class Api::V1::UserSerializer < ActiveModel::Serializer
   attributes :id, :first_name, :last_name, :email
 
-  has_many :comments, each_serializer: CommentSerializer
+  has_many :projects, each_serializer: Api::V1::ProjectSerializer
+  has_many :comments, each_serializer: Api::V1::CommentSerializer
 end

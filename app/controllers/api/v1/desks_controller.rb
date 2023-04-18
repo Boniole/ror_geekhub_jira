@@ -7,18 +7,18 @@ class Api::V1::DesksController < ApplicationController
   before_action :set_desks, only: :index
 
   def index
-    render json: @desks, status: :ok, include: [], each_serializer: DeskSerializer
+    render json: @desks, status: :ok, include: [], each_serializer: Api::V1::DeskSerializer
   end
 
   def show
-    render json: @desk, status: :ok, serializer: DeskSerializer
+    render json: @desk, status: :ok, serializer: Api::V1::DeskSerializer
   end
 
   def create
     desk = @project.desks.new(desk_params)
 
     if desk.save
-      render json: desk, status: :ok, serializer: DeskSerializer
+      render json: desk, status: :ok, serializer: Api::V1::DeskSerializer
     else
       render json: desk.errors, status: :unprocessable_entity
     end
