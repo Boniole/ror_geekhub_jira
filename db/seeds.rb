@@ -3,7 +3,8 @@ require 'ffaker'
 # User.all.each(&:destroy)
 
 10.times do
-  user = User.new(name: FFaker::Name.first_name, last_name: FFaker::Name.last_name, email: FFaker::Internet.free_email)
+  user = User.new(first_name: FFaker::Name.first_name, last_name: FFaker::Name.last_name,
+                  email: FFaker::Internet.free_email)
   user.password = 'Password123'
   user.password_confirmation = 'Password123'
   user.save
@@ -26,7 +27,7 @@ end
   25.times do
     column = Column.where(desk_id: desk.id).sample
     task = column.tasks.create(
-      title: "Task for project number #{project.id}",
+      name: "Task for project number #{project.id}",
       description: "columns is #{column.name}",
       label: 'need to add label',
       estimate: '2w',
@@ -45,6 +46,5 @@ end
       commentable_type: 'Task',
       commentable_id: task.id
     )
-
   end
 end
