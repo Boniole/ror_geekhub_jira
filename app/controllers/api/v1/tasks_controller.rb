@@ -5,7 +5,7 @@ class Api::V1::TasksController < ApplicationController
 
   def show
     authorize @task
-    render json: @task, status: :ok, serializer: TaskSerializer
+    render json: @task, status: :ok, serializer: Api::V1::TaskSerializer
   end
 
   def create
@@ -15,7 +15,7 @@ class Api::V1::TasksController < ApplicationController
     authorize @task
 
     if @task.save
-      render json: @task, status: :created, serializer: TaskSerializer
+      render json: @task, status: :created, serializer: Api::V1::TaskSerializer
     else
       render json: @task.errors, status: :unprocessable_entity
     end

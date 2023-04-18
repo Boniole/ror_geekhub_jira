@@ -10,7 +10,7 @@ class Api::V1::ColumnsController < ApplicationController
 
     # add render_success to all methods
     # render_success(data: @column, serializer: ColumnSerializer)
-    render json: @column, status: :ok, serializer: ColumnSerializer
+    render json: @column, status: :ok, serializer: Api::V1::ColumnSerializer
   end
 
   def create
@@ -20,7 +20,7 @@ class Api::V1::ColumnsController < ApplicationController
     @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
 
     if @column.save
-      render json: @column, status: :ok, serializer: ColumnSerializer
+      render json: @column, status: :ok, serializer: Api::V1::ColumnSerializer
     else
       render json: @column.errors, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class Api::V1::ColumnsController < ApplicationController
   def update
     authorize @column
     if @column.update(column_params)
-      render json: @column, status: :ok, serializer: ColumnSerializer
+      render json: @column, status: :ok, serializer: Api::V1::ColumnSerializer
     else
       render json: @column.errors, status: :unprocessable_entity
     end

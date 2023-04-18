@@ -20,9 +20,9 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-class ProjectSerializer < ActiveModel::Serializer
+class Api::V1::ProjectSerializer < ActiveModel::Serializer
   attributes :id, :name, :status, :git_url, :git_repo
 
-  has_many :desks, serializer: DeskSerializer
-  has_one :user, serializer: UserSerializer
+  has_many :desks, serializer: Api::V1::DeskSerializer
+  has_one :user, serializer: Api::V1::UserSerializer
 end

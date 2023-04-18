@@ -36,11 +36,11 @@
 #  fk_rails_...  (project_id => projects.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class TaskSerializer < ActiveModel::Serializer
+class Api::V1::TaskSerializer < ActiveModel::Serializer
   attributes :id, :user, :assignee, :name, :description, :tag_name, :priority_number, :estimate, :label, :priority,
              :type_of, :status, :start_date, :end_date, :created_at, :updated_at
 
-  has_one :user, serializer: UserSerializer
-  has_one :assignee, serializer: AssigneeSerializer
-  has_many :comments, each_serializer: CommentSerializer
+  has_one :user, serializer: Api::V1::UserSerializer
+  has_one :assignee, serializer: Api::V1::AssigneeSerializer
+  has_many :comments, each_serializer: Api::V1::CommentSerializer
 end
