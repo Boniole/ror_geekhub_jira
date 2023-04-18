@@ -144,7 +144,7 @@ module Validatable
       validate_description
       validate_estimate
       validate_format_date
-      validate_name_field(:label)
+      validate_label
     end
   end
 
