@@ -12,7 +12,7 @@ class Api::V1::ProjectsController < ApplicationController
   def show
     authorize @project
     #add serializer
-    render json: { project: @project, member: @project.memberships }, status: :ok
+    render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
   end
 
   def create
@@ -24,7 +24,7 @@ class Api::V1::ProjectsController < ApplicationController
     authorize @project
 
     if @project.save
-      render json: @project, status: :created
+      render json: @project, status: :created, serializer: Api::V1::ProjectSerializer
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class Api::V1::ProjectsController < ApplicationController
     authorize @project
 
     if @project.update(project_params)
-      render json: @project, status: :ok
+      render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class Api::V1::ProjectsController < ApplicationController
       authorize @project
 
       if membership.save
-        render json: membership, status: :created
+        render json: membership, status: :created, serializer: Api::V1::MembershipSerializer
       else
         render json: membership.errors, status: :unprocessable_entity
       end

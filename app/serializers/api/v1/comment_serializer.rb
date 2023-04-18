@@ -21,10 +21,5 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Api::V1::CommentSerializer < ActiveModel::Serializer
-  attributes :id, :status, :body, :user, :created_at, :updated_at
-
-  # need check
-  def user
-    Api::V1::UserSerializer.new(object.user).attributes
-  end
+  attributes :id, :status, :body, :created_at, :updated_at
 end

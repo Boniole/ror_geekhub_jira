@@ -24,5 +24,5 @@ class Api::V1::ProjectSerializer < ActiveModel::Serializer
   attributes :id, :name, :status, :git_url, :git_repo
 
   has_many :desks, serializer: Api::V1::DeskSerializer
-  has_one :user, serializer: Api::V1::UserSerializer
+  has_many :memberships, serializer: Api::V1::MembershipSerializer
 end
