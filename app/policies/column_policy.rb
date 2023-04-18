@@ -7,7 +7,8 @@ class ColumnPolicy < ApplicationPolicy
   end
 
   def create?
-    user.admin?(set_project)
+    true
+    # user.admin?(set_project)
   end
 
   def update?

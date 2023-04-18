@@ -2,9 +2,10 @@ class Api::V1::TasksController < ApplicationController
   before_action :authorize_request
   before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
+  # TODO create authorize_user policy
+  before_action :authorize_user, only: %i[show create update destroy]
 
   def show
-    authorize @task
     render json: @task, status: :ok, serializer: Api::V1::TaskSerializer
   end
 
@@ -12,7 +13,6 @@ class Api::V1::TasksController < ApplicationController
     @task = Task.new(task_params)
     # task.new
     @task.user_id = @current_user.id
-    authorize @task
 
     if @task.save
       render json: @task, status: :created, serializer: Api::V1::TaskSerializer
@@ -22,8 +22,6 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def update
-    authorize @task
-
     if @task.update(task_params)
       render json: @task
     else
@@ -32,11 +30,14 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def destroy
-    authorize @task
     @task.destroy
   end
 
   private
+
+  def authorize_user
+    authorize @task || Task
+  end
 
   def set_task
     @task = Task.find(params[:id])
