@@ -2,7 +2,7 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :authorize_request
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
-  before_action :set_project, only: %i[show update destroy add_member delete_member]
+  before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
   #before_action memberships, only: %i[show update destroy add_member delete_member]
 
   def index
@@ -10,8 +10,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def show
-    authorize @project
-    #add serializer
     render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
   end
 
@@ -21,6 +19,7 @@ class Api::V1::ProjectsController < ApplicationController
     #current_user.new
     @project.memberships.build(user_id: @current_user.id, role: 'admin')
     #before_auth authorize @project || Project
+
     authorize @project
 
     if @project.save
@@ -31,8 +30,6 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def update
-    authorize @project
-
     if @project.update(project_params)
       render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
     else
@@ -52,8 +49,6 @@ class Api::V1::ProjectsController < ApplicationController
       #build rename to new
       membership = @project.memberships.build(user:, role: 'member')
 
-      authorize @project
-
       if membership.save
         render json: membership, status: :created, serializer: Api::V1::MembershipSerializer
       else
@@ -66,16 +61,19 @@ class Api::V1::ProjectsController < ApplicationController
     # move to before_action
     membership = @project.memberships.find_by(user_id: params[:user_id])
     # @memberships.find_by(user_id: params[:user_id])
-    authorize @project #kill action before Project current_user
+    #authorize @project #kill action before Project current_user
     membership.destroy
   end
 
   def destroy
-    authorize @project
     @project.destroy
   end
 
   private
+
+  def authorize_user
+    authorize @project || Project
+  end
 
   def set_project
     @project = Project.find(params[:id])
