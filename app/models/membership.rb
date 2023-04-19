@@ -3,7 +3,7 @@
 # Table name: memberships
 #
 #  id         :bigint           not null, primary key
-#  role       :string
+#  role       :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  project_id :bigint
@@ -18,5 +18,5 @@ class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
-  enum :role, { member: 0, admin: 1 }
+  enum :role, %i[member admin], default: :member
 end

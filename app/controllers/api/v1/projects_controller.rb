@@ -3,7 +3,7 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
   before_action :set_project, only: %i[show update destroy add_member delete_member]
-  #before_action memberships, only: %i[show update destroy add_member delete_member]
+  # before_action memberships, only: %i[show update destroy add_member delete_member]
 
   def index
     render json: @projects, status: :ok
@@ -11,19 +11,21 @@ class Api::V1::ProjectsController < ApplicationController
 
   def show
     authorize @project
-    #add serializer
+    # add serializer
     render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
   end
 
   def create
     @project = Project.new(project_params)
     @project.user_id = @current_user.id
-    #current_user.new
-    @project.memberships.build(user_id: @current_user.id, role: 'admin')
-    #before_auth authorize @project || Project
+
+    # before_auth authorize @project || Project
     authorize @project
 
     if @project.save
+      # current_user.new
+      membership = @project.memberships.new(user_id: @current_user.id, role: :admin)
+      membership.save!
       render json: @project, status: :created, serializer: Api::V1::ProjectSerializer
     else
       render json: @project.errors, status: :unprocessable_entity
@@ -43,13 +45,13 @@ class Api::V1::ProjectsController < ApplicationController
   def add_member
     user = User.find(params[:user_id])
     # remove .first
-    #rename to memberships
+    # rename to memberships
     existing_membership = @project.memberships.where(user:).first
-#.any?
+    # .any?
     if existing_membership
       render json: { error: 'User is already a member of the project' }, status: :unprocessable_entity
     else
-      #build rename to new
+      # build rename to new
       membership = @project.memberships.build(user:, role: 'member')
 
       authorize @project
@@ -66,7 +68,7 @@ class Api::V1::ProjectsController < ApplicationController
     # move to before_action
     membership = @project.memberships.find_by(user_id: params[:user_id])
     # @memberships.find_by(user_id: params[:user_id])
-    authorize @project #kill action before Project current_user
+    authorize @project # kill action before Project current_user
     membership.destroy
   end
 
