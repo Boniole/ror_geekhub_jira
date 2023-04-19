@@ -1,9 +1,7 @@
 class Api::V1::ColumnsController < ApplicationController
   before_action :authorize_request
   before_action :column_params, only: %i[create update]
-  before_action :set_column, only: %i[show update destroy]
-  # TODO create authorize_user policy
-  before_action :authorize_user, only: %i[show create update destroy]
+  before_action :set_column, :authorize_user, only: %i[show update destroy]
 
   def show
     # add render_success to all methods
@@ -13,7 +11,9 @@ class Api::V1::ColumnsController < ApplicationController
 
   def create
     @column = Column.new(column_params)
-    # move logic to model
+
+    authorize @column
+
     @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
 
     if @column.save

@@ -1,12 +1,13 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :authorize_request
   before_action :comment_params, only: %i[create update]
-  before_action :set_comment, only: %i[update destroy]
-  # TODO create authorize_user policy
-  before_action :authorize_user, only: %i[create update destroy]
+  before_action :set_comment, :authorize_user, only: %i[update destroy]
 
   def create
     @comment = Comment.new(comment_params)
+
+    authorize @comment
+
     @comment.user_id = current_user.id
     # current_user.comments.new
 

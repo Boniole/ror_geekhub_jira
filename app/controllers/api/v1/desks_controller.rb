@@ -3,7 +3,7 @@ class Api::V1::DesksController < ApplicationController
   before_action :authorize_request
   before_action :desk_params, only: %i[create update]
   before_action :set_project, only: %i[index create]
-  before_action :set_desk, only: %i[show update destroy]
+  before_action :set_desk, :authorize_user, only: %i[show update destroy]
   before_action :set_desks, only: :index
 
   def index
@@ -16,6 +16,8 @@ class Api::V1::DesksController < ApplicationController
 
   def create
     desk = @project.desks.new(desk_params)
+
+    authorize desk
 
     if desk.save
       render json: desk, status: :ok, serializer: Api::V1::DeskSerializer
@@ -35,6 +37,10 @@ class Api::V1::DesksController < ApplicationController
   end
 
   private
+
+  def authorize_user
+    authorize @desk || Desk
+  end
 
   def set_project
     @project = Project.find(params[:project_id])
