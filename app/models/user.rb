@@ -29,30 +29,9 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :projects, through: :memberships
 
-  # think about (enum)
+  # think about simplify (+ enum)
   def admin?(project)
-    project.memberships.find_by(user_id: id).admin?
-    # project.memberships.exists?(user_id: current_user.id, admin: true)
-  end
-
-  # to controller or concerns
-  # omniauthable
-  def self.from_omniauth(auth)
-    find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
-      user.provider = auth[:provider]
-      user.uid = auth[:uid]
-      user.first_name = auth[:info][:first_name]
-      user.last_name = auth[:info][:last_name]
-      user.email = auth[:info][:email]
-      user.password = SecureRandom.hex(15)
-    end
-  end
-
-  private
-
-  # PASSWORDABLE
-  def generate_token
-    SecureRandom.hex(10)
+    current_user.id == project.user_id
   end
 end
 
