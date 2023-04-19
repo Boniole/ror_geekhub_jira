@@ -9,6 +9,8 @@ class Api::V1::TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+
+    authorize @task
     # task.new
     @task.user_id = @current_user.id
 

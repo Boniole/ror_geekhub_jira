@@ -17,6 +17,8 @@ class Api::V1::DesksController < ApplicationController
   def create
     desk = @project.desks.new(desk_params)
 
+    authorize desk
+
     if desk.save
       render json: desk, status: :ok, serializer: Api::V1::DeskSerializer
     else
