@@ -1,8 +1,8 @@
 class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
-  before_action :authorize_request, only: :reset_in_settings
-#forgot_password
-  def forgot
+  before_action :authorize_request, only: :update_password
+  # renamed title(forgot to forget_password) TODO delete this comment
+  def forget_password
     return render json: { error: 'Email not present' } if params[:email].blank?
 
     user = User.find_by(email: params[:email])
@@ -24,7 +24,8 @@ class Api::V1::PasswordsController < ApplicationController
     end
   end
 
-  def reset
+  # renamed title(reset to reset_password) TODO delete this comment
+  def reset_password
     #delete
     token = params[:token]
 
@@ -43,7 +44,8 @@ class Api::V1::PasswordsController < ApplicationController
     end
   end
 
-  def reset_in_settings
+  # renamed title(reset_in_settings to update_password) TODO delete this comment
+  def update_password
     #remove uset to current_user
     user = @current_user
     old_password = params[:old_password]

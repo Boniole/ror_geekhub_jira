@@ -2,9 +2,7 @@ class Api::V1::UsersController < ApplicationController
   include NatsPublisher
 
   before_action :authorize_request, except: :create
-  #remove set_user create and add show
-  # destroy
-  before_action :set_user, except: %i[create index about_current_user]
+  before_action :set_user, except: %i[index show create destroy]
 
   # remove index
   def index
@@ -12,13 +10,8 @@ class Api::V1::UsersController < ApplicationController
     render json: @users, status: :ok, include: [], each_serializer: Api::V1::UserSerializer
   end
 
-    # about_current_user replace to show @current_user
   def show
     render json: @user, status: :ok, serializer: Api::V1::UserSerializer
-  end
-
-  def about_current_user
-    render json: @current_user, status: :ok, serializer: Api::V1::UserSerializer
   end
 
   def create
@@ -68,7 +61,7 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def set_user
-    # current_user
+    # TODO need fix current_user and add here instead of User.find(params[:id])
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { errors: 'User not found' }, status: :not_found
