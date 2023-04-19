@@ -6,6 +6,7 @@ module Validatable
   RANGE_EMAIL_LENGTH = 8..64
   RANGE_PASSWORD_LENGTH = 8..20
   RANGE_REPO_NAME_LENGTH = RANGE_NAME_LENGTH
+  RANGE_LABEL_LENGTH = RANGE_NAME_LENGTH
 
   MAX_GIT_URL_LENGTH = 255
 
@@ -19,13 +20,17 @@ module Validatable
   REGEXP_GIT_URL = URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   included do
-    def self.validate_name_field(field = :name)
+    def self.validate_user_field(field = :first_name)
       validates field, presence: true,
                        length: { in: RANGE_NAME_LENGTH },
                        format: {
                          with: REGEXP_USER,
                          message: 'Only latin letters allowed, no spaces or special characters'
                        }
+    end
+
+    def self.validate_name(field = :name)
+      validates field, presence: true, length: { in: RANGE_NAME_LENGTH }
     end
 
     def self.validate_description(field = :description)
@@ -98,8 +103,8 @@ module Validatable
     include Validatable
 
     included do
-      validate_name_field(:first_name)
-      validate_name_field(:last_name)
+      validate_user_field
+      validate_user_field(:last_name)
       validate_email
       validate_password
       validate_github_token
@@ -111,7 +116,7 @@ module Validatable
     include Validatable
 
     included do
-      validate_name_field
+      validate_name
       validate_git_repo
       validate_git_url
     end
@@ -122,7 +127,7 @@ module Validatable
     include Validatable
 
     included do
-      validate_name_field
+      validate_name
     end
   end
 
@@ -131,7 +136,7 @@ module Validatable
     include Validatable
 
     included do
-      validate_name_field
+      validate_name
     end
   end
 
@@ -140,7 +145,7 @@ module Validatable
     include Validatable
 
     included do
-      validate_name_field
+      validate_name
       validate_description
       validate_estimate
       validate_format_date
@@ -162,7 +167,7 @@ module Validatable
     include Validatable
 
     included do
-      validate_name_field
+      validate_name
     end
   end
 end

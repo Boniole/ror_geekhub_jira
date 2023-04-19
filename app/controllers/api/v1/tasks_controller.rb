@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
   before_action :task_params, only: %i[create update]
   before_action :set_task, only: %i[show update destroy]
   # TODO create authorize_user policy
-  before_action :authorize_user, only: %i[show create update destroy]
+  before_action :authorize_user, only: %i[show update destroy]
 
   def show
     render json: @task, status: :ok, serializer: Api::V1::TaskSerializer
