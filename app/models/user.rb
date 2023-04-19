@@ -17,6 +17,7 @@
 #
 class User < ApplicationRecord
   include Validatable::Userable
+  include Passwordable
 
   has_secure_password
 
@@ -30,27 +31,11 @@ class User < ApplicationRecord
 
   # think about (enum)
   def admin?(project)
-    project.memberships.find_by(user_id: id)&.role == 'admin'
+    project.memberships.find_by(user_id: id).admin?
+    # project.memberships.exists?(user_id: current_user.id, admin: true)
   end
 
-  # self?
-  # PASSWORDABLE
-  def generate_password_token!
-    self.reset_password_token = generate_token
-    self.reset_password_sent_at = Time.now.utc
-    save!(validate: false)
-  end
-
-  def password_token_valid?
-    (reset_password_sent_at + 4.hours) > Time.now.utc
-  end
-
-  def reset_password!(password)
-    self.reset_password_token = nil
-    self.password = password
-    save!(validate: false)
-  end
-# to controller or concerns
+  # to controller or concerns
   # omniauthable
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth[:provider], uid: auth[:uid]) do |user|
