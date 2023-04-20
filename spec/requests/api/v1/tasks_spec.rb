@@ -200,8 +200,8 @@ RSpec.describe 'api/v1/tasks', type: :request do
     end
   end
 
-  path '/api/v1/tasks/{id}' do
-    # You'll want to customize the parameter types...
+  path '/api/v1/projects/{project_id}/tasks/{id}' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show task') do

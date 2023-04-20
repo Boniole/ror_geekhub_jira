@@ -33,6 +33,10 @@ class ApplicationController < ActionController::API
     render json: { errors: 'Github token invalid or empty!' }, status: :not_found
   end
 
+  def current_project
+    current_user.memberships.get_project(params[:project_id])
+  end
+
   private
 
   def user_not_authorized
