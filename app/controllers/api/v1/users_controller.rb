@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   include NatsPublisher
+  include Regexable
 
   before_action :authorize_request, except: :create
   before_action :set_user, except: %i[index show create destroy]
@@ -19,14 +20,14 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       token = JsonWebToken.encode(user_id: @user.id) # to method or concern
       time = Time.now + 24.hours.to_i # to method or concern
-      nats_publish('service.mail', {:class => "account",
-                                    :type => "account_register_new",
-                                    :language => "en",
-                                    :password => @user.password,
-                                    :to => @user.email,
-                                    :username => @user.first_name}.to_json)
-                                    # rename exp and add const '%m-%d-%Y %H:%M'
-      render json: { token:, expiration_date: time.strftime('%m-%d-%Y %H:%M'),
+      # nats_publish('service.mail', {:class => "account",
+      #                               :type => "account_register_new",
+      #                               :language => "en",
+      #                               :password => @user.password,
+      #                               :to => @user.email,
+      #                               :username => @user.first_name}.to_json)
+      # rename exp and add const '%m-%d-%Y %H:%M'
+      render json: { token:, expiration_date: time.strftime(DATE_FORMAT),
                      user: @user }, status: :created
     else
       render json: { errors: @user.errors.full_messages },
@@ -40,7 +41,7 @@ class Api::V1::UsersController < ApplicationController
       render json: { errors: 'You cannot update email or password' }, status: :unprocessable_entity
       return
     end
-# @user.update and add skip_validation???
+    # @user.update and add skip_validation???
     if @user.update_columns(first_name: params[:first_name], last_name: params[:last_name])
       render json: @user, status: :ok, serializer: Api::V1::UserSerializer
     else
@@ -49,19 +50,19 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
-    #current_user.destroy
+    # current_user.destroy
 
     # destroy session
     @user.destroy
 
     # render json: { success: 'ok' }, status: :ok
-    #else render json: { errors: }
+    # else render json: { errors: }
   end
 
   private
 
   def set_user
-    # TODO need fix current_user and add here instead of User.find(params[:id])
+    # TODO: need fix current_user and add here instead of User.find(params[:id])
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { errors: 'User not found' }, status: :not_found
