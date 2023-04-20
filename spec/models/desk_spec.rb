@@ -16,13 +16,9 @@
 #
 #  fk_rails_...  (project_id => projects.id)
 #
+require 'rails_helper'
 
-one:
-  name: MyString
-  project: one
-
-
-two:
-  name: MyString
-  project: two
-
+RSpec.describe Desk, type: :model do
+  it { should have_many :columns }
+  it { should belong_to :project }
+end

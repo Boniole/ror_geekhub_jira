@@ -20,13 +20,12 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
+require 'rails_helper'
 
-one:
-  name: MyString
-  user: luke_skywalker
-
-
-two:
-  name: MyString
-  user: two
-
+RSpec.describe Project, type: :model do
+  it {  should have_many :desks }
+  it { should have_many :documents }
+  it { should have_many :memberships }
+  it { should have_many :users }
+  it { should belong_to :user }
+end

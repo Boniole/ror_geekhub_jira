@@ -15,12 +15,18 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+require 'rails_helper'
 
-luke_skywalker:
-  first_name: "Luke"
-  last_name: "Skywalker"
-  email: "luke_skywalker@gmail.com"
-  password_digest: MyString
+RANGE_PASSWORD_LENGTH = 8..20
 
-two:
-  password_digest: MyString
+RSpec.describe User, type: :model do
+  it 'has many' do
+    should have_many :memberships
+    should have_many :projects
+    should have_many :tasks
+    should have_many :comments
+    should have_many :documents
+  end
+  it { should validate_uniqueness_of(:email) }
+  # it { should validate_exclusion_of(:password_digest).in_range(RANGE_PASSWORD_LENGTH) }
+end

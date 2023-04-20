@@ -1,6 +1,8 @@
 require 'swagger_helper'
+require 'spec_helper'
 
 RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
+  fixtures :users
   let(:user) { create(:user) }
   let(:user_id) { user.id }
 
@@ -21,6 +23,7 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
                  },
                  required: %w[id first_name last_name email]
                }
+
         run_test!
       end
     end
