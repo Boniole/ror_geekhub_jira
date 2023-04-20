@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  before_action :authorize_request
 
   # helper_method :nats_publish
-  # attr_reader :github_user
 
   def not_found
     render json: { error: 'not_found' }
@@ -23,9 +23,13 @@ class ApplicationController < ActionController::API
 
   # concern github able
   def authorize_github
-    @github_client = Octokit::Client.new(access_token: @current_user.github_token, auto_paginate: true)
+    github_client = Octokit::Client.new(access_token: current_user.github_token, auto_paginate: true)
   rescue Octokit::BadRequest
     render json: { errors: 'Github token invalid or empty!' }, status: :not_found
+  end
+
+  def current_project
+    current_user.memberships.get_project(params[:project_id])
   end
 
   private

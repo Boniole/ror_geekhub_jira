@@ -814,13 +814,6 @@ paths:
       - Tasks
       description: Create task
       parameters:
-      - name: user_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the user (integer)
       - name: project_id
         in: post
         required: true
@@ -954,9 +947,6 @@ paths:
                 project_id:
                   type: integer
                   default: 1
-                user_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                 description:
@@ -983,9 +973,14 @@ paths:
               - column_id
               - desk_id
               - project_id
-              - user_id
-  "/api/v1/tasks/{id}":
+  "/api/v1/projects/{project_id}/tasks/{id}":
     parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     - name: id
       in: path
       description: id
@@ -1027,9 +1022,6 @@ paths:
                 project_id:
                   type: integer
                   default: 1
-                user_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                 description:
@@ -1056,7 +1048,6 @@ paths:
               - column_id
               - desk_id
               - project_id
-              - user_id
     delete:
       summary: delete task
       tags:

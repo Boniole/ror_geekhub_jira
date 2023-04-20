@@ -1,5 +1,4 @@
 class Api::V1::ColumnsController < ApplicationController
-  before_action :authorize_request
   before_action :column_params, only: %i[create update]
   before_action :set_column, :authorize_user, only: %i[show update destroy]
 
@@ -10,16 +9,15 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def create
-    @column = Column.new(column_params)
+    column = Column.new(column_params)
+    authorize column
 
-    authorize @column
+    column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
 
-    @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
-
-    if @column.save
-      render json: @column, status: :ok, serializer: Api::V1::ColumnSerializer
+    if column.save
+      render json: column, status: :ok, serializer: Api::V1::ColumnSerializer
     else
-      render json: @column.errors, status: :unprocessable_entity
+      render json: column.errors, status: :unprocessable_entity
     end
   end
 

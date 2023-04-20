@@ -1,5 +1,4 @@
 class Api::V1::DocumentsController < ApplicationController
-  before_action :authorize_request
   before_action :document_params, only: %i[create update]
   before_action :set_attachable
   before_action :set_document, :authorize_user, only: [:show, :destroy]

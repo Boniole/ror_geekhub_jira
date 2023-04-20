@@ -2,7 +2,7 @@ class Api::V1::UsersController < ApplicationController
   include NatsPublisher
   include Regexable
 
-  before_action :authorize_request, except: :create
+  skip_before_action  :authorize_request, only: :create
   before_action :set_user, except: %i[index show create destroy]
 
   # remove index
