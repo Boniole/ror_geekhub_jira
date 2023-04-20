@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   before_action :authorize_request
 
   # helper_method :nats_publish
-  attr_reader :current_user, :github_user
+  attr_reader :current_user, :github_client
 
   def not_found
     render json: { error: 'not_found' }
