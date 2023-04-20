@@ -37,7 +37,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Api::V1::TaskSerializer < ActiveModel::Serializer
-  attributes :id, :assignee, :name, :description, :tag_name, :priority_number, :estimate, :label, :priority,
+  attributes :id, :user_id, :assignee, :name, :description, :tag_name, :priority_number, :estimate, :label, :priority,
              :type_of, :status, :start_date, :end_date, :created_at, :updated_at
 
   has_one :assignee, serializer: Api::V1::AssigneeSerializer
