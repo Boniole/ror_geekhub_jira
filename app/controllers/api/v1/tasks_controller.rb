@@ -1,5 +1,4 @@
 class Api::V1::TasksController < ApplicationController
-  before_action :authorize_request
   before_action :task_params, only: %i[create update]
   before_action :set_task, :authorize_user, only: %i[show update destroy]
 

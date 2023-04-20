@@ -1,4 +1,6 @@
 class Api::V1::SessionsController < ApplicationController
+  skip_before_action  :authorize_request
+
   def omniauth
     # remove from model to controller .from_omniauth(auth) or concern
     user = User.from_omniauth(auth)

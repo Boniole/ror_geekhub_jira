@@ -1,5 +1,5 @@
 class Api::V1::GithubRepositoriesController < ApplicationController
-  before_action :authorize_request, :authorize_github
+  before_action :authorize_github
   before_action :repo_params, only: %i[create update]
   before_action :repo_delete_params, only: %i[delete]
   before_action :set_project, only: %i[delete update]
@@ -8,12 +8,12 @@ class Api::V1::GithubRepositoriesController < ApplicationController
     #validator
     repository = GithubRepository.new(repo_params)
     #current_user
-    @project = @current_user.projects.find(params[:project_id])
+    @project = current_user.projects.find(params[:project_id])
 
     # authorize GithubRepository
 
     if repository.valid? && @project.present?
-      repo = @github_client.create_repository(
+      repo = github_client.create_repository(
         params[:name],
         description: params[:description],
         private: params[:private],
@@ -46,7 +46,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
     repo_name = get_repository_name(params[:name])
 #concerne github repository
     if repository.valid? && @project.present?
-      repo = @github_client.edit_repository(
+      repo = github_client.edit_repository(
         repo_name,
         description: params[:description],
         private: params[:private],
@@ -65,11 +65,11 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   def delete
     owner, repo_name = params[:validate_text].split('/')
 
-    if @github_client.repository(@project.git_repo).full_name == params[:validate_text]
+    if github_client.repository(@project.git_repo).full_name == params[:validate_text]
 
       @project.update(git_url: nil, git_repo: nil)
 
-      @github_client.delete_repository(
+      github_client.delete_repository(
         owner: owner,
         repo: repo_name
       )

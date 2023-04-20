@@ -1,6 +1,6 @@
 class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
-  before_action :authorize_request, only: :update_password
+  skip_before_action :authorize_request, only: %i[update_password forget_password]
 
   def forget_password
     return render json: { error: 'Email not present' } if params[:email].blank?
