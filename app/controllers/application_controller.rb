@@ -24,6 +24,10 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def current_user
+    User.find(@decoded[:user_id]) if @decoded.present?
+  end
+
   # concern github able
   def authorize_github
     @github_client = Octokit::Client.new(access_token: @current_user.github_token, auto_paginate: true)
