@@ -1,5 +1,6 @@
 class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
+
   before_action :authorize_request, only: :update_password
 
   def forget_password
@@ -52,11 +53,12 @@ class Api::V1::PasswordsController < ApplicationController
     password = params[:password]
     if current_user.present? && current_user.password_token_valid?
       current_user.password = password
+      # pay attention to validation!
       if current_user.valid?
         current_user.reset_password!(password)
         render json: { status: 'ok' }, status: :ok
       else
-        render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+        render json: { error: current_user.errors.full_messages }, status: :unprocessable_entity
       end
     else
       render json: { error: 'Token not valid or expired. Try again' }, status: :not_found

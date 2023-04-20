@@ -3,29 +3,22 @@ class ApplicationController < ActionController::API
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # helper_method :nats_publish
-  attr_reader :current_user
+  # attr_reader :github_user
 
   def not_found
     render json: { error: 'not_found' }
   end
-
-  # почитати по зміні єкземпляра attr accessor attr_reader
-  # attr_accessor :current_user, :github_user
 
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     begin
       @decoded = JsonWebToken.decode(header)
-      @current_user = User.find(@decoded[:user_id])
+      current_user
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
     end
-  end
-
-  def current_user
-    User.find(@decoded[:user_id]) if @decoded.present?
   end
 
   # concern github able
@@ -36,6 +29,10 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def current_user
+    User.find(@decoded[:user_id]) if @decoded.present?
+  end
 
   def user_not_authorized
     render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
