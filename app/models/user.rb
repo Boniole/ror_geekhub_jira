@@ -31,7 +31,7 @@ class User < ApplicationRecord
 
   # think about simplify (+ enum)
   def admin?(project)
-    current_user.id == project.user_id
+    id == project.user_id
   end
 end
 

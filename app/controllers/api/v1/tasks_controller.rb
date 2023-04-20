@@ -8,16 +8,15 @@ class Api::V1::TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    task = current_user.tasks.new
+    task.update(task_params)
 
-    authorize @task
-    # task.new
-    @task.user_id = @current_user.id
+    authorize task
 
-    if @task.save
-      render json: @task, status: :created, serializer: Api::V1::TaskSerializer
+    if task.save
+      render json: task, status: :created, serializer: Api::V1::TaskSerializer
     else
-      render json: @task.errors, status: :unprocessable_entity
+      render json: task.errors, status: :unprocessable_entity
     end
   end
 
@@ -47,7 +46,7 @@ class Api::V1::TasksController < ApplicationController
 
   def task_params
     params.permit(
-      :project_id, :user_id, :assignee_id, :desk_id, :column_id, :name, :description, :priority_number, :estimate,
+      :project_id, :assignee_id, :desk_id, :column_id, :name, :description, :priority_number, :estimate,
       :label, :priority, :type_of, :status, :start_date, :end_date
     )
   end
