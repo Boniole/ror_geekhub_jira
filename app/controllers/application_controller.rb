@@ -4,7 +4,6 @@ class ApplicationController < ActionController::API
   before_action :authorize_request
 
   # helper_method :nats_publish
-  attr_reader :current_user, :github_client
 
   def not_found
     render json: { error: 'not_found' }
@@ -15,15 +14,11 @@ class ApplicationController < ActionController::API
     header = header.split(' ').last if header
     begin
       @decoded = JsonWebToken.decode(header)
-      @current_user = User.find(@decoded[:user_id])
+      current_user
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
     end
-  end
-
-  def current_user
-    User.find(@decoded[:user_id]) if @decoded.present?
   end
 
   # concern github able
@@ -38,6 +33,10 @@ class ApplicationController < ActionController::API
   end
 
   private
+
+  def current_user
+    User.find(@decoded[:user_id]) if @decoded.present?
+  end
 
   def user_not_authorized
     render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
