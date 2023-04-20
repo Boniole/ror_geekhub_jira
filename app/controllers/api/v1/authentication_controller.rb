@@ -1,4 +1,6 @@
 class Api::V1::AuthenticationController < ApplicationController
+  include Regexable
+
   before_action :authorize_request, except: :login
 
   def login
@@ -6,7 +8,7 @@ class Api::V1::AuthenticationController < ApplicationController
     if @user&.authenticate(params[:password])
       token = JsonWebToken.encode(user_id: @user.id)
       time = Time.now + 24.hours.to_i
-      render json: { token:, expiration_date: time.strftime('%m-%d-%Y %H:%M'),
+      render json: { token:, expiration_date: time.strftime(DATE_FORMAT),
                      first_name: @user }, status: :ok
     else
       render json: { error: 'unauthorized' }, status: :unauthorized
