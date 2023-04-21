@@ -1,7 +1,6 @@
 class Api::V1::AuthenticationController < ApplicationController
   include Regexable
-
-  before_action :authorize_request, except: :login
+  skip_before_action :authorize_request
 
   def login
     @user = User.find_by_email(params[:email])
