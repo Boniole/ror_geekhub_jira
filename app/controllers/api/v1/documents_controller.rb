@@ -5,11 +5,11 @@ class Api::V1::DocumentsController < ApplicationController
   before_action :set_documents, only: :index
 
   def index
-    render json: @documents, status: :ok
+    render_success(data: @documents)
   end
 
   def show
-    render json: @document, status: :ok
+    render_success(data: @documents)
   end
 
   def create
@@ -47,11 +47,7 @@ class Api::V1::DocumentsController < ApplicationController
 
 
   def destroy
-    if @document.destroy
-      head :no_content
-    else
-      head :unprocessable_entity
-    end
+    @document.destroy
   end
 
   private
@@ -77,30 +73,11 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def set_document
-    # find
-    @document = @attachable.documents.find_by(id: params[:id])
-    # update to .nil?
-    if @document == nil
-      render json: { errors: 'Not found files' }, status: :not_found
-    else
-      @document
-    end
-    # remove
-    # if @document == nil
-    #   render json: { errors: 'Not found files' }, status: :not_found
-    # else
-    #   @document
-    # end
+    @document = @attachable.documents.find(id: params[:id])
   end
 
   def set_documents
     @documents = @attachable.documents
-    # update to .nil?
-    if @documents == nil
-      render json: { errors: 'Not found files' }, status: :not_found
-    else
-      @documents
-    end
   end
 
   def document_params

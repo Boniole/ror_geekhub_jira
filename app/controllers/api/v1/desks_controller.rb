@@ -1,15 +1,16 @@
 class Api::V1::DesksController < ApplicationController
+  # skip_before_action :authorize_request
   before_action :desk_params, only: %i[create update]
   before_action :set_project, only: %i[index create]
-  before_action :set_desk, :authorize_user, only: %i[show update destroy]
+  before_action :set_desk, only: %i[show update destroy]
   before_action :set_desks, only: :index
 
   def index
-    render json: @desks, status: :ok, include: [], each_serializer: Api::V1::DeskSerializer
+    render_success(data: @desks, each_serializer: Api::V1::DeskSerializer)
   end
 
   def show
-    render json: @desk, status: :ok, serializer: Api::V1::DeskSerializer
+    render_success(data: @desk, serializer: Api::V1::DeskSerializer)
   end
 
   def create
@@ -18,20 +19,20 @@ class Api::V1::DesksController < ApplicationController
     authorize desk
 
     if desk.save
-      render json: desk, status: :ok, serializer: Api::V1::DeskSerializer
+      render_success(data: desk, status: :created, serializer: Api::V1::DeskSerializer)
     else
-      render json: desk.errors, status: :unprocessable_entity
+      render_error(errors: desk.errors)
     end
   end
 
   def update
-    render json: @desk, status: :ok if @desk.update(desk_params)
+    return render_success(data: @desk, serializer: Api::V1::DeskSerializer) if @desk.update(desk_params)
+
+    render_error(errors: @desk.errors)
   end
 
   def destroy
     @desk.destroy
-  rescue ActiveRecord::InvalidForeignKey => e
-    render json: { errors: e.message }, status: :unauthorized
   end
 
   private
@@ -64,7 +65,7 @@ class Api::V1::DesksController < ApplicationController
     params.permit(:name)
   rescue ActionController::ParameterMissing => e
       # rescue from https://apidock.com/rails/ActiveSupport/Rescuable/ClassMethods/rescue_from
-  # catch errors in aplication controller
+      # catch errors in aplication controller
     render json: { errors: e.message }, status: :bad_request
   end
 end

@@ -5,11 +5,11 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :memberships, only: %i[update destroy add_member delete_member]
 
   def index
-    render json: @projects, status: :ok
+    render_success(data: @projects, each_serializer: Api::V1::ProjectSerializer)
   end
 
   def show
-    render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
+    render_success(data: @project, serializer: Api::V1::ProjectSerializer)
   end
 
   def create
@@ -19,17 +19,17 @@ class Api::V1::ProjectsController < ApplicationController
       membership = @project.memberships.new(user_id: current_user.id, role: :admin)
       membership.save!
 
-      render json: @project, status: :created, serializer: Api::V1::ProjectSerializer
+      render_success(data: @project, status: :created, serializer: Api::V1::ProjectSerializer)
     else
-      render json: @project.errors, status: :unprocessable_entity
+      render_error(errors: @project.errors)
     end
   end
 
   def update
     if @project.update(project_params)
-      render json: @project, status: :ok, serializer: Api::V1::ProjectSerializer
+      render_success(data: @project, serializer: Api::V1::ProjectSerializer)
     else
-      render json: @project.errors, status: :unprocessable_entity
+      render_error(errors: @project.errors)
     end
   end
 
@@ -43,9 +43,9 @@ class Api::V1::ProjectsController < ApplicationController
       membership = memberships.new(user:)
 
       if membership.save
-        render json: membership, status: :created, serializer: Api::V1::MembershipSerializer
+        render_success(data: membership, status: :created, serializer: Api::V1::MembershipSerializer)
       else
-        render json: membership.errors, status: :unprocessable_entity
+        render_error(errors: membership.errors)
       end
     end
   end

@@ -55,12 +55,13 @@ class Api::V1::PasswordsController < ApplicationController
       # TODO: pay attention to validation!
       if current_user.valid? # current_user.save(validate: false)
         current_user.reset_password!(password)
-        render json: { status: 'ok' }, status: :ok
+
+        render_success
       else
-        render json: { error: current_user.errors.full_messages }, status: :unprocessable_entity
+        render_error(errors: current_user.errors.full_messages )
       end
     else
-      render json: { error: 'Token not valid or expired. Try again' }, status: :not_found
+      render_error(errors: 'Token not valid or expired. Try again',  status: :not_found)
     end
   end
 end

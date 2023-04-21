@@ -9,17 +9,17 @@ class Api::V1::CommentsController < ApplicationController
     authorize comment
 
     if comment.save
-      render json: comment, status: :ok, serializer: Api::V1::CommentSerializer
+      render_success(data: comment, status: :created, serializer: Api::V1::CommentSerializer)
     else
-      render json: comment.errors, status: :unprocessable_entity
+      render_error(errors: comment.errors)
     end
   end
 
   def update
     if @comment.update(comment_params)
-      render json: @comment, serializer: Api::V1::CommentSerializer
+      render_success(data: @comment, serializer: Api::V1::CommentSerializer)
     else
-      render json: @comment.errors, status: :unprocessable_entity
+      render_error(errors: @comment.errors)
     end
   end
 

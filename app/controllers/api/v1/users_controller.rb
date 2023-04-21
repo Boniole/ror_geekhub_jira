@@ -5,14 +5,9 @@ class Api::V1::UsersController < ApplicationController
   skip_before_action  :authorize_request, only: :create
   before_action :set_user, except: %i[index show create destroy]
 
-  # remove index
-  def index
-    @users = User.all
-    render json: @users, status: :ok, include: [], each_serializer: Api::V1::UserSerializer
-  end
-
   def show
-    render json: @user, status: :ok, serializer: Api::V1::UserSerializer
+    render_success(data: @user, serializer: Api::V1::UserSerializer)
+    # render json: @user, status: :ok, serializer: Api::V1::UserSerializer
   end
 
   def create
@@ -27,25 +22,24 @@ class Api::V1::UsersController < ApplicationController
       #                               :to => @user.email,
       #                               :username => @user.first_name}.to_json)
       # rename exp and add const '%m-%d-%Y %H:%M'
+      # TODO add render_success
       render json: { token:, expiration_date: time.strftime(DATE_FORMAT),
                      user: @user }, status: :created
     else
-      render json: { errors: @user.errors.full_messages },
-             status: :unprocessable_entity
+      render_error(errors: @user.errors.full_messages)
     end
   end
 
   def update
     # remove 40 --43
     if user_params.key?(:email) || user_params.key?(:password)
-      render json: { errors: 'You cannot update email or password' }, status: :unprocessable_entity
-      return
+      return render_error(errors: 'You cannot update email or password' )
     end
     # @user.update and add skip_validation???
     if @user.update_columns(first_name: params[:first_name], last_name: params[:last_name])
-      render json: @user, status: :ok, serializer: Api::V1::UserSerializer
+      render_success(data: @user, serializer: Api::V1::UserSerializer)
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render_error(errors: @user.errors.full_messages)
     end
   end
 
