@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :projects do
         resources :desks, only: %i[index show create update destroy]
         resources :documents, except: :update
+        resources :tasks, only: %i[show update destroy]
         member do
           post 'add_member', to: 'projects#add_member'
           delete 'delete_member/:user_id', to: 'projects#delete_member'

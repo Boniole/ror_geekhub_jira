@@ -19,4 +19,6 @@ class Membership < ApplicationRecord
   belongs_to :project
 
   enum :role, %i[member admin], default: :member
+
+  scope :get_project, ->(id) { where(project_id: id).first.project }
 end

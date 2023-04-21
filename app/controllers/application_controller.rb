@@ -1,23 +1,20 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  before_action :authorize_request
 
   # helper_method :nats_publish
-  attr_reader :current_user
 
   def not_found
     render json: { error: 'not_found' }
   end
-
-  # почитати по зміні єкземпляра attr accessor attr_reader
-  # attr_accessor :current_user, :github_user
 
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
     begin
       @decoded = JsonWebToken.decode(header)
-      @current_user = User.find(@decoded[:user_id])
+      current_user
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
@@ -26,12 +23,20 @@ class ApplicationController < ActionController::API
 
   # concern github able
   def authorize_github
-    @github_client = Octokit::Client.new(access_token: @current_user.github_token, auto_paginate: true)
+    github_client = Octokit::Client.new(access_token: current_user.github_token, auto_paginate: true)
   rescue Octokit::BadRequest
     render json: { errors: 'Github token invalid or empty!' }, status: :not_found
   end
 
+  def current_project
+    current_user.memberships.get_project(params[:project_id])
+  end
+
   private
+
+  def current_user
+    User.find(@decoded[:user_id]) if @decoded.present?
+  end
 
   def user_not_authorized
     render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
