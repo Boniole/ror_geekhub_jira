@@ -52,8 +52,8 @@ class Api::V1::PasswordsController < ApplicationController
     password = params[:password]
     if current_user.present? && current_user.password_token_valid?
       current_user.password = password
-      # pay attention to validation!
-      if current_user.valid?
+      # TODO: pay attention to validation!
+      if current_user.valid? # current_user.save(validate: false)
         current_user.reset_password!(password)
         render json: { status: 'ok' }, status: :ok
       else
