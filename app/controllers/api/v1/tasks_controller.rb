@@ -3,7 +3,7 @@ class Api::V1::TasksController < ApplicationController
   before_action :current_project, :set_task, :authorize_user, only: %i[show update destroy]
 
   def show
-    render json: @task, status: :ok, serializer: Api::V1::TaskSerializer
+    render_success(data: @task, serializer: Api::V1::TaskSerializer)
   end
 
   def create
@@ -13,17 +13,17 @@ class Api::V1::TasksController < ApplicationController
     authorize task
 
     if task.save
-      render json: task, status: :created, serializer: Api::V1::TaskSerializer
+      render_success(data: task, status: :created, serializer: Api::V1::TaskSerializer)
     else
-      render json: task.errors, status: :unprocessable_entity
+      render_error(errors: task.errors)
     end
   end
 
   def update
     if @task.update(task_params)
-      render json: @task
+      render_success(data: @task)
     else
-      render json: @task.errors, status: :unprocessable_entity
+      render_error(errors: @task.errors)
     end
   end
 

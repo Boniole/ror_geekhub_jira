@@ -51,17 +51,17 @@ class ApplicationController < ActionController::API
     nats.publish(subject, data)
   end
 
-  # add this
-  def render_success(data: nil, status: :ok, serializer: nil)
+  def render_success(data: nil, status: :ok, serializer: nil, each_serializer: nil)
     if data.nil?
       render json: {}, status: status
+    elsif data.respond_to?(:to_ary)
+      render json: data, status: status, each_serializer: each_serializer
     else
-      render json: { data: }, status:
+      render json: data, status: status, serializer: serializer
     end
   end
 
-  # add this and update
-  def render_failure
-    render json: { baseErrors: errors }, status:
+  def render_error(errors: [], status: :unprocessable_entity)
+    render json: { errors: errors }, status: status
   end
 end
