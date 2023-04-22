@@ -16,8 +16,6 @@ class Api::V2::ColumnsController < ApplicationController
   def create
     @column = Column.new(column_params)
     authorize @column
-    # move logic to model
-    @column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
 
     if @column.save
       render json: @column, status: :ok, serializer: Api::V2::ColumnSerializer
