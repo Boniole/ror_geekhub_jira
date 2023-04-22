@@ -23,11 +23,11 @@ class ApplicationController < ActionController::API
     end
   end
 
+  private
+
   def current_project
     current_user.memberships.get_project(params[:project_id])
   end
-
-  private
 
   def current_user
     User.find(@decoded[:user_id]) if @decoded.present?
