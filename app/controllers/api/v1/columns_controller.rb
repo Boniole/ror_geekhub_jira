@@ -10,7 +10,7 @@ class Api::V1::ColumnsController < ApplicationController
     column = Column.new(column_params)
     authorize column
 
-    column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
+    column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1 
 
     if column.save
       render_success(data: @column, status: :created, serializer: Api::V1::ColumnSerializer)
