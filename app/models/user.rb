@@ -27,7 +27,8 @@ class User < ApplicationRecord
   has_many :documents, as: :documentable
 
   has_many :memberships
-  has_many :projects, through: :memberships
+  # has_many :projects, through: :memberships
+  has_many :membered_projects, through: :memberships, source: :project
 
   # think about simplify (+ enum)
   def admin?(project)

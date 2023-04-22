@@ -3,9 +3,7 @@ class Api::V1::ColumnsController < ApplicationController
   before_action :set_column, :authorize_user, only: %i[show update destroy]
 
   def show
-    # add render_success to all methods
-    # render_success(data: @column, serializer: ColumnSerializer)
-    render json: @column, status: :ok, serializer: Api::V1::ColumnSerializer
+    render_success(data: @column, serializer: Api::V1::ColumnSerializer)
   end
 
   def create
@@ -15,17 +13,17 @@ class Api::V1::ColumnsController < ApplicationController
     column.ordinal_number = Desk.find_by(id: column_params[:desk_id]).columns.count + 1
 
     if column.save
-      render json: column, status: :ok, serializer: Api::V1::ColumnSerializer
+      render_success(data: @column, status: :created, serializer: Api::V1::ColumnSerializer)
     else
-      render json: column.errors, status: :unprocessable_entity
+      render_error(errors: column.errors)
     end
   end
 
   def update
     if @column.update(column_params)
-      render json: @column, status: :ok, serializer: Api::V1::ColumnSerializer
+      render_success(data: @column, serializer: Api::V1::ColumnSerializer)
     else
-      render json: @column.errors, status: :unprocessable_entity
+      render_error(errors: @column.errors)
     end
   end
 

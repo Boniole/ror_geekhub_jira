@@ -27,6 +27,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
       # attribute :changed_files do
       #   object[:changed_files]
       # end
+      # TODO add render_success
       render json: {
         name: repo.name,
         description: repo.description,
@@ -35,7 +36,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
       }, status: :ok
 
     else
-      render json: { errors: repository.errors.full_messages }, status: :unprocessable_entity
+      render_error(errors: repository.errors.full_messages)
     end
   end
 
@@ -56,9 +57,10 @@ class Api::V1::GithubRepositoriesController < ApplicationController
 
       @project.update(git_url: repo.clone_url, git_repo: repo.full_name)
 
+      # TODO add render_success
       render json: { success: 'Repository update' }, status: :ok
     else
-      render json: { errors: repository.errors.full_messages }, status: :unprocessable_entity
+      render_error(errors: repository.errors.full_messages)
     end
   end
 
@@ -74,9 +76,10 @@ class Api::V1::GithubRepositoriesController < ApplicationController
         repo: repo_name
       )
 
+      # TODO add render_success
       render json: { success: 'Repository was deleted' }, status: :ok
     else
-      render json: { errors: 'Invalid validate text' }, status: :bad_request
+      render_error(errors: 'Invalid validate text', status: :bad_request)
     end
   end
 
@@ -84,19 +87,13 @@ class Api::V1::GithubRepositoriesController < ApplicationController
 
   def repo_params
     params.permit(:project_id, :name, :description, :private, :has_issues, :has_downloads)
-  rescue ActionController::ParameterMissing => e
-    render json: { errors: e.message }, status: :bad_request
   end
 
   def set_project
     @project = @current_user.projects.find(params[:project_id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def repo_delete_params
     params.permit(:project_id, :validate_text)
-  rescue ActionController::ParameterMissing => e
-    render json: { errors: e.message }, status: :bad_request
   end
 end
