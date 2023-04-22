@@ -29,8 +29,14 @@ paths:
               required:
               - name
               - desk_id
-  "/api/v1/columns/{id}":
+  "/api/v1/projects/{project_id}/columns/{id}":
     parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     - name: id
       in: path
       description: id

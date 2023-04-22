@@ -36,7 +36,7 @@ class Api::V1::ColumnsController < ApplicationController
   end
 
   def set_column
-    @column = Column.find(params[:id])
+    @column = current_project.desks.first.columns.find(params[:id])
   end
 
   def column_params
