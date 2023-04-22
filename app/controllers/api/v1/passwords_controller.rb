@@ -1,6 +1,5 @@
 class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
-
   skip_before_action :authorize_request, only: %i[update_password forget_password]
 
   def forget_password
