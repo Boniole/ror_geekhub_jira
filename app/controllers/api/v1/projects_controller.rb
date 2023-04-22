@@ -52,7 +52,6 @@ class Api::V1::ProjectsController < ApplicationController
 
   def delete_member
     membership = memberships.find_by(user_id: params[:user_id])
-    # authorize @project #kill action before Project current_user
     membership.destroy
   end
 
@@ -70,13 +69,11 @@ class Api::V1::ProjectsController < ApplicationController
     authorize @project || Project
   end
 
-  # TODO: method update and delete cant see current_user
   def set_project
     @project = current_user.projects.find(params[:id])
   end
 
   def set_projects
-    # TODO: think about project where user is member
     @projects = current_user.projects
   end
 
