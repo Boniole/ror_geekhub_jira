@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::API
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActionController::ParameterMissing, with: :handle_parameter_missing
   before_action :authorize_request
 
   # helper_method :nats_publish
 
+  # TODO Nazar, where do we use it?
   def not_found
     render json: { error: 'not_found' }
   end
@@ -15,6 +18,7 @@ class ApplicationController < ActionController::API
     begin
       @decoded = JsonWebToken.decode(header)
       current_user
+      # TODO maybe need delete rescue about ActiveRecord::RecordNotFound because we have rescue_from
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e
@@ -40,6 +44,14 @@ class ApplicationController < ActionController::API
 
   def user_not_authorized
     render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
+  end
+
+  def handle_parameter_missing
+    render json: { errors: "Required parameter is missing: #{exception.param}" }, status: :unprocessable_entity
+  end
+
+  def record_not_found
+    render json: { error: "Record not found" }, status: :not_found
   end
 
   # needed to delete? dublicate in concern

@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-  before_action :project_params, only: %i[create]
+  before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
   before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
   before_action :memberships, only: %i[update destroy add_member delete_member]
@@ -73,8 +73,6 @@ class Api::V1::ProjectsController < ApplicationController
   # TODO: method update and delete cant see current_user
   def set_project
     @project = current_user.projects.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def set_projects
@@ -84,7 +82,5 @@ class Api::V1::ProjectsController < ApplicationController
 
   def project_params
     params.permit(:name, :status, :git_url, :git_repo)
-  rescue ActionController::ParameterMissing => e
-    render json: { errors: e.message }, status: :bad_request
   end
 end

@@ -39,8 +39,6 @@ class Api::V1::TasksController < ApplicationController
 
   def set_task
     @task = current_project.tasks.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'Task not found' }, status: :not_found
   end
 
   def task_params

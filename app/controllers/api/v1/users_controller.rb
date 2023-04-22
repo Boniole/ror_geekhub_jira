@@ -58,8 +58,6 @@ class Api::V1::UsersController < ApplicationController
   def set_user
     # TODO: need fix current_user and add here instead of User.find(params[:id])
     @user = User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'User not found' }, status: :not_found
   end
 
   def user_params

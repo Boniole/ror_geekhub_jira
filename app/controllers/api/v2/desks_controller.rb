@@ -38,29 +38,17 @@ class Api::V2::DesksController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
-  # rescue from https://apidock.com/rails/ActiveSupport/Rescuable/ClassMethods/rescue_from
-  # catch errors in aplication controller
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def set_desk
     @desk = Desk.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def set_desks
     @desks = @project.desks
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def desk_params
     params.permit(:name)
-  rescue ActionController::ParameterMissing => e
-      # rescue from https://apidock.com/rails/ActiveSupport/Rescuable/ClassMethods/rescue_from
-  # catch errors in aplication controller
-    render json: { errors: e.message }, status: :bad_request
   end
 end
