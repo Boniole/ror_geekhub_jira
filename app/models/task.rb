@@ -55,7 +55,7 @@ class Task < ApplicationRecord
   validate :start_and_end_dates_are_valid
 
   before_create :generate_tag_name
-  after_create :increment_project_task_count
+  after_create :increment_project_task_count, :set_priority_number
 
   private
 
@@ -74,6 +74,10 @@ class Task < ApplicationRecord
 
   def increment_project_task_count
     project.increment!(:tasks_count)
+  end
+
+  def set_priority_number
+    self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
   end
 
   def generate_tag_name
