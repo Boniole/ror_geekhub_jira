@@ -10,13 +10,13 @@ module Validatable
 
   MAX_GIT_URL_LENGTH = 255
 
-  REGEXP_USER = /\A[a-zA-Z]+\z/
-  REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/
-  REGEXP_PASSWORD = /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/
-  REGEXP_ESTIMATE = /\A\d+(w|d|h|m)\z/
-  REGEXP_DATE = /\A(20[2-9]\d|2[1-2]\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/
-  REGEXP_GITHUB_TOKEN =/\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/
-  REGEXP_GIT_REPO = /\A\w+\/\w+\z/
+  REGEXP_USER = /\A[a-zA-Z]+\z/.freeze
+  REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/.freeze
+  REGEXP_PASSWORD = /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/.freeze
+  REGEXP_TIME_PERIOD = /\A\d+(w|d|h|m)\z/.freeze
+  REGEXP_DATE = /\A(20[2-9]\d|2[1-2]\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\z/.freeze
+  REGEXP_GITHUB_TOKEN = /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/.freeze
+  REGEXP_GIT_REPO = /\A\w+\/\w+\z/.freeze
   REGEXP_GIT_URL = URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   included do
@@ -57,10 +57,10 @@ module Validatable
                 }
     end
 
-    def self.validate_estimate
-      validates :estimate,
+    def self.validate_time_period(field = :estimate)
+      validates field,
                 format: {
-                  with: REGEXP_ESTIMATE,
+                  with: REGEXP_TIME_PERIOD,
                   message: 'is not in the valid format (e.g. 2w, 4d, 6h, 45m)'
                 }, allow_blank: true
     end
@@ -147,7 +147,8 @@ module Validatable
     included do
       validate_name
       validate_description
-      validate_estimate
+      validate_time_period
+      validate_time_period(:time_work)
       validate_format_date
       validate_label
     end

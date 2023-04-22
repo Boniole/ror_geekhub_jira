@@ -13,6 +13,7 @@
 #  start_date      :text
 #  status          :integer
 #  tag_name        :text
+#  time_work       :string
 #  type_of         :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

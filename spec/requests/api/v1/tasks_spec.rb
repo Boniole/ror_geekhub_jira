@@ -97,6 +97,17 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
+        name: :time_work,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string
+        },
+        default: '45m',
+        description: 'The time_work time for completion (e.g. 2w, 4d, 6h, 45m) (optional)'
+      )
+
+      parameter(
         name: :label,
         in: :post,
         required: false,
@@ -177,6 +188,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           description: { type: :string },
           priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
+          time_work: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
           start_date: { type: :string },
@@ -238,6 +250,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           description: { type: :string },
           priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
+          time_work: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
           start_date: { type: :string },

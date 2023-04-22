@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_183342) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_22_083655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -125,6 +125,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_183342) do
     t.bigint "column_id", null: false
     t.text "tag_name"
     t.integer "priority_number"
+    t.string "time_work"
     t.index ["column_id"], name: "index_tasks_on_column_id"
     t.index ["desk_id"], name: "index_tasks_on_desk_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
