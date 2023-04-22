@@ -7,11 +7,6 @@ class ApplicationController < ActionController::API
 
   # helper_method :nats_publish
 
-  # TODO Nazar, where do we use it?
-  def not_found
-    render json: { error: 'not_found' }
-  end
-
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
@@ -49,7 +44,7 @@ class ApplicationController < ActionController::API
   end
 
   def record_not_found
-    render json: { error: "Record not found" }, status: :not_found
+    render json: { error: 'Record not found' }, status: :not_found
   end
 
   # needed to delete? dublicate in concern
@@ -67,11 +62,11 @@ class ApplicationController < ActionController::API
     elsif data.respond_to?(:to_ary)
       render json: data, status: status, each_serializer: each_serializer
     else
-      render json: data, status: status, serializer: serializer
+      render json: data, status:, serializer:
     end
   end
 
   def render_error(errors: [], status: :unprocessable_entity)
-    render json: { errors: errors }, status: status
+    render json: { errors: }, status:
   end
 end

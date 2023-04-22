@@ -1,14 +1,12 @@
 class Api::V1::SessionsController < ApplicationController
-  skip_before_action  :authorize_request
+  skip_before_action :authorize_request
 
   def omniauth
-    # remove from model to controller .from_omniauth(auth) or concern
     user = User.from_omniauth(auth)
     # move dot env Rails.application.secrets.secret_key_base
     token = JWT.encode({ user_id: user.id }, Rails.application.secrets.secret_key_base)
 
-    # TODO update to render_success
-    render json: { token: }
+    render_success(data: token)
   end
 
   def self.from_omniauth(auth)
@@ -26,7 +24,3 @@ class Api::V1::SessionsController < ApplicationController
     request.env['omniauth.auth']
   end
 end
-
-# add action security session
-# 'JWT session' https://github.com/tuwukee/jwt_sessions
-# https://www.javatpoint.com/ruby-on-rails-session
