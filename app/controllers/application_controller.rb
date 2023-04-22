@@ -18,18 +18,11 @@ class ApplicationController < ActionController::API
     end
   end
 
-  # concern github able
-  def authorize_github
-    github_client = Octokit::Client.new(access_token: current_user.github_token, auto_paginate: true)
-  rescue Octokit::BadRequest
-    render json: { errors: 'Github token invalid or empty!' }, status: :not_found
-  end
+  private
 
   def current_project
     current_user.memberships.get_project(params[:project_id])
   end
-
-  private
 
   def current_user
     User.find(@decoded[:user_id]) if @decoded.present?

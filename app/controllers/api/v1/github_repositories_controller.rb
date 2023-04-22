@@ -1,5 +1,5 @@
 class Api::V1::GithubRepositoriesController < ApplicationController
-  before_action :authorize_github
+  include Githubable
   before_action :repo_params, only: %i[create update]
   before_action :repo_delete_params, only: %i[delete]
   before_action :set_project, only: %i[delete update]

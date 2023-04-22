@@ -13,6 +13,7 @@
 #  start_date      :text
 #  status          :integer
 #  tag_name        :text
+#  time_work       :string
 #  type_of         :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
@@ -54,13 +55,11 @@ class Task < ApplicationRecord
   validate :start_and_end_dates_are_valid
 
   before_create :generate_tag_name
-  after_create :increment_project_task_count, :set_priority_number
-  after_update :set_priority_number, if: -> { set_priority_number.nil? }
+  after_create :increment_project_task_count
 
   private
 
-
-        # TODO validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
+  # TODO validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
   #                                  :before => Proc.new { Time.now - 2.years } }
   def start_and_end_dates_are_valid
     return unless parse_date([start_date, end_date])
@@ -80,9 +79,5 @@ class Task < ApplicationRecord
   def generate_tag_name
     first_project_letter = Translit.convert(project.name[0], :english).upcase
     self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
-  end
-
-  def set_priority_number
-    self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
   end
 end
