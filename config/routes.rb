@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users
+      get '/my_profile', to: 'users#show_current_user'
       get '/auth/:provider/callback', to: 'sessions#omniauth'
       post '/login', to: 'authentication#login'
       post '/forget_password', to: 'passwords#forget_password'
