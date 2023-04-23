@@ -2,7 +2,6 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
   before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
-  # TODO why do it need here? (memberships)
   before_action :memberships, only: %i[update destroy add_member delete_member]
   before_action :set_member, only: %i[add_member delete_member]
 
@@ -39,6 +38,7 @@ class Api::V1::ProjectsController < ApplicationController
     existing_membership = memberships.where(user: @user)
 
     if existing_membership.any?
+      # error render_errors
       render json: { errors: 'User is already a member of the project' }, status: :unprocessable_entity
     else
       membership = memberships.new(user: @user)
