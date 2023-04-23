@@ -25,10 +25,10 @@ class ApplicationPolicy
     false
   end
 
-  add alias_method :show?, :index?
-  add alias_method :create?, :index?
-  add alias_method :new?, :index?
-  add alias_method :update?, :index?
-  add alias_method :edit?, :index?
-  add alias_method :destroy?, :index?
+  alias show? index?
+  alias create? index?
+  alias new? index?
+  alias update? index?
+  alias edit? index?
+  alias destroy? index?
 end
