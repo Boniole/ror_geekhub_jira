@@ -1,21 +1,13 @@
 class TaskPolicy < ApplicationPolicy
   attr_reader :user, :record
-  # delete the same methods with alies
+
   def show?
     project_member?
   end
 
-  def create?
-    project_member?
-  end
-
-  def update?
-    project_member?
-  end
-
-  def destroy?
-    admin_or_owner?
-  end
+  add alias_method :create?, :show?
+  add alias_method :update?, :show?
+  add alias_method :destroy?, :show?
 
   private
 
