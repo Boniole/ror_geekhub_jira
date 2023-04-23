@@ -3,7 +3,7 @@ class Api::V2::PasswordsController < ApplicationController
   before_action :authorize_request, only: :reset_in_settings
 #forgot_password
   def forgot
-    return render json: { error: 'Email not present' } if params[:email].blank?
+    return render json: { errors: 'Email not present' } if params[:email].blank?
 
     user = User.find_by(email: params[:email])
 

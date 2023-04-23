@@ -149,8 +149,6 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
     ffaker (2.21.0)
-    figaro (1.2.0)
-      thor (>= 0.14.0, < 2)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hashie (5.0.0)
@@ -344,12 +342,8 @@ DEPENDENCIES
   dotenv-rails
   ed25519
   ffaker (~> 2.21)
-  figaro
   jwt
   nats-pure
-  net-imap
-  net-pop
-  net-smtp
   octokit (~> 5.0)
   omniauth-facebook
   omniauth-github!

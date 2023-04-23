@@ -1,6 +1,6 @@
 class CommentPolicy < ApplicationPolicy
   attr_reader :user, :record
-  # delete the same methods with alies
+
   def create?
     project_member?
   end
@@ -9,9 +9,7 @@ class CommentPolicy < ApplicationPolicy
     comment_author? || user.admin?(@record.commentable.project)
   end
 
-  def destroy?
-    update?
-  end
+  add alias_method :destroy?, :update?
 
   private
 
