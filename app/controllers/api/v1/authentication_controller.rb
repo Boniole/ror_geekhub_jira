@@ -9,7 +9,7 @@ class Api::V1::AuthenticationController < ApplicationController
       render json: { token: token_data[:token], expiration_date: token_data[:expiration_date],
                      user: @user }, status: :ok
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      render json: { errors: 'unauthorized' }, status: :unauthorized
     end
   end
 

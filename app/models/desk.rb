@@ -28,9 +28,6 @@ class Desk < ApplicationRecord
   private
 
   def create_columns
-    # string to constant
-    ['ToDo', 'In progress', 'In review', 'Done'].each.with_index do |name, index|
-      columns.create(name:, ordinal_number: index + 1)
-    end
+    RANGE_COLUMN_NAMES.each { |name| columns.create(name: name) }
   end
 end

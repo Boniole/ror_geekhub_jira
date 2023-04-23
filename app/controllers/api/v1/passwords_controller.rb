@@ -3,7 +3,7 @@ class Api::V1::PasswordsController < ApplicationController
   skip_before_action :authorize_request, only: %i[reset_password forget_password]
 
   def forget_password
-    return render json: { error: 'Email not present' } if params[:email].blank?
+    return render json: { errors: 'Email not present' } if params[:email].blank?
 
     user = User.find_by(email: params[:email])
 
@@ -20,12 +20,12 @@ class Api::V1::PasswordsController < ApplicationController
                                      username: user.first_name }.to_json)
       render json: { status: 'ok' }, status: :ok
     else
-      render json: { error: ['Email address not found. Please check and try again.'] }, status: :not_found
+      render json: { errors: ['Email address not found. Please check and try again.'] }, status: :not_found
     end
   end
 
   def reset_password
-    return render json: { error: 'Token not present' } if params[:email].blank?
+    return render json: { errors: 'Token not present' } if params[:email].blank?
 
     user = User.find_by(reset_password_token: params[:token])
 
@@ -33,21 +33,21 @@ class Api::V1::PasswordsController < ApplicationController
       if user.reset_password!(params[:password])
         render json: { status: 'ok' }, status: :ok
       else
-        render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
       end
     else
-      render json: { error: ['Link not valid or expired. Try generating a new link.'] }, status: :not_found
+      render json: { errors: ['Link not valid or expired. Try generating a new link.'] }, status: :not_found
     end
   end
 
   def update_password
     unless current_user.authenticate(params[:old_password])
-      return render json: { error: 'Old password is incorrect' }, status: :unprocessable_entity
+      return render json: { errors: 'Old password is incorrect' }, status: :unprocessable_entity
     end
 
     current_user.generate_password_token!
 
-    return render json: { error: 'Invalid or expired password reset token' } if current_user.reset_password_token.blank?
+    return render json: { errors: 'Invalid or expired password reset token' } if current_user.reset_password_token.blank?
 
     password = params[:password]
     if current_user.present? && current_user.password_token_valid?
