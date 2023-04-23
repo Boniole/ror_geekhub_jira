@@ -18,10 +18,8 @@ class Api::V1::DocumentsController < ApplicationController
 #authorize @document move before creating new documents
 
     params[:documents].each do |document|
-      @document = Document.new
+      @document = current_user.document.new
       @document.documentable = @attachable
-          # current_user.document.new
-      @document.user_id = @current_user.id
       @document.file.attach(document)
       @document.name = @document.file.blob.filename
       @document.document_type = @document.file.content_type.split('/').last
@@ -41,7 +39,7 @@ class Api::V1::DocumentsController < ApplicationController
       # add serialized documents?
       render json: { saved_documents: saved_documents, failed_documents: failed_documents }, status: :multi_status
     else
-      render json: { saved_documents: saved_documents }, status: :created
+      render_success(data: saved_documents, status: :created)
     end
   end
 
@@ -59,16 +57,13 @@ class Api::V1::DocumentsController < ApplicationController
   def set_attachable
     case
     when params[:project_id]
-      # current user not models Project...
-      @attachable = Project.find(params[:project_id])
-    when params[:user_id]
-      @attachable = User.find(params[:user_id])
+      @attachable = current_user.projects.find(params[:project_id])
     when params[:task_id]
-      @attachable = Task.find(params[:task_id])
+      @attachable = current_user.task.find(params[:task_id])
     when params[:comment_id]
-      @attachable = Comment.find(params[:comment_id])
+      @attachable = current_user.comment.find(params[:comment_id])
     else
-      render json: { errors: 'Attachable not found' }, status: :not_found
+      render_error(errors: 'Attachable not found', status: :not_found)
     end
   end
 

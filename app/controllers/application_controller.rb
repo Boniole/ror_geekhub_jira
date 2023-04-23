@@ -10,12 +10,11 @@ class ApplicationController < ActionController::API
   def authorize_request
     header = request.headers['Authorization']
     header = header.split(' ').last if header
-    begin
+
       @decoded = JsonWebToken.decode(header)
       current_user
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
-    end
   end
 
   private
@@ -29,7 +28,7 @@ class ApplicationController < ActionController::API
   end
 
   def user_not_authorized
-    render json: { error: 'You do not have permission to perform this action' }, status: :forbidden
+    render json: { errors: 'You do not have permission to perform this action' }, status: :forbidden
   end
 
   def handle_parameter_missing
@@ -37,7 +36,7 @@ class ApplicationController < ActionController::API
   end
 
   def record_not_found
-    render json: { error: 'Record not found' }, status: :not_found
+    render json: { errors: 'Record not found' }, status: :not_found
   end
 
   # needed to delete? dublicate in concern
@@ -55,7 +54,7 @@ class ApplicationController < ActionController::API
     elsif data.respond_to?(:to_ary)
       render json: data, status: status, each_serializer: each_serializer
     else
-      render json: data, status:, serializer:
+      render json: data, status:, serializer: serializer
     end
   end
 

@@ -14,7 +14,7 @@ class Api::V1::DesksController < ApplicationController
 
   def create
     desk = @project.desks.new(desk_params)
-
+    # TODO we don't have policy for desks
     authorize desk
 
     if desk.save
@@ -41,11 +41,11 @@ class Api::V1::DesksController < ApplicationController
   end
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = current_user.projects.find(params[:project_id])
   end
 
   def set_desk
-    @desk = Desk.find(params[:id])
+    @desk = current_user.desks.find(params[:id])
   end
 
   def set_desks
