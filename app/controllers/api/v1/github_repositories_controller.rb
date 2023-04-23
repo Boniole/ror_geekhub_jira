@@ -1,40 +1,24 @@
 class Api::V1::GithubRepositoriesController < ApplicationController
   include Githubable
+
   before_action :repo_params, only: %i[create update]
   before_action :repo_delete_params, only: %i[delete]
-  before_action :set_project, only: %i[delete update]
+  before_action :set_project, only: %i[update delete]
+  after_action :project_git_info, only: %i[create delete]
 
   def create
     #validator
     repository = GithubRepository.new(repo_params)
-    #current_user
     @project = current_user.projects.find(params[:project_id])
 
     # authorize GithubRepository
 
     if repository.valid? && @project.present?
-      repo = github_client.create_repository(
-        params[:name],
-        description: params[:description],
-        private: params[:private],
-        has_issues: params[:has_issues],
-        has_downloads: params[:has_downloads]
-      )
+      git_create_repo
 
-      @project.update(git_url: repo.clone_url, git_repo: repo.full_name)
+      serialized_repository = Api::V1::GithubRepositorySerializer.new(@repo).as_json
 
-      #
-      # attribute :changed_files do
-      #   object[:changed_files]
-      # end
-      # TODO add render_success
-      render json: {
-        name: repo.name,
-        description: repo.description,
-        url: repo.html_url,
-        git_url: repo.git_url
-      }, status: :ok
-
+      render_success(data: serialized_repository, status: :ok)
     else
       render_error(errors: repository.errors.full_messages)
     end
@@ -43,22 +27,12 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   def update
     repository = GithubRepository.new(repo_params)
 
-    authorize repository
-    repo_name = get_repository_name(params[:name])
-#concerne github repository
+    # authorize repository
+
     if repository.valid? && @project.present?
-      repo = github_client.edit_repository(
-        repo_name,
-        description: params[:description],
-        private: params[:private],
-        has_issues: params[:has_issues],
-        has_downloads: params[:has_downloads]
-      )
+      git_update_repo
 
-      @project.update(git_url: repo.clone_url, git_repo: repo.full_name)
-
-      # TODO add render_success
-      render json: { success: 'Repository update' }, status: :ok
+      render_success(data: 'Repository update', status: :ok)
     else
       render_error(errors: repository.errors.full_messages)
     end
@@ -68,16 +42,9 @@ class Api::V1::GithubRepositoriesController < ApplicationController
     owner, repo_name = params[:validate_text].split('/')
 
     if github_client.repository(@project.git_repo).full_name == params[:validate_text]
+      github_client.delete_repository(owner: owner, repo: repo_name)
 
-      @project.update(git_url: nil, git_repo: nil)
-
-      github_client.delete_repository(
-        owner: owner,
-        repo: repo_name
-      )
-
-      # TODO add render_success
-      render json: { success: 'Repository was deleted' }, status: :ok
+      render_success(data: 'Repository was deleted', status: :ok)
     else
       render_error(errors: 'Invalid validate text', status: :bad_request)
     end
@@ -90,7 +57,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   end
 
   def set_project
-    @project = @current_user.projects.find(params[:project_id])
+    @project = current_user.projects.find(params[:project_id])
   end
 
   def repo_delete_params
