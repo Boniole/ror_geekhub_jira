@@ -3,6 +3,7 @@ class Api::V1::ProjectsController < ApplicationController
   before_action :set_projects, only: :index
   before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
   before_action :memberships, only: %i[update destroy add_member delete_member]
+  before_action :set_member, only: %i[add_member delete_member]
 
   def index
     render_success(data: @projects, each_serializer: Api::V1::ProjectSerializer)
@@ -34,15 +35,15 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def add_member
-    user = User.find(params[:user_id])
-    existing_membership = memberships.where(user:)
+    existing_membership = memberships.where(user: @user)
 
     if existing_membership.any?
       render json: { error: 'User is already a member of the project' }, status: :unprocessable_entity
     else
-      membership = memberships.new(user:)
+      membership = memberships.new(user: @user)
 
       if membership.save
+        # SEND MAIL HERE
         render_success(data: membership, status: :created, serializer: Api::V1::MembershipSerializer)
       else
         render_error(errors: membership.errors)
@@ -51,7 +52,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def delete_member
-    membership = memberships.find_by(user_id: params[:user_id])
+    membership = memberships.find_by(user_id: @user.id)
     membership.destroy
   end
 
@@ -75,6 +76,10 @@ class Api::V1::ProjectsController < ApplicationController
 
   def set_projects
     @projects = current_user.projects
+  end
+
+  def set_member
+    @user = User.find_by(email: params[:email])
   end
 
   def project_params

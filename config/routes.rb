@@ -63,7 +63,7 @@ Rails.application.routes.draw do
         resources :documents, except: :update
         member do
           post 'add_member', to: 'projects#add_member'
-          delete 'delete_member/:user_id', to: 'projects#delete_member'
+          delete 'delete_member', to: 'projects#delete_member'
         end
       end
       # delete it
