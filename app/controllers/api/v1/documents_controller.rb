@@ -1,5 +1,6 @@
 class Api::V1::DocumentsController < ApplicationController
   before_action :document_params, only: %i[create update]
+  before_action :authorize_user
   before_action :set_attachable
   before_action :set_document, :authorize_user, only: [:show, :destroy]
   before_action :set_documents, only: :index
@@ -25,8 +26,6 @@ class Api::V1::DocumentsController < ApplicationController
       @document.document_type = @document.file.content_type.split('/').last
       @document.url = @document.file.url
 
-      authorize @document
-
       if @document.save
         saved_documents << @document
       else
@@ -35,7 +34,6 @@ class Api::V1::DocumentsController < ApplicationController
     end
 
     if failed_documents.any?
-      # check status?
       # add serialized documents?
       render json: { saved_documents: saved_documents, failed_documents: failed_documents }, status: :multi_status
     else
