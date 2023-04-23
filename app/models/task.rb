@@ -4,13 +4,13 @@
 #
 #  id              :bigint           not null, primary key
 #  description     :string
-#  end_date        :text
+#  end_date        :date
 #  estimate        :text
 #  label           :text
 #  name            :text
 #  priority        :integer
 #  priority_number :integer
-#  start_date      :text
+#  start_date      :date
 #  status          :integer
 #  tag_name        :text
 #  time_work       :string
@@ -52,25 +52,11 @@ class Task < ApplicationRecord
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
-  validate :start_and_end_dates_are_valid
+  validates_comparison_of :start_date, greater_than_or_equal_to: Date.today
+  validates_comparison_of :end_date, greater_than: :start_date, other_than: Date.today
 
   before_create :generate_tag_name
   after_create :increment_project_task_count, :set_priority_number
-
-  private
-
-  # TODO validates :dated_on, :date => {:after => Proc.new { Time.now + 2.years },
-  #                                  :before => Proc.new { Time.now - 2.years } }
-  def start_and_end_dates_are_valid
-    return unless parse_date([start_date, end_date])
-
-    errors.add(:errors, 'must be equal to or greater than the current date')
-  end
-
-  def parse_date(dates)
-    parsed_dates = dates.map { |date| Date.parse(date) }
-    parsed_dates.any? { |date| date.present? && date < Date.today }
-  end
 
   def increment_project_task_count
     project.increment!(:tasks_count)
