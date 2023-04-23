@@ -13,10 +13,10 @@ class ProjectPolicy < ApplicationPolicy
     project_admin
   end
 
-  add alias_method :add_member?, :update?
-  add alias_method :delete_member, :update?
-  add alias_method :delete_member?, :update?
-  add alias_method :destroy?, :update?
+  alias add_member? update?
+  alias delete_member update?
+  alias delete_member? update?
+  alias destroy? update?
 
   private
 
