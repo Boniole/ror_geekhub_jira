@@ -5,9 +5,9 @@ class TaskPolicy < ApplicationPolicy
     project_member?
   end
 
-  add alias_method :create?, :show?
-  add alias_method :update?, :show?
-  add alias_method :destroy?, :show?
+  alias_method :create?, :show?
+  alias_method :update?, :show?
+  alias_method :destroy?, :show?
 
   private
 
