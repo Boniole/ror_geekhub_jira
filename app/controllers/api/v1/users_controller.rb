@@ -7,10 +7,8 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     render_success(data: @user, serializer: Api::V1::UserSerializer)
-    # render json: @user, status: :ok, serializer: Api::V1::UserSerializer
   end
 
-  # debugger
   def show_current_user
     render_success(data: current_user, serializer: Api::V1::UserSerializer)
   end
@@ -34,27 +32,21 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    # @user.update and add skip_validation???
-    if current_user.update(first_name: params[:first_name], last_name: params[:last_name],
-                           context: :update_without_validation)
-      render_success(data: @user, serializer: Api::V1::UserSerializer)
+    if current_user.update(first_name: params[:first_name], last_name: params[:last_name])
+      render_success(data: current_user, serializer: Api::V1::UserSerializer)
     else
-      render_error(errors: @user.errors.full_messages)
+      render_error(errors: current_user.errors.full_messages)
     end
   end
 
   def destroy
     current_user.destroy
-
-    # render json: { success: 'ok' }, status: :ok
-    # else render json: { errors: }
   end
 
   private
 
   def set_user
-    # TODO: need fix current_user and add here instead of User.find(params[:id])
-    @user = User.find(params[:email])
+    @user = User.find(params[:id])
   end
 
   def user_params
