@@ -57,9 +57,9 @@ class Api::V1::DocumentsController < ApplicationController
     when params[:project_id]
       @attachable = current_user.projects.find(params[:project_id])
     when params[:task_id]
-      @attachable = current_user.task.find(params[:task_id])
+      @attachable = current_user.tasks.find(params[:task_id])
     when params[:comment_id]
-      @attachable = current_user.comment.find(params[:comment_id])
+      @attachable = current_user.comments.find(params[:comment_id])
     else
       render_error(errors: 'Attachable not found', status: :not_found)
     end

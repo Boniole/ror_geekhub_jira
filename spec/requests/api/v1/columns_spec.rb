@@ -1,7 +1,8 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/columns', type: :request do
-  path '/api/v1/columns' do
+  path '/api/v1/projects/{project_id}/columns' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
 
     post('create column') do
       tags 'Columns'

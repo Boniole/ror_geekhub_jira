@@ -1,7 +1,8 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/comments', type: :request do
-  path '/api/v1/comments' do
+  path '/api/v1/projects/{project_id}/comments' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
 
     post('create comment') do
       tags 'Comments'
@@ -31,8 +32,8 @@ RSpec.describe 'api/v1/comments', type: :request do
     end
   end
 
-  path '/api/v1/comments/{id}' do
-    # You'll want to customize the parameter types...
+  path '/api/v1/projects/{project_id}/comments/{id}' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     patch('update comment') do
