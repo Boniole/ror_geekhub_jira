@@ -4,7 +4,14 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/columns":
+  "/api/v1/projects/{project_id}/columns":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: create column
       tags:
@@ -85,7 +92,14 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/comments":
+  "/api/v1/projects/{project_id}/comments":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: create comment
       tags:
@@ -114,8 +128,14 @@ paths:
               - body
               - commentable_type
               - commentable_id
-  "/api/v1/comments/{id}":
+  "/api/v1/projects/{project_id}/comments/{id}":
     parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     - name: id
       in: path
       description: id
@@ -813,7 +833,14 @@ paths:
       responses:
         '204':
           description: successful
-  "/api/v1/tasks":
+  "/api/v1/projects/{project_id}/tasks":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: create task
       tags:
