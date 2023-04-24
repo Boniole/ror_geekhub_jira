@@ -10,17 +10,11 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    project_admin
+    user.admin?(@record)
   end
 
   alias add_member? update?
   alias delete_member update?
   alias delete_member? update?
   alias destroy? update?
-
-  private
-
-  def project_admin
-    user.admin?(@record)
-  end
 end
