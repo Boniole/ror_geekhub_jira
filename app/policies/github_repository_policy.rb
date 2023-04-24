@@ -10,7 +10,7 @@ class GithubRepositoryPolicy < ApplicationPolicy
     user.admin?(set_project)
   end
 
-  add alias_method :update?, :create?
+  alias :update? :create?
 
   private
 
