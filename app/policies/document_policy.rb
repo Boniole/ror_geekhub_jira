@@ -9,8 +9,8 @@ class DocumentPolicy < ApplicationPolicy
     user_is_file_author_or_admin?
   end
 
-  alias :create? :show?
-  alias :destroy? :update?
+  alias create? show?
+  alias destroy? update?
 
   private
 

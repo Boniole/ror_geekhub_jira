@@ -5,9 +5,9 @@ class TaskPolicy < ApplicationPolicy
     project_member?
   end
 
-  alias :create? :show?
-  alias :update? :show?
-  alias :destroy? :show?
+  alias create? show?
+  alias update? show?
+  alias destroy? show?
 
   private
 

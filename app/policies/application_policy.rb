@@ -25,10 +25,10 @@ class ApplicationPolicy
     false
   end
 
-  alias :show? :index?
-  alias :create? :index?
-  alias :new? :index?
-  alias :update? :index?
-  alias :edit? :index?
-  alias :destroy? :index?
+  alias show? index?
+  alias create? index?
+  alias new? index?
+  alias update? index?
+  alias edit? index?
+  alias destroy? index?
 end

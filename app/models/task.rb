@@ -52,8 +52,8 @@ class Task < ApplicationRecord
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
 
-  validates_comparison_of :start_date, greater_than_or_equal_to: Date.today
-  validates_comparison_of :end_date, greater_than: :start_date, other_than: Date.today
+  validates_comparison_of :start_date, greater_than_or_equal_to: Date.today, allow_blank: true
+  validates_comparison_of :end_date, greater_than: :start_date, other_than: Date.today, allow_blank: true
 
   before_create :generate_tag_name
   after_create :increment_project_task_count, :set_priority_number

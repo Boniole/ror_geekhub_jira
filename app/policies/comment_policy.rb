@@ -9,7 +9,7 @@ class CommentPolicy < ApplicationPolicy
     comment_author? || user.admin?(@record.commentable.project)
   end
 
-  alias :destroy? :update?
+  alias destroy? update?
 
   private
 
