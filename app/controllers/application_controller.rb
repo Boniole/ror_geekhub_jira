@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
   private
 
   def current_project
-    current_user.memberships.get_project(params[:project_id])
+    current_user.memberships.get_project(params[:project_id]).first.project
   end
 
   def current_user

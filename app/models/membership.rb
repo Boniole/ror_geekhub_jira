@@ -20,5 +20,5 @@ class Membership < ApplicationRecord
 
   enum :role, %i[member admin], default: :member
 
-  scope :get_project, ->(id) { where(project_id: id).first.project }
+  scope :get_project, ->(id) { where(project_id: id) }
 end
