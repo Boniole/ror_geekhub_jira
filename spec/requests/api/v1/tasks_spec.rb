@@ -1,7 +1,8 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/tasks', type: :request do
-  path '/api/v1/tasks' do
+  path '/api/v1/projects/{project_id}/tasks' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
 
     post('create task') do
       tags 'Tasks'
