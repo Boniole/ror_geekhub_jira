@@ -1,4 +1,5 @@
 class Api::V1::DesksController < ApplicationController
+  before_action :authorize_request
   before_action :desk_params, only: %i[create update]
   before_action :set_project, only: %i[index create]
   before_action :set_desk, only: %i[show update destroy]
