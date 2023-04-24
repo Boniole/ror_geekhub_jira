@@ -1,4 +1,4 @@
-class Api::V1::TasksController < ApplicationController
+class Api::V2::TasksController < ApplicationController
   before_action :task_params, only: %i[create update]
   before_action :current_project, :set_task, :authorize_user, only: %i[show update destroy]
 
