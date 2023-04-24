@@ -2,6 +2,7 @@ class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
   skip_before_action :authorize_request, only: %i[reset_password forget_password]
 
+  # render_success / errors
   def forget_password
     return render json: { errors: 'Email not present' } if params[:email].blank?
 
@@ -45,23 +46,12 @@ class Api::V1::PasswordsController < ApplicationController
       return render json: { errors: 'Old password is incorrect' }, status: :unprocessable_entity
     end
 
-    current_user.generate_password_token!
+    # TODO: need to add password validation
+    if current_user.update(password: params[:password]) # current_user.save(validate: false)
 
-    return render json: { errors: 'Invalid or expired password reset token' } if current_user.reset_password_token.blank?
-
-    password = params[:password]
-    if current_user.present? && current_user.password_token_valid?
-      current_user.password = password
-      # TODO: pay attention to validation!
-      if current_user.valid? # current_user.save(validate: false)
-        current_user.reset_password!(password)
-
-        render_success
-      else
-        render_error(errors: current_user.errors.full_messages )
-      end
+      render_success(data: current_user, serializer: Api::V1::UserSerializer)
     else
-      render_error(errors: 'Token not valid or expired. Try again',  status: :not_found)
+      render_error(errors: current_user.errors.full_messages)
     end
   end
 end

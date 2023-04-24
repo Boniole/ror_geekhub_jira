@@ -3,13 +3,16 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
-      resources :users
+      resources :users, except: %i[update destroy] do
+        patch :update, on: :collection
+        delete :destroy, on: :collection
+      end
       get '/my_profile', to: 'users#show_current_user'
       get '/auth/:provider/callback', to: 'sessions#omniauth'
       post '/login', to: 'authentication#login'
       post '/forget_password', to: 'passwords#forget_password'
       post '/reset_password', to: 'passwords#reset_password'
-      post '/update_password', to: 'passwords#update_password'
+      patch '/update_password', to: 'passwords#update_password'
 
       resources :projects do
         resources :desks, only: %i[index show create update destroy]

@@ -711,14 +711,10 @@ paths:
                 status:
                   type: string
                   default: open
-                user_id:
-                  type: integer
                 git_url:
                   type: string
               required:
               - name
-              - status
-              - user_id
     delete:
       summary: delete project
       tags:

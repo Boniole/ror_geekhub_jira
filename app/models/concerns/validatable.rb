@@ -55,7 +55,7 @@ module Validatable
                 format: {
                   with: REGEXP_PASSWORD,
                   message: 'Must contain at least one uppercase letter, one lowercase letter, and one digit'
-                }
+                }, on: %i[create show show_current_user destroy]
     end
 
     def self.validate_time_period(field = :estimate)

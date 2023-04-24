@@ -28,14 +28,9 @@ class User < ApplicationRecord
   has_many :documents, as: :documentable
 
   has_many :memberships
-  # has_many :projects, through: :memberships
   has_many :membered_projects, through: :memberships, source: :project
 
-  # think about simplify (+ enum)
   def admin?(project)
     id == project.user_id
   end
 end
-
-# CONCERNS
-# https://blog.appsignal.com/2020/09/16/rails-concers-to-concern-or-not-to-concern.html

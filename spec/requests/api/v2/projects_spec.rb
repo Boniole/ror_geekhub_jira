@@ -84,10 +84,9 @@ RSpec.describe 'api/v2/projects', type: :request, swagger_doc: 'v2/swagger.yaml'
         properties: {
           name: { type: :string },
           status: { type: :string, default: :open },
-          user_id: { type: :integer },
           git_url: { type: :string }
         },
-        required: %w[name status user_id]
+        required: %w[name]
       }
       response(200, 'successful') do
         schema type: :object,
