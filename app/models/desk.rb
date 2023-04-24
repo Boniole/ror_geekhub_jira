@@ -2,11 +2,12 @@
 #
 # Table name: desks
 #
-#  id         :bigint           not null, primary key
-#  name       :string           default("Your Desk")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  project_id :bigint           not null
+#  id            :bigint           not null, primary key
+#  columns_count :integer          default(0), not null
+#  name          :string           default("Your Desk")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  project_id    :bigint           not null
 #
 # Indexes
 #
@@ -17,16 +18,16 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 class Desk < ApplicationRecord
-  belongs_to :project
-  has_many :columns, dependent: :destroy
+  include Validatable::Deskable
 
-  validates :name, presence: true, length: { minimum: 3 }
+  belongs_to :project
+  has_many :columns, dependent: :destroy # TODO https://github.com/rubysherpas/paranoia
 
   after_create :create_columns
 
   private
 
   def create_columns
-    ['ToDo', 'In progress', 'In review', 'Done'].each.with_index {|name, index| columns.create(name: name, ordinal_number: index + 1) }
+    RANGE_COLUMN_NAMES.each { |name| columns.create(name: name) }
   end
 end

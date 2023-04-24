@@ -6,56 +6,54 @@ class Api::V1::DesksController < ApplicationController
   before_action :set_desks, only: :index
 
   def index
-    render json: @desks, status: :ok, include: [], each_serializer: DeskSerializer
+    render_success(data: @desks, each_serializer: Api::V1::DeskSerializer)
   end
 
   def show
-    render json: @desk, status: :ok, serializer: DeskSerializer
+    render_success(data: @desk, serializer: Api::V1::DeskSerializer)
   end
 
   def create
     desk = @project.desks.new(desk_params)
+    # TODO we don't have policy for desks
+    authorize desk
 
     if desk.save
-      render json: desk, status: :ok, serializer: DeskSerializer
+      render_success(data: desk, status: :created, serializer: Api::V1::DeskSerializer)
     else
-      render json: desk.errors, status: :unprocessable_entity
+      render_error(errors: desk.errors)
     end
   end
 
   def update
-    render json: @desk, status: :ok if @desk.update(desk_params)
+    return render_success(data: @desk, serializer: Api::V1::DeskSerializer) if @desk.update(desk_params)
+
+    render_error(errors: @desk.errors)
   end
 
   def destroy
     @desk.destroy
-  rescue ActiveRecord::InvalidForeignKey => e
-    render json: { errors: e.message }, status: :unauthorized
   end
 
   private
 
+  def authorize_user
+    authorize @desk || Desk
+  end
+
   def set_project
-    @project = Project.find(params[:project_id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
+    @project = current_user.projects.find(params[:project_id])
   end
 
   def set_desk
-    @desk = Desk.find(params[:id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
+    @desk = current_user.desks.find(params[:id])
   end
 
   def set_desks
     @desks = @project.desks
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def desk_params
     params.permit(:name)
-  rescue ActionController::ParameterMissing => e
-    render json: { errors: e.message }, status: :bad_request
   end
 end

@@ -2,11 +2,12 @@
 #
 # Table name: desks
 #
-#  id         :bigint           not null, primary key
-#  name       :string           default("Your Desk")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  project_id :bigint           not null
+#  id            :bigint           not null, primary key
+#  columns_count :integer          default(0), not null
+#  name          :string           default("Your Desk")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  project_id    :bigint           not null
 #
 # Indexes
 #
@@ -20,9 +21,9 @@
 one:
   name: MyString
   project: one
-  users: one
+
 
 two:
   name: MyString
   project: two
-  users: two
+

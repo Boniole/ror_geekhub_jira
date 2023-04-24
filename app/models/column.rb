@@ -18,9 +18,27 @@
 #  fk_rails_...  (desk_id => desks.id)
 #
 class Column < ApplicationRecord
-  belongs_to :desk
-  has_many :tasks
+  include Validatable::Columnable
 
-  validates :name, presence: true, length: { in: 3..14 }
-  validates :ordinal_number, presence: true, numericality: { only_integer: true }, allow_blank: true
+  belongs_to :desk
+  has_many :tasks, dependent: :destroy
+  # TODO https://github.com/rubysherpas/paranoia
+
+  validates :ordinal_number, numericality: { only_integer: true }, allow_blank: true
+
+  before_create :ordinal_number
+  after_create :increment_desk_column_count
+  after_destroy :decrement_desk_column_count
+
+  def increment_desk_column_count
+    desk.increment!(:columns_count)
+  end
+
+  def decrement_desk_column_count
+    desk.decrement!(:columns_count)
+  end
+
+  def ordinal_number
+    self.ordinal_number = desk.columns_count
+  end
 end

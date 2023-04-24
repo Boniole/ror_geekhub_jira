@@ -9,17 +9,6 @@ RSpec.describe 'api/v1/tasks', type: :request do
       consumes "application/json"
 
       parameter(
-        name: :user_id,
-        in: :post,
-        required: true,
-        schema: {
-          type: :integer
-        },
-        default: 1,
-        description: 'The ID of the user (integer)'
-      )
-
-      parameter(
         name: :project_id,
         in: :post,
         required: true,
@@ -64,14 +53,14 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :title,
+        name: :name,
         in: :post,
         required: true,
         schema: {
           type: :string
         },
-        default: 'Task title',
-        description: 'The title of the task (string)'
+        default: 'Task name',
+        description: 'The name of the task (string)'
       )
 
       parameter(
@@ -86,7 +75,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
       )
 
       parameter(
-        name: :sort_number,
+        name: :priority_number,
         in: :post,
         required: false,
         schema: {
@@ -105,6 +94,17 @@ RSpec.describe 'api/v1/tasks', type: :request do
         },
         default: '2w',
         description: 'The estimated time for completion (e.g. 2w, 4d, 6h, 45m) (optional)'
+      )
+
+      parameter(
+        name: :time_work,
+        in: :post,
+        required: false,
+        schema: {
+          type: :string
+        },
+        default: '45m',
+        description: 'The time_work time for completion (e.g. 2w, 4d, 6h, 45m) (optional)'
       )
 
       parameter(
@@ -184,11 +184,11 @@ RSpec.describe 'api/v1/tasks', type: :request do
           column_id: { type: :integer, default: 1 },
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
-          user_id: { type: :integer, default: 1 },
-          title: { type: :string },
+          name: { type: :string },
           description: { type: :string },
-          sort_number: { type: :integer, default: 1 },
+          priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
+          time_work: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
           start_date: { type: :string },
@@ -196,7 +196,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id  desk_id project_id user_id]
+        required: %w[name column_id desk_id project_id]
       }
 
       response(200, 'successful') do
@@ -212,8 +212,8 @@ RSpec.describe 'api/v1/tasks', type: :request do
     end
   end
 
-  path '/api/v1/tasks/{id}' do
-    # You'll want to customize the parameter types...
+  path '/api/v1/projects/{project_id}/tasks/{id}' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
     parameter name: 'id', in: :path, type: :string, description: 'id'
 
     get('show task') do
@@ -246,11 +246,11 @@ RSpec.describe 'api/v1/tasks', type: :request do
           column_id: { type: :integer, default: 1 },
           desk_id: { type: :integer, default: 1 },
           project_id: { type: :integer, default: 1 },
-          user_id: { type: :integer, default: 1 },
-          title: { type: :string },
+          name: { type: :string },
           description: { type: :string },
-          sort_number: { type: :integer, default: 1 },
+          priority_number: { type: :integer, default: 1 },
           estimate: { type: :string },
+          time_work: { type: :string },
           label: { type: :string },
           priority: { type: :integer },
           start_date: { type: :string },
@@ -258,7 +258,7 @@ RSpec.describe 'api/v1/tasks', type: :request do
           status: { type: :integer },
           type_of: { type: :integer }
         },
-        required: %w[title column_id desk_id project_id user_id]
+        required: %w[name column_id desk_id project_id]
       }
       response(200, 'successful') do
         let(:id) { '123' }

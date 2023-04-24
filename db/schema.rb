@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_23_172114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,8 +46,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "ordinal_number", default: 0
     t.bigint "desk_id", null: false
+    t.integer "ordinal_number", default: 0
     t.index ["desk_id"], name: "index_columns_on_desk_id"
   end
 
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
     t.bigint "user_id", null: false
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
-    t.integer "status", default: 0
+    t.integer "status"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "columns_count", default: 0, null: false
     t.index ["project_id"], name: "index_desks_on_project_id"
   end
 
@@ -87,7 +88,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "project_id"
-    t.string "role"
+    t.integer "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_memberships_on_project_id"
@@ -96,23 +97,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
-    t.integer "status", default: 0
+    t.integer "status"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tasks_count", default: 0, null: false
     t.string "git_url"
-    t.string "git_name"
+    t.string "git_repo"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.text "title"
+    t.text "name"
     t.string "description"
-    t.integer "priority", default: 0
-    t.integer "status", default: 0
+    t.integer "priority"
+    t.integer "status"
+    t.integer "type_of"
     t.text "label"
-    t.datetime "estimate"
+    t.text "estimate"
     t.date "start_date"
     t.date "end_date"
     t.integer "assignee_id"
@@ -121,9 +123,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
     t.bigint "desk_id", null: false
-    t.bigint "column_id"
+    t.bigint "column_id", null: false
     t.text "tag_name"
-    t.integer "sort_number"
+    t.integer "priority_number"
+    t.string "time_work"
     t.index ["column_id"], name: "index_tasks_on_column_id"
     t.index ["desk_id"], name: "index_tasks_on_desk_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
@@ -131,7 +134,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_09_174319) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

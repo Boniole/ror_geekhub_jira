@@ -4,9 +4,9 @@
 #
 #  id                     :bigint           not null, primary key
 #  email                  :string
+#  first_name             :string
 #  github_token           :string
 #  last_name              :string
-#  name                   :string
 #  password_digest        :string
 #  provider               :string
 #  reset_password_sent_at :datetime
@@ -15,8 +15,8 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :last_name, :email
+class Api::V2::UserSerializer < ActiveModel::Serializer
+  attributes :id, :first_name, :last_name, :email
 
-  has_many :comments, each_serializer: CommentSerializer
+  has_many :comments, each_serializer: Api::V2::CommentSerializer
 end

@@ -22,14 +22,17 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Document < ApplicationRecord
+  include Validatable::Documentable
+
   ALLOWED_TYPES = %w[pdf jpg jpeg png gif doc docx xls xlsx zip rar]
   belongs_to :documentable, polymorphic: true
-
   belongs_to :user
 
   has_one_attached :file
 
-  validates :name, presence: true, length: { minimum: 1, maximum: 255 }
-  validates :document_type, presence: true, inclusion: { in: ALLOWED_TYPES, message: "File type %{value} is not allowed. Allowed types are: #{ALLOWED_TYPES.join(', ')}" }
-  validates :url, presence: true, format: { with: URI.regexp }
+  #https://guides.rubyonrails.org/i18n.html#using-safe-html-translations
+  #https://guides.rubyonrails.org/active_record_validations.html#exclusion
+  validates :document_type, presence: true,
+                            inclusion: { in: ALLOWED_TYPES, message: "File type %{value} is not allowed. Allowed types are: #{ALLOWED_TYPES.join(', ')}" }
+  validates :url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
 end

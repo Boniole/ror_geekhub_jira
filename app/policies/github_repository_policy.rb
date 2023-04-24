@@ -2,20 +2,9 @@ class GithubRepositoryPolicy < ApplicationPolicy
   attr_reader :user, :record
 
   def create?
-    user.admin?(set_project)
+    user.admin?(user.projects.find(@record.project_id))
   end
 
-  def update?
-    create?
-  end
-
-  def delete?
-    user.admin?(set_project)
-  end
-
-  private
-
-  def set_project
-    user.projects.find(@record.project_id)
-  end
+  alias update? create?
+  alias delete? create?
 end

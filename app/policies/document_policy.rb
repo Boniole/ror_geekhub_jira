@@ -5,17 +5,12 @@ class DocumentPolicy < ApplicationPolicy
     project_member?
   end
 
-  def create?
-    project_member?
-  end
-
   def update?
     user_is_file_author_or_admin?
   end
 
-  def destroy?
-    user_is_file_author_or_admin?
-  end
+  alias create? show?
+  alias destroy? update?
 
   private
 

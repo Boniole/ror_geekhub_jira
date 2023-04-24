@@ -8,34 +8,6 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
-  end
-
-  def show?
-    false
-  end
-
-  def create?
-    false
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
-  end
-
   class Scope
     attr_reader :user, :scope
 
@@ -47,5 +19,20 @@ class ApplicationPolicy
     def resolve
       scope
     end
+  end
+
+  def index?
+    false
+  end
+
+  alias show? index?
+  alias create? index?
+  alias new? index?
+  alias update? index?
+  alias edit? index?
+  alias destroy? index?
+
+  def member?(project_id)
+    user.memberships.get_project(project_id).present?
   end
 end

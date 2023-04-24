@@ -15,11 +15,11 @@ RSpec.describe 'api/v1/users', type: :request do
                  type: :object,
                  properties: {
                    id: { type: :integer },
-                   name: { type: :string },
+                   first_name: { type: :string },
                    last_name: { type: :string },
                    email: { type: :string }
                  },
-                 required: %w[id name last_name email]
+                 required: %w[id first_name last_name email]
                }
         run_test!
       end
@@ -35,12 +35,12 @@ RSpec.describe 'api/v1/users', type: :request do
           schema type: :object,
                  properties: {
                    id: { type: :integer },
-                   name: { type: :string },
+                   first_name: { type: :string },
                    last_name: { type: :string },
                    email: { type: :string },
                    github_token: { type: :string }
                  },
-                 required: %w[id name last_name email]
+                 required: %w[id first_name last_name email]
 
           let(:id) { user.id }
           run_test!
@@ -63,11 +63,11 @@ RSpec.describe 'api/v1/users', type: :request do
           schema type: :object,
                  properties: {
                    id: { type: :integer },
-                   name: { type: :string },
+                   first_name: { type: :string },
                    last_name: { type: :string },
                    email: { type: :string }
                  },
-                 required: %w[id name last_name email]
+                 required: %w[id first_name last_name email]
 
           let(:current_user) { 'Bearer ' + JsonWebToken.encode(user_id: user.id) }
           run_test!
@@ -87,13 +87,13 @@ RSpec.describe 'api/v1/users', type: :request do
         parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
-            name: { type: :string },
+            first_name: { type: :string },
             last_name: { type: :string },
             email: { type: :string },
             password: { type: :string },
             github_token: { type: :string }
           },
-          required: %w[name last_name email password]
+          required: %w[first_name last_name email password]
         }
 
         security []
@@ -104,7 +104,7 @@ RSpec.describe 'api/v1/users', type: :request do
         end
 
         response '422', 'invalid request' do
-          let(:user) { { name: 'John', last_name: 'Doe' } }
+          let(:user) { { first_name: 'John', last_name: 'Doe' } }
           run_test!
         end
       end
@@ -118,27 +118,27 @@ RSpec.describe 'api/v1/users', type: :request do
         parameter name: :user, in: :body, schema: {
           type: :object,
           properties: {
-            name: { type: :string },
+            first_name: { type: :string },
             last_name: { type: :string },
             github_token: { type: :string }
           }
         }
 
         response '200', 'user updated' do
-          let(:user) { { name: 'New Name', github_token: 'New token' } }
+          let(:user) { { first_name: 'New Name', github_token: 'New token' } }
           let(:id) { user_id }
           run_test!
         end
 
         response '422', 'invalid request' do
-          let(:user) { { name: nil } }
+          let(:user) { { first_name: nil } }
           let(:id) { user_id }
           run_test!
         end
 
         response '404', 'user not found' do
           let(:id) { 'invalid' }
-          let(:user) { { name: 'New Name' } }
+          let(:user) { { first_name: 'New Name' } }
           run_test!
         end
       end
@@ -180,10 +180,10 @@ RSpec.describe 'api/v1/users', type: :request do
         schema type: :object,
                properties: {
                  token: { type: :string },
-                 exp: { type: :string },
-                 name: { type: :string }
+                 expiration_date: { type: :string },
+                 first_name: { type: :string }
                },
-               required: %w[token exp name]
+               required: %w[token expiration_date first_name]
 
         let(:user) { create(:user) }
         let(:login) { { email: user.email, password: user.password } }

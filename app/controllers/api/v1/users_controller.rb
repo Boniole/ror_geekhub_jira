@@ -1,67 +1,55 @@
 class Api::V1::UsersController < ApplicationController
   include NatsPublisher
+  include TokenGenerationable
 
-  before_action :authorize_request, except: :create
-  before_action :set_user, except: %i[create index about_current_user]
-
-  def index
-    @users = User.all
-    render json: @users, status: :ok, include: [], each_serializer: UserSerializer
-  end
+  skip_before_action :authorize_request, only: :create
+  before_action :set_user, only: :show
 
   def show
-    render json: @user, status: :ok, serializer: UserSerializer
+    render_success(data: @user, serializer: Api::V1::UserSerializer)
   end
 
-  def about_current_user
-    render json: @current_user, status: :ok, serializer: UserSerializer
+  def show_current_user
+    render_success(data: current_user, serializer: Api::V1::UserSerializer)
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      token = JsonWebToken.encode(user_id: @user.id)
-      time = Time.now + 24.hours.to_i
-      nats_publish('service.mail', {:class => "account",
-                                    :type => "account_register_new",
-                                    :language => "en",
-                                    :password => @user.password,
-                                    :to => @user.email,
-                                    :username => @user.name}.to_json)
-      render json: { token:, exp: time.strftime('%m-%d-%Y %H:%M'),
-                     name: @user }, status: :created
+      token_data = generate_token(@user.id)
+      nats_publish('service.mail', { class: 'account',
+                                     type: 'account_register_new',
+                                     language: 'en',
+                                     password: @user.password,
+                                     to: @user.email,
+                                     username: @user.first_name }.to_json)
+      # TODO: add render_success
+      render json: { token: token_data[:token], expiration_date: token_data[:expiration_date],
+                     user: @user }, status: :ok
     else
-      render json: { errors: @user.errors.full_messages },
-             status: :unprocessable_entity
+      render_error(errors: @user.errors.full_messages)
     end
   end
 
   def update
-    if user_params.key?(:email) || user_params.key?(:password)
-      render json: { errors: 'You cannot update email or password' }, status: :unprocessable_entity
-      return
-    end
-
-    if @user.update_columns(name: params[:name], last_name: params[:last_name])
-      render json: @user, status: :ok, serializer: UserSerializer
+    if current_user.update(first_name: params[:first_name], last_name: params[:last_name])
+      render_success(data: current_user, serializer: Api::V1::UserSerializer)
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
+      render_error(errors: current_user.errors.full_messages)
     end
   end
 
   def destroy
-    @user.destroy
+    current_user.destroy
   end
 
   private
 
   def set_user
     @user = User.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render json: { errors: 'User not found' }, status: :not_found
   end
 
   def user_params
-    params.permit(:name, :last_name, :email, :password, :github_token)
+    params.permit(:first_name, :last_name, :email, :password, :github_token)
   end
 end
