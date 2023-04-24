@@ -25,5 +25,6 @@ module MiniJira
     config.api_only = true
 
     config.autoload_paths += Dir[Rails.root.join(Rails.root.join('config', 'routes', '**/'))]
+    Dotenv.load(File.join(Rails.root, 'config', '.env'))
   end
 end
