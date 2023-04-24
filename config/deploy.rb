@@ -1,7 +1,9 @@
 lock "~> 3.17.1" # there should be your version, don`t change this!!!
 
 set :repo_url, 'git@github.com:Boniole/ror_geekhub_jira.git'
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp # if you want to chose branch before each deploy
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp # if you want to chose branch before each deploy
+set :branch, ENV['BRANCH'] || 'main'
+
 
 set :user, 'deployer'
 set :puma_user, fetch(:user)
