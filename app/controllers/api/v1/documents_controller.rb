@@ -10,16 +10,15 @@ class Api::V1::DocumentsController < ApplicationController
   end
 
   def show
-    render_success(data: @documents)
+    render_success(data: @document)
   end
 
   def create
     saved_documents = []
     failed_documents = []
-#authorize @document move before creating new documents
 
     params[:documents].each do |document|
-      @document = current_user.document.new
+      @document = current_user.documents.new
       @document.documentable = @attachable
       @document.file.attach(document)
       @document.name = @document.file.blob.filename
@@ -40,7 +39,6 @@ class Api::V1::DocumentsController < ApplicationController
       render_success(data: saved_documents, status: :created)
     end
   end
-
 
   def destroy
     @document.destroy
