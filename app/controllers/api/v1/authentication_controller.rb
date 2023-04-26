@@ -6,10 +6,13 @@ class Api::V1::AuthenticationController < ApplicationController
     @user = User.find_by_email(params[:email])
     if @user&.authenticate(params[:password])
       token_data = generate_token(@user.id)
-      render json: { token: token_data[:token], expiration_date: token_data[:expiration_date],
-                     user: @user }, status: :ok
+      render_success(data: {
+                       token: token_data[:token],
+                       expiration_date: token_data[:expiration_date],
+                       user: @user
+                     })
     else
-      render json: { errors: 'unauthorized' }, status: :unauthorized
+      render_error(errors: ['Unauthorized'], status: :unauthorized)
     end
   end
 
