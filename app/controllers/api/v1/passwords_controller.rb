@@ -2,9 +2,8 @@ class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
   skip_before_action :authorize_request, only: %i[reset_password forget_password]
 
-  # render_success / errors
   def forget_password
-    return render json: { errors: 'Email not present' } if params[:email].blank?
+    render_error(errors: ['Email not present']) if params[:email].blank?
 
     user = User.find_by(email: params[:email])
 
@@ -42,14 +41,14 @@ class Api::V1::PasswordsController < ApplicationController
   end
 
   def update_password
-    render_error(errors: ['Old password is incorrect']) unless current_user.authenticate(params[:old_password])
-
-    # TODO: need to add password validation
-    if current_user.update!(password: params[:password])
-
-      render_success(data: current_user, serializer: Api::V1::UserSerializer)
+    if current_user.authenticate(params[:old_password])
+      if current_user.update!(password: params[:password])
+        render_success(data: current_user, serializer: Api::V1::UserSerializer)
+      else
+        render_error(errors: current_user.errors.full_messages)
+      end
     else
-      render_error(errors: current_user.errors.full_messages)
+      render_error(errors: ['Old password is incorrect'])
     end
   end
 end
