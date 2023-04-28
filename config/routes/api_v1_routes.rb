@@ -3,7 +3,7 @@ module ApiV1Routes
     router.instance_exec do
       namespace :v1 do
         resources :users, except: %i[update destroy] do
-          patch :update, on: :collection
+          put :update, on: :collection
           delete :destroy, on: :collection
         end
         get '/my_profile', to: 'users#show_current_user'
@@ -11,7 +11,7 @@ module ApiV1Routes
         post '/login', to: 'authentication#login'
         post '/forget_password', to: 'passwords#forget_password'
         post '/reset_password', to: 'passwords#reset_password'
-        patch '/update_password', to: 'passwords#update_password'
+        put '/update_password', to: 'passwords#update_password'
 
         resources :projects do
           resources :desks, only: %i[index show create update destroy]

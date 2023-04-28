@@ -14,7 +14,6 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   alias add_member? update?
-  alias delete_member update?
   alias delete_member? update?
   alias destroy? update?
 end

@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
 
   skip_before_action :authorize_request, only: :create
   before_action :set_user, only: :show
+  # before_action :skip_password_validation, only: :update
 
   def show
     render_success(data: @user, serializer: Api::V1::UserSerializer)
@@ -35,7 +36,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(first_name: params[:first_name], last_name: params[:last_name])
+    if current_user.update!(first_name: params[:first_name], last_name: params[:last_name])
       render_success(data: current_user, serializer: Api::V1::UserSerializer)
     else
       render_error(errors: current_user.errors.full_messages)
@@ -54,5 +55,9 @@ class Api::V1::UsersController < ApplicationController
 
   def user_params
     params.permit(:first_name, :last_name, :email, :password, :github_token)
+  end
+
+  def skip_password_validation
+    current_user.skip_password_validation = true
   end
 end
