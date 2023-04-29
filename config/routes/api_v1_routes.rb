@@ -32,6 +32,12 @@ module ApiV1Routes
             delete 'delete'
           end
         end
+        resources :github_branches do
+          collection do
+            get 'index'
+            post 'create'
+          end
+        end
 
         concern :documentable do
           resources :documents, except: :update

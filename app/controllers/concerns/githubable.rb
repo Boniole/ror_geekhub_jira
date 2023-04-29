@@ -22,7 +22,7 @@ module Githubable
 
   def git_update_repo
     @repo = github_client.edit_repository(
-      @project.git_repo,
+      current_project.git_repo,
       description: params[:description],
       private: params[:private],
       has_issues: params[:has_issues],
@@ -33,8 +33,20 @@ module Githubable
   end
 
   def git_find_repo
-    @repo = github_client.repository(@project.git_repo)
+    @repo = github_client.repository(current_project.git_repo)
   rescue Octokit::InvalidRepository => error
+    render_error(errors: error.message)
+  end
+
+  def git_create_branch
+    @new_branch_name = "heads/#{@task.type_of}/#{@task.tag_name}/#{params[:branch_name]}"
+
+    github_client.create_ref(
+      current_project.git_repo,
+      @new_branch_name,
+      params[:sha]
+    )
+  rescue Octokit::UnprocessableEntity => error
     render_error(errors: error.message)
   end
 end
