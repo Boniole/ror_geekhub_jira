@@ -3,8 +3,14 @@ class GithubRepositoryPolicy < ApplicationPolicy
 
   def create?
     user.admin?(user.projects.find(@record.project_id))
+    debugger
   end
 
-  alias update? create?
-  alias delete? create?
+  def delete?
+    # user.admin?(user.projects.find(@record.project_id))
+    debugger
+  end
+
+  # alias update? create?
+  # alias delete? create?
 end
