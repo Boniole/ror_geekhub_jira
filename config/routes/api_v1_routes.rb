@@ -34,7 +34,7 @@ module ApiV1Routes
         end
         resources :github_branches do
           collection do
-            get 'index'
+            put 'index'
             post 'create'
           end
         end

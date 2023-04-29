@@ -467,15 +467,60 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/github_users/show":
-    get:
-      summary: create column
+  "/api/v1/github_branches/index":
+    put:
+      summary: list branches
       tags:
-      - GithubUser
-      description: Github User
+      - Github branch
+      description: List branches
+      parameters: []
       responses:
         '200':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+              required:
+              - project_id
+  "/api/v1/github_branches/create":
+    post:
+      summary: Create branch
+      tags:
+      - Github branch
+      description: Create branch
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  default: 1
+                task_id:
+                  type: integer
+                  default: 1
+                branch_name:
+                  type: string
+                  default: branch-name
+                sha:
+                  type: string
+                  example: Parent branch sha
+              required:
+              - project_id
+              - task_id
+              - branch_name
+              - sha
   "/api/v1/github_repositories/create":
     post:
       summary: Create repository
@@ -583,6 +628,15 @@ paths:
               required:
               - project_id
               - validate_text
+  "/api/v1/github_users/show":
+    get:
+      summary: create column
+      tags:
+      - Github User
+      description: Github User
+      responses:
+        '200':
+          description: successful
   "/api/v1/projects":
     get:
       summary: list projects

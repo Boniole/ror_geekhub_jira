@@ -1,7 +1,7 @@
 class Api::V1::GithubBranchesController < ApplicationController
   include Githubable
 
-  before_action :branch_params, only: %i[index show create]
+  before_action :branch_params, only: %i[index create]
   before_action :set_task, only: %i[create]
 
   def index
