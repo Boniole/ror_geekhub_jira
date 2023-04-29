@@ -8,10 +8,6 @@ module Githubable
     render_error(errors: 'Github token invalid or empty!', status: :not_found)
   end
 
-  def project_git_info
-    @project.update(git_url: @repo&.clone_url, git_repo: @repo&.full_name)
-  end
-
   def git_create_repo
     @repo = github_client.create_repository(
       params[:name],
@@ -20,15 +16,37 @@ module Githubable
       has_issues: params[:has_issues],
       has_downloads: params[:has_downloads]
     )
+  rescue Octokit::Error => error
+    render_error(errors: "Repository #{error.errors.first[:message]}")
   end
 
   def git_update_repo
     @repo = github_client.edit_repository(
-      @project.git_repo,
+      current_project.git_repo,
       description: params[:description],
       private: params[:private],
       has_issues: params[:has_issues],
       has_downloads: params[:has_downloads]
     )
+  rescue Octokit::InvalidRepository => error
+    render_error(errors: error.message)
+  end
+
+  def git_find_repo
+    @repo = github_client.repository(current_project.git_repo)
+  rescue Octokit::InvalidRepository => error
+    render_error(errors: error.message)
+  end
+
+  def git_create_branch
+    @new_branch_name = "heads/#{@task.type_of}/#{@task.tag_name}/#{params[:branch_name]}"
+
+    github_client.create_ref(
+      current_project.git_repo,
+      @new_branch_name,
+      params[:sha]
+    )
+  rescue Octokit::UnprocessableEntity => error
+    render_error(errors: error.message)
   end
 end
