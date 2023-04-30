@@ -23,8 +23,7 @@ class User < ApplicationRecord
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
-  has_many :task_comments, -> { where(commentable_type: 'Task') }, class_name: 'Comment', foreign_key: :commentable_id
+  has_many :comments, dependent: :destroy
   has_many :documents, dependent: :destroy
 
   has_many :memberships

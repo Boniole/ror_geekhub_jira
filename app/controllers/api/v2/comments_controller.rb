@@ -34,7 +34,7 @@ class Api::V2::CommentsController < ApplicationController
   private
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.current_comment(current_user, params[:id])
   end
 
   def comment_params
