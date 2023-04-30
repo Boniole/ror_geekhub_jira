@@ -33,7 +33,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = current_user.task_comments.find(params[:id])
+    @comment = Comment.current_comment(current_user, params[:id])
   end
 
   def comment_params
