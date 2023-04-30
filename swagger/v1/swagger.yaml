@@ -561,6 +561,47 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/projects/{project_id}/github_pullrequests":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Create pullrequest
+      tags:
+      - Github pullrequest
+      description: Create pullrequest
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                base_name:
+                  type: string
+                  default: main
+                head_name:
+                  type: string
+                  default: dev
+                title:
+                  type: string
+                  default: Title pullrequest
+                body:
+                  type: string
+                  default: Body pullrequest
+              required:
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
   "/api/v1/projects/{project_id}/github_repositories/create":
     parameters:
     - name: project_id
