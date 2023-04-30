@@ -3,8 +3,7 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, :authorize_user, only: %i[update destroy]
 
   def create
-    comment = Comment.new(comment_params)
-    comment.update(user_id: current_user.id)
+    comment = current_user.comments.new(comment_params)
 
     authorize comment
 
