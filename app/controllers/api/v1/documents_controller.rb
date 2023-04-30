@@ -1,16 +1,15 @@
 class Api::V1::DocumentsController < ApplicationController
   before_action :document_params, only: %i[create update]
-  before_action :authorize_user
-  before_action :set_attachable
+  before_action :authorize_user, :set_attachable
   before_action :set_document, :authorize_user, only: [:show, :destroy]
   before_action :set_documents, only: :index
 
   def index
-    render_success(data: @documents)
+    render_success(data: @documents, each_serializer: Api::V1::DocumentSerializer)
   end
 
   def show
-    render_success(data: @document)
+    render_success(data: @document, each_serializer: Api::V1::DocumentSerializer)
   end
 
   def create
@@ -33,8 +32,9 @@ class Api::V1::DocumentsController < ApplicationController
     end
 
     if failed_documents.any?
-      # add serialized documents?
-      render json: { saved_documents: saved_documents, failed_documents: failed_documents }, status: :multi_status
+      render_success( data: { saved_documents: saved_documents, failed_documents: failed_documents },
+                      status: :multi_status,
+                      each_serializer: Api::V1::DocumentSerializer)
     else
       render_success(data: saved_documents, status: :created)
     end
@@ -57,14 +57,14 @@ class Api::V1::DocumentsController < ApplicationController
     when params[:task_id]
       @attachable = current_user.tasks.find(params[:task_id])
     when params[:comment_id]
-      @attachable = current_user.comments.find(params[:comment_id])
+      @attachable = Comment.current_comment(current_user, params[:comment_id])
     else
       render_error(errors: 'Attachable not found', status: :not_found)
     end
   end
 
   def set_document
-    @document = @attachable.documents.find(id: params[:id])
+    @document = @attachable.documents.find(params[:id])
   end
 
   def set_documents
