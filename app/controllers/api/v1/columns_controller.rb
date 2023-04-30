@@ -9,7 +9,6 @@ class Api::V1::ColumnsController < ApplicationController
   def create
     column = Column.new(column_params)
     authorize column
-
     if column.save
       render_success(data: column, status: :created, serializer: Api::V1::ColumnSerializer)
     else
