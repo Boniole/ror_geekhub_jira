@@ -533,6 +533,34 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/projects/{project_id}/github_commits/{task_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: string
+    - name: sha
+      in: path
+      description: Branch sha
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show branch commits
+      tags:
+      - Github commit
+      description: Show branch commits
+      responses:
+        '200':
+          description: successful
   "/api/v1/projects/{project_id}/github_repositories/create":
     parameters:
     - name: project_id

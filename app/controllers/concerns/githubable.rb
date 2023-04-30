@@ -1,6 +1,8 @@
 module Githubable
   extend ActiveSupport::Concern
-  include GithubBranchable, GithubRepositoryable
+  include GithubBranchable
+  include GithubRepositoryable
+  include GithubCommitable
 
   def github_client
     Octokit::Client.new(access_token: current_user.github_token, auto_paginate: true)
