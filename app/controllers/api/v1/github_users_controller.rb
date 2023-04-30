@@ -3,7 +3,6 @@ class Api::V1::GithubUsersController < ApplicationController
 
   def show
     user = github_client.user
-#serializer 
-    render json: { username: user.login, name: user.name, avatar: user.avatar_url, url: user.url }, status: :ok
+    render_success(data: Api::V1::GithubUserSerializer.new(user).as_json, status: :ok)
   end
 end
