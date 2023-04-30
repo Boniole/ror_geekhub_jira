@@ -1,7 +1,6 @@
 class Api::V1::GithubBranchesController < ApplicationController
   include Githubable
 
-  before_action :branch_params, only: %i[show create]
   before_action :set_task, :authorize_user, only: %i[show create]
 
   def index
@@ -15,7 +14,6 @@ class Api::V1::GithubBranchesController < ApplicationController
 
   def create
     branch = git_create_branch
-
     render_success(data: ["Create new branch: #{@new_branch_name}"], status: :ok) if branch.is_a?(Sawyer::Resource)
   end
 
@@ -23,10 +21,6 @@ class Api::V1::GithubBranchesController < ApplicationController
 
   def authorize_user
     authorize @task
-  end
-
-  def branch_params
-    params.permit(:project_id, :task_id, :branch_name, :sha)
   end
 
   def set_task

@@ -30,6 +30,8 @@ module ApiV1Routes
             end
           end
           resources :github_branches, only: %i[index show create]
+          resources :github_commits, only: %i[show]
+          resources :github_pullrequests, only: %i[create]
         end
 
         resources :github_users, only: %i[show]
