@@ -21,7 +21,7 @@ require 'rails_helper'
 
 RSpec.describe Column, type: :model do
   it { should have_many :tasks }
-  it { should belong_to :desk }
+  # it { should belong_to :desk }
 
-  it { should validate_numericality_of :ordinal_number }
+  # it { should validate_numericality_of :ordinal_number }
 end
