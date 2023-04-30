@@ -4,13 +4,13 @@
 #
 #  id              :bigint           not null, primary key
 #  description     :string
-#  end_date        :date
+#  end_date        :text
 #  estimate        :text
 #  label           :text
 #  name            :text
 #  priority        :integer
 #  priority_number :integer
-#  start_date      :date
+#  start_date      :text
 #  status          :integer
 #  tag_name        :text
 #  time_work       :string
@@ -39,20 +39,22 @@
 #
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
-  # it { should belong_to :project }
-  # it { should belong_to :desk }
-  # it { should belong_to :column }
-  # it { should belong_to :user }
-  # it { should belong_to :assignee }
+RANGE_PASSWORD_LENGTH = 8..20
+
+RSpec.describe User, type: :model do
+
+  it { should have_many :memberships }
+  it { should have_many :projects }
+  it { should have_many :tasks }
   it { should have_many :comments }
   it { should have_many :documents }
 
-  it { should define_enum_for(:priority).with_values([:lowest, :low, :high, :highest]) }
-  it { should define_enum_for(:type_of).with_values([:task, :bug, :epic]) }
-  it { should define_enum_for(:status).with_values([:open, :close]) }
+  it { should validate_uniqueness_of(:email) }
+  it { should have_secure_password }
 
-  # it { should validate_length_of(:name).is_at_least(RANGE_PASSWORD_LENGTH).on(:create) }
-
-
+  it { should validate_presence_of :first_name }
+  it { should validate_presence_of :last_name }
+  it { should validate_presence_of :email }
+  it { should validate_presence_of :password }
+  # it { should validate_exclusion_of(:password_digest).in_range(RANGE_PASSWORD_LENGTH) }
 end

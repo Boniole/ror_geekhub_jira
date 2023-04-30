@@ -22,4 +22,22 @@ require 'rails_helper'
 RSpec.describe Desk, type: :model do
   it { should have_many :columns }
   it { should belong_to :project }
+
+  it { should validate_presence_of :name }
+
+  it 'must have 4 colums for new desk' do
+    user = User.new(first_name: 'John',
+                    last_name: 'Travolta',
+                    email: Random.hex(5)+'@gmail.com',
+                    password: 'Home2023Ls')
+    user.save!
+
+    project = Project.new(name: 'My project', user_id: user.id)
+    project.save!
+
+    desk = Desk.new(project_id: project.id)
+    desk.save!
+
+    expect(desk.columns.count).to be 4
+  end
 end
