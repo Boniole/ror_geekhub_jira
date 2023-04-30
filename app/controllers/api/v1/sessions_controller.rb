@@ -4,7 +4,7 @@ class Api::V1::SessionsController < ApplicationController
   def omniauth
     user = User.from_omniauth(auth)
     # move dot env Rails.application.secrets.secret_key_base
-    token = JWT.encode({ user_id: user.id }, Rails.application.secrets.secret_key_base)
+    token = JWT.encode({ user_id: user.id }, ENV['SECRET_KEY_BASE'])
 
     render_success(data: token)
   end
