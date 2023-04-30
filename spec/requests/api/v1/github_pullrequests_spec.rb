@@ -11,6 +11,7 @@ RSpec.describe 'api/v1/github_pullrequests', type: :request do
       parameter name: :pullrequest, in: :body, schema: {
         type: :object,
         properties: {
+          task_id: { type: :integer, default: 1 },
           base_name: { type: :string, default: 'main' },
           head_name: { type: :string, default: 'dev' },
           title: { type: :string, default: 'Title pullrequest' },
