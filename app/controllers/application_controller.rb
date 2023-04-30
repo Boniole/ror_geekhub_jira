@@ -19,12 +19,12 @@ class ApplicationController < ActionController::API
 
   private
 
-  def current_project
-    current_user.memberships.get_project(params[:project_id]).first.project
-  end
-
   def current_user
     User.find(@decoded[:user_id]) if @decoded.present?
+  end
+
+  def current_project(project_id = params[:project_id])
+    current_user.memberships.get_project(project_id).first.project
   end
 
   def user_not_authorized

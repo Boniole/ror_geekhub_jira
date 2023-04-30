@@ -49,4 +49,15 @@ module Githubable
   rescue Octokit::UnprocessableEntity => error
     render_error(errors: error.message)
   end
+
+  def git_get_brenches
+    branches = github_client.branches(current_project.git_repo)
+    branches.map { |branch| { name: branch.name, sha: branch.commit.sha } }
+  rescue Octokit::UnprocessableEntity => error
+    render_error(errors: error.message)
+  end
+
+  def git_task_brenches(task_name)
+    git_get_brenches.select { |branch| branch[:name].match(%r{/#{Regexp.escape(task_name)}/}) }
+  end
 end
