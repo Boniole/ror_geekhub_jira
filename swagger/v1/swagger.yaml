@@ -584,6 +584,9 @@ paths:
             schema:
               type: object
               properties:
+                task_id:
+                  type: integer
+                  default: 1
                 base_name:
                   type: string
                   default: main
