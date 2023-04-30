@@ -8,8 +8,9 @@ module Validatable
   RANGE_REPO_NAME_LENGTH = RANGE_NAME_LENGTH
   RANGE_LABEL_LENGTH = RANGE_NAME_LENGTH
   RANGE_COLUMN_NAMES = ['ToDo', 'In progress', 'In review', 'Done'].freeze
+  RANGE_ALLOWED_TYPES = %w[pdf jpg jpeg png gif doc docx xls xlsx zip rar].freeze
 
-  MAX_GIT_URL_LENGTH = 255
+  MAX_GIT_URL_LENGTH = 500
 
   REGEXP_USER = /\A[a-zA-Z]+\z/
   REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/
@@ -89,12 +90,17 @@ module Validatable
                            }, allow_blank: true
     end
 
-    def self.validate_git_url
-      validates :git_url, length: { maximum: MAX_GIT_URL_LENGTH },
+    def self.validate_url(field = :git_url)
+      validates field, length: { maximum: MAX_GIT_URL_LENGTH },
                           format: {
                             with: REGEXP_GIT_URL,
                             message: 'Must be a valid URL'
                           }, allow_blank: true
+    end
+
+    def self.validate_document_type
+      validates :document_type, presence: true,
+              inclusion: { in: RANGE_ALLOWED_TYPES, message: "File type %{value} is not allowed. Allowed types are: #{RANGE_ALLOWED_TYPES.join(', ')}" }
     end
   end
 
@@ -118,7 +124,7 @@ module Validatable
     included do
       validate_name
       validate_git_repo
-      validate_git_url
+      validate_url
     end
   end
 
@@ -168,6 +174,8 @@ module Validatable
 
     included do
       validate_name
+      validate_url(:url)
+      validate_document_type
     end
   end
 end

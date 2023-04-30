@@ -60,7 +60,7 @@ RSpec.describe 'api/v1/documents', type: :request do
   path '/api/v1/projects/{project_id}/documents/{id}' do
     # You'll want to customize the parameter types...
     parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
-    parameter name: :id, in: :path, type: :integer, description: 'document_id'
+    parameter name: :id, in: :path, type: :integer, description: 'id'
 
     get('show document') do
       tags 'Documents'
@@ -160,7 +160,7 @@ RSpec.describe 'api/v1/documents', type: :request do
   path '/api/v1/tasks/{task_id}/documents/{id}' do
     # You'll want to customize the parameter types...
     parameter name: :task_id, in: :path, type: :integer, description: 'task_id'
-    parameter name: :id, in: :path, type: :integer, description: 'document_id'
+    parameter name: :id, in: :path, type: :integer, description: 'id'
 
     get('show document') do
       tags 'Documents'
@@ -273,7 +273,7 @@ RSpec.describe 'api/v1/documents', type: :request do
   path '/api/v1/comments/{comment_id}/documents/{id}' do
     # You'll want to customize the parameter types...
     parameter name: :comment_id, in: :path, type: :integer, description: 'comment_id'
-    parameter name: :id, in: :path, type: :integer, description: 'document_id'
+    parameter name: :id, in: :path, type: :integer, description: 'id'
 
     get('show document') do
       tags 'Documents'

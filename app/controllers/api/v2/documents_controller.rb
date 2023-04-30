@@ -1,7 +1,6 @@
 class Api::V2::DocumentsController < ApplicationController
-  before_action :authorize_request
+  before_action :authorize_request, :set_attachable
   before_action :document_params, only: %i[create update]
-  before_action :set_attachable
   before_action :set_document, only: [:show, :destroy]
   before_action :set_documents, only: :index
 
@@ -70,7 +69,7 @@ class Api::V2::DocumentsController < ApplicationController
     when params[:task_id]
       @attachable = Task.find(params[:task_id])
     when params[:comment_id]
-      @attachable = Comment.find(params[:comment_id])
+      @attachable = Comment.current_comment(current_user, params[:comment_id])
     else
       render json: { errors: 'Attachable not found' }, status: :not_found
     end
