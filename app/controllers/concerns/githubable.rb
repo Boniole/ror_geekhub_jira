@@ -16,8 +16,8 @@ module Githubable
       has_issues: params[:has_issues],
       has_downloads: params[:has_downloads]
     )
-  rescue Octokit::Error => error
-    render_error(errors: "Repository #{error.errors.first[:message]}")
+  rescue Octokit::Error => e
+    render_error(errors: "Repository #{e.errors.first[:message]}")
   end
 
   def git_update_repo
@@ -28,14 +28,14 @@ module Githubable
       has_issues: params[:has_issues],
       has_downloads: params[:has_downloads]
     )
-  rescue Octokit::InvalidRepository => error
-    render_error(errors: error.message)
+  rescue Octokit::InvalidRepository => e
+    render_error(errors: e.message)
   end
 
   def git_find_repo
     @repo = github_client.repository(current_project.git_repo)
-  rescue Octokit::InvalidRepository => error
-    render_error(errors: error.message)
+  rescue Octokit::InvalidRepository => e
+    render_error(errors: e.message)
   end
 
   def git_create_branch
@@ -46,15 +46,15 @@ module Githubable
       @new_branch_name,
       params[:sha]
     )
-  rescue Octokit::UnprocessableEntity => error
-    render_error(errors: error.message)
+  rescue Octokit::UnprocessableEntity => e
+    render_error(errors: e.message)
   end
 
   def git_get_brenches
     branches = github_client.branches(current_project.git_repo)
     branches.map { |branch| { name: branch.name, sha: branch.commit.sha } }
-  rescue Octokit::UnprocessableEntity => error
-    render_error(errors: error.message)
+  rescue Octokit::UnprocessableEntity => e
+    render_error(errors: e.message)
   end
 
   def git_task_brenches(task_name)

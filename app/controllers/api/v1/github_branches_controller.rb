@@ -16,7 +16,7 @@ class Api::V1::GithubBranchesController < ApplicationController
   def create
     branch = git_create_branch
 
-    render_success(data: "Create new branch: #{@new_branch_name}", status: :ok) if branch.is_a?(Sawyer::Resource)
+    render_success(data: ["Create new branch: #{@new_branch_name}"], status: :ok) if branch.is_a?(Sawyer::Resource)
   end
 
   private

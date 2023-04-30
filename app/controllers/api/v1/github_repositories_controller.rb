@@ -24,7 +24,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
     if repository.valid? && current_project.present?
       git_update_repo
 
-      render_success(data: 'Repository update', status: :ok) if @repo.is_a?(Sawyer::Resource)
+      render_success(data: ['Repository update'], status: :ok) if @repo.is_a?(Sawyer::Resource)
     else
       render_error(errors: repository.errors.full_messages)
     end
@@ -37,7 +37,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
       github_client.delete_repository(params[:validate_text])
       current_project.update(git_url: nil, git_repo: nil)
 
-      render_success(data: 'Repository was deleted', status: :ok)
+      render_success(data: ['Repository was deleted'], status: :ok)
     end
   end
 
