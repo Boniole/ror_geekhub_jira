@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'api/v1/github_users', type: :request do
-  path '/api/v1/github_repositories/create' do
+  path '/api/v1/projects/{project_id}/github_repositories/create' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
     post('Create repository') do
       tags 'Github repository'
       description 'Create repository'
@@ -10,14 +11,13 @@ RSpec.describe 'api/v1/github_users', type: :request do
       parameter name: :repository, in: :body, schema: {
         type: :object,
         properties: {
-          project_id: { type: :integer, default: 1 },
           name: { type: :string, default: 'Name repository' },
           description: { type: :string, default: 'Name description' },
           private: { type: :boolean, example: true },
           has_issues: { type: :boolean, default: true },
           has_downloads: { type: :boolean, example: true }
         },
-        required: %w[project_id name description private has_issues has_downloads]
+        required: %w[name description private has_issues has_downloads]
       }
 
       response(200, 'successful') do
@@ -33,7 +33,8 @@ RSpec.describe 'api/v1/github_users', type: :request do
     end
   end
 
-  path '/api/v1/github_repositories/update' do
+  path '/api/v1/projects/{project_id}/github_repositories/update' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
     patch('Update repository') do
       tags 'Github repository'
       description 'Update repository'
@@ -42,14 +43,13 @@ RSpec.describe 'api/v1/github_users', type: :request do
       parameter name: :repository, in: :body, schema: {
         type: :object,
         properties: {
-          project_id: { type: :integer, default: 1 },
           name: { type: :string, default: 'Name repository' },
           description: { type: :string, default: 'Name description' },
           private: { type: :boolean, example: true },
           has_issues: { type: :boolean, default: true },
           has_downloads: { type: :boolean, example: true }
         },
-        required: %w[project_id name description private has_issues has_downloads]
+        required: %w[name description private has_issues has_downloads]
       }
 
       response(200, 'successful') do
@@ -65,7 +65,8 @@ RSpec.describe 'api/v1/github_users', type: :request do
     end
   end
 
-  path '/api/v1/github_repositories/delete' do
+  path '/api/v1/projects/{project_id}/github_repositories/delete' do
+    parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
     delete('delete repository') do
       tags 'Github repository'
       description 'Delete repository'

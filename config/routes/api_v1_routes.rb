@@ -22,22 +22,17 @@ module ApiV1Routes
             post 'add_member', to: 'projects#add_member'
             delete 'delete_member', to: 'projects#delete_member'
           end
+          resources :github_repositories do
+            collection do
+              post 'create'
+              put 'update'
+              delete 'delete'
+            end
+          end
+          resources :github_branches, only: %i[index show create]
         end
 
         resources :github_users, only: %i[show]
-        resources :github_repositories do
-          collection do
-            post 'create'
-            put 'update'
-            delete 'delete'
-          end
-        end
-        resources :github_branches do
-          collection do
-            put 'index'
-            post 'create'
-          end
-        end
 
         concern :documentable do
           resources :documents, except: :update

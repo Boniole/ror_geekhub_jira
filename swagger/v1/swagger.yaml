@@ -467,28 +467,22 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/github_branches/index":
-    put:
-      summary: list branches
+  "/api/v1/projects/{project_id}/github_branches":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Project list branches
       tags:
       - Github branch
-      description: List branches
-      parameters: []
+      description: Project list branches
       responses:
         '200':
           description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                project_id:
-                  type: integer
-                  default: 1
-              required:
-              - project_id
-  "/api/v1/github_branches/create":
     post:
       summary: Create branch
       tags:
@@ -504,9 +498,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 task_id:
                   type: integer
                   default: 1
@@ -517,11 +508,39 @@ paths:
                   type: string
                   example: Parent branch sha
               required:
-              - project_id
               - task_id
               - branch_name
               - sha
-  "/api/v1/github_repositories/create":
+  "/api/v1/projects/{project_id}/github_branches/{task_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show task branches
+      tags:
+      - Github branch
+      description: Show task branches
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects/{project_id}/github_repositories/create":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: Create repository
       tags:
@@ -537,9 +556,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                   default: Name repository
@@ -556,13 +572,19 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
               - name
               - description
               - private
               - has_issues
               - has_downloads
-  "/api/v1/github_repositories/update":
+  "/api/v1/projects/{project_id}/github_repositories/update":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     patch:
       summary: Update repository
       tags:
@@ -578,9 +600,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                   default: Name repository
@@ -597,13 +616,19 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
               - name
               - description
               - private
               - has_issues
               - has_downloads
-  "/api/v1/github_repositories/delete":
+  "/api/v1/projects/{project_id}/github_repositories/delete":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     delete:
       summary: delete repository
       tags:

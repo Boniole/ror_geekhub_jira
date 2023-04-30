@@ -1,19 +1,22 @@
 class Api::V1::GithubBranchesController < ApplicationController
   include Githubable
 
-  before_action :branch_params, only: %i[index create]
-  before_action :set_task, only: %i[create]
+  before_action :branch_params, only: %i[show create]
+  before_action :set_task, :authorize_user, only: %i[show create]
 
   def index
-    branches = github_client.branches(current_project.git_repo)
+    authorize current_project
+    render_success(data: git_get_brenches, status: :ok)
+  end
 
-    render_success(data: branches.map { |branch| { name: branch.name, sha: branch.commit.sha } }, status: :ok)
+  def show
+    render_success(data: git_task_brenches(@task.tag_name), status: :ok)
   end
 
   def create
     branch = git_create_branch
 
-    render_success(data: "Create new branch: #{@new_branch_name}", status: :ok) if branch.is_a?(Sawyer::Resource)
+    render_success(data: ["Create new branch: #{@new_branch_name}"], status: :ok) if branch.is_a?(Sawyer::Resource)
   end
 
   private
@@ -27,6 +30,7 @@ class Api::V1::GithubBranchesController < ApplicationController
   end
 
   def set_task
-    @task = current_project.tasks.find(params[:task_id])
+    task_id = params[:task_id] || params[:id]
+    @task = current_project.tasks.find(task_id)
   end
 end
