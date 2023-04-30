@@ -84,14 +84,10 @@ class Api::V2::GithubRepositoriesController < ApplicationController
 
   def repo_params
     params.permit(:project_id, :name, :description, :private, :has_issues, :has_downloads)
-  rescue ActionController::ParameterMissing => e
-    render json: { errors: e.message }, status: :bad_request
   end
 
   def set_project
     @project = @current_user.projects.find(params[:project_id])
-  rescue ActiveRecord::RecordNotFound => e
-    render json: { errors: e.message }, status: :not_found
   end
 
   def repo_delete_params

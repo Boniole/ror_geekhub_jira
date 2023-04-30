@@ -2,11 +2,12 @@
 #
 # Table name: desks
 #
-#  id         :bigint           not null, primary key
-#  name       :string           default("Your Desk")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  project_id :bigint           not null
+#  id            :bigint           not null, primary key
+#  columns_count :integer          default(0), not null
+#  name          :string           default("Your Desk")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  project_id    :bigint           not null
 #
 # Indexes
 #
@@ -27,9 +28,6 @@ class Desk < ApplicationRecord
   private
 
   def create_columns
-    # string to constant
-    ['ToDo', 'In progress', 'In review', 'Done'].each.with_index do |name, index|
-      columns.create(name:, ordinal_number: index + 1)
-    end
+    RANGE_COLUMN_NAMES.each { |name| columns.create(name: name) }
   end
 end

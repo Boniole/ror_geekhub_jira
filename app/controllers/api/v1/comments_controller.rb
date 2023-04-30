@@ -3,23 +3,22 @@ class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, :authorize_user, only: %i[update destroy]
 
   def create
-    comment = Comment.new(comment_params)
-    comment.update(user_id: current_user.id)
+    comment = current_user.comments.new(comment_params)
 
     authorize comment
 
     if comment.save
-      render json: comment, status: :ok, serializer: Api::V1::CommentSerializer
+      render_success(data: comment, status: :created, serializer: Api::V1::CommentSerializer)
     else
-      render json: comment.errors, status: :unprocessable_entity
+      render_error(errors: comment.errors)
     end
   end
 
   def update
     if @comment.update(comment_params)
-      render json: @comment, serializer: Api::V1::CommentSerializer
+      render_success(data: @comment, serializer: Api::V1::CommentSerializer)
     else
-      render json: @comment.errors, status: :unprocessable_entity
+      render_error(errors: @comment.errors)
     end
   end
 
@@ -34,7 +33,7 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.current_comment(current_user, params[:id])
   end
 
   def comment_params

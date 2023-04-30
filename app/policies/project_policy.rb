@@ -1,37 +1,17 @@
 class ProjectPolicy < ApplicationPolicy
   attr_reader :user, :record
-  # delete the same methods with alies
-  def show?
-    @record.memberships.exists?(user_id: user.id)
-  end
 
-  def create?
-    true
+  def show?
+    member?(record)
   end
 
   def update?
-    project_admin
+    user.admin?(record)
   end
 
-  def add_member?
-    project_admin
-  end
-
-  def delete_member
-    project_admin
-  end
-
-  def delete_member?
-    project_admin
-  end
-
-  def destroy?
-    project_admin
-  end
-
-  private
-
-  def project_admin
-    user.admin?(@record)
-  end
+  alias add_member? update?
+  alias delete_member? update?
+  alias destroy? update?
+  alias delete? update?
+  alias index? show?
 end

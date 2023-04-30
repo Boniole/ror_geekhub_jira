@@ -1,17 +1,18 @@
 class Api::V1::AuthenticationController < ApplicationController
-  include Regexable
-
-  before_action :authorize_request, except: :login
+  include TokenGenerationable
+  skip_before_action :authorize_request
 
   def login
     @user = User.find_by_email(params[:email])
     if @user&.authenticate(params[:password])
-      token = JsonWebToken.encode(user_id: @user.id)
-      time = Time.now + 24.hours.to_i
-      render json: { token:, expiration_date: time.strftime(DATE_FORMAT),
-                     first_name: @user }, status: :ok
+      token_data = generate_token(@user.id)
+      render_success(data: {
+                       token: token_data[:token],
+                       expiration_date: token_data[:expiration_date],
+                       user: @user
+                     })
     else
-      render json: { error: 'unauthorized' }, status: :unauthorized
+      render_error(errors: ['Unauthorized'], status: :unauthorized)
     end
   end
 

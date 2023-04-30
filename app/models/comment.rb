@@ -28,4 +28,6 @@ class Comment < ApplicationRecord
   has_many :documents, as: :documentable, dependent: :destroy
 
   enum :status, %i[open close], default: :open
+
+  scope :current_comment, ->(user_id, comment_id) { joins(:user).where(user_id: user_id).find(comment_id) }
 end

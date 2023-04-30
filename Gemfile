@@ -37,14 +37,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem "rack-cors"
-# needed? Net::IMAP implements Internet Message Access Protocol (IMAP) client functionality. The protocol is described in
-gem 'net-imap', require: false
-gem 'net-pop', require: false
-gem 'net-smtp', require: false
-
-# needed?
-gem 'figaro'
+gem "rack-cors"
 
 # A Ruby binding to the Ed25519 elliptic curve public-key signature system described in RFC 8032.
 gem 'ed25519'

@@ -1,21 +1,21 @@
 lock "~> 3.17.1" # there should be your version, don`t change this!!!
 
 set :repo_url, 'git@github.com:Boniole/ror_geekhub_jira.git'
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp # if you want to chose branch before each deploy
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp # if you want to chose branch before each deploy
+set :branch, ENV['BRANCH'] || 'main'
+
 
 set :user, 'deployer'
 set :puma_user, fetch(:user)
 set :rvm_ruby_version, '3.1.2'
 set :pty, true
 
-# delete 'config/application.yml - config/.env.production
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key', 'config/puma.rb', 'config/application.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/master.key', 'config/puma.rb', 'config/.env')
 set :linked_dirs,  fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads', 'public/images',
                                                 'storage')
 
 set :config_example_suffix, '.example'
-# delete 'config/application.yml - config/.env.production
-set :config_files, %w[config/database.yml config/application.yml]
+set :config_files, %w[config/database.yml config/.env]
 set :nginx_use_ssl, false
 
 namespace :deploy do

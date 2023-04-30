@@ -4,7 +4,14 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/columns":
+  "/api/v1/projects/{project_id}/columns":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: create column
       tags:
@@ -29,8 +36,14 @@ paths:
               required:
               - name
               - desk_id
-  "/api/v1/columns/{id}":
+  "/api/v1/projects/{project_id}/columns/{id}":
     parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     - name: id
       in: path
       description: id
@@ -79,7 +92,14 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/comments":
+  "/api/v1/projects/{project_id}/comments":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: create comment
       tags:
@@ -108,8 +128,14 @@ paths:
               - body
               - commentable_type
               - commentable_id
-  "/api/v1/comments/{id}":
+  "/api/v1/projects/{project_id}/comments/{id}":
     parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     - name: id
       in: path
       description: id
@@ -441,16 +467,152 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/github_users/show":
+  "/api/v1/projects/{project_id}/github_branches":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     get:
-      summary: create column
+      summary: Project list branches
       tags:
-      - GithubUser
-      description: Github User
+      - Github branch
+      description: Project list branches
       responses:
         '200':
           description: successful
-  "/api/v1/github_repositories/create":
+    post:
+      summary: Create branch
+      tags:
+      - Github branch
+      description: Create branch
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                branch_name:
+                  type: string
+                  default: branch-name
+                sha:
+                  type: string
+                  example: Parent branch sha
+              required:
+              - task_id
+              - branch_name
+              - sha
+  "/api/v1/projects/{project_id}/github_branches/{task_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show task branches
+      tags:
+      - Github branch
+      description: Show task branches
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects/{project_id}/github_commits/{task_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: string
+    - name: sha
+      in: path
+      description: Branch sha
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show branch commits
+      tags:
+      - Github commit
+      description: Show branch commits
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects/{project_id}/github_pullrequests":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Create pullrequest
+      tags:
+      - Github pullrequest
+      description: Create pullrequest
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                base_name:
+                  type: string
+                  default: main
+                head_name:
+                  type: string
+                  default: dev
+                title:
+                  type: string
+                  default: Title pullrequest
+                body:
+                  type: string
+                  default: Body pullrequest
+              required:
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
+  "/api/v1/projects/{project_id}/github_repositories/create":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: Create repository
       tags:
@@ -466,9 +628,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                   default: Name repository
@@ -485,13 +644,19 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
               - name
               - description
               - private
               - has_issues
               - has_downloads
-  "/api/v1/github_repositories/update":
+  "/api/v1/projects/{project_id}/github_repositories/update":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     patch:
       summary: Update repository
       tags:
@@ -507,9 +672,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                   default: Name repository
@@ -526,13 +688,19 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
               - name
               - description
               - private
               - has_issues
               - has_downloads
-  "/api/v1/github_repositories/delete":
+  "/api/v1/projects/{project_id}/github_repositories/delete":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     delete:
       summary: delete repository
       tags:
@@ -557,6 +725,15 @@ paths:
               required:
               - project_id
               - validate_text
+  "/api/v1/github_users/show":
+    get:
+      summary: create column
+      tags:
+      - Github User
+      description: Github User
+      responses:
+        '200':
+          description: successful
   "/api/v1/projects":
     get:
       summary: list projects
@@ -807,125 +984,20 @@ paths:
       responses:
         '204':
           description: successful
-  "/api/v1/tasks":
+  "/api/v1/projects/{project_id}/tasks":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: create task
       tags:
       - Tasks
       description: Create task
-      parameters:
-      - name: project_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the project (integer)
-      - name: assignee_id
-        in: post
-        required: false
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the assignee (integer)
-      - name: desk_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the desk (integer)
-      - name: column_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the desk (integer)
-      - name: name
-        in: post
-        required: true
-        schema:
-          type: string
-        default: Task name
-        description: The name of the task (string)
-      - name: description
-        in: post
-        required: false
-        schema:
-          type: string
-        default: Task description
-        description: The description of the task (optional)
-      - name: priority_number
-        in: post
-        required: false
-        schema:
-          type: string
-        default: '1'
-        description: sort number
-      - name: estimate
-        in: post
-        required: false
-        schema:
-          type: string
-        default: 2w
-        description: The estimated time for completion (e.g. 2w, 4d, 6h, 45m) (optional)
-      - name: label
-        in: post
-        required: false
-        schema:
-          type: string
-        default: task
-        description: The label of the task (optional)
-      - name: start_date
-        in: post
-        required: false
-        schema:
-          type: string
-          format: date
-        default: '2023-12-12'
-        description: The start date of the task (date in YYYY-MM-DD format) (optional)
-      - name: end_date
-        in: post
-        required: false
-        schema:
-          type: string
-          format: date
-        default: '2023-12-12'
-        description: The end date of the task (date in YYYY-MM-DD format) (optional)
-      - name: priority
-        in: post
-        required: false
-        schema:
-          type: string
-          enum:
-          - lowest
-          - low
-          - high
-          - highest
-        default: lowest
-        description: 'Task priority: lowest/low/high/highest.'
-      - name: type_of
-        in: post
-        required: false
-        schema:
-          type: string
-          enum:
-          - task
-          - bug
-          - epic
-        default: task
-        description: 'Task type: task/bug/epic.'
-      - name: status
-        in: post
-        required: false
-        schema:
-          type: string
-          enum:
-          - open
-          - close
-        default: open
-        description: 'Task status: open/close.'
+      parameters: []
       responses:
         '200':
           description: successful
@@ -955,6 +1027,8 @@ paths:
                   type: integer
                   default: 1
                 estimate:
+                  type: string
+                time_work:
                   type: string
                 label:
                   type: string
@@ -1030,6 +1104,8 @@ paths:
                   type: integer
                   default: 1
                 estimate:
+                  type: string
+                time_work:
                   type: string
                 label:
                   type: string

@@ -1,10 +1,8 @@
 class Api::V1::GithubUsersController < ApplicationController
-  before_action :authorize_github
+  include Githubable
 
   def show
-    #consorn @github_client. > method gthub user
     user = github_client.user
-#serializer 
-    render json: { username: user.login, name: user.name, avatar: user.avatar_url, url: user.url }, status: :ok
+    render_success(data: Api::V1::GithubUserSerializer.new(user).as_json, status: :ok)
   end
 end

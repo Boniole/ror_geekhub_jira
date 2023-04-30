@@ -1,11 +1,7 @@
 class DocumentPolicy < ApplicationPolicy
   attr_reader :user, :record
-  # delete the same methods with alies
-  def show?
-    project_member?
-  end
 
-  def create?
+  def show?
     project_member?
   end
 
@@ -13,9 +9,8 @@ class DocumentPolicy < ApplicationPolicy
     user_is_file_author_or_admin?
   end
 
-  def destroy?
-    user_is_file_author_or_admin?
-  end
+  alias create? show?
+  alias destroy? update?
 
   private
 

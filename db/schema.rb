@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_19_183342) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_23_172114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_183342) do
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "columns_count", default: 0, null: false
     t.index ["project_id"], name: "index_desks_on_project_id"
   end
 
@@ -114,8 +115,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_183342) do
     t.integer "type_of"
     t.text "label"
     t.text "estimate"
-    t.text "start_date"
-    t.text "end_date"
+    t.date "start_date"
+    t.date "end_date"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -125,6 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_19_183342) do
     t.bigint "column_id", null: false
     t.text "tag_name"
     t.integer "priority_number"
+    t.string "time_work"
     t.index ["column_id"], name: "index_tasks_on_column_id"
     t.index ["desk_id"], name: "index_tasks_on_desk_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"

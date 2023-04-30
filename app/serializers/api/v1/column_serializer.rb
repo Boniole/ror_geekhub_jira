@@ -20,5 +20,5 @@
 class Api::V1::ColumnSerializer < ActiveModel::Serializer
   attributes :id, :name, :ordinal_number, :tasks
 
-  has_many :tasks, serializer: Api::V1::TaskSerializer
+  has_many :tasks, serializer: Api::V1::TaskShortInfoSerializer
 end
