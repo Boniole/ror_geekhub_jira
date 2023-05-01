@@ -36,8 +36,4 @@ class User < ApplicationRecord
   has_many :membered_projects, through: :memberships, source: :project
 
   after_restore :restore_projects
-
-  def admin?(project)
-    id == project.user_id
-  end
 end
