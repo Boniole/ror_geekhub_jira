@@ -40,7 +40,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  include Validatable::Taskable
+  include Taskable
 
   belongs_to :project
   belongs_to :desk

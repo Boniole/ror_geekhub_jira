@@ -20,7 +20,7 @@
 #  fk_rails_...  (desk_id => desks.id)
 #
 class Column < ApplicationRecord
-  include Validatable::Columnable
+  include Columnable
 
   belongs_to :desk
   has_many :tasks, dependent: :destroy

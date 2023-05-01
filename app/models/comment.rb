@@ -23,7 +23,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
-  include Validatable::Commentable
+  include Commentable
 
   belongs_to :user
   belongs_to :commentable, polymorphic: true

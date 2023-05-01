@@ -20,7 +20,7 @@
 #  fk_rails_...  (project_id => projects.id)
 #
 class Desk < ApplicationRecord
-  include Validatable::Deskable
+  include Deskable
 
   belongs_to :project
   has_many :columns, dependent: :destroy

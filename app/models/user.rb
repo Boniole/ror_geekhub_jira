@@ -21,8 +21,8 @@
 #  index_users_on_deleted_at  (deleted_at)
 #
 class User < ApplicationRecord
-  include Validatable::Userable
   include Passwordable
+  include Userable
 
   has_secure_password
   acts_as_paranoid
