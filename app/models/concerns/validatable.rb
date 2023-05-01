@@ -115,6 +115,10 @@ module Validatable
       validate_password
       validate_github_token
     end
+
+    def restore_projects
+      self.projects.only_deleted.each { |project| project.restore }
+    end
   end
 
   module Projectable
@@ -126,6 +130,14 @@ module Validatable
       validate_git_repo
       validate_url
     end
+
+    def restore_desks
+      self.desks.only_deleted.each { |desk| desk.restore }
+    end
+
+    def create_desk
+      desks.create
+    end
   end
 
   module Deskable
@@ -135,6 +147,17 @@ module Validatable
     included do
       validate_name
     end
+
+    def create_columns
+      RANGE_COLUMN_NAMES.each { |name| columns.create(name: name) }
+    end
+
+    def restore_columns
+      self.columns.only_deleted.each do |column|
+        column.restore
+        self.increment!(:columns_count)
+      end
+    end
   end
 
   module Columnable
@@ -143,6 +166,22 @@ module Validatable
 
     included do
       validate_name
+    end
+
+    def increment_desk_column_count
+      desk.increment!(:columns_count)
+    end
+
+    def decrement_desk_column_count
+      desk.decrement!(:columns_count)
+    end
+
+    def ordinal_number
+      self.ordinal_number = desk.columns_count
+    end
+
+    def restore_tasks
+      self.tasks.only_deleted.each { |task| task.restore }
     end
   end
 
@@ -156,6 +195,10 @@ module Validatable
       validate_time_period
       validate_time_period(:time_work)
       validate_label
+    end
+
+    def restore_comments
+      Comment.all_comments_task(self).only_deleted.each { |comment| comment.restore }
     end
   end
 

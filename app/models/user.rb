@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  deleted_at             :datetime
 #  email                  :string
 #  first_name             :string
 #  github_token           :string
@@ -15,11 +16,16 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
+#
 class User < ApplicationRecord
   include Validatable::Userable
   include Passwordable
 
   has_secure_password
+  acts_as_paranoid
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
@@ -28,6 +34,8 @@ class User < ApplicationRecord
 
   has_many :memberships
   has_many :membered_projects, through: :memberships, source: :project
+
+  after_restore :restore_projects
 
   def admin?(project)
     id == project.user_id

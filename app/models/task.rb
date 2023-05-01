@@ -3,6 +3,7 @@
 # Table name: tasks
 #
 #  id              :bigint           not null, primary key
+#  deleted_at      :datetime
 #  description     :string
 #  end_date        :text
 #  estimate        :text
@@ -26,6 +27,7 @@
 # Indexes
 #
 #  index_tasks_on_column_id   (column_id)
+#  index_tasks_on_deleted_at  (deleted_at)
 #  index_tasks_on_desk_id     (desk_id)
 #  index_tasks_on_project_id  (project_id)
 #  index_tasks_on_user_id     (user_id)
@@ -48,6 +50,8 @@ class Task < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :destroy
 
+  acts_as_paranoid
+
   enum :priority, %i[lowest low high highest], default: :low
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open
@@ -57,6 +61,8 @@ class Task < ApplicationRecord
 
   before_create :generate_tag_name
   after_create :increment_project_task_count, :set_priority_number
+
+  after_restore :restore_comments
 
   def increment_project_task_count
     project.increment!(:tasks_count)
