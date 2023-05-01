@@ -2,11 +2,11 @@ class ProjectPolicy < ApplicationPolicy
   attr_reader :user, :record
 
   def show?
-    member?(record)
+    member?(@record)
   end
 
   def update?
-    user.admin?(record)
+    admin?(@record)
   end
 
   alias add_member? update?

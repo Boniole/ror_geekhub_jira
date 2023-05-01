@@ -44,7 +44,7 @@ class Api::V1::GithubRepositoriesController < ApplicationController
   private
 
   def authorize_user
-    authorize current_project
+    authorize current_project || Project.find
   end
 
   def repo_params

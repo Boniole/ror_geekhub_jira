@@ -11,10 +11,10 @@ class Api::V1::GithubPullrequestsController < ApplicationController
   private
 
   def authorize_user
-    authorize @task
+    authorize @task || Task.find
   end
 
   def set_task
-    @task = current_project.tasks.find(params[:task_id])
+    @task = current_project.tasks.find(params[:id]) if current_project.present?
   end
 end

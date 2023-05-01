@@ -11,10 +11,6 @@ module Userable
   end
 
   def restore_projects
-    self.projects.only_deleted.each { |project| project.restore }
-  end
-
-  def admin?(project)
-    id == project.user_id
+    self.projects.only_deleted.each(&:restore)
   end
 end

@@ -20,11 +20,11 @@ class Api::V1::GithubBranchesController < ApplicationController
   private
 
   def authorize_user
-    authorize @task
+    authorize @task || Task.find
   end
 
   def set_task
     task_id = params[:task_id] || params[:id]
-    @task = current_project.tasks.find(task_id)
+    @task = current_project.tasks.find(task_id) if current_project.present?
   end
 end

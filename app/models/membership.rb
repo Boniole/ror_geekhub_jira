@@ -23,6 +23,4 @@ class Membership < ApplicationRecord
   acts_as_paranoid
 
   enum :role, %i[member admin], default: :member
-
-  scope :get_project, ->(id) { where(project_id: id) }
 end
