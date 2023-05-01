@@ -83,8 +83,7 @@ RSpec.describe 'api/v2/projects', type: :request, swagger_doc: 'v2/swagger.yaml'
         type: :object,
         properties: {
           name: { type: :string },
-          status: { type: :string, default: :open },
-          git_url: { type: :string }
+          status: { type: :string, default: :open }
         },
         required: %w[name]
       }
