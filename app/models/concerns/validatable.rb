@@ -10,7 +10,7 @@ module Validatable
   RANGE_COLUMN_NAMES = ['ToDo', 'In progress', 'In review', 'Done'].freeze
   RANGE_ALLOWED_TYPES = %w[pdf jpg jpeg png gif doc docx xls xlsx zip rar].freeze
 
-  MAX_GIT_URL_LENGTH = 500
+  MAX_URL_LENGTH = 500
 
   REGEXP_USER = /\A[a-zA-Z]+\z/
   REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/
@@ -91,7 +91,7 @@ module Validatable
     end
 
     def self.validate_url(field = :git_url)
-      validates field, length: { maximum: MAX_GIT_URL_LENGTH },
+      validates field, length: { maximum: MAX_URL_LENGTH },
                           format: {
                             with: REGEXP_GIT_URL,
                             message: 'Must be a valid URL'
