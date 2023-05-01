@@ -74,3 +74,6 @@ tmp/cache
 
 # ignore passwords
 .env
+
+# ignore passwords
+config/.env.production
