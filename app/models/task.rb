@@ -3,6 +3,7 @@
 # Table name: tasks
 #
 #  id              :bigint           not null, primary key
+#  deleted_at      :datetime
 #  description     :string
 #  end_date        :date
 #  estimate        :text
@@ -26,6 +27,7 @@
 # Indexes
 #
 #  index_tasks_on_column_id   (column_id)
+#  index_tasks_on_deleted_at  (deleted_at)
 #  index_tasks_on_desk_id     (desk_id)
 #  index_tasks_on_project_id  (project_id)
 #  index_tasks_on_user_id     (user_id)
@@ -38,7 +40,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  include Validatable::Taskable
+  include Taskable
 
   belongs_to :project
   belongs_to :desk
@@ -47,6 +49,8 @@ class Task < ApplicationRecord
   belongs_to :assignee, class_name: 'User', optional: true
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :destroy
+
+  acts_as_paranoid
 
   enum :priority, %i[lowest low high highest], default: :low
   enum :type_of, %i[task bug epic], default: :task
@@ -58,16 +62,5 @@ class Task < ApplicationRecord
   before_create :generate_tag_name
   after_create :increment_project_task_count, :set_priority_number
 
-  def increment_project_task_count
-    project.increment!(:tasks_count)
-  end
-
-  def set_priority_number
-    self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
-  end
-
-  def generate_tag_name
-    first_project_letter = Translit.convert(project.name[0], :english).upcase
-    self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
-  end
+  after_restore :restore_comments
 end

@@ -310,7 +310,7 @@ paths:
         type: integer
     - name: id
       in: path
-      description: document_id
+      description: id
       required: true
       schema:
         type: integer
@@ -378,7 +378,7 @@ paths:
         type: integer
     - name: id
       in: path
-      description: document_id
+      description: id
       required: true
       schema:
         type: integer
@@ -447,7 +447,7 @@ paths:
         type: integer
     - name: id
       in: path
-      description: document_id
+      description: id
       required: true
       schema:
         type: integer
@@ -467,16 +467,152 @@ paths:
       responses:
         '200':
           description: successful
-  "/api/v1/github_users/show":
+  "/api/v1/projects/{project_id}/github_branches":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     get:
-      summary: create column
+      summary: Project list branches
       tags:
-      - GithubUser
-      description: Github User
+      - Github branch
+      description: Project list branches
       responses:
         '200':
           description: successful
-  "/api/v1/github_repositories/create":
+    post:
+      summary: Create branch
+      tags:
+      - Github branch
+      description: Create branch
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                branch_name:
+                  type: string
+                  default: branch-name
+                sha:
+                  type: string
+                  example: Parent branch sha
+              required:
+              - task_id
+              - branch_name
+              - sha
+  "/api/v1/projects/{project_id}/github_branches/{task_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show task branches
+      tags:
+      - Github branch
+      description: Show task branches
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects/{project_id}/github_commits/{task_id}":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    - name: task_id
+      in: path
+      description: task_id
+      required: true
+      schema:
+        type: string
+    - name: sha
+      in: path
+      description: Branch sha
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show branch commits
+      tags:
+      - Github commit
+      description: Show branch commits
+      responses:
+        '200':
+          description: successful
+  "/api/v1/projects/{project_id}/github_pullrequests":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: Create pullrequest
+      tags:
+      - Github pullrequest
+      description: Create pullrequest
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task_id:
+                  type: integer
+                  default: 1
+                base_name:
+                  type: string
+                  default: main
+                head_name:
+                  type: string
+                  default: dev
+                title:
+                  type: string
+                  default: Title pullrequest
+                body:
+                  type: string
+                  default: Body pullrequest
+              required:
+              - name
+              - description
+              - private
+              - has_issues
+              - has_downloads
+  "/api/v1/projects/{project_id}/github_repositories/create":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     post:
       summary: Create repository
       tags:
@@ -492,9 +628,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                   default: Name repository
@@ -511,13 +644,19 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
               - name
               - description
               - private
               - has_issues
               - has_downloads
-  "/api/v1/github_repositories/update":
+  "/api/v1/projects/{project_id}/github_repositories/update":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     patch:
       summary: Update repository
       tags:
@@ -533,9 +672,6 @@ paths:
             schema:
               type: object
               properties:
-                project_id:
-                  type: integer
-                  default: 1
                 name:
                   type: string
                   default: Name repository
@@ -552,13 +688,19 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
               - name
               - description
               - private
               - has_issues
               - has_downloads
-  "/api/v1/github_repositories/delete":
+  "/api/v1/projects/{project_id}/github_repositories/delete":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
     delete:
       summary: delete repository
       tags:
@@ -583,6 +725,15 @@ paths:
               required:
               - project_id
               - validate_text
+  "/api/v1/github_users/show":
+    get:
+      summary: create column
+      tags:
+      - Github User
+      description: Github User
+      responses:
+        '200':
+          description: successful
   "/api/v1/projects":
     get:
       summary: list projects
@@ -777,8 +928,10 @@ paths:
                 properties:
                   id:
                     type: integer
-                  user:
-                    type: object
+                  user_id:
+                    type: integer
+                  project_id:
+                    type: integer
                   role:
                     type: string
                   created_at:
@@ -787,8 +940,10 @@ paths:
                     type: string
                 required:
                 - id
-                - user
+                - email
                 - role
+                - created_at
+                - updated_at
         '422':
           description: unprocessable entity
           content:
@@ -806,11 +961,11 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
-                  type: integer
+                email:
+                  type: string
               required:
-              - user_id
-  "/api/v1/projects/{project_id}/delete_member/{user_id}":
+              - email
+  "/api/v1/projects/{project_id}/delete_member":
     parameters:
     - name: project_id
       in: path
@@ -823,16 +978,20 @@ paths:
       tags:
       - Projects
       description: Delete member from project
-      parameters:
-      - name: user_id
-        in: path
-        description: user_id
-        required: true
-        schema:
-          type: integer
+      parameters: []
       responses:
         '204':
           description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
   "/api/v1/projects/{project_id}/tasks":
     parameters:
     - name: project_id
@@ -846,126 +1005,7 @@ paths:
       tags:
       - Tasks
       description: Create task
-      parameters:
-      - name: project_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the project (integer)
-      - name: assignee_id
-        in: post
-        required: false
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the assignee (integer)
-      - name: desk_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the desk (integer)
-      - name: column_id
-        in: post
-        required: true
-        schema:
-          type: integer
-        default: 1
-        description: The ID of the desk (integer)
-      - name: name
-        in: post
-        required: true
-        schema:
-          type: string
-        default: Task name
-        description: The name of the task (string)
-      - name: description
-        in: post
-        required: false
-        schema:
-          type: string
-        default: Task description
-        description: The description of the task (optional)
-      - name: priority_number
-        in: post
-        required: false
-        schema:
-          type: string
-        default: '1'
-        description: sort number
-      - name: estimate
-        in: post
-        required: false
-        schema:
-          type: string
-        default: 2w
-        description: The estimated time for completion (e.g. 2w, 4d, 6h, 45m) (optional)
-      - name: time_work
-        in: post
-        required: false
-        schema:
-          type: string
-        default: 45m
-        description: The time_work time for completion (e.g. 2w, 4d, 6h, 45m) (optional)
-      - name: label
-        in: post
-        required: false
-        schema:
-          type: string
-        default: task
-        description: The label of the task (optional)
-      - name: start_date
-        in: post
-        required: false
-        schema:
-          type: string
-          format: date
-        default: '2023-12-12'
-        description: The start date of the task (date in YYYY-MM-DD format) (optional)
-      - name: end_date
-        in: post
-        required: false
-        schema:
-          type: string
-          format: date
-        default: '2023-12-12'
-        description: The end date of the task (date in YYYY-MM-DD format) (optional)
-      - name: priority
-        in: post
-        required: false
-        schema:
-          type: string
-          enum:
-          - lowest
-          - low
-          - high
-          - highest
-        default: lowest
-        description: 'Task priority: lowest/low/high/highest.'
-      - name: type_of
-        in: post
-        required: false
-        schema:
-          type: string
-          enum:
-          - task
-          - bug
-          - epic
-        default: task
-        description: 'Task type: task/bug/epic.'
-      - name: status
-        in: post
-        required: false
-        schema:
-          type: string
-          enum:
-          - open
-          - close
-        default: open
-        description: 'Task status: open/close.'
+      parameters: []
       responses:
         '200':
           description: successful
@@ -1240,17 +1280,11 @@ paths:
           description: user deleted
         '404':
           description: user not found
-  "/api/v1/about_user":
+  "/api/v1/my_profile":
     get:
       summary: Retrieves information about the current user
       tags:
       - Users
-      parameters:
-      - name: current_user
-        in: header
-        description: JWT token to identify current user
-        schema:
-          type: string
       responses:
         '200':
           description: user information found
@@ -1330,14 +1364,14 @@ paths:
               - old_password
               - password
 servers:
-- url: http://{localhost}
-  variables:
-    localhost:
-      default: 127.0.0.1:3000
 - url: https://{kotello}
   variables:
     kotello:
       default: kotello.space
+- url: http://{localhost}
+  variables:
+    localhost:
+      default: 127.0.0.1:3000
 components:
   securitySchemes:
     bearerAuth:

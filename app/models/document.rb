@@ -3,6 +3,7 @@
 # Table name: documents
 #
 #  id                :bigint           not null, primary key
+#  deleted_at        :datetime
 #  document_type     :string           not null
 #  documentable_type :string           not null
 #  name              :string           not null
@@ -14,6 +15,7 @@
 #
 # Indexes
 #
+#  index_documents_on_deleted_at    (deleted_at)
 #  index_documents_on_documentable  (documentable_type,documentable_id)
 #  index_documents_on_user_id       (user_id)
 #
@@ -22,17 +24,10 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Document < ApplicationRecord
-  include Validatable::Documentable
+  include Documentable
 
-  ALLOWED_TYPES = %w[pdf jpg jpeg png gif doc docx xls xlsx zip rar]
   belongs_to :documentable, polymorphic: true
   belongs_to :user
 
   has_one_attached :file
-
-  #https://guides.rubyonrails.org/i18n.html#using-safe-html-translations
-  #https://guides.rubyonrails.org/active_record_validations.html#exclusion
-  validates :document_type, presence: true,
-                            inclusion: { in: ALLOWED_TYPES, message: "File type %{value} is not allowed. Allowed types are: #{ALLOWED_TYPES.join(', ')}" }
-  validates :url, presence: true, format: { with: URI::DEFAULT_PARSER.make_regexp }
 end

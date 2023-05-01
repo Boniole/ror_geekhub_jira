@@ -34,11 +34,11 @@ class Api::V1::TasksController < ApplicationController
   private
 
   def authorize_user
-    authorize @task || Task
+    authorize @task || Task.find
   end
 
   def set_task
-    @task = current_project.tasks.find(params[:id])
+    @task = current_project.tasks.find(params[:id]) if current_project.present?
   end
 
   def task_params

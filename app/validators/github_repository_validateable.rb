@@ -1,7 +1,5 @@
-class GithubRepository
+class GithubRepositoryValidateable
   include ActiveModel::API
-
-  # https://api.rubyonrails.org/classes/ActiveModel/Validator.html
   attr_accessor :project_id, :name, :description, :private, :has_issues, :has_downloads
 
   validates :project_id, numericality: { only_integer: true }

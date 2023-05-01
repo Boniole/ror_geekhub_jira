@@ -15,7 +15,6 @@ class Api::V1::ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.new(project_params)
-    authorize @project
     if @project.save
       membership = @project.memberships.new(user_id: current_user.id, role: :admin)
       membership.save!
@@ -38,8 +37,7 @@ class Api::V1::ProjectsController < ApplicationController
     existing_membership = memberships.where(user: @user)
 
     if existing_membership.any?
-      # TODO error render_errors
-      render json: { errors: 'User is already a member of the project' }, status: :unprocessable_entity
+      render_error(errors: ['User is already a member of the project'])
     else
       membership = memberships.new(user: @user)
 
@@ -68,11 +66,11 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def authorize_user
-    authorize @project || Project
+    authorize @project || Project.find
   end
 
   def set_project
-    @project = current_user.projects.find(params[:id])
+    @project = current_project(params[:id])
   end
 
   def set_projects

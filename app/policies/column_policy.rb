@@ -1,11 +1,14 @@
 class ColumnPolicy < ApplicationPolicy
   attr_reader :user, :record
 
-  def show?
-    user.admin?(@record.desk.project)
+  def create?
+    admin?(@record.desk.project_id)
   end
 
-  alias create? show?
-  alias update? show?
-  alias destroy? show?
+  def show?
+    member?(@record.desk.project_id)
+  end
+
+  alias update? create?
+  alias destroy? create?
 end

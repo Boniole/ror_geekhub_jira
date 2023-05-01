@@ -3,6 +3,7 @@
 # Table name: tasks
 #
 #  id              :bigint           not null, primary key
+#  deleted_at      :datetime
 #  description     :string
 #  end_date        :date
 #  estimate        :text
@@ -26,6 +27,7 @@
 # Indexes
 #
 #  index_tasks_on_column_id   (column_id)
+#  index_tasks_on_deleted_at  (deleted_at)
 #  index_tasks_on_desk_id     (desk_id)
 #  index_tasks_on_project_id  (project_id)
 #  index_tasks_on_user_id     (user_id)
@@ -39,20 +41,22 @@
 #
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
-  # it { should belong_to :project }
-  # it { should belong_to :desk }
-  # it { should belong_to :column }
-  # it { should belong_to :user }
-  # it { should belong_to :assignee }
+RANGE_PASSWORD_LENGTH = 8..20
+
+RSpec.describe User, type: :model do
+
+  it { should have_many :memberships }
+  it { should have_many :projects }
+  it { should have_many :tasks }
   it { should have_many :comments }
   it { should have_many :documents }
 
-  it { should define_enum_for(:priority).with_values([:lowest, :low, :high, :highest]) }
-  it { should define_enum_for(:type_of).with_values([:task, :bug, :epic]) }
-  it { should define_enum_for(:status).with_values([:open, :close]) }
+  it { should validate_uniqueness_of(:email) }
+  it { should have_secure_password }
 
-  # it { should validate_length_of(:name).is_at_least(RANGE_PASSWORD_LENGTH).on(:create) }
-
-
+  it { should validate_presence_of :first_name }
+  it { should validate_presence_of :last_name }
+  it { should validate_presence_of :email }
+  it { should validate_presence_of :password }
+  # it { should validate_exclusion_of(:password_digest).in_range(RANGE_PASSWORD_LENGTH) }
 end

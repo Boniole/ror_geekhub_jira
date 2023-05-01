@@ -3,6 +3,7 @@
 # Table name: tasks
 #
 #  id              :bigint           not null, primary key
+#  deleted_at      :datetime
 #  description     :string
 #  end_date        :date
 #  estimate        :text
@@ -26,6 +27,7 @@
 # Indexes
 #
 #  index_tasks_on_column_id   (column_id)
+#  index_tasks_on_deleted_at  (deleted_at)
 #  index_tasks_on_desk_id     (desk_id)
 #  index_tasks_on_project_id  (project_id)
 #  index_tasks_on_user_id     (user_id)

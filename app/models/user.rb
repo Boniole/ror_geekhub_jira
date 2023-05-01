@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  deleted_at             :datetime
 #  email                  :string
 #  first_name             :string
 #  github_token           :string
@@ -15,22 +16,24 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
+#
 class User < ApplicationRecord
-  include Validatable::Userable
   include Passwordable
+  include Userable
 
   has_secure_password
+  acts_as_paranoid
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_many :comments, as: :commentable, dependent: :destroy
-  has_many :task_comments, -> { where(commentable_type: 'Task') }, class_name: 'Comment', foreign_key: :commentable_id
-  has_many :documents, as: :documentable
+  has_many :comments, dependent: :destroy
+  has_many :documents, dependent: :destroy
 
   has_many :memberships
   has_many :membered_projects, through: :memberships, source: :project
 
-  def admin?(project)
-    id == project.user_id
-  end
+  after_restore :restore_projects
 end

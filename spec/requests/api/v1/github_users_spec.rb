@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'api/v1/github_users', type: :request do
   path '/api/v1/github_users/show' do
     get('create column') do
-      tags 'GithubUser'
+      tags 'Github User'
       description 'Github User'
       consumes 'application/json'
 

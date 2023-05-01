@@ -18,7 +18,7 @@ class Api::V2::UsersController < ApplicationController
   end
 
   def about_current_user
-    render json: @current_user, status: :ok, serializer: Api::V2::UserSerializer
+    render json: current_user, status: :ok, serializer: Api::V2::UserSerializer
   end
 
   def create
@@ -49,7 +49,7 @@ class Api::V2::UsersController < ApplicationController
     end
 # @user.update and add skip_validation???
     if @user.update_columns(first_name: params[:first_name], last_name: params[:last_name])
-      render json: @user, status: :ok, serializer: UserSerializer
+      render json: @user, status: :ok, serializer: Api::V2::UserSerializer
     else
       render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end

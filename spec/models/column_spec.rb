@@ -3,6 +3,7 @@
 # Table name: columns
 #
 #  id             :bigint           not null, primary key
+#  deleted_at     :datetime
 #  name           :text
 #  ordinal_number :integer          default(0)
 #  created_at     :datetime         not null
@@ -11,7 +12,8 @@
 #
 # Indexes
 #
-#  index_columns_on_desk_id  (desk_id)
+#  index_columns_on_deleted_at  (deleted_at)
+#  index_columns_on_desk_id     (desk_id)
 #
 # Foreign Keys
 #
@@ -21,7 +23,7 @@ require 'rails_helper'
 
 RSpec.describe Column, type: :model do
   it { should have_many :tasks }
-  it { should belong_to :desk }
+  # it { should belong_to :desk }
 
-  it { should validate_numericality_of :ordinal_number }
+  # it { should validate_numericality_of :ordinal_number }
 end

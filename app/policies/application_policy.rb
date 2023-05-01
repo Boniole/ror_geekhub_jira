@@ -8,19 +8,6 @@ class ApplicationPolicy
     @record = record
   end
 
-  class Scope
-    attr_reader :user, :scope
-
-    def initialize(user, scope)
-      @user = user
-      @scope = scope
-    end
-
-    def resolve
-      scope
-    end
-  end
-
   def index?
     false
   end
@@ -32,7 +19,11 @@ class ApplicationPolicy
   alias edit? index?
   alias destroy? index?
 
+  def admin?(project_id)
+    user.memberships.find_by(project_id: project_id).admin?
+  end
+
   def member?(project_id)
-    user.memberships.get_project(project_id).present?
+    user.memberships.find_by(project_id: project_id).present?
   end
 end

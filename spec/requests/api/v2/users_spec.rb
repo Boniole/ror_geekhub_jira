@@ -60,7 +60,6 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
       get 'Retrieves information about the current user' do
         tags 'Users'
         produces 'application/json'
-        parameter name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
 
         response '200', 'user information found' do
           schema type: :object,
@@ -93,8 +92,7 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
             first_name: { type: :string },
             last_name: { type: :string },
             email: { type: :string },
-            password: { type: :string },
-            github_token: { type: :string }
+            password: { type: :string }
           },
           required: %w[first_name last_name email password]
         }
@@ -122,8 +120,7 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
           type: :object,
           properties: {
             first_name: { type: :string },
-            last_name: { type: :string },
-            github_token: { type: :string }
+            last_name: { type: :string }
           }
         }
 

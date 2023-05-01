@@ -9,7 +9,6 @@ class Api::V1::ColumnsController < ApplicationController
   def create
     column = Column.new(column_params)
     authorize column
-
     if column.save
       render_success(data: column, status: :created, serializer: Api::V1::ColumnSerializer)
     else
@@ -32,11 +31,11 @@ class Api::V1::ColumnsController < ApplicationController
   private
 
   def authorize_user
-    authorize @column || Column
+    authorize @column || Column.find
   end
 
   def set_column
-    @column = current_project.desks.first.columns.find(params[:id])
+    @column = current_project.desks.first.columns.find(params[:id]) if current_project.present?
   end
 
   def column_params

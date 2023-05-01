@@ -15,6 +15,7 @@ RSpec.configure do |config|
   # document below. You can override this behavior by adding a swagger_doc tag to the
   # the root example_group in your specs, e.g. describe '...', swagger_doc: 'v2/swagger.json'
   config.swagger_docs = {
+
     'v1/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
@@ -24,18 +25,18 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://{localhost}',
-          variables: {
-            localhost: {
-              default: '127.0.0.1:3000'
-            }
-          }
-        },
-        {
           url: 'https://{kotello}',
           variables: {
             kotello: {
               default: 'kotello.space'
+            }
+          }
+        },
+        {
+          url: 'http://{localhost}',
+          variables: {
+            localhost: {
+              default: '127.0.0.1:3000'
             }
           }
         }
@@ -54,8 +55,7 @@ RSpec.configure do |config|
           bearerAuth: []
         }
       ]
-    },
-
+  },
     'v2/swagger.yaml' => {
       openapi: '3.0.1',
       info: {
@@ -65,18 +65,18 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'http://{localhost}',
-          variables: {
-            localhost: {
-              default: '127.0.0.1:3000'
-            }
-          }
-        },
-        {
           url: 'https://{kotello}',
           variables: {
             kotello: {
               default: 'kotello.space'
+            }
+          }
+        },
+        {
+          url: 'http://{localhost}',
+          variables: {
+            localhost: {
+              default: '127.0.0.1:3000'
             }
           }
         }

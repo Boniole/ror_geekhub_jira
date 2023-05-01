@@ -8,16 +8,16 @@ module Validatable
   RANGE_REPO_NAME_LENGTH = RANGE_NAME_LENGTH
   RANGE_LABEL_LENGTH = RANGE_NAME_LENGTH
   RANGE_COLUMN_NAMES = ['ToDo', 'In progress', 'In review', 'Done'].freeze
+  RANGE_ALLOWED_TYPES = %w[pdf jpg jpeg png gif doc docx xls xlsx zip rar].freeze
 
+  MAX_URL_LENGTH = 500
 
-  MAX_GIT_URL_LENGTH = 255
-
-  REGEXP_USER = /\A[a-zA-Z]+\z/.freeze
-  REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/.freeze
-  REGEXP_PASSWORD = /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/.freeze
-  REGEXP_TIME_PERIOD = /\A\d+(w|d|h|m)\z/.freeze
-  REGEXP_GITHUB_TOKEN = /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/.freeze
-  REGEXP_GIT_REPO = /\A\w+\/\w+\z/.freeze
+  REGEXP_USER = /\A[a-zA-Z]+\z/
+  REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/
+  REGEXP_PASSWORD = /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/
+  REGEXP_TIME_PERIOD = /\A\d+(w|d|h|m)\z/
+  REGEXP_GITHUB_TOKEN = /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/
+  REGEXP_GIT_REPO = %r{\A\w+/\w+\z}
   REGEXP_GIT_URL = URI::DEFAULT_PARSER.make_regexp(%w[http https])
 
   included do
@@ -55,7 +55,11 @@ module Validatable
                 format: {
                   with: REGEXP_PASSWORD,
                   message: 'Must contain at least one uppercase letter, one lowercase letter, and one digit'
-                }, on: %i[create show show_current_user destroy]
+                }, if: :password_required?
+
+      def password_required?
+        new_record? || password.present?
+      end
     end
 
     def self.validate_time_period(field = :estimate)
@@ -86,85 +90,17 @@ module Validatable
                            }, allow_blank: true
     end
 
-    def self.validate_git_url
-      validates :git_url, length: { maximum: MAX_GIT_URL_LENGTH },
+    def self.validate_url(field = :git_url)
+      validates field, length: { maximum: MAX_URL_LENGTH },
                           format: {
                             with: REGEXP_GIT_URL,
                             message: 'Must be a valid URL'
                           }, allow_blank: true
     end
-  end
 
-  module Userable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_user_field
-      validate_user_field(:last_name)
-      validate_email
-      validate_password
-      validate_github_token
-    end
-  end
-
-  module Projectable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_name
-      validate_git_repo
-      validate_git_url
-    end
-  end
-
-  module Deskable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_name
-    end
-  end
-
-  module Columnable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_name
-    end
-  end
-
-  module Taskable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_name
-      validate_description
-      validate_time_period
-      validate_time_period(:time_work)
-      validate_label
-    end
-  end
-
-  module Commentable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_description(:body)
-    end
-  end
-
-  module Documentable
-    extend ActiveSupport::Concern
-    include Validatable
-
-    included do
-      validate_name
+    def self.validate_document_type
+      validates :document_type, presence: true,
+              inclusion: { in: RANGE_ALLOWED_TYPES, message: "File type %{value} is not allowed. Allowed types are: #{RANGE_ALLOWED_TYPES.join(', ')}" }
     end
   end
 end

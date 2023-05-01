@@ -3,6 +3,7 @@
 # Table name: projects
 #
 #  id          :bigint           not null, primary key
+#  deleted_at  :datetime
 #  git_repo    :string
 #  git_url     :string
 #  name        :string
@@ -14,14 +15,15 @@
 #
 # Indexes
 #
-#  index_projects_on_user_id  (user_id)
+#  index_projects_on_deleted_at  (deleted_at)
+#  index_projects_on_user_id     (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
 #
 class Project < ApplicationRecord
-  include Validatable::Projectable
+  include Projectable
 
   belongs_to :user
   has_many :memberships
@@ -30,13 +32,11 @@ class Project < ApplicationRecord
   has_many :tasks
   has_many :documents, as: :documentable
 
+  acts_as_paranoid
+
   enum :status, %i[open close], default: :open
 
   after_create :create_desk
 
-  private
-
-  def create_desk
-    desks.create
-  end
+  after_restore :restore_desks
 end

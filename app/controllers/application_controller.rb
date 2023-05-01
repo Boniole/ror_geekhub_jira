@@ -19,12 +19,12 @@ class ApplicationController < ActionController::API
 
   private
 
-  def current_project
-    current_user.memberships.get_project(params[:project_id]).first.project
-  end
-
   def current_user
     User.find(@decoded[:user_id]) if @decoded.present?
+  end
+
+  def current_project(project_id = params[:project_id])
+    current_user.memberships.find_by(project_id: project_id)&.project
   end
 
   def user_not_authorized
@@ -35,8 +35,8 @@ class ApplicationController < ActionController::API
     render json: { errors: "Required parameter is missing: #{exception.param}" }, status: :unprocessable_entity
   end
 
-  def record_not_found
-    render json: { errors: 'Record not found' }, status: :not_found
+  def record_not_found(exception)
+    render json: { error: "#{exception.model} not found!" }, status: :not_found
   end
 
   # needed to delete? dublicate in concern

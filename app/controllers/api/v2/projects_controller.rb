@@ -15,7 +15,6 @@ class Api::V2::ProjectsController < ApplicationController
 
   def create
     @project = current_user.projects.new(project_params)
-    authorize @project
 
     if @project.save
       membership = @project.memberships.new(user_id: current_user.id, role: :admin)
