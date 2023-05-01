@@ -24,7 +24,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_project(project_id = params[:project_id])
-    current_user.memberships.get_project(project_id).first.project
+    current_user.memberships.get_project(project_id).first&.project
   end
 
   def user_not_authorized

@@ -31,11 +31,11 @@ class Api::V1::ColumnsController < ApplicationController
   private
 
   def authorize_user
-    authorize @column || Column
+    authorize @column || Column.find
   end
 
   def set_column
-    @column = current_project.desks.first.columns.find(params[:id])
+    @column = current_project.desks.first.columns.find(params[:id]) if current_project.present?
   end
 
   def column_params
