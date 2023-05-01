@@ -711,8 +711,6 @@ paths:
                 status:
                   type: string
                   default: open
-                git_url:
-                  type: string
               required:
               - name
     delete:
@@ -1007,8 +1005,6 @@ paths:
                   type: string
                 password:
                   type: string
-                github_token:
-                  type: string
               required:
               - first_name
               - last_name
@@ -1076,8 +1072,6 @@ paths:
                 first_name:
                   type: string
                 last_name:
-                  type: string
-                github_token:
                   type: string
     delete:
       summary: Deletes a user
@@ -1178,14 +1172,14 @@ paths:
               - old_password
               - password
 servers:
-- url: http://{localhost}
-  variables:
-    localhost:
-      default: 127.0.0.1:3000
 - url: https://{kotello}
   variables:
     kotello:
       default: kotello.space
+- url: http://{localhost}
+  variables:
+    localhost:
+      default: 127.0.0.1:3000
 components:
   securitySchemes:
     bearerAuth:
