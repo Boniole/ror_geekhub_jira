@@ -32,6 +32,8 @@ class Project < ApplicationRecord
   has_many :tasks
   has_many :documents, as: :documentable
 
+  acts_as_paranoid
+
   enum :status, %i[open close], default: :open
 
   after_create :create_desk

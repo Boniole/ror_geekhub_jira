@@ -50,6 +50,8 @@ class Task < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :documents, as: :documentable, dependent: :destroy
 
+  acts_as_paranoid
+
   enum :priority, %i[lowest low high highest], default: :low
   enum :type_of, %i[task bug epic], default: :task
   enum :status, %i[open close], default: :open

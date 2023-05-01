@@ -25,6 +25,7 @@ class User < ApplicationRecord
   include Passwordable
 
   has_secure_password
+  acts_as_paranoid
 
   has_many :projects, dependent: :destroy
   has_many :tasks, dependent: :destroy

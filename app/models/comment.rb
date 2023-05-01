@@ -29,6 +29,8 @@ class Comment < ApplicationRecord
   belongs_to :commentable, polymorphic: true
   has_many :documents, as: :documentable, dependent: :destroy
 
+  acts_as_paranoid
+
   enum :status, %i[open close], default: :open
 
   scope :current_comment, ->(user_id, comment_id) { joins(:user).where(user_id: user_id).find(comment_id) }
