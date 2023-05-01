@@ -53,11 +53,10 @@ RSpec.describe 'api/v1/users', type: :request do
       end
     end
 
-    path '/api/v1/about_user' do
+    path '/api/v1/my_profile' do
       get 'Retrieves information about the current user' do
         tags 'Users'
         produces 'application/json'
-        parameter name: :current_user, in: :header, type: :string, description: 'JWT token to identify current user'
 
         response '200', 'user information found' do
           schema type: :object,

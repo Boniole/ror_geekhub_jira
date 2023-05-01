@@ -32,8 +32,8 @@ RSpec.describe 'api/v1/projects', type: :request do
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
-            name: { type: :string },
-            status: { type: :string, default: :open }
+          name: { type: :string },
+          status: { type: :string, default: :open }
         },
         required: %w[name]
       }
@@ -124,25 +124,28 @@ RSpec.describe 'api/v1/projects', type: :request do
       description 'Add member to project'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: :project, in: :body, schema: {
+      parameter name: :user, in: :body, schema: {
         type: :object,
         properties: {
-          user_id: { type: :integer }
+          email: { type: :string }
         },
-        required: %w[user_id]
+        required: %w[email]
       }
+
       response(201, 'successful') do
         schema type: :object,
                properties: {
                  id: { type: :integer },
-                 user: { type: :object },
+                 user_id: { type: :integer },
+                 project_id: { type: :integer },
                  role: { type: :string },
                  created_at: { type: :string },
                  updated_at: { type: :string }
                },
-               required: %w[id user role]
+               required: %w[id email role created_at updated_at]
         run_test!
       end
+
       response(422, 'unprocessable entity') do
         schema type: :object,
                properties: {
@@ -154,7 +157,7 @@ RSpec.describe 'api/v1/projects', type: :request do
     end
   end
 
-  path '/api/v1/projects/{project_id}/delete_member/{user_id}' do
+  path '/api/v1/projects/{project_id}/delete_member' do
     parameter name: :project_id, in: :path, type: :integer, description: 'project_id'
 
     delete('delete member from project') do
@@ -162,7 +165,13 @@ RSpec.describe 'api/v1/projects', type: :request do
       description 'Delete member from project'
       produces 'application/json'
       consumes 'application/json'
-      parameter name: :user_id, in: :path, type: :integer, description: 'user_id'
+      parameter name: :email, in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string }
+        },
+        required: %w[email]
+      }
       response(204, 'successful') do
         run_test!
       end
