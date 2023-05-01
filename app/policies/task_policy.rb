@@ -2,7 +2,7 @@ class TaskPolicy < ApplicationPolicy
   attr_reader :user, :record
 
   def show?
-    member?(@record&.project_id) if @record.project_id.present?
+    member?(@record.project_id)
   end
 
   alias create? show?
