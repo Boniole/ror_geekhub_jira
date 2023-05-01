@@ -23,7 +23,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Project < ApplicationRecord
-  include Validatable::Projectable
+  include Projectable
 
   belongs_to :user
   has_many :memberships

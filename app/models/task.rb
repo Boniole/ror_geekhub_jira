@@ -40,7 +40,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Task < ApplicationRecord
-  include Validatable::Taskable
+  include Taskable
 
   belongs_to :project
   belongs_to :desk
@@ -63,17 +63,4 @@ class Task < ApplicationRecord
   after_create :increment_project_task_count, :set_priority_number
 
   after_restore :restore_comments
-
-  def increment_project_task_count
-    project.increment!(:tasks_count)
-  end
-
-  def set_priority_number
-    self.priority_number = column.tasks.maximum(:priority_number).to_i + 1 if priority_number.nil?
-  end
-
-  def generate_tag_name
-    first_project_letter = Translit.convert(project.name[0], :english).upcase
-    self.tag_name = "#{first_project_letter}P-#{project.tasks_count}"
-  end
 end

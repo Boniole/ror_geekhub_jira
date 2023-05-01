@@ -24,7 +24,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Document < ApplicationRecord
-  include Validatable::Documentable
+  include Documentable
 
   belongs_to :documentable, polymorphic: true
   belongs_to :user
