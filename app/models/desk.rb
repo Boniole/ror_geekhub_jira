@@ -29,9 +29,5 @@ class Desk < ApplicationRecord
 
   after_create :create_columns
 
-  private
-
-  def create_columns
-    RANGE_COLUMN_NAMES.each { |name| columns.create(name: name) }
-  end
+  after_restore :restore_columns
 end

@@ -62,6 +62,8 @@ class Task < ApplicationRecord
   before_create :generate_tag_name
   after_create :increment_project_task_count, :set_priority_number
 
+  after_restore :restore_comments
+
   def increment_project_task_count
     project.increment!(:tasks_count)
   end

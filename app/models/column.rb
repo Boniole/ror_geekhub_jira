@@ -33,15 +33,5 @@ class Column < ApplicationRecord
   after_create :increment_desk_column_count
   after_destroy :decrement_desk_column_count
 
-  def increment_desk_column_count
-    desk.increment!(:columns_count)
-  end
-
-  def decrement_desk_column_count
-    desk.decrement!(:columns_count)
-  end
-
-  def ordinal_number
-    self.ordinal_number = desk.columns_count
-  end
+  after_restore :restore_tasks
 end

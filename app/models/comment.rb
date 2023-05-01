@@ -34,4 +34,5 @@ class Comment < ApplicationRecord
   enum :status, %i[open close], default: :open
 
   scope :current_comment, ->(user_id, comment_id) { joins(:user).where(user_id: user_id).find(comment_id) }
+  scope :all_comments_task, ->(task) { joins(:user).where(commentable_id: task.id) }
 end

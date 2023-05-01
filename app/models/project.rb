@@ -38,9 +38,5 @@ class Project < ApplicationRecord
 
   after_create :create_desk
 
-  private
-
-  def create_desk
-    desks.create
-  end
+  after_restore :restore_desks
 end
