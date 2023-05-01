@@ -35,8 +35,8 @@ class ApplicationController < ActionController::API
     render json: { errors: "Required parameter is missing: #{exception.param}" }, status: :unprocessable_entity
   end
 
-  def record_not_found
-    render json: { errors: 'Record not found' }, status: :not_found
+  def record_not_found(exception)
+    render json: { error: exception.message }, status: :not_found
   end
 
   # needed to delete? dublicate in concern
