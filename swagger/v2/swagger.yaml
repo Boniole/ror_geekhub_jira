@@ -1099,12 +1099,6 @@ paths:
       summary: Retrieves information about the current user
       tags:
       - Users
-      parameters:
-      - name: current_user
-        in: header
-        description: JWT token to identify current user
-        schema:
-          type: string
       responses:
         '200':
           description: user information found
