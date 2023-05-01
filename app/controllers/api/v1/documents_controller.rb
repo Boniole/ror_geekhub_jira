@@ -47,7 +47,7 @@ class Api::V1::DocumentsController < ApplicationController
   private
 
   def authorize_user
-    authorize @document || Document
+    authorize @document || Document.find
   end
 
   def set_attachable

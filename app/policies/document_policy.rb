@@ -2,36 +2,24 @@ class DocumentPolicy < ApplicationPolicy
   attr_reader :user, :record
 
   def show?
-    project_member?
+    member?(project_of_documentable)
   end
 
   def update?
-    user_is_file_author_or_admin?
+    @record.user == user || admin?(project_of_documentable)
   end
 
   alias create? show?
   alias destroy? update?
 
-  private
-
-  def project_member?
-    project = project_of_documentable
-    project.memberships.exists?(user_id: user.id)
-  end
-
-  def user_is_file_author_or_admin?
-    @record.user == user || user.admin?(project_of_documentable)
-  end
-
   def project_of_documentable
     case @record.documentable_type
     when 'Project'
-      @record.documentable
+      @record.documentable.id
     when 'Task'
-      @record.documentable.project
-      # TODO not working comment
+      @record.documentable.project_id
     when 'Comment'
-      @record.documentable.commentable.project
+      @record.documentable.commentable.project_id
     end
   end
 end

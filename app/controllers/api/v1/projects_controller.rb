@@ -66,11 +66,11 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def authorize_user
-    authorize @project || Project.find(params[:id])
+    authorize @project || Project.find
   end
 
   def set_project
-    @project = current_project(params[:id])
+    @project = current_project(params[:id]) if current_project.present?
   end
 
   def set_projects

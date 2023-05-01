@@ -6,7 +6,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    @record.user == user || user.admin?(@record.commentable.project)
+    @record.user == user || admin?(@record.commentable.project_id)
   end
 
   alias destroy? update?

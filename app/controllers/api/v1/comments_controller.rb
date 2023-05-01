@@ -29,7 +29,7 @@ class Api::V1::CommentsController < ApplicationController
   private
 
   def authorize_user
-    authorize @comment || Comment
+    authorize @comment || Comment.find
   end
 
   def set_comment

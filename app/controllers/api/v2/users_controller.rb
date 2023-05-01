@@ -18,7 +18,7 @@ class Api::V2::UsersController < ApplicationController
   end
 
   def about_current_user
-    render json: @current_user, status: :ok, serializer: Api::V2::UserSerializer
+    render json: current_user, status: :ok, serializer: Api::V2::UserSerializer
   end
 
   def create

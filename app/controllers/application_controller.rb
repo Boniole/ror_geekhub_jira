@@ -24,7 +24,7 @@ class ApplicationController < ActionController::API
   end
 
   def current_project(project_id = params[:project_id])
-    current_user.memberships.get_project(project_id).first.project
+    current_user.memberships.find_by(project_id: project_id)&.project
   end
 
   def user_not_authorized
@@ -36,7 +36,7 @@ class ApplicationController < ActionController::API
   end
 
   def record_not_found(exception)
-    render json: { error: exception.message }, status: :not_found
+    render json: { error: "#{exception.model} not found!" }, status: :not_found
   end
 
   # needed to delete? dublicate in concern
