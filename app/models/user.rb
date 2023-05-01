@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  deleted_at             :datetime
 #  email                  :string
 #  first_name             :string
 #  github_token           :string
@@ -14,6 +15,10 @@
 #  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_deleted_at  (deleted_at)
 #
 class User < ApplicationRecord
   include Validatable::Userable

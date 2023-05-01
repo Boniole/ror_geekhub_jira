@@ -3,6 +3,7 @@
 # Table name: documents
 #
 #  id                :bigint           not null, primary key
+#  deleted_at        :datetime
 #  document_type     :string           not null
 #  documentable_type :string           not null
 #  name              :string           not null
@@ -14,6 +15,7 @@
 #
 # Indexes
 #
+#  index_documents_on_deleted_at    (deleted_at)
 #  index_documents_on_documentable  (documentable_type,documentable_id)
 #  index_documents_on_user_id       (user_id)
 #

@@ -3,6 +3,7 @@
 # Table name: columns
 #
 #  id             :bigint           not null, primary key
+#  deleted_at     :datetime
 #  name           :text
 #  ordinal_number :integer          default(0)
 #  created_at     :datetime         not null
@@ -11,7 +12,8 @@
 #
 # Indexes
 #
-#  index_columns_on_desk_id  (desk_id)
+#  index_columns_on_deleted_at  (deleted_at)
+#  index_columns_on_desk_id     (desk_id)
 #
 # Foreign Keys
 #
