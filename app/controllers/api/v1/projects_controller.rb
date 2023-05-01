@@ -1,7 +1,7 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
-  before_action :authorize_user, :set_project, only: %i[show update destroy add_member delete_member]
+  before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
   before_action :memberships, only: %i[update destroy add_member delete_member]
   before_action :set_member, only: %i[add_member delete_member]
 
@@ -70,7 +70,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = current_project(params[:id]) if current_project.present?
+    @project = current_project(params[:id])
   end
 
   def set_projects
