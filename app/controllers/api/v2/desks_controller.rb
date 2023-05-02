@@ -1,5 +1,5 @@
 class Api::V2::DesksController < ApplicationController
-  before_action :authorize_request, :set_project
+  before_action :set_project
   before_action :desk_params, only: %i[create update]
   before_action :set_desk, only: %i[show update destroy]
   before_action :set_desks, only: :index
@@ -14,8 +14,6 @@ class Api::V2::DesksController < ApplicationController
 
   def create
     desk = @project.desks.new(desk_params)
-    # TODO we don't have policy for desks
-    # authorize desk
 
     if desk.save
       render_success(data: desk, status: :created, serializer: Api::V2::DeskSerializer)
@@ -35,10 +33,6 @@ class Api::V2::DesksController < ApplicationController
   end
 
   private
-
-  def authorize_user
-    authorize @desk || Desk
-  end
 
   def set_project
     @project = current_user.projects.find(params[:project_id])

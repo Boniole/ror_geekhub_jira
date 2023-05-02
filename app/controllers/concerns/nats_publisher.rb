@@ -1,7 +1,7 @@
 require 'nats/client'
 require 'json'
 
-# module to publich data NATS
+# TODO module to publich data NATS Serhii
 module NatsPublisher #extend ActiveSupport::Concern
   def nats_publish(subject, data)
     nats = NATS.connect(ENV['NATS_SERVER_PORT'])

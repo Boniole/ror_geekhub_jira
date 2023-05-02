@@ -90,7 +90,8 @@ RSpec.describe 'api/v1/users', type: :request do
             last_name: { type: :string },
             email: { type: :string },
             password: { type: :string },
-            github_token: { type: :string }
+            github_token: { type: :string },
+            phone_number: { type: :string }
           },
           required: %w[first_name last_name email password]
         }

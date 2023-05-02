@@ -37,7 +37,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-gem "rack-cors"
+gem 'rack-cors'
 
 # A Ruby binding to the Ed25519 elliptic curve public-key signature system described in RFC 8032.
 gem 'ed25519'
@@ -53,6 +53,9 @@ gem 'omniauth-facebook'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+
+# Gem for communicating with the Twilio API
+gem 'twilio-ruby'
 
 # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
 gem 'rspec-rails'
@@ -86,9 +89,9 @@ gem 'paranoia'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'shoulda-matchers'
-  gem 'rails-controller-testing'
   gem 'factory_bot'
+  gem 'rails-controller-testing'
+  gem 'shoulda-matchers'
 end
 
 group :development do

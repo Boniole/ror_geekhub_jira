@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
 
   skip_before_action :authorize_request, only: :create
   before_action :set_user, only: :show
+  # TODO delete comment
   # before_action :skip_password_validation, only: :update
 
   def show
@@ -18,7 +19,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token_data = generate_token(@user.id)
-      # Move to concerns
+      # TODO Move to concerns Serhii
       nats_publish('service.mail', { class: 'account',
                                      type: 'account_register_new',
                                      language: 'en',

@@ -42,7 +42,7 @@ class Api::V1::ProjectsController < ApplicationController
       membership = memberships.new(user: @user)
 
       if membership.save
-        # SEND MAIL HERE
+        # TODO SEND MAIL HERE Serhii
         render_success(data: membership, status: :created, serializer: Api::V1::MembershipSerializer)
       else
         render_error(errors: membership.errors)
