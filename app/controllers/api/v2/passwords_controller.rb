@@ -1,7 +1,7 @@
 class Api::V2::PasswordsController < ApplicationController
   include NatsPublisher
   before_action :authorize_request, only: :reset_in_settings
-#forgot_password
+  # forgot_password
   def forgot
     return render json: { errors: 'Email not present' } if params[:email].blank?
 
@@ -11,10 +11,10 @@ class Api::V2::PasswordsController < ApplicationController
       user.generate_password_token!
       # SEND EMAIL HERE
 
-      #concorn nats_publish nuts able
-      nats_publish('service.mail', { class: "account",
-                                     type: "account_reset_password",
-                                     language: "en",
+      # concorn nats_publish nuts able
+      nats_publish('service.mail', { class: 'account',
+                                     type: 'account_reset_password',
+                                     language: 'en',
                                      to: user.email,
                                      token: user.reset_password_token,
                                      username: user.first_name }.to_json)
@@ -25,11 +25,12 @@ class Api::V2::PasswordsController < ApplicationController
   end
 
   def reset
-    #delete
+    # delete
     token = params[:token]
 
     return render json: { error: 'Token not present' } if params[:email].blank?
-#params[:token] replace token
+
+    # params[:token] replace token
     user = User.find_by(reset_password_token: token)
 
     if user.present? && user.password_token_valid?
@@ -44,11 +45,11 @@ class Api::V2::PasswordsController < ApplicationController
   end
 
   def reset_in_settings
-    #remove uset to current_user
-    user = @current_user
+    # remove uset to current_user
+    user = current_user
     old_password = params[:old_password]
 
-    #move to 62 not initialized if get return unless user.authenticate(old_password)
+    # move to 62 not initialized if get return unless user.authenticate(old_password)
     password = params[:password]
 
     # replace old_password to params[:old_password]

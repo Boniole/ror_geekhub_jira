@@ -15,7 +15,7 @@ module ApiV2Routes
         # rename reset to reset_password
         post '/reset', to: 'passwords#reset'
         # rename reset_password to update_password
-        post '/reset_password', to: 'passwords#reset_in_settings'
+        put '/reset_password', to: 'passwords#reset_in_settings'
         resources :projects do
           resources :desks
           resources :documents, except: :update
