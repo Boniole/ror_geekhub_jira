@@ -36,9 +36,7 @@ class Api::V2::ProjectsController < ApplicationController
 
   def add_member
     existing_membership = memberships.where(user: @user)
-    # .any?
     if existing_membership.any?
-      # TODO error render_errors
       render json: { error: 'User is already a member of the project' }, status: :unprocessable_entity
     else
       membership = @project.memberships.new(user: @user)

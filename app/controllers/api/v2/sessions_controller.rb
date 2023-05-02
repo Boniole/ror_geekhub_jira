@@ -18,7 +18,6 @@ class Api::V2::SessionsController < ApplicationController
   def auth
     request.env['omniauth.auth']
   end
-# TODO OR REMOVE commit code
 
   # private
 
