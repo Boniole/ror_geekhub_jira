@@ -1,5 +1,6 @@
 class Api::V1::PasswordsController < ApplicationController
   include NatsPublisher
+  include TwilioSmsable
   skip_before_action :authorize_request, only: %i[reset_password forget_password]
 
   def forget_password
@@ -43,12 +44,23 @@ class Api::V1::PasswordsController < ApplicationController
   def update_password
     if current_user.authenticate(params[:old_password])
       if current_user.update!(password: params[:password])
+        send_sms
+
         render_success(data: current_user, serializer: Api::V1::UserSerializer)
       else
         render_error(errors: current_user.errors.full_messages)
       end
     else
       render_error(errors: ['Old password is incorrect'])
+    end
+  end
+
+  private
+
+  def send_sms
+    if current_user.phone_number.present?
+      send_twilio_sms(current_user.phone_number,
+                      'Your password has been successfully changed')
     end
   end
 end
