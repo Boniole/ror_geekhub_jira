@@ -19,12 +19,12 @@ class Api::V1::UsersController < ApplicationController
     if @user.save
       token_data = generate_token(@user.id)
       # Move to concerns
-      nats_publish('service.mail', { class: 'account',
-                                     type: 'account_register_new',
-                                     language: 'en',
-                                     password: @user.password,
-                                     to: @user.email,
-                                     username: @user.first_name }.to_json)
+      # nats_publish('service.mail', { class: 'account',
+      #                                type: 'account_register_new',
+      #                                language: 'en',
+      #                                password: @user.password,
+      #                                to: @user.email,
+      #                                username: @user.first_name }.to_json)
       render_success(data: {
                        token: token_data[:token],
                        expiration_date: token_data[:expiration_date],
@@ -54,7 +54,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:first_name, :last_name, :email, :password, :github_token)
+    params.permit(:first_name, :last_name, :email, :password, :github_token, :phone_number)
   end
 
   def skip_password_validation
