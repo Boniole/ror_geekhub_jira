@@ -15,6 +15,7 @@ module Validatable
   REGEXP_USER = /\A[a-zA-Z]+\z/
   REGEXP_EMAIL = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/
   REGEXP_PASSWORD = /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]+\z/
+  REGEXP_PHONE = /\A\+[0-9]{6,14}\z/
   REGEXP_TIME_PERIOD = /\A\d+(w|d|h|m)\z/
   REGEXP_GITHUB_TOKEN = /\A(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9]{22}_[a-zA-Z0-9]{59}|v[0-9]\.[0-9a-f]{40})\z/
   REGEXP_GIT_REPO = %r{\A\w+/\w+\z}
@@ -62,6 +63,13 @@ module Validatable
       end
     end
 
+    def self.validate_phone_number
+      validates :phone_number, format: {
+        with: REGEXP_PHONE,
+        message: 'Invalid phone number. Please check your input and try again.'
+      }, allow_blank: true
+    end
+
     def self.validate_time_period(field = :estimate)
       validates field,
                 format: {
@@ -92,15 +100,15 @@ module Validatable
 
     def self.validate_url(field = :git_url)
       validates field, length: { maximum: MAX_URL_LENGTH },
-                          format: {
-                            with: REGEXP_GIT_URL,
-                            message: 'Must be a valid URL'
-                          }, allow_blank: true
+                       format: {
+                         with: REGEXP_GIT_URL,
+                         message: 'Must be a valid URL'
+                       }, allow_blank: true
     end
 
     def self.validate_document_type
       validates :document_type, presence: true,
-              inclusion: { in: RANGE_ALLOWED_TYPES, message: "File type %{value} is not allowed. Allowed types are: #{RANGE_ALLOWED_TYPES.join(', ')}" }
+                                inclusion: { in: RANGE_ALLOWED_TYPES, message: "File type %<value>s is not allowed. Allowed types are: #{RANGE_ALLOWED_TYPES.join(', ')}" }
     end
   end
 end
