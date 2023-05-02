@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_101651) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_193331) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -160,6 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_101651) do
     t.string "uid"
     t.string "provider"
     t.datetime "deleted_at"
+    t.string "phone_number"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
