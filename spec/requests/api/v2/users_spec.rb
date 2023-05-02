@@ -197,11 +197,65 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
     end
   end
 
-  path '/api/v2/reset' do
-    post 'Resets a user password' do
+  path '/api/v1/forget_password' do
+    post 'Generates a password reset token and sends an email' do
+      tags 'Users'
+      consumes 'application/json'
+      parameter name: :email, in: :body, schema: {
+        type: :object,
+        properties: {
+          email: { type: :string }
+        },
+        required: %w[email]
+      }
+
+      response '200', 'Password reset token sent successfully' do
+        let(:email) { { email: 'user@example.com' } }
+        run_test!
+      end
+
+      response '404', 'Email address not found' do
+        let(:email) { { email: 'nonexistent_user@example.com' } }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/reset_password' do
+    post 'Resets a user password with a valid password reset token' do
       tags 'Users'
       consumes 'application/json'
       parameter name: :reset_password, in: :body, schema: {
+        type: :object,
+        properties: {
+          token: { type: :string },
+          password: { type: :string }
+        },
+        required: %w[token password]
+      }
+
+      response '200', 'Password reset successfully' do
+        let(:reset_password) { { token: 'valid_token', password: 'new_password' } }
+        run_test!
+      end
+
+      response '422', 'Invalid password reset request' do
+        let(:reset_password) { { token: 'valid_token', password: '' } }
+        run_test!
+      end
+
+      response '404', 'Invalid or expired password reset token' do
+        let(:reset_password) { { token: 'invalid_token', password: 'new_password' } }
+        run_test!
+      end
+    end
+  end
+
+  path '/api/v1/update_password' do
+    post 'Updates user password' do
+      tags 'Users'
+      consumes 'application/json'
+      parameter name: :password_params, in: :body, schema: {
         type: :object,
         properties: {
           old_password: { type: :string },
@@ -209,36 +263,25 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
         },
         required: %w[old_password password]
       }
-      security [{ bearerAuth: [] }]
 
-      response '200', 'Password reset successfully' do
-        let(:Authorization) { "Bearer #{user_token}" }
-        let(:reset_password) { { old_password: user.password, password: 'new_password' } }
+      response '200', 'Password updated successfully' do
+        let(:current_user) { create(:user) }
+        let(:old_password) { current_user.password }
+        let(:password) { 'new_password' }
+        run_test!
+      end
+
+      response '422', 'Validation failed' do
+        let(:current_user) { create(:user) }
+        let(:old_password) { current_user.password }
+        let(:password) { '' }
         run_test!
       end
 
       response '401', 'Unauthorized' do
-        let(:Authorization) { '' }
-        let(:reset_password) { { old_password: user.password, password: 'new_password' } }
-        run_test!
-      end
-
-      response '422', 'Invalid request' do
-        let(:Authorization) { "Bearer #{user_token}" }
-        let(:reset_password) { { old_password: user.password, password: '' } }
-        run_test!
-      end
-
-      response '404', 'Invalid or expired password reset token' do
-        let(:Authorization) { "Bearer #{user_token}" }
-        let(:reset_password) { { old_password: 'wrong_password', password: 'new_password' } }
-        run_test!
-      end
-
-      response '404', 'User not found' do
-        let(:Authorization) { "Bearer #{user_token}" }
-        let(:reset_password) { { old_password: user.password, password: 'new_password' } }
-        before { user.destroy }
+        let(:current_user) { create(:user) }
+        let(:old_password) { 'wrong_password' }
+        let(:password) { 'new_password' }
         run_test!
       end
     end
