@@ -11,11 +11,11 @@ module ApiV2Routes
         get '/auth/:provider/callback', to: 'sessions#omniauth'
         post '/login', to: 'authentication#login'
         # rename forget_password
-        post '/forgot', to: 'passwords#forgot'
+        post '/forget_password', to: 'passwords#forgot'
         # rename reset to reset_password
-        post '/reset', to: 'passwords#reset'
+        post '/reset_password', to: 'passwords#reset'
         # rename reset_password to update_password
-        put '/reset_password', to: 'passwords#reset_in_settings'
+        patch '/update_password', to: 'passwords#reset_in_settings'
         resources :projects do
           resources :desks
           resources :documents, except: :update

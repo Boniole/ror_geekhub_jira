@@ -1145,7 +1145,7 @@ paths:
     post:
       summary: Generates a password reset token and sends an email
       tags:
-      - Users
+      - Password
       parameters: []
       responses:
         '200':
@@ -1166,7 +1166,7 @@ paths:
     post:
       summary: Resets a user password with a valid password reset token
       tags:
-      - Users
+      - Password
       parameters: []
       responses:
         '200':
@@ -1189,10 +1189,10 @@ paths:
               - token
               - password
   "/api/v1/update_password":
-    post:
+    patch:
       summary: Updates user password
       tags:
-      - Users
+      - Password
       parameters: []
       responses:
         '200':

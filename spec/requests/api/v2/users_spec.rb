@@ -199,7 +199,7 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
 
   path '/api/v1/forget_password' do
     post 'Generates a password reset token and sends an email' do
-      tags 'Users'
+      tags 'Password'
       consumes 'application/json'
       parameter name: :email, in: :body, schema: {
         type: :object,
@@ -223,7 +223,7 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
 
   path '/api/v1/reset_password' do
     post 'Resets a user password with a valid password reset token' do
-      tags 'Users'
+      tags 'Password'
       consumes 'application/json'
       parameter name: :reset_password, in: :body, schema: {
         type: :object,
@@ -252,8 +252,8 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
   end
 
   path '/api/v1/update_password' do
-    post 'Updates user password' do
-      tags 'Users'
+    patch 'Updates user password' do
+      tags 'Password'
       consumes 'application/json'
       parameter name: :password_params, in: :body, schema: {
         type: :object,
