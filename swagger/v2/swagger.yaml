@@ -8,11 +8,11 @@ paths:
     post:
       summary: create column
       tags:
-      - Columns
+        - Columns
       description: Create task
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -27,31 +27,31 @@ paths:
                   type: integer
                   default: 1
               required:
-              - name
-              - desk_id
+                - name
+                - desk_id
   "/api/v2/columns/{id}":
     parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
     get:
       summary: show column
       tags:
-      - Columns
+        - Columns
       responses:
-        '200':
+        "200":
           description: successful
     patch:
       summary: update column
       tags:
-      - Columns
+        - Columns
       description: update task
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -69,25 +69,25 @@ paths:
                   type: integer
                   default: 1
               required:
-              - name
-              - desk_id
-              - ordinal_number
+                - name
+                - desk_id
+                - ordinal_number
     delete:
       summary: delete column
       tags:
-      - Columns
+        - Columns
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/comments":
     post:
       summary: create comment
       tags:
-      - Comments
+        - Comments
       description: Create comment
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -105,25 +105,25 @@ paths:
                   type: integer
                   default: 1
               required:
-              - body
-              - commentable_type
-              - commentable_id
+                - body
+                - commentable_type
+                - commentable_id
   "/api/v2/comments/{id}":
     parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
     patch:
       summary: update comment
       tags:
-      - Comments
+        - Comments
       description: Put comment
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -141,41 +141,41 @@ paths:
                   type: integer
                   default: 1
               required:
-              - body
-              - commentable_type
-              - commentable_id
+                - body
+                - commentable_type
+                - commentable_id
     delete:
       summary: delete comment
       tags:
-      - Comments
+        - Comments
       description: Delete comment
       responses:
-        '204':
+        "204":
           description: successful
   "/api/v2/projects/{project_id}/desks":
     parameters:
-    - name: project_id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: list desks
       tags:
-      - Desks
+        - Desks
       description: Get desks
       responses:
-        '200':
+        "200":
           description: successful
     post:
       summary: create desk
       tags:
-      - Desks
+        - Desks
       description: Create desks
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -186,37 +186,37 @@ paths:
                 name:
                   type: string
               required:
-              - name
+                - name
   "/api/v2/projects/{project_id}/desks/{id}":
     parameters:
-    - name: project_id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
-    - name: id
-      in: path
-      description: desk_id
-      required: true
-      schema:
-        type: integer
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: desk_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: show desk
       tags:
-      - Desks
+        - Desks
       description: Get desk
       responses:
-        '200':
+        "200":
           description: successful
     patch:
       summary: update desk
       tags:
-      - Desks
+        - Desks
       description: Update desk
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -227,39 +227,39 @@ paths:
                 name:
                   type: string
               required:
-              - name
+                - name
     delete:
       summary: delete desk
       tags:
-      - Desks
+        - Desks
       description: Delete desk
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/projects/{project_id}/documents":
     parameters:
-    - name: project_id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: list documents
       tags:
-      - Documents
+        - Documents
       description: Get documents for project
       responses:
-        '200':
+        "200":
           description: successful
     post:
       summary: create document
       tags:
-      - Documents
+        - Documents
       description: Create document for project
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -276,58 +276,58 @@ paths:
         description: Array of files
   "/api/v2/projects/{project_id}/documents/{id}":
     parameters:
-    - name: project_id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
-    - name: id
-      in: path
-      description: document_id
-      required: true
-      schema:
-        type: integer
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: document_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: show document
       tags:
-      - Documents
+        - Documents
       description: Get document for project
       responses:
-        '200':
+        "200":
           description: successful
     delete:
       summary: delete document
       tags:
-      - Documents
+        - Documents
       description: Delete document for project
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/tasks/{task_id}/documents":
     parameters:
-    - name: task_id
-      in: path
-      description: task_id
-      required: true
-      schema:
-        type: integer
+      - name: task_id
+        in: path
+        description: task_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: list documents
       tags:
-      - Documents
+        - Documents
       description: Get documents for task
       responses:
-        '200':
+        "200":
           description: successful
     post:
       summary: create document
       tags:
-      - Documents
+        - Documents
       description: Create document for task
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -344,59 +344,59 @@ paths:
         description: Array of files
   "/api/v2/tasks/{task_id}/documents/{id}":
     parameters:
-    - name: task_id
-      in: path
-      description: task_id
-      required: true
-      schema:
-        type: integer
-    - name: id
-      in: path
-      description: document_id
-      required: true
-      schema:
-        type: integer
+      - name: task_id
+        in: path
+        description: task_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: document_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: show document
       tags:
-      - Documents
+        - Documents
       description: Show document for task
       responses:
-        '200':
+        "200":
           description: successful
     delete:
       summary: delete document
       tags:
-      - Documents
+        - Documents
       description: Dekete document for task
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/comments/{comment_id}/documents":
     parameters:
-    - name: comment_id
-      in: path
-      description: comment_id
-      required: true
-      schema:
-        type: integer
+      - name: comment_id
+        in: path
+        description: comment_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: list documents
       tags:
-      - Documents
+        - Documents
       description: Get documents for comment
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
     post:
       summary: create document
       tags:
-      - Documents
+        - Documents
       description: Create document for comment
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -413,52 +413,52 @@ paths:
         description: Array of files
   "/api/v2/comments/{comment_id}/documents/{id}":
     parameters:
-    - name: comment_id
-      in: path
-      description: comment_id
-      required: true
-      schema:
-        type: integer
-    - name: id
-      in: path
-      description: document_id
-      required: true
-      schema:
-        type: integer
+      - name: comment_id
+        in: path
+        description: comment_id
+        required: true
+        schema:
+          type: integer
+      - name: id
+        in: path
+        description: document_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: show document
       tags:
-      - Documents
+        - Documents
       description: Get documents for comment
       responses:
-        '200':
+        "200":
           description: successful
     delete:
       summary: delete document
       tags:
-      - Documents
+        - Documents
       description: Delete documents for comment
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/github_users/show":
     get:
       summary: create column
       tags:
-      - GithubUser
+        - GithubUser
       description: Github User
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/github_repositories/create":
     post:
       summary: Create repository
       tags:
-      - Github repository
+        - Github repository
       description: Create repository
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -485,21 +485,21 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
-              - name
-              - description
-              - private
-              - has_issues
-              - has_downloads
+                - project_id
+                - name
+                - description
+                - private
+                - has_issues
+                - has_downloads
   "/api/v2/github_repositories/update":
     patch:
       summary: Update repository
       tags:
-      - Github repository
+        - Github repository
       description: Update repository
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -526,21 +526,21 @@ paths:
                   type: boolean
                   example: true
               required:
-              - project_id
-              - name
-              - description
-              - private
-              - has_issues
-              - has_downloads
+                - project_id
+                - name
+                - description
+                - private
+                - has_issues
+                - has_downloads
   "/api/v2/github_repositories/delete":
     delete:
       summary: delete repository
       tags:
-      - Github repository
+        - Github repository
       description: Delete repository
       parameters: []
       responses:
-        '204':
+        "204":
           description: successful
       requestBody:
         content:
@@ -555,16 +555,16 @@ paths:
                   type: string
                   default: owner/repo_name
               required:
-              - project_id
-              - validate_text
+                - project_id
+                - validate_text
   "/api/v2/projects":
     get:
       summary: list projects
       tags:
-      - Projects
+        - Projects
       description: Get projects
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -585,17 +585,17 @@ paths:
                     git_url:
                       type: string
                   required:
-                  - id
-                  - name
-                  - status
+                    - id
+                    - name
+                    - status
     post:
       summary: create project
       tags:
-      - Projects
+        - Projects
       description: Create projects
       parameters: []
       responses:
-        '201':
+        "201":
           description: successful
           content:
             application/json:
@@ -614,9 +614,9 @@ paths:
                   git_url:
                     type: string
                 required:
-                - id
-                - name
-                - status
+                  - id
+                  - name
+                  - status
       requestBody:
         content:
           application/json:
@@ -629,22 +629,22 @@ paths:
                   type: string
                   default: open
               required:
-              - name
+                - name
   "/api/v2/projects/{id}":
     parameters:
-    - name: id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
+      - name: id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
     get:
       summary: show project
       tags:
-      - Projects
+        - Projects
       description: Get project
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -663,17 +663,17 @@ paths:
                   git_url:
                     type: string
                 required:
-                - id
-                - name
-                - status
+                  - id
+                  - name
+                  - status
     patch:
       summary: update project
       tags:
-      - Projects
+        - Projects
       description: Update project
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
           content:
             application/json:
@@ -696,10 +696,10 @@ paths:
                   git_url:
                     type: string
                 required:
-                - id
-                - name
-                - status
-                - user
+                  - id
+                  - name
+                  - status
+                  - user
       requestBody:
         content:
           application/json:
@@ -712,31 +712,31 @@ paths:
                   type: string
                   default: open
               required:
-              - name
+                - name
     delete:
       summary: delete project
       tags:
-      - Projects
+        - Projects
       description: Delete project
       responses:
-        '204':
+        "204":
           description: successful
   "/api/v2/projects/{project_id}/add_member":
     parameters:
-    - name: project_id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
     post:
       summary: add member to project
       tags:
-      - Projects
+        - Projects
       description: Add member to project
       parameters: []
       responses:
-        '201':
+        "201":
           description: successful
           content:
             application/json:
@@ -756,12 +756,12 @@ paths:
                   updated_at:
                     type: string
                 required:
-                - id
-                - email
-                - role
-                - created_at
-                - updated_at
-        '422':
+                  - id
+                  - email
+                  - role
+                  - created_at
+                  - updated_at
+        "422":
           description: unprocessable entity
           content:
             application/json:
@@ -771,7 +771,7 @@ paths:
                   error:
                     type: string
                 required:
-                - error
+                  - error
       requestBody:
         content:
           application/json:
@@ -781,23 +781,23 @@ paths:
                 email:
                   type: string
               required:
-              - email
+                - email
   "/api/v2/projects/{project_id}/delete_member":
     parameters:
-    - name: project_id
-      in: path
-      description: project_id
-      required: true
-      schema:
-        type: integer
+      - name: project_id
+        in: path
+        description: project_id
+        required: true
+        schema:
+          type: integer
     delete:
       summary: delete member from project
       tags:
-      - Projects
+        - Projects
       description: Delete member from project
       parameters: []
       responses:
-        '204':
+        "204":
           description: successful
       requestBody:
         content:
@@ -808,16 +808,16 @@ paths:
                 email:
                   type: string
               required:
-              - email
+                - email
   "/api/v2/tasks":
     post:
       summary: create task
       tags:
-      - Tasks
+        - Tasks
       description: Create task
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -864,35 +864,35 @@ paths:
                 type_of:
                   type: integer
               required:
-              - name
-              - column_id
-              - desk_id
-              - project_id
-              - user_id
+                - name
+                - column_id
+                - desk_id
+                - project_id
+                - user_id
   "/api/v2/tasks/{id}":
     parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
     get:
       summary: show task
       tags:
-      - Tasks
+        - Tasks
       description: Get task by id
       responses:
-        '200':
+        "200":
           description: successful
     patch:
       summary: update task
       tags:
-      - Tasks
+        - Tasks
       description: Update task
       parameters: []
       responses:
-        '200':
+        "200":
           description: successful
       requestBody:
         content:
@@ -939,26 +939,26 @@ paths:
                 type_of:
                   type: integer
               required:
-              - name
-              - column_id
-              - desk_id
-              - project_id
-              - user_id
+                - name
+                - column_id
+                - desk_id
+                - project_id
+                - user_id
     delete:
       summary: delete task
       tags:
-      - Tasks
+        - Tasks
       description: Delete task
       responses:
-        '200':
+        "200":
           description: successful
   "/api/v2/users":
     get:
       summary: Retrieves all users
       tags:
-      - Users
+        - Users
       responses:
-        '200':
+        "200":
           description: Users found
           content:
             application/json:
@@ -976,20 +976,20 @@ paths:
                     email:
                       type: string
                   required:
-                  - id
-                  - first_name
-                  - last_name
-                  - email
+                    - id
+                    - first_name
+                    - last_name
+                    - email
     post:
       summary: Creates a user
       tags:
-      - Users
+        - Users
       parameters: []
       security: []
       responses:
-        '200':
+        "200":
           description: user created
-        '422':
+        "422":
           description: invalid request
       requestBody:
         content:
@@ -1006,23 +1006,23 @@ paths:
                 password:
                   type: string
               required:
-              - first_name
-              - last_name
-              - email
-              - password
+                - first_name
+                - last_name
+                - email
+                - password
   "/api/v2/users/{id}":
     get:
       summary: Retrieves a user
       tags:
-      - Users
+        - Users
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           description: user found
           content:
             application/json:
@@ -1040,28 +1040,28 @@ paths:
                   github_token:
                     type: string
                 required:
-                - id
-                - first_name
-                - last_name
-                - email
-        '404':
+                  - id
+                  - first_name
+                  - last_name
+                  - email
+        "404":
           description: user not found
     patch:
       summary: Updates a user
       tags:
-      - Users
+        - Users
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
-        '200':
+        "200":
           description: user updated
-        '422':
+        "422":
           description: invalid request
-        '404':
+        "404":
           description: user not found
       requestBody:
         content:
@@ -1076,25 +1076,25 @@ paths:
     delete:
       summary: Deletes a user
       tags:
-      - Users
+        - Users
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
-        '204':
+        "204":
           description: user deleted
-        '404':
+        "404":
           description: user not found
   "/api/v2/about_user":
     get:
       summary: Retrieves information about the current user
       tags:
-      - Users
+        - Users
       responses:
-        '200':
+        "200":
           description: user information found
           content:
             application/json:
@@ -1110,23 +1110,23 @@ paths:
                   email:
                     type: string
                 required:
-                - id
-                - first_name
-                - last_name
-                - email
-        '401':
+                  - id
+                  - first_name
+                  - last_name
+                  - email
+        "401":
           description: unauthorized access
   "/api/v2/login":
     post:
       summary: Logs in a user
       tags:
-      - Authentication
+        - Authentication
       parameters: []
       security: []
       responses:
-        '200':
+        "200":
           description: logged in successfully
-        '401':
+        "401":
           description: unauthorized
       requestBody:
         content:
@@ -1139,18 +1139,19 @@ paths:
                 password:
                   type: string
               required:
-              - email
-              - password
+                - email
+                - password
   "/api/v1/forget_password":
     post:
       summary: Generates a password reset token and sends an email
+
       tags:
-      - Password
+        - Password
       parameters: []
       responses:
-        '200':
+        "200":
           description: Password reset token sent successfully
-        '404':
+        "404":
           description: Email address not found
       requestBody:
         content:
@@ -1161,19 +1162,19 @@ paths:
                 email:
                   type: string
               required:
-              - email
+                - email
   "/api/v1/reset_password":
     post:
       summary: Resets a user password with a valid password reset token
       tags:
-      - Password
+        - Password
       parameters: []
       responses:
-        '200':
+        "200":
           description: Password reset successfully
-        '422':
+        "422":
           description: Invalid password reset request
-        '404':
+        "404":
           description: Invalid or expired password reset token
       requestBody:
         content:
@@ -1186,20 +1187,20 @@ paths:
                 password:
                   type: string
               required:
-              - token
-              - password
+                - token
+                - password
   "/api/v1/update_password":
     patch:
       summary: Updates user password
       tags:
-      - Password
+        - Password
       parameters: []
       responses:
-        '200':
+        "200":
           description: Password updated successfully
-        '422':
+        "422":
           description: Validation failed
-        '401':
+        "401":
           description: Unauthorized
       requestBody:
         content:
@@ -1212,17 +1213,17 @@ paths:
                 password:
                   type: string
               required:
-              - old_password
-              - password
+                - old_password
+                - password
 servers:
-- url: https://{kotello}
-  variables:
-    kotello:
-      default: kotello.space
-- url: http://{localhost}
-  variables:
-    localhost:
-      default: 127.0.0.1:3000
+  - url: https://{kotello}
+    variables:
+      kotello:
+        default: kotello.space
+  - url: http://{localhost}
+    variables:
+      localhost:
+        default: 127.0.0.1:3000
 components:
   securitySchemes:
     bearerAuth:
@@ -1230,4 +1231,4 @@ components:
       scheme: bearer
       bearerFormat: JWT
 security:
-- bearerAuth: []
+  - bearerAuth: []

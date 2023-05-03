@@ -68,7 +68,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 # connect to amazon S3
 gem 'aws-sdk-s3', require: false
 
-# for passwords in .env file
+# for passwords in .env.production file
 gem 'dotenv-rails'
 
 # Octokit.rb wraps the GitHub API in a flat API [https://github.com/octokit/octokit.rb]
