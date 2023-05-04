@@ -42,7 +42,6 @@ class Api::V2::ProjectsController < ApplicationController
       membership = @project.memberships.new(user: @user)
 
       if membership.save
-        # SEND MAIL HERE
         render_success(data: membership, status: :created, serializer: Api::V2::MembershipSerializer)
       else
         render_error(errors: membership.errors)
