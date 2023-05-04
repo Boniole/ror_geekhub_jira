@@ -5,7 +5,6 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :handle_parameter_missing
   before_action :authorize_request
 
-  # helper_method :nats_publish
 
   def authorize_request
     header = request.headers['Authorization']
@@ -37,15 +36,6 @@ class ApplicationController < ActionController::API
 
   def record_not_found(exception)
     render json: { error: "#{exception.model} not found!" }, status: :not_found
-  end
-
-  # needed to delete? dublicate in concern
-  def nats_publish(subject, data)
-    require 'nats/client'
-    require 'json'
-
-    nats = NATS.connect(ENV['NATS_SERVER_PORT'])
-    nats.publish(subject, data)
   end
 
   def render_success(data: nil, status: :ok, serializer: nil, each_serializer: nil)

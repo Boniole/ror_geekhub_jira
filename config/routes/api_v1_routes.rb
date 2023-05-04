@@ -11,7 +11,7 @@ module ApiV1Routes
         post '/login', to: 'authentication#login'
         post '/forget_password', to: 'passwords#forget_password'
         post '/reset_password', to: 'passwords#reset_password'
-        put '/update_password', to: 'passwords#update_password'
+        patch '/update_password', to: 'passwords#update_password'
 
         resources :projects do
           resources :desks, only: %i[index show create update destroy]

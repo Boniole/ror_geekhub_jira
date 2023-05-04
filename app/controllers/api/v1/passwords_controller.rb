@@ -11,8 +11,6 @@ class Api::V1::PasswordsController < ApplicationController
     if user.present?
       user.generate_password_token!
       # SEND EMAIL HERE
-
-      # concorn nats_publish nuts able
       nats_publish('service.mail', { class: 'account',
                                      type: 'account_reset_password',
                                      language: 'en',
@@ -26,7 +24,7 @@ class Api::V1::PasswordsController < ApplicationController
   end
 
   def reset_password
-    render_error(errors: ['Token not present']) if params[:email].blank?
+    render_error(errors: ['Token not present']) if params[:token].blank?
 
     user = User.find_by(reset_password_token: params[:token])
 

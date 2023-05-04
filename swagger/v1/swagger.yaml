@@ -734,6 +734,81 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/forget_password":
+    post:
+      summary: Generates a password reset token and sends an email
+      tags:
+      - Password
+      parameters: []
+      security: []
+      responses:
+        '200':
+          description: Password reset token sent successfully
+        '404':
+          description: Email address not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+  "/api/v1/reset_password":
+    post:
+      summary: Resets a user password with a valid password reset token
+      tags:
+      - Password
+      parameters: []
+      security: []
+      responses:
+        '200':
+          description: Password reset successfully
+        '422':
+          description: Invalid password reset request
+        '404':
+          description: Invalid or expired password reset token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                password:
+                  type: string
+              required:
+              - token
+              - password
+  "/api/v1/update_password":
+    patch:
+      summary: Updates user password
+      tags:
+      - Password
+      parameters: []
+      responses:
+        '200':
+          description: Password updated successfully
+        '422':
+          description: Validation failed
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_password:
+                  type: string
+                password:
+                  type: string
+              required:
+              - old_password
+              - password
   "/api/v1/projects":
     get:
       summary: list projects
@@ -1334,36 +1409,6 @@ paths:
                   type: string
               required:
               - email
-              - password
-  "/api/v1/reset":
-    post:
-      summary: Resets a user password
-      tags:
-      - Users
-      parameters: []
-      security:
-      - bearerAuth: []
-      responses:
-        '200':
-          description: Password reset successfully
-        '401':
-          description: Unauthorized
-        '422':
-          description: Invalid request
-        '404':
-          description: User not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                old_password:
-                  type: string
-                password:
-                  type: string
-              required:
-              - old_password
               - password
 servers:
 - url: https://{kotello}

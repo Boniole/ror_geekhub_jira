@@ -1141,12 +1141,13 @@ paths:
               required:
               - email
               - password
-  "/api/v1/forget_password":
+  "/api/v2/forget_password":
     post:
       summary: Generates a password reset token and sends an email
       tags:
-      - Users
+      - Password
       parameters: []
+      security: []
       responses:
         '200':
           description: Password reset token sent successfully
@@ -1162,12 +1163,13 @@ paths:
                   type: string
               required:
               - email
-  "/api/v1/reset_password":
+  "/api/v2/reset_password":
     post:
       summary: Resets a user password with a valid password reset token
       tags:
-      - Users
+      - Password
       parameters: []
+      security: []
       responses:
         '200':
           description: Password reset successfully
@@ -1188,11 +1190,11 @@ paths:
               required:
               - token
               - password
-  "/api/v1/update_password":
-    post:
+  "/api/v2/update_password":
+    patch:
       summary: Updates user password
       tags:
-      - Users
+      - Password
       parameters: []
       responses:
         '200':

@@ -17,19 +17,16 @@ class Api::V2::DocumentsController < ApplicationController
   def create
     saved_documents = []
     failed_documents = []
-#authorize @document move before creating new documents
-
     params[:documents].each do |document|
       @document = Document.new
       @document.documentable = @attachable
-          # current_user.document.new
       @document.user_id = @current_user.id
       @document.file.attach(document)
       @document.name = @document.file.blob.filename
       @document.document_type = @document.file.content_type.split('/').last
       @document.url = @document.file.url
       authorize @document
-      
+
       if @document.save
         saved_documents << @document
       else
@@ -38,8 +35,6 @@ class Api::V2::DocumentsController < ApplicationController
     end
 
     if failed_documents.any?
-      # check status?
-      # add serialized documents?
       render json: { saved_documents: saved_documents, failed_documents: failed_documents }, status: :multi_status
     else
       render json: { saved_documents: saved_documents }, status: :created
@@ -49,7 +44,7 @@ class Api::V2::DocumentsController < ApplicationController
 
   def destroy
     authorize @document
-    
+
     if @document.destroy
       head :no_content
     else
@@ -61,8 +56,7 @@ class Api::V2::DocumentsController < ApplicationController
 
   def set_attachable
     case
-    when params[:project_id]
-      # current user not models Project...
+    when params[:project_id].
       @attachable = Project.find(params[:project_id])
     when params[:user_id]
       @attachable = User.find(params[:user_id])
@@ -76,26 +70,17 @@ class Api::V2::DocumentsController < ApplicationController
   end
 
   def set_document
-    # find
     @document = @attachable.documents.find_by(id: params[:id])
-    # update to .nil?
-    if @document == nil
+    if @document.nil?
       render json: { errors: 'Not found files' }, status: :not_found
     else
       @document
     end
-    # remove
-    # if @document == nil
-    #   render json: { errors: 'Not found files' }, status: :not_found
-    # else
-    #   @document
-    # end
   end
 
   def set_documents
     @documents = @attachable.documents
-    # update to .nil?
-    if @documents == nil
+    if @documents.nil?
       render json: { errors: 'Not found files' }, status: :not_found
     else
       @documents

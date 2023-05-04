@@ -197,9 +197,9 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
     end
   end
 
-  path '/api/v1/forget_password' do
+  path '/api/v2/forget_password' do
     post 'Generates a password reset token and sends an email' do
-      tags 'Users'
+      tags 'Password'
       consumes 'application/json'
       parameter name: :email, in: :body, schema: {
         type: :object,
@@ -208,6 +208,8 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
         },
         required: %w[email]
       }
+
+      security []
 
       response '200', 'Password reset token sent successfully' do
         let(:email) { { email: 'user@example.com' } }
@@ -221,9 +223,9 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
     end
   end
 
-  path '/api/v1/reset_password' do
+  path '/api/v2/reset_password' do
     post 'Resets a user password with a valid password reset token' do
-      tags 'Users'
+      tags 'Password'
       consumes 'application/json'
       parameter name: :reset_password, in: :body, schema: {
         type: :object,
@@ -233,6 +235,8 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
         },
         required: %w[token password]
       }
+
+      security []
 
       response '200', 'Password reset successfully' do
         let(:reset_password) { { token: 'valid_token', password: 'new_password' } }
@@ -251,9 +255,9 @@ RSpec.describe 'api/v2/users', type: :request, swagger_doc: 'v2/swagger.yaml' do
     end
   end
 
-  path '/api/v1/update_password' do
-    post 'Updates user password' do
-      tags 'Users'
+  path '/api/v2/update_password' do
+    patch 'Updates user password' do
+      tags 'Password'
       consumes 'application/json'
       parameter name: :password_params, in: :body, schema: {
         type: :object,
