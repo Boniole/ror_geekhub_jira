@@ -5,12 +5,8 @@ class Api::V2::GithubRepositoriesController < ApplicationController
   before_action :set_project, only: %i[delete update]
 
   def create
-    #validator
     repository = GithubRepository.new(repo_params)
-    #current_user
     @project = @current_user.projects.find(params[:project_id])
-
-    # authorize GithubRepository
 
     if repository.valid? && @project.present?
       repo = @github_client.create_repository(
@@ -22,11 +18,6 @@ class Api::V2::GithubRepositoriesController < ApplicationController
       )
 
       @project.update(git_url: repo.clone_url, git_repo: repo.full_name)
-
-      #
-      # attribute :changed_files do
-      #   object[:changed_files]
-      # end
       render json: {
         name: repo.name,
         description: repo.description,
@@ -44,7 +35,6 @@ class Api::V2::GithubRepositoriesController < ApplicationController
 
     authorize repository
     repo_name = get_repository_name(params[:name])
-#concerne github repository
     if repository.valid? && @project.present?
       repo = @github_client.edit_repository(
         repo_name,
