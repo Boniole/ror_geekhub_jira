@@ -5,13 +5,13 @@
 #  id              :bigint           not null, primary key
 #  deleted_at      :datetime
 #  description     :string
-#  end_date        :date
+#  end_date        :text
 #  estimate        :text
 #  label           :text
 #  name            :text
 #  priority        :integer
 #  priority_number :integer
-#  start_date      :date
+#  start_date      :text
 #  status          :integer
 #  tag_name        :text
 #  time_work       :string

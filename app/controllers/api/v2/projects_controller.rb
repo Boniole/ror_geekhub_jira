@@ -1,4 +1,6 @@
 class Api::V2::ProjectsController < ApplicationController
+  include NatsPublisher
+
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
   before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
@@ -37,6 +39,13 @@ class Api::V2::ProjectsController < ApplicationController
   def add_member
     existing_membership = memberships.where(user: @user)
     if existing_membership.any?
+      #SEND MAIL HERE
+      nats_publish('service.mail', { class: 'account',
+                                     type: 'add_member_to_project',
+                                     language: 'en',
+                                     to: @user.email,
+                                     project: @project.name,
+                                     username: @user.first_name }.to_json)
       render json: { error: 'User is already a member of the project' }, status: :unprocessable_entity
     else
       membership = @project.memberships.new(user: @user)
