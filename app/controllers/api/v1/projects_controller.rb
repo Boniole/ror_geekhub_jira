@@ -1,4 +1,6 @@
 class Api::V1::ProjectsController < ApplicationController
+  include NatsPublisher
+
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
   before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]

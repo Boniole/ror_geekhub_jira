@@ -127,8 +127,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_02_193331) do
     t.integer "type_of"
     t.text "label"
     t.text "estimate"
-    t.date "start_date"
-    t.date "end_date"
+    t.text "start_date"
+    t.text "end_date"
     t.integer "assignee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
