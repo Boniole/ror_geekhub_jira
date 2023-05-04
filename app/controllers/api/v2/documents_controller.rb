@@ -56,7 +56,7 @@ class Api::V2::DocumentsController < ApplicationController
 
   def set_attachable
     case
-    when params[:project_id].
+    when params[:project_id]
       @attachable = Project.find(params[:project_id])
     when params[:user_id]
       @attachable = User.find(params[:user_id])
