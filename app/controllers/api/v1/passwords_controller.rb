@@ -26,7 +26,7 @@ class Api::V1::PasswordsController < ApplicationController
   end
 
   def reset_password
-    render_error(errors: ['Token not present']) if params[:email].blank?
+    render_error(errors: ['Token not present']) if params[:token].blank?
 
     user = User.find_by(reset_password_token: params[:token])
 
