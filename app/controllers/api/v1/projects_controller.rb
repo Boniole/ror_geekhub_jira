@@ -42,7 +42,13 @@ class Api::V1::ProjectsController < ApplicationController
       membership = memberships.new(user: @user)
 
       if membership.save
-        # TODO SEND MAIL HERE Serhii
+        #SEND MAIL HERE
+        nats_publish('service.mail', { class: 'account',
+                                       type: 'add_member_to_project',
+                                       language: 'en',
+                                       to: @user.email,
+                                       project: @project.name,
+                                       username: @user.first_name }.to_json)
         render_success(data: membership, status: :created, serializer: Api::V1::MembershipSerializer)
       else
         render_error(errors: membership.errors)
