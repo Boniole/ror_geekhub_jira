@@ -1,5 +1,6 @@
 class Api::V2::PasswordsController < ApplicationController
   include NatsPublisher
+  include Passwordable
   before_action :authorize_request, only: :reset_in_settings
   # forgot_password
   def forgot
@@ -28,7 +29,8 @@ class Api::V2::PasswordsController < ApplicationController
     # delete
     token = params[:token]
 
-    return render json: { error: 'Token not present' } if params[:email].blank?
+    debugger
+    return render json: { error: 'Token not present' } if params[:token].blank?
 
     # params[:token] replace token
     user = User.find_by(reset_password_token: token)
