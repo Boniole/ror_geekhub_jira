@@ -10,7 +10,6 @@ class Api::V1::PasswordsController < ApplicationController
 
     if user.present?
       user.generate_password_token!
-      # SEND EMAIL HERE
       nats_publish('service.mail', { class: 'account',
                                      type: 'account_reset_password',
                                      language: 'en',

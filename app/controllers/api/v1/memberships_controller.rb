@@ -1,8 +1,7 @@
 class Api::V1::MembershipsController < ApplicationController
   include NatsPublisher
-
-  before_action :membership_params, :set_member, :set_project, only: %i[create destroy]
-
+  before_action :set_member, :set_membership, :authorize_user, only: %i[create destroy]
+  
   def create
     if project_memberships.where(user: @user).any?
       render_error(errors: ['User is already a member of the project'])
@@ -30,19 +29,23 @@ class Api::V1::MembershipsController < ApplicationController
 
   private
 
+  def authorize_user
+    authorize @membership || Membership.find
+  end
+
   def set_member
     @user = User.find_by(email: membership_params[:email])
   end
 
-  def set_project
-    @project = current_project
+  def set_membership
+    @membership = current_user.memberships.find_by(project_id: params[:project_id])
   end
 
   def project_memberships
-    @project.memberships
+    current_project.memberships
   end
 
   def membership_params
-    params.permit(:email)
+    params.permit(:project_id, :email)
   end
 end
