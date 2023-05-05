@@ -734,6 +734,52 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/v1/projects/{project_id}/memberships":
+    parameters:
+    - name: project_id
+      in: path
+      description: project_id
+      required: true
+      schema:
+        type: integer
+    post:
+      summary: create membership
+      tags:
+      - Memberships
+      description: Create membership
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+    delete:
+      summary: delete membership
+      tags:
+      - Memberships
+      description: Delete membership
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
   "/api/v1/forget_password":
     post:
       summary: Generates a password reset token and sends an email

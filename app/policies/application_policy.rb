@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ApplicationPolicy
   attr_reader :user, :record
 
@@ -20,10 +18,10 @@ class ApplicationPolicy
   alias destroy? index?
 
   def admin?(project_id)
-    user.memberships.find_by(project_id: project_id).admin?
+    user.memberships.find_by(project_id: project_id)&.admin?
   end
 
   def member?(project_id)
-    user.memberships.find_by(project_id: project_id).present?
+    user.memberships.find_by(project_id: project_id)&.present?
   end
 end

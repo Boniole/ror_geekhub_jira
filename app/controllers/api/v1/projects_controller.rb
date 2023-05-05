@@ -1,11 +1,8 @@
 class Api::V1::ProjectsController < ApplicationController
-  include NatsPublisher
-
   before_action :project_params, only: %i[create update]
   before_action :set_projects, only: :index
-  before_action :set_project, :authorize_user, only: %i[show update destroy add_member delete_member]
-  before_action :memberships, only: %i[update destroy add_member delete_member]
-  before_action :set_member, only: %i[add_member delete_member]
+  before_action :set_project, :authorize_user, only: %i[show update destroy]
+  before_action :memberships, only: %i[update destroy]
 
   def index
     render_success(data: @projects, each_serializer: Api::V1::ProjectSerializer)
@@ -35,34 +32,6 @@ class Api::V1::ProjectsController < ApplicationController
     end
   end
 
-  def add_member
-    existing_membership = memberships.where(user: @user)
-
-    if existing_membership.any?
-      render_error(errors: ['User is already a member of the project'])
-    else
-      membership = memberships.new(user: @user)
-
-      if membership.save
-        #SEND MAIL HERE
-        nats_publish('service.mail', { class: 'account',
-                                       type: 'add_member_to_project',
-                                       language: 'en',
-                                       to: @user.email,
-                                       project: @project.name,
-                                       username: @user.first_name }.to_json)
-        render_success(data: membership, status: :created, serializer: Api::V1::MembershipSerializer)
-      else
-        render_error(errors: membership.errors)
-      end
-    end
-  end
-
-  def delete_member
-    membership = memberships.find_by(user_id: @user.id)
-    membership.destroy
-  end
-
   def destroy
     @project.destroy
   end
@@ -83,10 +52,6 @@ class Api::V1::ProjectsController < ApplicationController
 
   def set_projects
     @projects = current_user.projects
-  end
-
-  def set_member
-    @user = User.find_by(email: params[:email])
   end
 
   def project_params

@@ -18,9 +18,11 @@ module ApiV1Routes
           resources :columns, only: %i[create show update destroy]
           resources :tasks, only: %i[create show update destroy]
           resources :comments, only: %i[create update destroy]
-          member do
-            post 'add_member', to: 'projects#add_member'
-            delete 'delete_member', to: 'projects#delete_member'
+          resources :memberships, only: [] do
+            collection do
+              post :create
+              delete :destroy
+            end
           end
           resources :github_repositories do
             collection do
