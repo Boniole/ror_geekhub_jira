@@ -3,8 +3,8 @@
 require 'ffaker'
 require_relative 'constants_file'
 
-10.times do
-  user = User.new(first_name: FFaker::Name.first_name, last_name: FFaker::Name.last_name,
+20.times do
+  user = User.new(first_name: NAME.sample, last_name: FFaker::Name.last_name,
                   email: FFaker::Internet.free_email)
   user.password = 'Password123'
   user.password_confirmation = 'Password123'
@@ -18,8 +18,8 @@ end
   # add memberships
   project.memberships.create(user_id: user.id, role: 'admin')
 
-  2.times do |e|
-    if i < 6
+  10.times do |e|
+    if i < 10
       project.memberships.create!(user_id: User.find(i + e + 2).id, role: 'member')
     else
       project.memberships.create!(user_id: User.find(i - e + 1).id, role: 'member')

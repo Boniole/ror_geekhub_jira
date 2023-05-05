@@ -95,3 +95,5 @@ COMMENT = [
   'Could be better, but still good effort.',
   'Outstanding!',
   'Needs some refinement, but good start.'].freeze
+
+NAME = %w[Velma Gertrude Jennine Cherise Jesus Roselyn Leanam Ching Davis Douglas]

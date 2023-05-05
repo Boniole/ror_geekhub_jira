@@ -86,6 +86,9 @@ gem 'annotate'
 # if you wished that when you called destroy on an Active Record object that it didn't actually destroy it, but just "hid" the record.
 gem 'paranoia'
 
+# The faker and ffaker APIs are mostly the same, although the API on ffaker keeps diverging with its users additions.
+gem 'ffaker', '~> 2.21'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -103,6 +106,4 @@ group :development do
   gem 'capistrano-upload-config'
   gem 'sshkit-sudo'
 
-  # The faker and ffaker APIs are mostly the same, although the API on ffaker keeps diverging with its users additions.
-  gem 'ffaker', '~> 2.21'
 end
