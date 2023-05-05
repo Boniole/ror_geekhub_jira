@@ -2,7 +2,7 @@ module ApiV2Routes
   def self.extended(router)
     router.instance_exec do
       namespace :v2 do
-        get '/about_user', to: 'users#about_current_user' # collection show
+        get '/about_user', to: 'users#about_current_user'
         resources :users do
           member do
             get :comments
@@ -10,11 +10,8 @@ module ApiV2Routes
         end
         get '/auth/:provider/callback', to: 'sessions#omniauth'
         post '/login', to: 'authentication#login'
-        # rename forget_password
         post '/forget_password', to: 'passwords#forgot'
-        # rename reset to reset_password
         post '/reset_password', to: 'passwords#reset'
-        # rename reset_password to update_password
         patch '/update_password', to: 'passwords#reset_in_settings'
         resources :projects do
           resources :desks
@@ -25,7 +22,6 @@ module ApiV2Routes
           end
         end
 
-        # need check it
         resources :desks
         resources :columns
         resources :tasks do
@@ -39,7 +35,6 @@ module ApiV2Routes
           resources :documents, except: :update
         end
 
-        # need check it the same(36-42)
         resources :columns do
           resources :tasks do
             member do
@@ -47,15 +42,12 @@ module ApiV2Routes
             end
           end
         end
-        # delete resources :tasks
         resources :tasks
         resources :comments
 
         resources :github_users, only: %i[show]
         resources :github_repositories do
-          # collection do 63-66
           post 'create', on: :collection
-          # patch - put
           patch 'update', on: :collection
           delete 'delete', on: :collection
         end
