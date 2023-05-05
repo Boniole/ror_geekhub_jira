@@ -3,8 +3,11 @@
 require 'ffaker'
 require_relative 'constants_file'
 
-User.create(first_name: 'John', last_name: 'Dou',
+first_user = User.create(first_name: 'John', last_name: 'Dou',
             email: 'johndou@gmail.com')
+first_user.password = 'Password123'
+first_user.password_confirmation = 'Password123'
+first_user.save!
 
 20.times do
   user = User.new(first_name: NAME.sample, last_name: FFaker::Name.last_name,
@@ -14,14 +17,13 @@ User.create(first_name: 'John', last_name: 'Dou',
   user.save!
 end
 
-user = User.first
-project = user.projects.create(name: 'project #1')
+project = first_user.projects.create(name: 'project #1')
 
 # add memberships
-project.memberships.create(user_id: user.id, role: 'admin')
+project.memberships.create(user_id: first_user.id, role: 'admin')
 
 10.times do |e|
-  project.memberships.create!(user_id: User.find(e + 3).id, role: 'member')
+  project.memberships.create!(user_id: first_user.find(e + 3).id, role: 'member')
 end
 
 # find Desk
