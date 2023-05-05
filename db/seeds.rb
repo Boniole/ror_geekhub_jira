@@ -49,11 +49,9 @@ end
 
     # create Comments
     5.times do
-      Comment.create(
+      task.comments.create(
         body: COMMENT.sample,
-        user_id: project.memberships.sample.id,
-        commentable_type: 'Task',
-        commentable_id: task.id
+        user_id: project.memberships.sample.id
       )
     end
   end
