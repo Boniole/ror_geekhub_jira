@@ -1,50 +1,60 @@
-require 'ffaker'
+# frozen_string_literal: true
 
-# User.all.each(&:destroy)
+require 'ffaker'
+require_relative 'constants_file'
 
 10.times do
   user = User.new(first_name: FFaker::Name.first_name, last_name: FFaker::Name.last_name,
                   email: FFaker::Internet.free_email)
   user.password = 'Password123'
   user.password_confirmation = 'Password123'
-  user.save
+  user.save!
 end
 
-10.times do
-  user = User.all.sample
-  project = Project.create(
-    name: "project ##{Project.count == 0 ? 1 : Project.pluck(:id).last + 1}",
-    user_id: user.id
-  )
+10.times do |i|
+  user = User.find(i + 1)
+  project = user.projects.create(name: "project ##{i}")
 
   # add memberships
   project.memberships.create(user_id: user.id, role: 'admin')
 
-  # create Desk
+  2.times do |e|
+    if i < 6
+      project.memberships.create!(user_id: User.find(i + e + 2).id, role: 'member')
+    else
+      project.memberships.create!(user_id: User.find(i - e + 1).id, role: 'member')
+    end
+  end
+
+  # find Desk
   desk = Desk.find_by(project_id: project.id)
 
   # create Tasks
   25.times do
+    description = [FRONT, QA, BACK].sample
+
     column = Column.where(desk_id: desk.id).sample
     task = column.tasks.create(
       name: "Task for project number #{project.id}",
-      description: "columns is #{column.name}",
-      label: 'need to add label',
+      description: description.sample,
+      label: %w[FRONT QA BACK].sample,
       estimate: '2w',
       start_date: Date.today,
       end_date: Date.today + 1,
-      assignee_id: nil,
+      assignee_id: User.all.sample.id,
       user_id: project.user_id,
       project_id: project.id,
       desk_id: desk.id
     )
 
     # create Comments
-    Comment.create(
-      body: 'It is a body for comment',
-      user_id: user.id,
-      commentable_type: 'Task',
-      commentable_id: task.id
-    )
+    5.times do
+      Comment.create(
+        body: COMMENT.sample,
+        user_id: project.memberships.sample.id,
+        commentable_type: 'Task',
+        commentable_id: task.id
+      )
+    end
   end
 end
