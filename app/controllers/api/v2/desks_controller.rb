@@ -1,5 +1,4 @@
 class Api::V2::DesksController < ApplicationController
-  before_action :set_project
   before_action :desk_params, only: %i[create update]
   before_action :set_desk, only: %i[show update destroy]
   before_action :set_desks, only: :index
@@ -34,16 +33,12 @@ class Api::V2::DesksController < ApplicationController
 
   private
 
-  def set_project
-    @project = current_user.projects.find(params[:project_id])
-  end
-
   def set_desk
-    @desk = @project.desks.find(params[:id])
+    @desk = current_project.desks.find(params[:id])
   end
 
   def set_desks
-    @desks = @project.desks
+    @desks = current_project.desks
   end
 
   def desk_params

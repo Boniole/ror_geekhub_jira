@@ -19,6 +19,7 @@ Install all necessary dependencies by running```bundle install``` command.
 Create a database by running the commands```rails db:create``` and ```rails db:migrate```.
 Start the server by running the rails server command.
 Open a web browser and go to http://127.0.0.1:3000/api-docs/index.html (Swagger).
+Use V1 version
 
 # Instructions for use
 1. Register in the system or log in with your username and password.
