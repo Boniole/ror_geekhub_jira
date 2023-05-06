@@ -77,7 +77,7 @@ class Api::V2::ProjectsController < ApplicationController
   end
 
   def set_project
-    @project = current_user.projects.find(params[:id])
+    @project = current_project(params[:id])
   end
 
   def set_projects
