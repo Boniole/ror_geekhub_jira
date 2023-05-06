@@ -51,7 +51,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def set_projects
-    @projects = current_user.projects
+    @projects = current_user.memberships.map(&:project)
   end
 
   def project_params
