@@ -39,7 +39,6 @@ class Api::V2::ProjectsController < ApplicationController
   def add_member
     existing_membership = memberships.where(user: @user)
     if existing_membership.any?
-      #SEND MAIL HERE
       nats_publish('service.mail', { class: 'account',
                                      type: 'add_member_to_project',
                                      language: 'en',
@@ -82,7 +81,7 @@ class Api::V2::ProjectsController < ApplicationController
   end
 
   def set_projects
-    @projects = current_user.projects
+    @projects = current_user.memberships.map(&:project)
   end
 
   def set_member
